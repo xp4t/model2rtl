@@ -1,0 +1,61 @@
+{
+  "format": "model2rtl-param-image-v1",
+  "images": {
+    "bias_l1": {
+      "depth": 32,
+      "files": {
+        "canonical_bin": "bias_l1.bin",
+        "hex_rows": "bias_l1.hex"
+      },
+      "name": "bias_l1",
+      "orientation": "[out_features]",
+      "packing": "row[j] = two's-complement bias of output neuron j",
+      "sha256": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+      "signed": true,
+      "total_bits": 704,
+      "width": 22
+    },
+    "bias_l2": {
+      "depth": 10,
+      "files": {
+        "canonical_bin": "bias_l2.bin",
+        "hex_rows": "bias_l2.hex"
+      },
+      "name": "bias_l2",
+      "orientation": "[out_features]",
+      "packing": "row[j] = two's-complement bias of output neuron j",
+      "sha256": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+      "signed": true,
+      "total_bits": 170,
+      "width": 17
+    },
+    "weights_l1": {
+      "depth": 784,
+      "files": {
+        "canonical_bin": "weights_l1.bin",
+        "hex_rows": "weights_l1.hex"
+      },
+      "name": "weights_l1",
+      "orientation": "[in_features, out_features] (Stage-0 orientation)",
+      "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+      "sha256": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+      "signed": false,
+      "total_bits": 100352,
+      "width": 128
+    },
+    "weights_l2": {
+      "depth": 32,
+      "files": {
+        "canonical_bin": "weights_l2.bin",
+        "hex_rows": "weights_l2.hex"
+      },
+      "name": "weights_l2",
+      "orientation": "[in_features, out_features] (Stage-0 orientation)",
+      "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+      "sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+      "signed": false,
+      "total_bits": 1280,
+      "width": 40
+    }
+  }
+}

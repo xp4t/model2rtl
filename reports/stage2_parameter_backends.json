@@ -1,0 +1,571 @@
+{
+  "canonical_images": {
+    "bias_l1": {
+      "depth": 32,
+      "name": "bias_l1",
+      "orientation": "[out_features]",
+      "packing": "row[j] = two's-complement bias of output neuron j",
+      "sha256": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+      "signed": true,
+      "total_bits": 704,
+      "width": 22
+    },
+    "bias_l2": {
+      "depth": 10,
+      "name": "bias_l2",
+      "orientation": "[out_features]",
+      "packing": "row[j] = two's-complement bias of output neuron j",
+      "sha256": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+      "signed": true,
+      "total_bits": 170,
+      "width": 17
+    },
+    "weights_l1": {
+      "depth": 784,
+      "name": "weights_l1",
+      "orientation": "[in_features, out_features] (Stage-0 orientation)",
+      "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+      "sha256": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+      "signed": false,
+      "total_bits": 100352,
+      "width": 128
+    },
+    "weights_l2": {
+      "depth": 32,
+      "name": "weights_l2",
+      "orientation": "[in_features, out_features] (Stage-0 orientation)",
+      "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+      "sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+      "signed": false,
+      "total_bits": 1280,
+      "width": 40
+    }
+  },
+  "equivalence": {
+    "backend_mismatch_detail": [],
+    "backend_mismatches": 0,
+    "bias_comparisons": 969,
+    "golden_mismatch_detail": [],
+    "golden_mismatches": 0,
+    "logged_cycles": 969,
+    "stimulus_cycles": 969,
+    "undriven_cycles_before_first_read": 0,
+    "weight_comparisons": 969
+  },
+  "existing_fabric_changed": false,
+  "failures": [],
+  "full_model": {
+    "backend_to_backend_logit_mismatches": 0,
+    "openram_behavioral": {
+      "accuracy": 0.98,
+      "cycles_per_inference": [
+        864
+      ],
+      "hidden_mismatches": 0,
+      "images": 200,
+      "logit_mismatches": 0,
+      "prediction_mismatches": 0,
+      "sources": [
+        "mnist_mlp_fabric.v",
+        "mnist_mlp_params_openram.v",
+        "mnist_mlp_params_sel_openram.v",
+        "mnist_mlp_top.v"
+      ]
+    },
+    "oracle": "Stage-0 NumPy integer golden model (not Keras)",
+    "portable": {
+      "accuracy": 0.98,
+      "cycles_per_inference": [
+        864
+      ],
+      "hidden_mismatches": 0,
+      "images": 200,
+      "logit_mismatches": 0,
+      "prediction_mismatches": 0,
+      "sources": [
+        "mnist_mlp_fabric.v",
+        "mnist_mlp_params_portable.v",
+        "mnist_mlp_params_sel_portable.v",
+        "mnist_mlp_top.v"
+      ]
+    }
+  },
+  "interface": {
+    "capture_model": "always @(posedge clk) if (en) data_r <= MEM[{layer, addr}];\nassign data = data_r;",
+    "description": {
+      "bias_port": {
+        "ports": [
+          {
+            "direction": "output",
+            "memory_direction": "input",
+            "name": "bmem_en",
+            "role": "read strobe for this cycle's address",
+            "width": 1
+          },
+          {
+            "direction": "output",
+            "memory_direction": "input",
+            "name": "bmem_layer",
+            "role": "0 = layer 1, 1 = layer 2",
+            "width": 1
+          },
+          {
+            "direction": "output",
+            "memory_direction": "input",
+            "name": "bmem_addr",
+            "role": "output-neuron index j being finalised",
+            "width": 6
+          },
+          {
+            "direction": "input",
+            "memory_direction": "output",
+            "name": "bmem_data",
+            "role": "that neuron's signed bias, sign extended to 22 bits",
+            "width": 22
+          }
+        ],
+        "spaces": [
+          {
+            "addr_used_bits": 5,
+            "depth": 32,
+            "description": "32 signed 22-bit biases",
+            "layer_select": 0,
+            "name": "layer1_bias",
+            "used_data_bits": 22
+          },
+          {
+            "addr_used_bits": 4,
+            "depth": 10,
+            "description": "10 signed 17-bit biases",
+            "layer_select": 1,
+            "name": "layer2_bias",
+            "used_data_bits": 17
+          }
+        ]
+      },
+      "capture_model": "always @(posedge clk) if (en) data_r <= MEM[{layer, addr}];\nassign data = data_r;",
+      "clock": {
+        "direction": "input",
+        "name": "clk",
+        "role": "single clock; both backends are clocked by it",
+        "width": 1
+      },
+      "out_of_range_note": "The fabric's address counter reaches n_in (=784) for one cycle at the end of layer-1 streaming, and n_hidden (=32) at the end of layer-2 streaming, while wmem_en is LOW. An enable-gated backend never sees those addresses. A free-running backend would read one past the end of the array; its data is never consumed, but the backend must still not produce X on the bus in that cycle.",
+      "packing": {
+        "layer1_field": "bits [127:0] of wmem_data",
+        "layer2_field": "bits [39:0] of wmem_data",
+        "neuron0_position": "least significant nibble",
+        "orientation": "[in_features, out_features] (Stage-0 orientation, not transposed)",
+        "rule": "weight_index[i][j] = wmem_data[j*4 +: 4]",
+        "unused_bits": "bits above the active layer's field are ignored by the fabric; a backend may drive them to zero"
+      },
+      "read_latency_cycles": 1,
+      "reset": {
+        "direction": "input",
+        "name": "rst",
+        "role": "synchronous, active high; the fabric's reset. A parameter memory holds no architectural state, so a backend need not use it.",
+        "width": 1
+      },
+      "storage_footprint": {
+        "all_parameter_bits": 102506,
+        "all_parameter_bytes": 12814,
+        "bias_bits_total": 874,
+        "layer1_bias_bits_total": 704,
+        "layer1_weight_bits": 100352,
+        "layer2_bias_bits_total": 170,
+        "layer2_weight_bits": 1280,
+        "weight_bits_total": 101632
+      },
+      "timing_contract": "Synchronous read, 1 cycle latency, enable gated with hold: an address and layer driven during cycle T are captured on the posedge that ends cycle T; the corresponding data must be presented throughout cycle T+1. When en is low the previously captured data must be held unchanged.",
+      "weight_port": {
+        "ports": [
+          {
+            "direction": "output",
+            "memory_direction": "input",
+            "name": "wmem_en",
+            "role": "read strobe for this cycle's address",
+            "width": 1
+          },
+          {
+            "direction": "output",
+            "memory_direction": "input",
+            "name": "wmem_layer",
+            "role": "0 = layer 1, 1 = layer 2",
+            "width": 1
+          },
+          {
+            "direction": "output",
+            "memory_direction": "input",
+            "name": "wmem_addr",
+            "role": "input-feature index i of the currently streamed activation",
+            "width": 10
+          },
+          {
+            "direction": "input",
+            "memory_direction": "output",
+            "name": "wmem_data",
+            "role": "one word holding EVERY output neuron's 4-bit index for input feature i",
+            "width": 128
+          }
+        ],
+        "spaces": [
+          {
+            "addr_used_bits": 10,
+            "depth": 784,
+            "description": "784 entries x 128 bits (32 neurons x 4 bits)",
+            "layer_select": 0,
+            "name": "layer1_weights",
+            "used_data_bits": 128
+          },
+          {
+            "addr_used_bits": 5,
+            "depth": 32,
+            "description": "32 entries x 40 bits (10 neurons x 4 bits)",
+            "layer_select": 1,
+            "name": "layer2_weights",
+            "used_data_bits": 40
+          }
+        ]
+      }
+    },
+    "fabric_sha256": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+    "fabric_sha256_matches_stage1": true,
+    "timing_contract": "Synchronous read, 1 cycle latency, enable gated with hold: an address and layer driven during cycle T are captured on the posedge that ends cycle T; the corresponding data must be presented throughout cycle T+1. When en is low the previously captured data must be held unchanged.",
+    "verification_status": "PASS (memif.verify_against_rtl re-parses the fabric port list and fails closed on drift)"
+  },
+  "limitations": [
+    "The bias ROMs cannot be requested from this OpenROM version: its word_size is expressed in BYTES, so 22-bit and 17-bit words are not representable. Padding was NOT applied because that would change the physical word width without approval.",
+    "DRC and LVS fail in this environment on the UPSTREAM REFERENCE macro as well (830 errors, LVS mismatch), so no macro here has a clean physical-verification result and none is claimed.",
+    "No synthesis, FPGA or ASIC gate-level verification has been run; that is Stage 4.",
+    "No area, timing or cell-area number is claimed.",
+    "Stage 3's formal behavioural verification campaign is not implemented."
+  ],
+  "meta": {
+    "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+    "numpy": "1.26.4",
+    "platform": "Linux-4.18.0-553.33.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "python": "3.11.11",
+    "quant_params_sha256": "2ad884b42e797bb4400ecaa2f9de46da7aa16b5abf32fe21e77a657bdd82eec7",
+    "stage0_npz_sha256": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46"
+  },
+  "openram_behavioral_model": {
+    "authorship": "model2rtl behavioural model of the generated OpenROM contents. NOT OpenROM-generated Verilog.",
+    "lint": {
+      "icarus_verilog2001": "PASS",
+      "ok": true,
+      "sources": [
+        "mnist_mlp_params_openram.v"
+      ],
+      "yosys_cell_counts": {
+        "$dff": 8,
+        "$logic_and": 8,
+        "$logic_or": 2,
+        "$lt": 4,
+        "$meminit": 4,
+        "$memrd_v2": 4,
+        "$mux": 12,
+        "$not": 6,
+        "rom_macro_bias_l1": 1,
+        "rom_macro_bias_l2": 1,
+        "rom_macro_weights_l1": 1,
+        "rom_macro_weights_l2": 1
+      },
+      "yosys_check_assert": "PASS (Found and reported 0 problems)",
+      "yosys_hierarchy_check": "PASS",
+      "yosys_inferred_latches": 0,
+      "yosys_multiple_drivers": false,
+      "yosys_read_verilog": "PASS",
+      "yosys_undriven_nets": false
+    },
+    "openrom_verilog_note": "OpenROM does emit a .v file, but it is a byte-oriented, delay-based ($readmemb on a binary file, negedge data with #DELAY) non-synthesizable stub that does not implement this project's read contract, so it is not used.",
+    "rtl": "rtl/mnist_mlp_params_openram.v",
+    "rtl_sha256": "162f3131691da527d963d0e3e67d6d273e39091f7414f339d10b593989497cbe"
+  },
+  "openram_environment": {
+    "drc_tool": "magic 8.3.486 (conda-forge, user space)",
+    "env_script": "build/openram/openram_env.sh",
+    "lvs_tool": "netgen 1.5.323 (built from source, user space)",
+    "nix_bootstrap": "disabled (use_nix = False); tools come from PATH",
+    "openram_branch": "stable",
+    "openram_commit": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a",
+    "openram_home": "/home/rithwik/OpenRAM/compiler",
+    "openram_source_url": "https://github.com/VLSIDA/OpenRAM.git",
+    "openram_tech": "/home/rithwik/OpenRAM/technology",
+    "pdk_provenance": "ciel enable --pdk sky130 e8294524e5f67c533c5d0c3afa0bcc5b2a5fa066 (OpenRAM Makefile SKY130_CIEL), plus skywater-pdk f70d8ca and sky130_fd_bd_sram dd64256",
+    "pdk_root": "/home/rithwik/pdk",
+    "pdk_variant": "sky130A",
+    "python": "Python 3.11.11",
+    "smoke_test": {
+      "config": "build/openram/smoke/smoke_rom.py",
+      "design": "official OpenRAM sample sky130 1 kbyte ROM",
+      "drc_result": "830 errors",
+      "elapsed_seconds": 235,
+      "generation": "PASS",
+      "lvs_result": "MISMATCH",
+      "note": "The UPSTREAM REFERENCE macro itself fails DRC and LVS in this environment, so physical-verification results here are not evidence about model2rtl's data. Generation of all views works.",
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ]
+    }
+  },
+  "openrom_macro_summary": {
+    "blocked": [
+      "bias_l1",
+      "bias_l2"
+    ],
+    "convention_evidence": "build/openram/diag: a 1024-word one-hot-per-byte diagnostic ROM was generated and all 8192 programmed cells in the resulting SPICE netlist matched the predicted placement exactly (0 mismatches).",
+    "data_convention_proven": "OpenROM stores the input file as a big-endian bit stream, first bit first. Word A of the file lands at addr0 = A. Within a word, the macro drives dout0[b] = bit (word_bits-1-b) of that word's big-endian value, i.e. dout0 is BIT REVERSED with respect to a Verilog [word_bits-1:0] literal. This was proven empirically against a generated SPICE netlist, not assumed.",
+    "failed": [],
+    "generated": [
+      "weights_l2"
+    ]
+  },
+  "openrom_macros": {
+    "bias_l1": {
+      "blocked_reason": "OpenROM's word_size is expressed in BYTES (rom_config.py sets word_bits = word_size * 8), so a 22-bit word cannot be requested. Generating this macro would require changing the word width, which Stage 2 forbids without explicit approval.",
+      "canonical_image_sha256": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+      "macro": "bias_l1",
+      "proposed_fix_not_implemented": "pad the word to 24 bits (3 bytes) in the physical macro and slice it back in the wrapper",
+      "requested_depth": 32,
+      "requested_width_bits": 22,
+      "status": "BLOCKED"
+    },
+    "bias_l2": {
+      "blocked_reason": "OpenROM's word_size is expressed in BYTES (rom_config.py sets word_bits = word_size * 8), so a 17-bit word cannot be requested. Generating this macro would require changing the word width, which Stage 2 forbids without explicit approval.",
+      "canonical_image_sha256": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+      "macro": "bias_l2",
+      "proposed_fix_not_implemented": "pad the word to 24 bits (3 bytes) in the physical macro and slice it back in the wrapper",
+      "requested_depth": 10,
+      "requested_width_bits": 17,
+      "status": "BLOCKED"
+    },
+    "weights_l2": {
+      "canonical_image_sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+      "compile_log": "build/openram/weights_l2/weights_l2_compile.log",
+      "config": "/home/rithwik/model2rtl/build/openram/weights_l2/weights_l2_cfg.py",
+      "elapsed_seconds": 10.9,
+      "lvsdrc_probe": {
+        "drc_errors": 780,
+        "drc_status": "780 errors",
+        "elapsed_seconds": 30.9,
+        "fatal_lines": [
+          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_279869_temp/weights_l2_drclvs.lvs.report)"
+        ],
+        "log": "build/openram/weights_l2/weights_l2_drclvs.log",
+        "lvs_status": "MISMATCH",
+        "reports_found": {},
+        "returncode": 1
+      },
+      "macro": "weights_l2",
+      "missing_expected_views": [],
+      "physical_cols": 160,
+      "physical_rows": 8,
+      "physical_verification": {
+        "drc_errors": 780,
+        "drc_status": "780 errors",
+        "elapsed_seconds": 30.9,
+        "fatal_lines": [
+          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_279869_temp/weights_l2_drclvs.lvs.report)"
+        ],
+        "log": "build/openram/weights_l2/weights_l2_drclvs.log",
+        "lvs_status": "MISMATCH",
+        "reports_found": {},
+        "returncode": 1
+      },
+      "requested_depth": 32,
+      "requested_width_bits": 40,
+      "returncode": 0,
+      "rom_data": {
+        "bits": 1280,
+        "bitstream_matches_canonical_image": true,
+        "canonical_image_sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+        "path": "/home/rithwik/model2rtl/build/openram/weights_l2/weights_l2.hex",
+        "sha256": "2c51c785841633f248bf9787f681bda0c444f55c4f7ad3fc0c3276dc31084d63"
+      },
+      "status": "PASS",
+      "views": {
+        "gds": {
+          "bytes": 920564,
+          "path": "build/openram/weights_l2/out/weights_l2.gds",
+          "sha256": "6e5d626110003472c7227be1f2bcb7529e183fdac86d3b82eb5352a2fda5f046"
+        },
+        "lef": {
+          "bytes": 7937,
+          "path": "build/openram/weights_l2/out/weights_l2.lef",
+          "sha256": "7f17f651a1c429f69581d8f65cb3ab9cfc2d5636aff8456640720f5131f90ce9"
+        },
+        "log": {
+          "bytes": 3262,
+          "path": "build/openram/weights_l2/out/weights_l2.log",
+          "sha256": "31f3c7504ebe1ccf0cad102d4b818010d0d82258f7aeaf9a8a38cf241393cd7c"
+        },
+        "lvs.sp": {
+          "bytes": 197468,
+          "path": "build/openram/weights_l2/out/weights_l2.lvs.sp",
+          "sha256": "ad966ea9078e785ddd3b0fd26210a1bf51de434a0e08f11787b64010c6a35c85"
+        },
+        "py": {
+          "bytes": 586,
+          "path": "build/openram/weights_l2/out/weights_l2.py",
+          "sha256": "f2d5eb9ea50e6ce83356b6d2005d35409fafdae3b08ac1d971390e97e32752e7"
+        },
+        "sp": {
+          "bytes": 198478,
+          "path": "build/openram/weights_l2/out/weights_l2.sp",
+          "sha256": "7d3e2968b5ba8809c020bae9b4095b9d5a081c0b740bb79b4826705bd0111c24"
+        },
+        "v": {
+          "bytes": 1481,
+          "path": "build/openram/weights_l2/out/weights_l2.v",
+          "sha256": "f17c1af33f1a35f545d742516634a219b166d58b6255545f2478cef118cf1f2c"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    }
+  },
+  "portable_backend": {
+    "complete_readback": {
+      "layer1_bias_exact": true,
+      "layer1_bias_rows": "32/32",
+      "layer1_weight_rows": "784/784",
+      "layer2_bias_exact": true,
+      "layer2_bias_rows": "10/10",
+      "layer2_weight_rows": "32/32",
+      "weight_indices_exact": "25408/25408"
+    },
+    "generator": "scripts/gen_weight_rom_portable.py",
+    "invalid_address_behaviour": "all zeros; no invalid address aliases a valid parameter row (tested)",
+    "lint": {
+      "icarus_verilog2001": "PASS",
+      "ok": true,
+      "sources": [
+        "mnist_mlp_params_portable.v"
+      ],
+      "yosys_cell_counts": {
+        "$dff": 2,
+        "$logic_not": 2,
+        "$meminit": 4,
+        "$memrd_v2": 4,
+        "$mux": 7,
+        "$not": 3
+      },
+      "yosys_check_assert": "PASS (Found and reported 0 problems)",
+      "yosys_hierarchy_check": "PASS",
+      "yosys_inferred_latches": 0,
+      "yosys_multiple_drivers": false,
+      "yosys_read_verilog": "PASS",
+      "yosys_undriven_nets": false
+    },
+    "rtl": "rtl/mnist_mlp_params_portable.v",
+    "rtl_sha256": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe"
+  },
+  "stage": 2,
+  "status": "PARTIAL",
+  "top_level": {
+    "backend_selection": "build time, by source list: compile exactly one of rtl/mnist_mlp_params_sel_portable.v or rtl/mnist_mlp_params_sel_openram.v, each of which defines the abstract module mnist_mlp_params. No runtime mux exists.",
+    "fabric_modified": false,
+    "lint_openram": {
+      "icarus_verilog2001": "PASS",
+      "ok": true,
+      "sources": [
+        "mnist_mlp_fabric.v",
+        "mnist_mlp_params_openram.v",
+        "mnist_mlp_params_sel_openram.v",
+        "mnist_mlp_top.v"
+      ],
+      "yosys_cell_counts": {
+        "$add": 49,
+        "$dff": 114,
+        "$eq": 705,
+        "$gt": 2,
+        "$logic_and": 11,
+        "$logic_not": 50,
+        "$logic_or": 5,
+        "$lt": 4,
+        "$meminit": 4,
+        "$memrd": 11,
+        "$memrd_v2": 4,
+        "$memwr_v2": 44,
+        "$mul": 16,
+        "$mux": 269,
+        "$not": 9,
+        "$pmux": 53,
+        "$pos": 1,
+        "$reduce_bool": 1,
+        "mnist_mlp_fabric": 1,
+        "mnist_mlp_params": 1
+      },
+      "yosys_check_assert": "PASS (Found and reported 0 problems)",
+      "yosys_hierarchy_check": "PASS",
+      "yosys_inferred_latches": 0,
+      "yosys_multiple_drivers": false,
+      "yosys_read_verilog": "PASS",
+      "yosys_undriven_nets": false
+    },
+    "lint_portable": {
+      "icarus_verilog2001": "PASS",
+      "ok": true,
+      "sources": [
+        "mnist_mlp_fabric.v",
+        "mnist_mlp_params_portable.v",
+        "mnist_mlp_params_sel_portable.v",
+        "mnist_mlp_top.v"
+      ],
+      "yosys_cell_counts": {
+        "$add": 49,
+        "$dff": 108,
+        "$eq": 705,
+        "$gt": 2,
+        "$logic_and": 3,
+        "$logic_not": 52,
+        "$logic_or": 3,
+        "$meminit": 4,
+        "$memrd": 11,
+        "$memrd_v2": 4,
+        "$memwr_v2": 44,
+        "$mul": 16,
+        "$mux": 264,
+        "$not": 6,
+        "$pmux": 53,
+        "$pos": 1,
+        "$reduce_bool": 1,
+        "mnist_mlp_fabric": 1,
+        "mnist_mlp_params": 1
+      },
+      "yosys_check_assert": "PASS (Found and reported 0 problems)",
+      "yosys_hierarchy_check": "PASS",
+      "yosys_inferred_latches": 0,
+      "yosys_multiple_drivers": false,
+      "yosys_read_verilog": "PASS",
+      "yosys_undriven_nets": false
+    },
+    "openram_sources": [
+      "mnist_mlp_fabric.v",
+      "mnist_mlp_params_openram.v",
+      "mnist_mlp_params_sel_openram.v",
+      "mnist_mlp_top.v"
+    ],
+    "portable_sources": [
+      "mnist_mlp_fabric.v",
+      "mnist_mlp_params_portable.v",
+      "mnist_mlp_params_sel_portable.v",
+      "mnist_mlp_top.v"
+    ],
+    "rtl": "rtl/mnist_mlp_top.v"
+  }
+}

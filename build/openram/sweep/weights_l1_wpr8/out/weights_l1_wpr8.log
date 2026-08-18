@@ -1,0 +1,20 @@
+[2026-08-18 16:32:39.971960] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-18 16:32:40.781355] |==============================================================================|
+[2026-08-18 16:32:40.781490] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 16:32:40.781527] |=========                                                            =========|
+[2026-08-18 16:32:40.781549] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 16:32:40.781568] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 16:32:40.781588] |=========            University of California Santa Cruz             =========|
+[2026-08-18 16:32:40.781608] |=========                                                            =========|
+[2026-08-18 16:32:40.781627] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 16:32:40.781644] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 16:32:40.781661] |=========                See LICENSE for license info                =========|
+[2026-08-18 16:32:40.781677] |==============================================================================|
+[2026-08-18 16:32:40.781700] ** Start: 08/18/2026 16:32:40
+[2026-08-18 16:32:40.781721] Output files are: 
+[2026-08-18 16:32:40.781738] /home/rithwik/model2rtl/build/openram/sweep/weights_l1_wpr8/out/weights_l1_wpr8.sp
+[2026-08-18 16:32:40.781755] /home/rithwik/model2rtl/build/openram/sweep/weights_l1_wpr8/out/weights_l1_wpr8.v
+[2026-08-18 16:32:40.781772] /home/rithwik/model2rtl/build/openram/sweep/weights_l1_wpr8/out/weights_l1_wpr8.lef
+[2026-08-18 16:32:40.781789] /home/rithwik/model2rtl/build/openram/sweep/weights_l1_wpr8/out/weights_l1_wpr8.gds
+[2026-08-18 16:32:40.797343] create rom of word size 16 with 784 num of words

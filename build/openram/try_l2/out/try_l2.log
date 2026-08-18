@@ -1,0 +1,36 @@
+[2026-08-18 15:53:45.591302] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-18 15:53:46.389325] |==============================================================================|
+[2026-08-18 15:53:46.389466] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 15:53:46.389504] |=========                                                            =========|
+[2026-08-18 15:53:46.389526] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 15:53:46.389545] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 15:53:46.389565] |=========            University of California Santa Cruz             =========|
+[2026-08-18 15:53:46.389586] |=========                                                            =========|
+[2026-08-18 15:53:46.389605] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 15:53:46.389623] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 15:53:46.389640] |=========                See LICENSE for license info                =========|
+[2026-08-18 15:53:46.389656] |==============================================================================|
+[2026-08-18 15:53:46.389679] ** Start: 08/18/2026 15:53:46
+[2026-08-18 15:53:46.389699] Output files are: 
+[2026-08-18 15:53:46.389717] /home/rithwik/model2rtl/build/openram/try_l2/out/try_l2.sp
+[2026-08-18 15:53:46.389734] /home/rithwik/model2rtl/build/openram/try_l2/out/try_l2.v
+[2026-08-18 15:53:46.389750] /home/rithwik/model2rtl/build/openram/try_l2/out/try_l2.lef
+[2026-08-18 15:53:46.389766] /home/rithwik/model2rtl/build/openram/try_l2/out/try_l2.gds
+[2026-08-18 15:53:46.390178] create rom of word size 5 with 32 num of words
+[2026-08-18 15:53:47.164483] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.165172] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.165685] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.166185] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.166791] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.167283] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.167799] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-18 15:53:47.303741] ** Submodules: 0.9 seconds
+[2026-08-18 15:53:47.304298] ** Placement: 0.0 seconds

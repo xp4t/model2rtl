@@ -1,0 +1,11 @@
+word_size = 5
+words_per_row = 2
+check_lvsdrc = False
+use_nix = False
+rom_data = "weights_l2.hex"
+data_type = "hex"
+output_name = "try_l2"
+output_path = "/home/rithwik/model2rtl/build/openram/try_l2/out/"
+tech_name = "sky130"
+nominal_corner_only = True
+route_supplies = "ring"

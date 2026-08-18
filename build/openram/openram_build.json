@@ -1,0 +1,98 @@
+{
+  "macros": {
+    "weights_l2": {
+      "canonical_image_sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+      "compile_log": "build/openram/weights_l2/weights_l2_compile.log",
+      "config": "/home/rithwik/model2rtl/build/openram/weights_l2/weights_l2_cfg.py",
+      "elapsed_seconds": 10.8,
+      "lvsdrc_probe": {
+        "drc_errors": 780,
+        "drc_status": "780 errors",
+        "elapsed_seconds": 2238.8,
+        "fatal_lines": [
+          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_273700_temp/weights_l2_drclvs.lvs.report)"
+        ],
+        "log": "build/openram/weights_l2/weights_l2_drclvs.log",
+        "lvs_status": "MISMATCH",
+        "reports_found": {},
+        "returncode": -9
+      },
+      "macro": "weights_l2",
+      "missing_expected_views": [],
+      "physical_cols": 160,
+      "physical_rows": 8,
+      "physical_verification": {
+        "drc_errors": 780,
+        "drc_status": "780 errors",
+        "elapsed_seconds": 2238.8,
+        "fatal_lines": [
+          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_273700_temp/weights_l2_drclvs.lvs.report)"
+        ],
+        "log": "build/openram/weights_l2/weights_l2_drclvs.log",
+        "lvs_status": "MISMATCH",
+        "reports_found": {},
+        "returncode": -9
+      },
+      "requested_depth": 32,
+      "requested_width_bits": 40,
+      "returncode": 0,
+      "rom_data": {
+        "bits": 1280,
+        "bitstream_matches_canonical_image": true,
+        "canonical_image_sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+        "path": "/home/rithwik/model2rtl/build/openram/weights_l2/weights_l2.hex",
+        "sha256": "2c51c785841633f248bf9787f681bda0c444f55c4f7ad3fc0c3276dc31084d63"
+      },
+      "status": "PASS",
+      "views": {
+        "gds": {
+          "bytes": 920564,
+          "path": "build/openram/weights_l2/out/weights_l2.gds",
+          "sha256": "fa40478db04bdfd56d7306b5ee631fa09c1c7d97a49e0f0ae94d86fb3bb80ec8"
+        },
+        "lef": {
+          "bytes": 7937,
+          "path": "build/openram/weights_l2/out/weights_l2.lef",
+          "sha256": "b50d0daac72be1efed18e3fecf71918a43637b78bd745d631c2a6b8f722833e7"
+        },
+        "log": {
+          "bytes": 3262,
+          "path": "build/openram/weights_l2/out/weights_l2.log",
+          "sha256": "2c7f162a429342253823e8cdbc5c1bfebcc9f190ed8ed20bf1fa4ef717e6f73e"
+        },
+        "lvs.sp": {
+          "bytes": 197468,
+          "path": "build/openram/weights_l2/out/weights_l2.lvs.sp",
+          "sha256": "9629e1ed110f7cf1ca7e7d41ba5508aa22f627cb2af24b756e09cd93eb74aa1b"
+        },
+        "py": {
+          "bytes": 586,
+          "path": "build/openram/weights_l2/out/weights_l2.py",
+          "sha256": "f2d5eb9ea50e6ce83356b6d2005d35409fafdae3b08ac1d971390e97e32752e7"
+        },
+        "sp": {
+          "bytes": 198478,
+          "path": "build/openram/weights_l2/out/weights_l2.sp",
+          "sha256": "777978f7b4572d682b31645393983dad0457372f2d2458bc898841b7eaffed0d"
+        },
+        "v": {
+          "bytes": 1481,
+          "path": "build/openram/weights_l2/out/weights_l2.v",
+          "sha256": "f17c1af33f1a35f545d742516634a219b166d58b6255545f2478cef118cf1f2c"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    }
+  },
+  "openram_root": "/home/rithwik/OpenRAM",
+  "pdk_root": "/home/rithwik/pdk"
+}

@@ -1,0 +1,37 @@
+WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+|==============================================================================|
+|=========                      OpenRAM v1.2.49                       =========|
+|=========                                                            =========|
+|=========               VLSI Design and Automation Lab               =========|
+|=========        Computer Science and Engineering Department         =========|
+|=========            University of California Santa Cruz             =========|
+|=========                                                            =========|
+|=========          Usage help: openram-user-group@ucsc.edu           =========|
+|=========        Development help: openram-dev-group@ucsc.edu        =========|
+|=========                See LICENSE for license info                =========|
+|==============================================================================|
+** Start: 08/18/2026 15:54:21
+Output files are: 
+/home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.sp
+/home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.v
+/home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.lef
+/home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.gds
+create rom of word size 5 with 32 num of words
+** Submodules: 1.1 seconds
+** Placement: 0.0 seconds
+** Routing: 8.4 seconds
+** Verification: 0.0 seconds
+** ROM creation: 9.5 seconds
+SP: Writing to /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.sp
+** Spice writing: 0.0 seconds
+GDS: Writing to /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.gds
+** GDS: 0.1 seconds
+LEF: Writing to /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.lef
+** LEF: 0.0 seconds
+LVS: Writing to /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.lvs.sp
+** LVS writing: 0.0 seconds
+Config: Writing to /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.py
+** Config: 0.0 seconds
+Verilog: Writing to /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/weights_l2_wpr4.v
+** Verilog: 0.0 seconds
+** End: 9.6 seconds

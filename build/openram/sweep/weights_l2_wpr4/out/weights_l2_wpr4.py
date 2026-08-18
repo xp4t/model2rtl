@@ -1,0 +1,11 @@
+word_size = 5
+words_per_row = 4
+check_lvsdrc = False
+use_nix = False
+rom_data = "/home/rithwik/model2rtl/build/openram/sweep/weights_l2.hex"
+data_type = "hex"
+output_name = "weights_l2_wpr4"
+output_path = "/home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr4/out/"
+tech_name = "sky130"
+nominal_corner_only = True
+route_supplies = "ring"

@@ -1,0 +1,38 @@
+[2026-08-18 16:43:01.843768] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-18 16:43:02.651310] |==============================================================================|
+[2026-08-18 16:43:02.651484] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 16:43:02.651539] |=========                                                            =========|
+[2026-08-18 16:43:02.651564] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 16:43:02.651583] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 16:43:02.651603] |=========            University of California Santa Cruz             =========|
+[2026-08-18 16:43:02.651624] |=========                                                            =========|
+[2026-08-18 16:43:02.651643] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 16:43:02.651660] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 16:43:02.651677] |=========                See LICENSE for license info                =========|
+[2026-08-18 16:43:02.651694] |==============================================================================|
+[2026-08-18 16:43:02.651717] ** Start: 08/18/2026 16:43:02
+[2026-08-18 16:43:02.651737] Output files are: 
+[2026-08-18 16:43:02.651755] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.sp
+[2026-08-18 16:43:02.651772] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.v
+[2026-08-18 16:43:02.651791] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.lef
+[2026-08-18 16:43:02.651807] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.gds
+[2026-08-18 16:43:02.652095] create rom of word size 5 with 32 num of words
+[2026-08-18 16:43:03.762194] ** Submodules: 1.1 seconds
+[2026-08-18 16:43:03.762755] ** Placement: 0.0 seconds
+[2026-08-18 16:43:12.167455] ** Routing: 8.4 seconds
+[2026-08-18 16:43:12.167631] ** Verification: 0.0 seconds
+[2026-08-18 16:43:12.167665] ** ROM creation: 9.5 seconds
+[2026-08-18 16:43:12.167693] SP: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.sp
+[2026-08-18 16:43:12.187299] ** Spice writing: 0.0 seconds
+[2026-08-18 16:43:12.187381] GDS: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.gds
+[2026-08-18 16:43:12.311230] ** GDS: 0.1 seconds
+[2026-08-18 16:43:12.311317] LEF: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.lef
+[2026-08-18 16:43:12.312715] ** LEF: 0.0 seconds
+[2026-08-18 16:43:12.312768] LVS: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.lvs.sp
+[2026-08-18 16:43:12.332024] ** LVS writing: 0.0 seconds
+[2026-08-18 16:43:12.332295] Config: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.py
+[2026-08-18 16:43:12.332340] ** Config: 0.0 seconds
+[2026-08-18 16:43:12.332364] Verilog: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.v
+[2026-08-18 16:43:12.332480] ** Verilog: 0.0 seconds
+[2026-08-18 16:43:12.332627] ** End: 9.7 seconds

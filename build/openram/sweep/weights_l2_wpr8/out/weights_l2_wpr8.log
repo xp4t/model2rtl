@@ -1,0 +1,22 @@
+[2026-08-18 15:54:31.368616] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-18 15:54:32.170107] |==============================================================================|
+[2026-08-18 15:54:32.170244] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 15:54:32.170282] |=========                                                            =========|
+[2026-08-18 15:54:32.170312] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 15:54:32.170332] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 15:54:32.170353] |=========            University of California Santa Cruz             =========|
+[2026-08-18 15:54:32.170373] |=========                                                            =========|
+[2026-08-18 15:54:32.170393] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 15:54:32.170411] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 15:54:32.170429] |=========                See LICENSE for license info                =========|
+[2026-08-18 15:54:32.170446] |==============================================================================|
+[2026-08-18 15:54:32.170470] ** Start: 08/18/2026 15:54:32
+[2026-08-18 15:54:32.170490] Output files are: 
+[2026-08-18 15:54:32.170508] /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr8/out/weights_l2_wpr8.sp
+[2026-08-18 15:54:32.170525] /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr8/out/weights_l2_wpr8.v
+[2026-08-18 15:54:32.170542] /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr8/out/weights_l2_wpr8.lef
+[2026-08-18 15:54:32.170559] /home/rithwik/model2rtl/build/openram/sweep/weights_l2_wpr8/out/weights_l2_wpr8.gds
+[2026-08-18 15:54:32.170825] create rom of word size 5 with 32 num of words
+[2026-08-18 15:54:33.847521] ** Submodules: 1.7 seconds
+[2026-08-18 15:54:33.848052] ** Placement: 0.0 seconds

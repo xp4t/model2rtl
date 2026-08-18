@@ -1,0 +1,38 @@
+[2026-08-18 15:51:17.471222] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-18 15:51:18.283031] |==============================================================================|
+[2026-08-18 15:51:18.283201] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 15:51:18.283255] |=========                                                            =========|
+[2026-08-18 15:51:18.283282] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 15:51:18.283321] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 15:51:18.283346] |=========            University of California Santa Cruz             =========|
+[2026-08-18 15:51:18.283369] |=========                                                            =========|
+[2026-08-18 15:51:18.283391] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 15:51:18.283411] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 15:51:18.283431] |=========                See LICENSE for license info                =========|
+[2026-08-18 15:51:18.283450] |==============================================================================|
+[2026-08-18 15:51:18.283476] ** Start: 08/18/2026 15:51:18
+[2026-08-18 15:51:18.283501] Output files are: 
+[2026-08-18 15:51:18.283521] /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.sp
+[2026-08-18 15:51:18.283551] /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.v
+[2026-08-18 15:51:18.283569] /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.lef
+[2026-08-18 15:51:18.283587] /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.gds
+[2026-08-18 15:51:18.284785] create rom of word size 1 with 1024 num of words
+[2026-08-18 15:51:33.129506] ** Submodules: 14.8 seconds
+[2026-08-18 15:51:33.130065] ** Placement: 0.0 seconds
+[2026-08-18 15:51:57.564208] ** Routing: 24.4 seconds
+[2026-08-18 15:51:57.564392] ** Verification: 0.0 seconds
+[2026-08-18 15:51:57.564427] ** ROM creation: 39.3 seconds
+[2026-08-18 15:51:57.564457] SP: Writing to /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.sp
+[2026-08-18 15:51:57.642867] ** Spice writing: 0.1 seconds
+[2026-08-18 15:51:57.642950] GDS: Writing to /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.gds
+[2026-08-18 15:51:57.756927] ** GDS: 0.1 seconds
+[2026-08-18 15:51:57.757024] LEF: Writing to /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.lef
+[2026-08-18 15:51:57.757888] ** LEF: 0.0 seconds
+[2026-08-18 15:51:57.757933] LVS: Writing to /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.lvs.sp
+[2026-08-18 15:51:57.836848] ** LVS writing: 0.1 seconds
+[2026-08-18 15:51:57.837100] Config: Writing to /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.py
+[2026-08-18 15:51:57.837143] ** Config: 0.0 seconds
+[2026-08-18 15:51:57.837165] Verilog: Writing to /home/rithwik/model2rtl/build/openram/diag/out/diag_rom.v
+[2026-08-18 15:51:57.837257] ** Verilog: 0.0 seconds
+[2026-08-18 15:51:57.837493] ** End: 39.6 seconds

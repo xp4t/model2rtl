@@ -1,0 +1,381 @@
+{
+  "activations": {
+    "hidden_elements_evaluated": 320000,
+    "hidden_pre_saturation_max_observed": 204,
+    "hidden_range_declared": [
+      0,
+      255
+    ],
+    "hidden_range_observed_test": [
+      0,
+      204
+    ],
+    "hidden_saturation_count": 0,
+    "hidden_saturation_percentage": 0.0,
+    "hidden_zero_count": 129278,
+    "hidden_zero_percentage": 40.399375,
+    "input_range_declared": [
+      0,
+      255
+    ],
+    "input_range_observed_test": [
+      0,
+      255
+    ],
+    "input_signedness": "unsigned",
+    "input_width_bits": 8,
+    "layer1_accumulator_range_observed": [
+      -71470,
+      52160
+    ],
+    "logit_range_observed": [
+      -3216,
+      2417
+    ]
+  },
+  "arithmetic_contract": {
+    "accumulator_signedness": "signed",
+    "accumulator_width_bits": {
+      "layer1": 23,
+      "layer2": 18
+    },
+    "bias_format": "signed integer in the layer accumulator domain, added directly to the dot product",
+    "bias_width_bits": {
+      "layer1": 22,
+      "layer2": 17
+    },
+    "input_signedness": "unsigned",
+    "input_width_bits": 8,
+    "input_zero_point": 0,
+    "output_logit_signedness": "signed",
+    "output_logit_width_bits": 18,
+    "prediction_rule": "argmax over the 10 signed logits; lowest index wins ties",
+    "product_signedness": "signed",
+    "product_width_bits": {
+      "layer1": 12,
+      "layer2": 12
+    },
+    "relu_semantics": "ReLU applied to the signed accumulator BEFORE the shift, so the shifted operand is never negative and the shift direction is unambiguous",
+    "requantization_rule": "hidden: h = clamp((max(acc1, 0) + 128) >> 8, 0, 255); output: none (raw signed logits)",
+    "requantization_shift": 8,
+    "rounding_rule": "round-half-up (add 1 << (shift-1), then arithmetic right shift)",
+    "saturation_rule": "clamp to [0, 255] (unsigned 8-bit)",
+    "scale_note": "No multiplicative requantisation scale exists anywhere in the datapath. The only requantisation operator is a fixed power-of-two shift that is an architectural constant, so no trained-model scale constant can leak into the fixed compute fabric.",
+    "weight_alphabet_rule": "alphabet[i] = i - 8",
+    "weight_alphabet_values": [
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "weight_index_width_bits": 4,
+    "weight_value_signedness": "signed",
+    "weight_value_width_bits": 4
+  },
+  "float_model": {
+    "note": "reference only; the NumPy integer golden model is the RTL oracle",
+    "test_accuracy": 0.9652,
+    "train_accuracy": 0.9793090909090909,
+    "val_accuracy": 0.9704
+  },
+  "layer1": {
+    "accumulator_bits": 23,
+    "bias_bits_declared": 22,
+    "bias_bits_required": 10,
+    "bias_max": 434,
+    "bias_min": -327,
+    "dot_product_bits": 22,
+    "max_quantized_weight": 7,
+    "min_quantized_weight": -8,
+    "orientation": "[in_features, out_features]",
+    "pre_clip_max": 13,
+    "pre_clip_min": -22,
+    "product_bits": 12,
+    "shape": [
+      784,
+      32
+    ],
+    "synapse_count": 25088,
+    "unused_weight_level_values": [],
+    "unused_weight_levels": [],
+    "weight_index_histogram": [
+      228,
+      204,
+      312,
+      569,
+      1013,
+      1696,
+      2572,
+      3702,
+      4201,
+      3876,
+      2868,
+      1795,
+      997,
+      523,
+      279,
+      253
+    ],
+    "weight_index_histogram_by_level": {
+      "-1": 3702,
+      "-2": 2572,
+      "-3": 1696,
+      "-4": 1013,
+      "-5": 569,
+      "-6": 312,
+      "-7": 204,
+      "-8": 228,
+      "0": 4201,
+      "1": 3876,
+      "2": 2868,
+      "3": 1795,
+      "4": 997,
+      "5": 523,
+      "6": 279,
+      "7": 253
+    },
+    "weight_saturation_count": 230,
+    "weight_saturation_percentage": 0.9167729591836735,
+    "worst_case_accumulator_max": 3496591,
+    "worst_case_accumulator_min": -3696512
+  },
+  "layer2": {
+    "accumulator_bits": 18,
+    "bias_bits_declared": 17,
+    "bias_bits_required": 8,
+    "bias_max": 80,
+    "bias_min": -106,
+    "dot_product_bits": 17,
+    "max_quantized_weight": 7,
+    "min_quantized_weight": -8,
+    "orientation": "[in_features, out_features]",
+    "pre_clip_max": 12,
+    "pre_clip_min": -19,
+    "product_bits": 12,
+    "shape": [
+      32,
+      10
+    ],
+    "synapse_count": 320,
+    "unused_weight_level_values": [],
+    "unused_weight_levels": [],
+    "weight_index_histogram": [
+      23,
+      11,
+      8,
+      21,
+      18,
+      24,
+      16,
+      29,
+      22,
+      32,
+      28,
+      28,
+      26,
+      16,
+      10,
+      8
+    ],
+    "weight_index_histogram_by_level": {
+      "-1": 29,
+      "-2": 16,
+      "-3": 24,
+      "-4": 18,
+      "-5": 21,
+      "-6": 8,
+      "-7": 11,
+      "-8": 23,
+      "0": 22,
+      "1": 32,
+      "2": 28,
+      "3": 28,
+      "4": 26,
+      "5": 16,
+      "6": 10,
+      "7": 8
+    },
+    "weight_saturation_count": 24,
+    "weight_saturation_percentage": 7.5,
+    "worst_case_accumulator_max": 122655,
+    "worst_case_accumulator_min": -130816
+  },
+  "meta": {
+    "artifact_hashes": {
+      "mnist_weights_indices.npz": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46",
+      "model_parameter_sha256": "6d54c2e75088bf85db83f83097c3a0dd06dc98281216eb29559e664f89cbfeb6",
+      "quant_params.json": "2ad884b42e797bb4400ecaa2f9de46da7aa16b5abf32fe21e77a657bdd82eec7"
+    },
+    "batch_size": 128,
+    "bias_latent_scale": {
+      "layer1": 1024.0,
+      "layer2": 256.0
+    },
+    "dataset": {
+      "split_rule": "MNIST train[:55000] / train[55000:60000] / official test",
+      "test_images": 10000,
+      "train_images": 55000,
+      "val_images": 5000,
+      "x_test_sha256": "ba1ed81f08b0bc5f87541e3b60cc09cd8a851564187aedfcfa2d49a5df13143d",
+      "x_train_sha256": "3b82d920ed966a9875cd49b0b6fd43301269bd184e2edd2698ea65f003b8a1f3",
+      "y_test_sha256": "602442a0cd4693d10568d685b52fb88b0b92a6ba7667ba0dd79420d5136fc0f5"
+    },
+    "epochs_float": 30,
+    "epochs_qat": 60,
+    "hidden_shift_sweep": [
+      {
+        "hidden_shift": 5,
+        "val_accuracy": 0.9568
+      },
+      {
+        "hidden_shift": 6,
+        "val_accuracy": 0.958
+      },
+      {
+        "hidden_shift": 7,
+        "val_accuracy": 0.9562
+      },
+      {
+        "golden_val_accuracy": 0.9512,
+        "hidden_shift": 8,
+        "val_accuracy": 0.9512
+      },
+      {
+        "hidden_shift": 9,
+        "val_accuracy": 0.9462
+      },
+      {
+        "hidden_shift": 10,
+        "val_accuracy": 0.9392
+      }
+    ],
+    "learning_rate": 0.001,
+    "optimizer": "Adam with cosine decay",
+    "quantization_method": "quantisation-aware training with straight-through estimators",
+    "seed": 1234,
+    "tf_graph_vs_golden_max_logit_diff": 0.0,
+    "training_seconds": 87.7,
+    "versions": {
+      "keras": "3.15.1",
+      "numpy": "1.26.4",
+      "platform": "Linux-4.18.0-553.33.1.el8_10.x86_64-x86_64-with-glibc2.28",
+      "python": "3.11.11",
+      "python_implementation": "CPython",
+      "tensorflow": "2.16.2"
+    },
+    "weight_latent_scale": 8.0
+  },
+  "model_size": {
+    "index_bits_per_synapse": 4,
+    "layer1_synapses": 25088,
+    "layer2_synapses": 320,
+    "total_index_bits": 101632,
+    "total_index_bytes": 12704,
+    "total_synapses": 25408
+  },
+  "multiply_select_add": {
+    "crossover_note": "Product-generator sharing reduces the raw product count only when a layer's output fanout exceeds K. Layer 1 has fanout 32 > K=16 so sharing wins; layer 2 has fanout 10 < K=16 so sharing costs more product generators than the naive form.",
+    "layer1": {
+      "K": 16,
+      "inputs": 784,
+      "naive_multipliers": 25088,
+      "outputs": 32,
+      "ratio_naive_over_shared": 2.0,
+      "selector_fan_in": 16,
+      "selectors": 25088,
+      "shared_product_generators": 12544,
+      "sharing_reduces_product_generators": true
+    },
+    "layer2": {
+      "K": 16,
+      "inputs": 32,
+      "naive_multipliers": 320,
+      "outputs": 10,
+      "ratio_naive_over_shared": 0.625,
+      "selector_fan_in": 16,
+      "selectors": 320,
+      "shared_product_generators": 512,
+      "sharing_reduces_product_generators": false
+    },
+    "synthesis_caveat": "Source-level multiplier counts are not physical multiplier or DSP counts. Every product here has a constant int4 operand, so synthesis is free to implement it as shifts, adds and negations. Synthesised resource and area numbers are reported separately in later stages.",
+    "total": {
+      "naive_multipliers": 25408,
+      "ratio_naive_over_shared": 1.946078431372549,
+      "selectors": 25408,
+      "shared_product_generators": 13056
+    }
+  },
+  "quantized_integer_model": {
+    "accuracy_drop_from_float": 0.0006999999999999229,
+    "test_accuracy": 0.9645,
+    "train_accuracy": 0.9855454545454545
+  },
+  "rtl_generated": false,
+  "stage": 0,
+  "widths": {
+    "layer1": {
+      "accumulator_bits": 23,
+      "accumulator_max": 3496591,
+      "accumulator_min": -3696512,
+      "act_in_bits": 8,
+      "act_in_max": 255,
+      "act_in_min": 0,
+      "act_in_signed": false,
+      "bias_bits": 22,
+      "dot_bits": 22,
+      "dot_max": 1399440,
+      "dot_min": -1599360,
+      "n_inputs": 784,
+      "n_outputs": 32,
+      "name": "layer1",
+      "output_bits": 8,
+      "output_max": 255,
+      "output_min": 0,
+      "output_signed": false,
+      "product_bits": 12,
+      "product_max": 1785,
+      "product_min": -2040,
+      "requant_shift": 8,
+      "weight_index_bits": 4,
+      "weight_value_bits": 4
+    },
+    "layer2": {
+      "accumulator_bits": 18,
+      "accumulator_max": 122655,
+      "accumulator_min": -130816,
+      "act_in_bits": 8,
+      "act_in_max": 255,
+      "act_in_min": 0,
+      "act_in_signed": false,
+      "bias_bits": 17,
+      "dot_bits": 17,
+      "dot_max": 57120,
+      "dot_min": -65280,
+      "n_inputs": 32,
+      "n_outputs": 10,
+      "name": "layer2",
+      "output_bits": 18,
+      "output_max": 122655,
+      "output_min": -130816,
+      "output_signed": true,
+      "product_bits": 12,
+      "product_max": 1785,
+      "product_min": -2040,
+      "requant_shift": null,
+      "weight_index_bits": 4,
+      "weight_value_bits": 4
+    }
+  }
+}

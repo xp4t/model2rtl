@@ -1,0 +1,26 @@
+|==============================================================================|
+|=========                      OpenRAM v1.2.49                       =========|
+|=========                                                            =========|
+|=========               VLSI Design and Automation Lab               =========|
+|=========        Computer Science and Engineering Department         =========|
+|=========            University of California Santa Cruz             =========|
+|=========                                                            =========|
+|=========          Usage help: openram-user-group@ucsc.edu           =========|
+|=========        Development help: openram-dev-group@ucsc.edu        =========|
+|=========                See LICENSE for license info                =========|
+|==============================================================================|
+** Start: 08/18/2026 16:05:43
+Output files are: 
+/home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.sp
+/home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.v
+/home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.lef
+/home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.gds
+create rom of word size 5 with 32 num of words
+** Submodules: 1.1 seconds
+** Placement: 0.0 seconds
+** Routing: 8.5 seconds
+> /home/rithwik/OpenRAM/compiler/debug.py(48)error()
+-> assert return_value == 0
+(Pdb) WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+WARNING: file magic.py: line 254: DRC Errors weights_l2_drclvs	780
+ERROR: file magic.py: line 385: weights_l2_drclvs	LVS mismatch (results in /tmp/openram_rithwik_273700_temp/weights_l2_drclvs.lvs.report)

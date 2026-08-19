@@ -1,0 +1,21 @@
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_top.v
+hierarchy -check -top mnist_mlp_top
+proc
+flatten
+opt -full
+memory
+opt -full
+techmap
+opt -full
+simplemap
+dfflegalize -cell $_DFF_P_ 01
+abc -g simple
+setundef -zero
+opt_clean -purge
+check -assert
+stat
+write_json /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.json
+write_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.v

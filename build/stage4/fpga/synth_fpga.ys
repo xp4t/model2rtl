@@ -1,0 +1,9 @@
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_top.v
+synth_ice40 -top mnist_mlp_top
+check -assert
+stat
+write_json /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.json
+write_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.v

@@ -1,0 +1,2044 @@
+{
+  "fabric_only_diagnostic": {
+    "fpga": {
+      "cells": {
+        "$scopeinfo": 42,
+        "SB_CARRY": 1005,
+        "SB_DFFE": 18,
+        "SB_DFFESR": 1391,
+        "SB_DFFSR": 9,
+        "SB_LUT4": 6126
+      },
+      "check": {
+        "check_blocks": 5,
+        "error_lines": [],
+        "latches_explicitly_not_inferred_lines": 45,
+        "latches_inferred_lines": 0,
+        "multiple_driver_lines": 0,
+        "problems_reported": 0,
+        "undriven_net_lines": 0,
+        "warning_lines": [
+          "Warning: Replacing memory \\acc1 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:317",
+          "Warning: Replacing memory \\acc2 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:330"
+        ],
+        "wire_without_driver_lines": 0
+      },
+      "constant_multiply": {
+        "bank_net": "L1_SELECT[0].u_sel.bank",
+        "bank_width_bits": 192,
+        "bit_class_totals": {
+          "activation_register_alias": 41,
+          "constant": 37,
+          "no_driver_fused_downstream": 114
+        },
+        "multiplier_or_dsp_cells_in_netlist": 0,
+        "per_product": [
+          {
+            "alphabet_level": -8,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 3,
+              "no_driver_fused_downstream": 8
+            },
+            "k": 0,
+            "of_bits": 12,
+            "zero_logic_bits": 4
+          },
+          {
+            "alphabet_level": -7,
+            "bit_classes": {
+              "activation_register_alias": 3,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 1,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -6,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "constant": 1,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 2,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -5,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 3,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": -4,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 4,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -3,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 5,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -2,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 6,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -1,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 7,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": 0,
+            "bit_classes": {
+              "constant": 12
+            },
+            "k": 8,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 1,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 9,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 2,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 10,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 3,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 11,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": 4,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 12,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 5,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "constant": 1,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 13,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": 6,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 14,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": 7,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 15,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          }
+        ],
+        "product_width_bits": 12,
+        "product_wire_drivers": {},
+        "source_multiply_operators": 16,
+        "zero_logic_bits": 78
+      },
+      "exit_status": 0,
+      "family": "ice40",
+      "family_rationale": "synth_ice40 is present in the installed Yosys and the matching official simulation library <datdir>/ice40/cells_sim.v exists and is complete, so the synthesized netlist can be simulated with the vendor-equivalent cell models rather than hand-written stand-ins.  ECP5 was therefore not needed.",
+      "json_path": "build/stage4/diag_fabric_fpga/fabric_only_netlist.json",
+      "log_path": "build/stage4/diag_fabric_fpga/yosys_fabric_only.log",
+      "netlist_evidence": {
+        "always_blocks": 0,
+        "arithmetic_operators": 0,
+        "assign_statements": 2031,
+        "bytes": 5809394,
+        "case_statements": 0,
+        "cell_instance_types": [
+          "SB_CARRY",
+          "SB_DFFE",
+          "SB_DFFESR",
+          "SB_DFFSR",
+          "SB_LUT4"
+        ],
+        "cell_instances": 8549,
+        "contains_dollar_system_task": false,
+        "contains_initial_block": false,
+        "contains_readmemh": false,
+        "modules_defined": [
+          "mnist_mlp_fabric"
+        ],
+        "parameter_image_bits_required": 102506,
+        "parameter_storage": "constant combinational logic",
+        "ram_init_bits": 0,
+        "ram_init_one_bits": 0,
+        "ram_init_params": 0,
+        "top_ports": [
+          "clk",
+          "rst",
+          "start",
+          "in_ready",
+          "in_valid",
+          "in_data",
+          "wmem_en",
+          "wmem_layer",
+          "wmem_addr",
+          "wmem_data",
+          "bmem_en",
+          "bmem_layer",
+          "bmem_addr",
+          "bmem_data",
+          "busy",
+          "done",
+          "prediction_valid",
+          "prediction",
+          "logits"
+        ],
+        "top_ports_match_frozen_interface": false
+      },
+      "netlist_path": "build/stage4/diag_fabric_fpga/fabric_only_netlist.v",
+      "netlist_sha256": "a73c6d66aef1d0f3614319434c59319bccbd007472daa44cd0c713dfe7e5c41b",
+      "resources": {
+        "arithmetic_or_multiplier_cells": 0,
+        "carry": 1005,
+        "dsp": 0,
+        "ff": 1418,
+        "latches": 0,
+        "lut": 6126,
+        "other": 0,
+        "other_types": [],
+        "ram": 0,
+        "total_cells": 8549
+      },
+      "script": "read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nsynth_ice40 -top mnist_mlp_fabric\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/diag_fabric_fpga/fabric_only_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/diag_fabric_fpga/fabric_only_netlist.v\n",
+      "script_path": "build/stage4/diag_fabric_fpga/synth_fabric_only.ys",
+      "script_sha256": "8c8df6cd148fdbb9e8d9e14028c9fb7b1a0290c8bac109f533aee557458ee1a4",
+      "seconds": 16.12,
+      "status": "PASS",
+      "target": "fpga",
+      "unresolved_blackboxes": []
+    },
+    "generic": {
+      "cells": {
+        "$_AND_": 12084,
+        "$_DFF_P_": 1418,
+        "$_MUX_": 243,
+        "$_NOT_": 1978,
+        "$_OR_": 8359,
+        "$_XOR_": 1423
+      },
+      "check": {
+        "check_blocks": 1,
+        "error_lines": [],
+        "latches_explicitly_not_inferred_lines": 45,
+        "latches_inferred_lines": 0,
+        "multiple_driver_lines": 0,
+        "problems_reported": 0,
+        "undriven_net_lines": 0,
+        "warning_lines": [
+          "Warning: Replacing memory \\acc1 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:317",
+          "Warning: Replacing memory \\acc2 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:330"
+        ],
+        "wire_without_driver_lines": 0
+      },
+      "constant_multiply": {
+        "bank_net": "L1_SELECT[0].u_sel.bank",
+        "bank_width_bits": 192,
+        "bit_class_totals": {
+          "activation_register_alias": 41,
+          "constant": 33,
+          "no_driver_fused_downstream": 118
+        },
+        "multiplier_or_dsp_cells_in_netlist": 0,
+        "per_product": [
+          {
+            "alphabet_level": -8,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 3,
+              "no_driver_fused_downstream": 8
+            },
+            "k": 0,
+            "of_bits": 12,
+            "zero_logic_bits": 4
+          },
+          {
+            "alphabet_level": -7,
+            "bit_classes": {
+              "activation_register_alias": 3,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 1,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -6,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "constant": 1,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 2,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -5,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 3,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": -4,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 4,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -3,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 5,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -2,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 6,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -1,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 7,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": 0,
+            "bit_classes": {
+              "constant": 12
+            },
+            "k": 8,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 1,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 9,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 2,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 10,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 3,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 11,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": 4,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 12,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 5,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 13,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": 6,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 14,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": 7,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 15,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          }
+        ],
+        "product_width_bits": 12,
+        "product_wire_drivers": {},
+        "source_multiply_operators": 16,
+        "zero_logic_bits": 74
+      },
+      "exit_status": 0,
+      "json_path": "build/stage4/diag_fabric_generic/fabric_only_netlist.json",
+      "log_path": "build/stage4/diag_fabric_generic/yosys_fabric_only.log",
+      "netlist_evidence": {
+        "always_blocks": 0,
+        "arithmetic_operators": 0,
+        "assign_statements": 3,
+        "bytes": 2385213,
+        "case_statements": 0,
+        "cell_instance_types": [
+          "\\$_AND_",
+          "\\$_DFF_P_",
+          "\\$_MUX_",
+          "\\$_NOT_",
+          "\\$_OR_",
+          "\\$_XOR_"
+        ],
+        "cell_instances": 25505,
+        "contains_dollar_system_task": false,
+        "contains_initial_block": false,
+        "contains_readmemh": false,
+        "modules_defined": [
+          "mnist_mlp_fabric"
+        ],
+        "parameter_image_bits_required": 102506,
+        "parameter_storage": "constant combinational logic",
+        "ram_init_bits": 0,
+        "ram_init_one_bits": 0,
+        "ram_init_params": 0,
+        "top_ports": [
+          "clk",
+          "rst",
+          "start",
+          "in_ready",
+          "in_valid",
+          "in_data",
+          "wmem_en",
+          "wmem_layer",
+          "wmem_addr",
+          "wmem_data",
+          "bmem_en",
+          "bmem_layer",
+          "bmem_addr",
+          "bmem_data",
+          "busy",
+          "done",
+          "prediction_valid",
+          "prediction",
+          "logits"
+        ],
+        "top_ports_match_frozen_interface": false
+      },
+      "netlist_path": "build/stage4/diag_fabric_generic/fabric_only_netlist.v",
+      "netlist_sha256": "1f61bfa1c01dd4454bb3c07ea96b2667f0b24176d48abf3b258f7d79fdf9dcdd",
+      "resources": {
+        "and": 12084,
+        "aoi_oai": 0,
+        "arithmetic_or_multiplier_cells": 0,
+        "latches": 0,
+        "mux": 243,
+        "not": 1978,
+        "or": 8359,
+        "other": 0,
+        "other_types": [],
+        "sequential": 1418,
+        "total_cells": 25505,
+        "xor": 1423
+      },
+      "script": "read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nhierarchy -check -top mnist_mlp_fabric\nproc\nflatten\nopt -full\nmemory\nopt -full\ntechmap\nopt -full\nsimplemap\ndfflegalize -cell $_DFF_P_ 01\nabc -g simple\nsetundef -zero\nopt_clean -purge\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/diag_fabric_generic/fabric_only_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/diag_fabric_generic/fabric_only_netlist.v\n",
+      "script_path": "build/stage4/diag_fabric_generic/synth_fabric_only.ys",
+      "script_sha256": "f1dae1cdabf3ec104cc946a770d4fe1d8a2513f798b83d3a001ca4a41e8e1125",
+      "seconds": 5.09,
+      "status": "PASS",
+      "target": "generic",
+      "unresolved_blackboxes": []
+    }
+  },
+  "failures": [],
+  "formal_equivalence_check": {
+    "performed": false,
+    "reason": "optional supplemental evidence only; gate-level simulation against the Stage-0 integer oracle was run instead and is the mandatory check"
+  },
+  "fpga_target": {
+    "cells": {
+      "$scopeinfo": 45,
+      "SB_CARRY": 1004,
+      "SB_DFF": 61,
+      "SB_DFFE": 68,
+      "SB_DFFESR": 1479,
+      "SB_DFFSR": 6,
+      "SB_LUT4": 6429,
+      "SB_RAM40_4K": 32
+    },
+    "check": {
+      "check_blocks": 5,
+      "error_lines": [],
+      "latches_explicitly_not_inferred_lines": 45,
+      "latches_inferred_lines": 0,
+      "multiple_driver_lines": 0,
+      "problems_reported": 0,
+      "undriven_net_lines": 0,
+      "warning_lines": [
+        "Warning: Replacing memory \\acc1 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:317",
+        "Warning: Replacing memory \\acc2 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:330"
+      ],
+      "wire_without_driver_lines": 0
+    },
+    "constant_multiply": {
+      "bank_net": "u_fabric.L1_SELECT[0].u_sel.bank",
+      "bank_width_bits": 192,
+      "bit_class_totals": {
+        "activation_register_alias": 41,
+        "constant": 37,
+        "no_driver_fused_downstream": 114
+      },
+      "multiplier_or_dsp_cells_in_netlist": 0,
+      "per_product": [
+        {
+          "alphabet_level": -8,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 3,
+            "no_driver_fused_downstream": 8
+          },
+          "k": 0,
+          "of_bits": 12,
+          "zero_logic_bits": 4
+        },
+        {
+          "alphabet_level": -7,
+          "bit_classes": {
+            "activation_register_alias": 3,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 1,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": -6,
+          "bit_classes": {
+            "activation_register_alias": 2,
+            "constant": 1,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 2,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": -5,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "no_driver_fused_downstream": 11
+          },
+          "k": 3,
+          "of_bits": 12,
+          "zero_logic_bits": 1
+        },
+        {
+          "alphabet_level": -4,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 2,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 4,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": -3,
+          "bit_classes": {
+            "activation_register_alias": 2,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 5,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": -2,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 1,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 6,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": -1,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "no_driver_fused_downstream": 11
+          },
+          "k": 7,
+          "of_bits": 12,
+          "zero_logic_bits": 1
+        },
+        {
+          "alphabet_level": 0,
+          "bit_classes": {
+            "constant": 12
+          },
+          "k": 8,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 1,
+          "bit_classes": {
+            "activation_register_alias": 8,
+            "constant": 4
+          },
+          "k": 9,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 2,
+          "bit_classes": {
+            "activation_register_alias": 8,
+            "constant": 4
+          },
+          "k": 10,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 3,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 2,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 11,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": 4,
+          "bit_classes": {
+            "activation_register_alias": 8,
+            "constant": 4
+          },
+          "k": 12,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 5,
+          "bit_classes": {
+            "activation_register_alias": 2,
+            "constant": 1,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 13,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": 6,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 2,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 14,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": 7,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 1,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 15,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        }
+      ],
+      "product_width_bits": 12,
+      "product_wire_drivers": {
+        "prod_00": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [11:3], 3'h0 }",
+        "prod_01": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [23:15], \\u_fabric.act_pipe [2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_02": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [35:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+        "prod_03": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [47:37], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_04": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [58], \\u_fabric.L1_SELECT[0].u_sel.bank [58:51], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 2'h0 }",
+        "prod_05": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [70], \\u_fabric.L1_SELECT[0].u_sel.bank [70:63], \\u_fabric.L1_SELECT[0].u_sel.bank [27:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_06": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [81], \\u_fabric.L1_SELECT[0].u_sel.bank [81], \\u_fabric.L1_SELECT[0].u_sel.bank [81:74], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+        "prod_07": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92:85], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_08": "12'h000",
+        "prod_09": "{ 4'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_10": "{ 3'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+        "prod_11": "{ 2'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [141:133], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_12": "{ 2'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 2'h0 }",
+        "prod_13": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [166:159], \\u_fabric.L1_SELECT[0].u_sel.bank [27:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+        "prod_14": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [141:133], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+        "prod_15": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [190:182], \\u_fabric.L1_SELECT[0].u_sel.bank [37], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }"
+      },
+      "source_multiply_operators": 16,
+      "zero_logic_bits": 78
+    },
+    "exit_status": 0,
+    "family": "ice40",
+    "family_rationale": "synth_ice40 is present in the installed Yosys and the matching official simulation library <datdir>/ice40/cells_sim.v exists and is complete, so the synthesized netlist can be simulated with the vendor-equivalent cell models rather than hand-written stand-ins.  ECP5 was therefore not needed.",
+    "inferred_memories": 32,
+    "json_path": "build/stage4/fpga/fpga_netlist.json",
+    "log_path": "build/stage4/fpga/yosys_fpga.log",
+    "multiplier_related_cells": 0,
+    "mux_lut_related_cells": 6429,
+    "netlist_evidence": {
+      "always_blocks": 0,
+      "arithmetic_operators": 0,
+      "assign_statements": 2255,
+      "bytes": 6018807,
+      "case_statements": 0,
+      "cell_instance_types": [
+        "SB_CARRY",
+        "SB_DFF",
+        "SB_DFFE",
+        "SB_DFFESR",
+        "SB_DFFSR",
+        "SB_LUT4",
+        "SB_RAM40_4K"
+      ],
+      "cell_instances": 9079,
+      "contains_dollar_system_task": false,
+      "contains_initial_block": false,
+      "contains_readmemh": false,
+      "modules_defined": [
+        "mnist_mlp_top"
+      ],
+      "parameter_image_bits_required": 102506,
+      "parameter_storage": "block RAM initialisation data",
+      "ram_init_bits": 131072,
+      "ram_init_one_bits": 50795,
+      "ram_init_params": 512,
+      "top_ports": [
+        "clk",
+        "rst",
+        "start",
+        "in_ready",
+        "in_valid",
+        "in_data",
+        "busy",
+        "done",
+        "prediction_valid",
+        "prediction",
+        "logits"
+      ],
+      "top_ports_match_frozen_interface": true
+    },
+    "netlist_path": "build/stage4/fpga/fpga_netlist.v",
+    "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
+    "parameter_rom_mapping": "inferred as 32 SB_RAM40_4K block RAMs holding 131072 bits of INIT data; the ROM did not become LUT or mux logic",
+    "registers": 1614,
+    "resources": {
+      "arithmetic_or_multiplier_cells": 0,
+      "carry": 1004,
+      "dsp": 0,
+      "ff": 1614,
+      "latches": 0,
+      "lut": 6429,
+      "other": 0,
+      "other_types": [],
+      "ram": 32,
+      "total_cells": 9079
+    },
+    "script": "read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nread_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v\nread_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v\nread_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_top.v\nsynth_ice40 -top mnist_mlp_top\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.v\n",
+    "script_path": "build/stage4/fpga/synth_fpga.ys",
+    "script_sha256": "a0e928bd848e8466e0d94678b3c567836586fb1277e801b8edf46aa9e5d6828c",
+    "seconds": 25.34,
+    "simulation_library": "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v",
+    "simulation_library_sha256": "b5b2bcd86c0d6eea269015aaebff1d5fb66e7ec3f7eded0bde07406e5ac99527",
+    "status": "PASS",
+    "target": "fpga",
+    "unresolved_blackboxes": [],
+    "yosys_datdir": "/home/rithwik/klayout_cf/yosys/share/yosys",
+    "yosys_version": "Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]"
+  },
+  "gate_level_verification": {
+    "cross_target": {
+      "cycle_mismatches": 0,
+      "identical": true,
+      "logit_mismatches": 0,
+      "prediction_mismatches": 0
+    },
+    "fpga": {
+      "back_to_back": {
+        "compile_seconds": 1.4,
+        "cycles_per_inference": [
+          864
+        ],
+        "gate_level_label_accuracy": 0.9166666666666666,
+        "images": 12,
+        "latency_contract_cycles": 864,
+        "latency_contract_held": true,
+        "logit_mismatches": 0,
+        "logits_compared": 120,
+        "note": "12 inferences issued back to back inside ONE simulation, no reset and no restart between them",
+        "ok": true,
+        "prediction_comparisons": 12,
+        "prediction_mismatches": 0,
+        "sim_seconds": 49.2,
+        "testbench_self_checks_passed": true
+      },
+      "handshake_checks_passed": true,
+      "icarus_language_level": "-g2012 (required by the official Yosys cell library; the production RTL itself remains Verilog-2001)",
+      "netlist_path": "build/stage4/fpga/fpga_netlist.v",
+      "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
+      "no_stall": {
+        "compile_seconds": 1.5,
+        "cycles_per_inference": [
+          864
+        ],
+        "gate_level_label_accuracy": 0.98,
+        "images": 500,
+        "latency_contract_cycles": 864,
+        "latency_contract_held": true,
+        "logit_mismatches": 0,
+        "logits_compared": 5000,
+        "ok": true,
+        "prediction_comparisons": 500,
+        "prediction_mismatches": 0,
+        "sim_seconds": 2287.3,
+        "testbench_self_checks_passed": true
+      },
+      "observable_handshake_checks": [
+        "done asserted exactly once per inference (pulse counted)",
+        "prediction_valid high on the cycle done is high",
+        "busy high on the cycle done is high",
+        "done low again one cycle later (single-cycle pulse)",
+        "in_ready respected: no activation issued while it is low"
+      ],
+      "reset": {
+        "clean_reset_before_inference": {
+          "compile_seconds": 1.5,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 1.0,
+          "images": 1,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 10,
+          "ok": true,
+          "prediction_comparisons": 1,
+          "prediction_mismatches": 0,
+          "reset_asserted_after_activations": 0,
+          "sim_seconds": 4.9,
+          "stale_state_observed": false,
+          "testbench_self_checks_passed": true
+        },
+        "reset_mid_inference": {
+          "compile_seconds": 1.4,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 1.0,
+          "images": 1,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 10,
+          "ok": true,
+          "prediction_comparisons": 1,
+          "prediction_mismatches": 0,
+          "reset_asserted_after_activations": 391,
+          "sim_seconds": 6.5,
+          "stale_state_observed": false,
+          "testbench_self_checks_passed": true
+        }
+      },
+      "simulation_library": "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v",
+      "simulation_library_sha256": "b5b2bcd86c0d6eea269015aaebff1d5fb66e7ec3f7eded0bde07406e5ac99527",
+      "source_list_guard": {
+        "behavioural_implementation_in_source_list": false,
+        "duplicate_module_definitions": 0,
+        "production_rtl_in_source_list": false,
+        "sources": [
+          "/tmp/model2rtl_stage4_qp1pj9g6/fpga/tb_gls.v",
+          "build/stage4/fpga/fpga_netlist.v",
+          "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v"
+        ],
+        "top_defined_by": "build/stage4/fpga/fpga_netlist.v"
+      },
+      "stalls": {
+        "compile_seconds": 1.5,
+        "cycles_exceed_nominal": true,
+        "cycles_per_inference": [
+          975
+        ],
+        "gate_level_label_accuracy": 0.9166666666666666,
+        "images": 12,
+        "logit_mismatches": 0,
+        "logits_compared": 120,
+        "ok": true,
+        "pattern": "in_valid bubble after every 7th accepted activation",
+        "prediction_comparisons": 12,
+        "prediction_mismatches": 0,
+        "sim_seconds": 50.4,
+        "testbench_self_checks_passed": true
+      }
+    },
+    "generic": {
+      "back_to_back": {
+        "compile_seconds": 1.6,
+        "cycles_per_inference": [
+          864
+        ],
+        "gate_level_label_accuracy": 0.9166666666666666,
+        "images": 12,
+        "latency_contract_cycles": 864,
+        "latency_contract_held": true,
+        "logit_mismatches": 0,
+        "logits_compared": 120,
+        "note": "12 inferences issued back to back inside ONE simulation, no reset and no restart between them",
+        "ok": true,
+        "prediction_comparisons": 12,
+        "prediction_mismatches": 0,
+        "sim_seconds": 39.5,
+        "testbench_self_checks_passed": true
+      },
+      "handshake_checks_passed": true,
+      "icarus_language_level": "-g2012 (required by the official Yosys cell library; the production RTL itself remains Verilog-2001)",
+      "netlist_path": "build/stage4/generic/generic_netlist.v",
+      "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
+      "no_stall": {
+        "compile_seconds": 1.6,
+        "cycles_per_inference": [
+          864
+        ],
+        "gate_level_label_accuracy": 0.98,
+        "images": 500,
+        "latency_contract_cycles": 864,
+        "latency_contract_held": true,
+        "logit_mismatches": 0,
+        "logits_compared": 5000,
+        "ok": true,
+        "prediction_comparisons": 500,
+        "prediction_mismatches": 0,
+        "sim_seconds": 1603.7,
+        "testbench_self_checks_passed": true
+      },
+      "observable_handshake_checks": [
+        "done asserted exactly once per inference (pulse counted)",
+        "prediction_valid high on the cycle done is high",
+        "busy high on the cycle done is high",
+        "done low again one cycle later (single-cycle pulse)",
+        "in_ready respected: no activation issued while it is low"
+      ],
+      "reset": {
+        "clean_reset_before_inference": {
+          "compile_seconds": 1.6,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 1.0,
+          "images": 1,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 10,
+          "ok": true,
+          "prediction_comparisons": 1,
+          "prediction_mismatches": 0,
+          "reset_asserted_after_activations": 0,
+          "sim_seconds": 4.1,
+          "stale_state_observed": false,
+          "testbench_self_checks_passed": true
+        },
+        "reset_mid_inference": {
+          "compile_seconds": 1.6,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 1.0,
+          "images": 1,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 10,
+          "ok": true,
+          "prediction_comparisons": 1,
+          "prediction_mismatches": 0,
+          "reset_asserted_after_activations": 391,
+          "sim_seconds": 5.6,
+          "stale_state_observed": false,
+          "testbench_self_checks_passed": true
+        }
+      },
+      "simulation_library": "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v",
+      "simulation_library_sha256": "63918d5fd356ffcda0780eccfa4304a9888603a5266bbc1c812bf5a9bdd65b3c",
+      "source_list_guard": {
+        "behavioural_implementation_in_source_list": false,
+        "duplicate_module_definitions": 0,
+        "production_rtl_in_source_list": false,
+        "sources": [
+          "/tmp/model2rtl_stage4_qp1pj9g6/generic/tb_gls.v",
+          "build/stage4/generic/generic_netlist.v",
+          "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v"
+        ],
+        "top_defined_by": "build/stage4/generic/generic_netlist.v"
+      },
+      "stalls": {
+        "compile_seconds": 1.6,
+        "cycles_exceed_nominal": true,
+        "cycles_per_inference": [
+          975
+        ],
+        "gate_level_label_accuracy": 0.9166666666666666,
+        "images": 12,
+        "logit_mismatches": 0,
+        "logits_compared": 120,
+        "ok": true,
+        "pattern": "in_valid bubble after every 7th accepted activation",
+        "prediction_comparisons": 12,
+        "prediction_mismatches": 0,
+        "sim_seconds": 47.5,
+        "testbench_self_checks_passed": true
+      }
+    },
+    "image_selection": {
+      "count": 500,
+      "images_sha256": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+      "indices_first": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "indices_last": [
+        490,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499
+      ],
+      "indices_sha256": "0c3fc3e2e8b0514136a044efedc6d6aa32df05e1f58c8cca9cc665e1521f4c8c",
+      "integer_golden_accuracy": 0.98,
+      "label_histogram": [
+        42,
+        67,
+        55,
+        45,
+        55,
+        50,
+        43,
+        49,
+        40,
+        54
+      ],
+      "labels_sha256": "d9c1ee129708614296525e1d5d088e7f6c31867941fca58d4df714564188c7d2",
+      "oracle": "Stage-0 pure NumPy integer golden model (model2rtl.golden.IntegerModel)",
+      "reused_from_stage3": true,
+      "selection_policy": "first 500 images of the official MNIST test set, in order; no filtering of any kind"
+    },
+    "oracle": "Stage-0 pure NumPy integer golden model; pre-synthesis RTL was NOT used as the oracle"
+  },
+  "generic_target": {
+    "cells": {
+      "$_AND_": 20159,
+      "$_DFF_P_": 1742,
+      "$_MUX_": 1351,
+      "$_NOT_": 2439,
+      "$_OR_": 18603,
+      "$_XOR_": 1413
+    },
+    "check": {
+      "check_blocks": 1,
+      "error_lines": [],
+      "latches_explicitly_not_inferred_lines": 45,
+      "latches_inferred_lines": 0,
+      "multiple_driver_lines": 0,
+      "problems_reported": 0,
+      "undriven_net_lines": 0,
+      "warning_lines": [
+        "Warning: Replacing memory \\acc1 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:317",
+        "Warning: Replacing memory \\acc2 with list of registers. See /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v:330"
+      ],
+      "wire_without_driver_lines": 0
+    },
+    "constant_multiply": {
+      "bank_net": "u_fabric.L1_SELECT[0].u_sel.bank",
+      "bank_width_bits": 192,
+      "bit_class_totals": {
+        "activation_register_alias": 41,
+        "constant": 33,
+        "no_driver_fused_downstream": 118
+      },
+      "multiplier_or_dsp_cells_in_netlist": 0,
+      "per_product": [
+        {
+          "alphabet_level": -8,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 3,
+            "no_driver_fused_downstream": 8
+          },
+          "k": 0,
+          "of_bits": 12,
+          "zero_logic_bits": 4
+        },
+        {
+          "alphabet_level": -7,
+          "bit_classes": {
+            "activation_register_alias": 3,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 1,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": -6,
+          "bit_classes": {
+            "activation_register_alias": 2,
+            "constant": 1,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 2,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": -5,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "no_driver_fused_downstream": 11
+          },
+          "k": 3,
+          "of_bits": 12,
+          "zero_logic_bits": 1
+        },
+        {
+          "alphabet_level": -4,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 2,
+            "no_driver_fused_downstream": 9
+          },
+          "k": 4,
+          "of_bits": 12,
+          "zero_logic_bits": 3
+        },
+        {
+          "alphabet_level": -3,
+          "bit_classes": {
+            "activation_register_alias": 2,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 5,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": -2,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 1,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 6,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": -1,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "no_driver_fused_downstream": 11
+          },
+          "k": 7,
+          "of_bits": 12,
+          "zero_logic_bits": 1
+        },
+        {
+          "alphabet_level": 0,
+          "bit_classes": {
+            "constant": 12
+          },
+          "k": 8,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 1,
+          "bit_classes": {
+            "activation_register_alias": 8,
+            "constant": 4
+          },
+          "k": 9,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 2,
+          "bit_classes": {
+            "activation_register_alias": 8,
+            "constant": 4
+          },
+          "k": 10,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 3,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 1,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 11,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": 4,
+          "bit_classes": {
+            "activation_register_alias": 8,
+            "constant": 4
+          },
+          "k": 12,
+          "of_bits": 12,
+          "zero_logic_bits": 12
+        },
+        {
+          "alphabet_level": 5,
+          "bit_classes": {
+            "activation_register_alias": 2,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 13,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": 6,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "constant": 1,
+            "no_driver_fused_downstream": 10
+          },
+          "k": 14,
+          "of_bits": 12,
+          "zero_logic_bits": 2
+        },
+        {
+          "alphabet_level": 7,
+          "bit_classes": {
+            "activation_register_alias": 1,
+            "no_driver_fused_downstream": 11
+          },
+          "k": 15,
+          "of_bits": 12,
+          "zero_logic_bits": 1
+        }
+      ],
+      "product_width_bits": 12,
+      "product_wire_drivers": {},
+      "source_multiply_operators": 16,
+      "zero_logic_bits": 74
+    },
+    "exit_status": 0,
+    "inferred_memories": 0,
+    "json_path": "build/stage4/generic/generic_netlist.json",
+    "log_path": "build/stage4/generic/yosys_generic.log",
+    "multiplier_related_cells": 0,
+    "mux_lut_related_cells": 1351,
+    "netlist_evidence": {
+      "always_blocks": 0,
+      "arithmetic_operators": 0,
+      "assign_statements": 5,
+      "bytes": 4342639,
+      "case_statements": 0,
+      "cell_instance_types": [
+        "\\$_AND_",
+        "\\$_DFF_P_",
+        "\\$_MUX_",
+        "\\$_NOT_",
+        "\\$_OR_",
+        "\\$_XOR_"
+      ],
+      "cell_instances": 45707,
+      "contains_dollar_system_task": false,
+      "contains_initial_block": false,
+      "contains_readmemh": false,
+      "modules_defined": [
+        "mnist_mlp_top"
+      ],
+      "parameter_image_bits_required": 102506,
+      "parameter_storage": "constant combinational logic",
+      "ram_init_bits": 0,
+      "ram_init_one_bits": 0,
+      "ram_init_params": 0,
+      "top_ports": [
+        "clk",
+        "rst",
+        "start",
+        "in_ready",
+        "in_valid",
+        "in_data",
+        "busy",
+        "done",
+        "prediction_valid",
+        "prediction",
+        "logits"
+      ],
+      "top_ports_match_frozen_interface": true
+    },
+    "netlist_path": "build/stage4/generic/generic_netlist.v",
+    "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
+    "parameter_rom_mapping": "the generic gate vocabulary has no memory primitive, so the ROM was synthesized into constant combinational logic",
+    "registers": 1742,
+    "resources": {
+      "and": 20159,
+      "aoi_oai": 0,
+      "arithmetic_or_multiplier_cells": 0,
+      "latches": 0,
+      "mux": 1351,
+      "not": 2439,
+      "or": 18603,
+      "other": 0,
+      "other_types": [],
+      "sequential": 1742,
+      "total_cells": 45707,
+      "xor": 1413
+    },
+    "script": "read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nread_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v\nread_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v\nread_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_top.v\nhierarchy -check -top mnist_mlp_top\nproc\nflatten\nopt -full\nmemory\nopt -full\ntechmap\nopt -full\nsimplemap\ndfflegalize -cell $_DFF_P_ 01\nabc -g simple\nsetundef -zero\nopt_clean -purge\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.v\n",
+    "script_path": "build/stage4/generic/synth_generic.ys",
+    "script_sha256": "6b41105e536c6fed7bd38d31cddbe95dd0cb995a8d19f205a2ebfd87b23117a8",
+    "seconds": 11.82,
+    "simulation_library": "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v",
+    "simulation_library_sha256": "63918d5fd356ffcda0780eccfa4304a9888603a5266bbc1c812bf5a9bdd65b3c",
+    "status": "PASS",
+    "target": "generic",
+    "unresolved_blackboxes": [],
+    "yosys_datdir": "/home/rithwik/klayout_cf/yosys/share/yosys",
+    "yosys_version": "Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]"
+  },
+  "limitations": [
+    "No FPGA place-and-route was run: synth_ice40 output was not passed to nextpnr and no bitstream exists.",
+    "No FPGA timing analysis and no Fmax was measured. The Stage-1 50/100 MHz figures remain architectural latency examples only.",
+    "No ASIC physical implementation: the generic flow maps to the Yosys generic gate vocabulary, not to a SKY130 standard-cell library, and no floorplan, placement, routing or extraction was performed.",
+    "No ASIC timing analysis and no characterized-library area.",
+    "Stage-2 physical OpenROM backend remains PARTIAL and was not touched in Stage 4; the OpenRAM behavioural backend was deliberately excluded from Stage 4, which uses the portable backend only."
+  ],
+  "openrom_physical_backend": "PARTIAL (unchanged from Stage 2)",
+  "portability": {
+    "fpga_gls": "PASS",
+    "fpga_source_hashes": {
+      "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+      "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+      "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb"
+    },
+    "generic_gls": "PASS",
+    "generic_source_hashes": {
+      "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+      "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+      "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb"
+    },
+    "matches_working_tree": true,
+    "same_source_rtl": true,
+    "source_patches_applied": false,
+    "sources_read_from": [
+      "rtl/mnist_mlp_fabric.v",
+      "rtl/mnist_mlp_params_portable.v",
+      "rtl/mnist_mlp_params_sel_portable.v",
+      "rtl/mnist_mlp_top.v"
+    ]
+  },
+  "reproducibility": {
+    "fpga_family": "ice40",
+    "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+    "python": "3.11.11",
+    "repeat_synthesis": {
+      "fpga": {
+        "cells": {
+          "$scopeinfo": 45,
+          "SB_CARRY": 1004,
+          "SB_DFF": 61,
+          "SB_DFFE": 68,
+          "SB_DFFESR": 1479,
+          "SB_DFFSR": 6,
+          "SB_LUT4": 6429,
+          "SB_RAM40_4K": 32
+        },
+        "exit_status": 0,
+        "identical_to_first_run": true,
+        "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
+        "same_cell_counts": true,
+        "seconds": 25.39
+      },
+      "generic": {
+        "cells": {
+          "$_AND_": 20159,
+          "$_DFF_P_": 1742,
+          "$_MUX_": 1351,
+          "$_NOT_": 2439,
+          "$_OR_": 18603,
+          "$_XOR_": 1413
+        },
+        "exit_status": 0,
+        "identical_to_first_run": true,
+        "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
+        "same_cell_counts": true,
+        "seconds": 11.87
+      }
+    },
+    "simulation_libraries": {
+      "fpga": {
+        "path": "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v",
+        "sha256": "b5b2bcd86c0d6eea269015aaebff1d5fb66e7ec3f7eded0bde07406e5ac99527"
+      },
+      "generic": {
+        "path": "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v",
+        "sha256": "63918d5fd356ffcda0780eccfa4304a9888603a5266bbc1c812bf5a9bdd65b3c"
+      }
+    },
+    "yosys": "Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]",
+    "yosys_datdir": "/home/rithwik/klayout_cf/yosys/share/yosys"
+  },
+  "resource_analysis": {
+    "constant_multiplication": {
+      "fpga": {
+        "bank_net": "u_fabric.L1_SELECT[0].u_sel.bank",
+        "bank_width_bits": 192,
+        "bit_class_totals": {
+          "activation_register_alias": 41,
+          "constant": 37,
+          "no_driver_fused_downstream": 114
+        },
+        "multiplier_or_dsp_cells_in_netlist": 0,
+        "per_product": [
+          {
+            "alphabet_level": -8,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 3,
+              "no_driver_fused_downstream": 8
+            },
+            "k": 0,
+            "of_bits": 12,
+            "zero_logic_bits": 4
+          },
+          {
+            "alphabet_level": -7,
+            "bit_classes": {
+              "activation_register_alias": 3,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 1,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -6,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "constant": 1,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 2,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -5,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 3,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": -4,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 4,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -3,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 5,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -2,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 6,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -1,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 7,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": 0,
+            "bit_classes": {
+              "constant": 12
+            },
+            "k": 8,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 1,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 9,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 2,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 10,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 3,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 11,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": 4,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 12,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 5,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "constant": 1,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 13,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": 6,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 14,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": 7,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 15,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          }
+        ],
+        "product_width_bits": 12,
+        "product_wire_drivers": {
+          "prod_00": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [11:3], 3'h0 }",
+          "prod_01": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [23:15], \\u_fabric.act_pipe [2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_02": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [35:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+          "prod_03": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [47:37], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_04": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [58], \\u_fabric.L1_SELECT[0].u_sel.bank [58:51], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 2'h0 }",
+          "prod_05": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [70], \\u_fabric.L1_SELECT[0].u_sel.bank [70:63], \\u_fabric.L1_SELECT[0].u_sel.bank [27:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_06": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [81], \\u_fabric.L1_SELECT[0].u_sel.bank [81], \\u_fabric.L1_SELECT[0].u_sel.bank [81:74], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+          "prod_07": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92:85], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_08": "12'h000",
+          "prod_09": "{ 4'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_10": "{ 3'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+          "prod_11": "{ 2'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [141:133], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_12": "{ 2'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 2'h0 }",
+          "prod_13": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [166:159], \\u_fabric.L1_SELECT[0].u_sel.bank [27:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+          "prod_14": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [141:133], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+          "prod_15": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [190:182], \\u_fabric.L1_SELECT[0].u_sel.bank [37], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }"
+        },
+        "source_multiply_operators": 16,
+        "zero_logic_bits": 78
+      },
+      "generic": {
+        "bank_net": "u_fabric.L1_SELECT[0].u_sel.bank",
+        "bank_width_bits": 192,
+        "bit_class_totals": {
+          "activation_register_alias": 41,
+          "constant": 33,
+          "no_driver_fused_downstream": 118
+        },
+        "multiplier_or_dsp_cells_in_netlist": 0,
+        "per_product": [
+          {
+            "alphabet_level": -8,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 3,
+              "no_driver_fused_downstream": 8
+            },
+            "k": 0,
+            "of_bits": 12,
+            "zero_logic_bits": 4
+          },
+          {
+            "alphabet_level": -7,
+            "bit_classes": {
+              "activation_register_alias": 3,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 1,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -6,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "constant": 1,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 2,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -5,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 3,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": -4,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 2,
+              "no_driver_fused_downstream": 9
+            },
+            "k": 4,
+            "of_bits": 12,
+            "zero_logic_bits": 3
+          },
+          {
+            "alphabet_level": -3,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 5,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -2,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 6,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": -1,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 7,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          },
+          {
+            "alphabet_level": 0,
+            "bit_classes": {
+              "constant": 12
+            },
+            "k": 8,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 1,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 9,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 2,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 10,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 3,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 11,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": 4,
+            "bit_classes": {
+              "activation_register_alias": 8,
+              "constant": 4
+            },
+            "k": 12,
+            "of_bits": 12,
+            "zero_logic_bits": 12
+          },
+          {
+            "alphabet_level": 5,
+            "bit_classes": {
+              "activation_register_alias": 2,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 13,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": 6,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "constant": 1,
+              "no_driver_fused_downstream": 10
+            },
+            "k": 14,
+            "of_bits": 12,
+            "zero_logic_bits": 2
+          },
+          {
+            "alphabet_level": 7,
+            "bit_classes": {
+              "activation_register_alias": 1,
+              "no_driver_fused_downstream": 11
+            },
+            "k": 15,
+            "of_bits": 12,
+            "zero_logic_bits": 1
+          }
+        ],
+        "product_width_bits": 12,
+        "product_wire_drivers": {},
+        "source_multiply_operators": 16,
+        "zero_logic_bits": 74
+      }
+    },
+    "fpga": {
+      "categories": {
+        "arithmetic_or_multiplier_cells": 0,
+        "carry": 1004,
+        "dsp": 0,
+        "ff": 1614,
+        "latches": 0,
+        "lut": 6429,
+        "other": 0,
+        "other_types": [],
+        "ram": 32,
+        "total_cells": 9079
+      },
+      "cells": {
+        "$scopeinfo": 45,
+        "SB_CARRY": 1004,
+        "SB_DFF": 61,
+        "SB_DFFE": 68,
+        "SB_DFFESR": 1479,
+        "SB_DFFSR": 6,
+        "SB_LUT4": 6429,
+        "SB_RAM40_4K": 32
+      },
+      "fabric_only_diagnostic": {
+        "arithmetic_or_multiplier_cells": 0,
+        "carry": 1005,
+        "dsp": 0,
+        "ff": 1418,
+        "latches": 0,
+        "lut": 6126,
+        "other": 0,
+        "other_types": [],
+        "ram": 0,
+        "total_cells": 8549
+      },
+      "family": "ice40",
+      "parameter_rom_mapping": "inferred as 32 SB_RAM40_4K block RAMs holding 131072 bits of INIT data; the ROM did not become LUT or mux logic"
+    },
+    "generic": {
+      "categories": {
+        "and": 20159,
+        "aoi_oai": 0,
+        "arithmetic_or_multiplier_cells": 0,
+        "latches": 0,
+        "mux": 1351,
+        "not": 2439,
+        "or": 18603,
+        "other": 0,
+        "other_types": [],
+        "sequential": 1742,
+        "total_cells": 45707,
+        "xor": 1413
+      },
+      "cells": {
+        "$_AND_": 20159,
+        "$_DFF_P_": 1742,
+        "$_MUX_": 1351,
+        "$_NOT_": 2439,
+        "$_OR_": 18603,
+        "$_XOR_": 1413
+      },
+      "fabric_only_diagnostic": {
+        "and": 12084,
+        "aoi_oai": 0,
+        "arithmetic_or_multiplier_cells": 0,
+        "latches": 0,
+        "mux": 243,
+        "not": 1978,
+        "or": 8359,
+        "other": 0,
+        "other_types": [],
+        "sequential": 1418,
+        "total_cells": 25505,
+        "xor": 1423
+      },
+      "parameter_rom_mapping": "the generic gate vocabulary has no memory primitive, so the ROM was synthesized into constant combinational logic"
+    },
+    "physical_area": "not available at this stage: no characterized standard-cell library was used, so cell counts cannot be converted to area",
+    "source_level_baselines": {
+      "caveat": "These are SOURCE-LEVEL operation counts from the Stage-1 analysis, not synthesized areas.  No ratio between them is an area ratio, and none of them may be divided by a synthesized cell count.  Only the two synthesized numbers below are measured.",
+      "fully_spatial_msa_product_generators": 13056,
+      "naive_fully_spatial_synapse_multiplications": 25408,
+      "stage1_time_multiplexed_msa_product_expressions": 16
+    }
+  },
+  "rtl2gdsagi_modified": false,
+  "source_freeze": {
+    "after": {
+      "model/mnist_weights_indices.npz": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46",
+      "model/quant_params.json": "2ad884b42e797bb4400ecaa2f9de46da7aa16b5abf32fe21e77a657bdd82eec7",
+      "reports/stage0_quantization.json": "c0c4fa1f89fe279559f82e429660d59327c3fbe1f607fc186d94611d8f6da9a0",
+      "reports/stage1_compute_fabric.json": "9a7a501a89c15b42e00361c8096f184a6d7b9db5aa16342119aa3c921b282786",
+      "reports/stage2_parameter_backends.json": "3ef8042d8134e8541961e105f9e585130b6bfbe91fb52cddce64e1f9447f798b",
+      "reports/stage3_behavioral_verification.json": "d433742d54461c9d66677b49e9ce187e12383baf72c0856544ffd7f186b7518d",
+      "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "rtl/mnist_mlp_params_openram.v": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395",
+      "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+      "rtl/mnist_mlp_params_sel_openram.v": "0e820585cb6230cbf39570d9f38269e9bbdd71c0fd2f6d43b35f6df0132d3cb0",
+      "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+      "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb",
+      "src/model2rtl/contract.py": "0fbe4877f7f49b9b8da6d3947a49ba7bab85e4b36ba011e4337f5fc3d3480b12",
+      "src/model2rtl/fabric.py": "ae7e8d93660a6f141fdc9b1ee59130f7c93c0098c9995b66426d153913ff7981",
+      "src/model2rtl/golden.py": "e10eb33a952c6ae5fd67ad33791985c3a62a7d5d25fd3b5edc13819cb20e5270",
+      "src/model2rtl/param_image.py": "5a0e883f7e7216c9e910ba2c75310d80c095686cd6b325411f989be4d8563a76",
+      "src/model2rtl/storage.py": "57618e982731c334bae76811d386b018e031b88f910fafad92a5656fdaed6b47"
+    },
+    "before": {
+      "model/mnist_weights_indices.npz": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46",
+      "model/quant_params.json": "2ad884b42e797bb4400ecaa2f9de46da7aa16b5abf32fe21e77a657bdd82eec7",
+      "reports/stage0_quantization.json": "c0c4fa1f89fe279559f82e429660d59327c3fbe1f607fc186d94611d8f6da9a0",
+      "reports/stage1_compute_fabric.json": "9a7a501a89c15b42e00361c8096f184a6d7b9db5aa16342119aa3c921b282786",
+      "reports/stage2_parameter_backends.json": "3ef8042d8134e8541961e105f9e585130b6bfbe91fb52cddce64e1f9447f798b",
+      "reports/stage3_behavioral_verification.json": "d433742d54461c9d66677b49e9ce187e12383baf72c0856544ffd7f186b7518d",
+      "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "rtl/mnist_mlp_params_openram.v": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395",
+      "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+      "rtl/mnist_mlp_params_sel_openram.v": "0e820585cb6230cbf39570d9f38269e9bbdd71c0fd2f6d43b35f6df0132d3cb0",
+      "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+      "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb",
+      "src/model2rtl/contract.py": "0fbe4877f7f49b9b8da6d3947a49ba7bab85e4b36ba011e4337f5fc3d3480b12",
+      "src/model2rtl/fabric.py": "ae7e8d93660a6f141fdc9b1ee59130f7c93c0098c9995b66426d153913ff7981",
+      "src/model2rtl/golden.py": "e10eb33a952c6ae5fd67ad33791985c3a62a7d5d25fd3b5edc13819cb20e5270",
+      "src/model2rtl/param_image.py": "5a0e883f7e7216c9e910ba2c75310d80c095686cd6b325411f989be4d8563a76",
+      "src/model2rtl/storage.py": "57618e982731c334bae76811d386b018e031b88f910fafad92a5656fdaed6b47"
+    },
+    "unchanged": true
+  },
+  "stage": 4,
+  "stage5_implemented": false,
+  "status": "PASS",
+  "title": "dual-target synthesis portability + gate-level verification"
+}

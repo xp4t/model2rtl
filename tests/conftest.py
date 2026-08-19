@@ -163,3 +163,92 @@ def openram_build():
         pytest.skip("build/openram/openram_build.json missing")
     with open(OPENRAM_BUILD) as fh:
         return json.load(fh)
+
+
+STAGE3_REPORT = os.path.join(ROOT, "reports", "stage3_behavioral_verification.json")
+
+
+@pytest.fixture(scope="session")
+def stage3_report():
+    import json
+    if not os.path.exists(STAGE3_REPORT):
+        pytest.skip("reports/stage3_behavioral_verification.json missing")
+    with open(STAGE3_REPORT) as fh:
+        return json.load(fh)
+
+
+# ---------------------------------------------------------------------------
+# Stage-4 fixtures
+# ---------------------------------------------------------------------------
+
+STAGE4_REPORT = os.path.join(ROOT, "reports",
+                             "stage4_dual_target_portability.json")
+STAGE4_SYNTH = os.path.join(ROOT, "build", "stage4", "stage4_synth.json")
+
+
+@pytest.fixture(scope="session")
+def stage4_report():
+    import json
+    if not os.path.exists(STAGE4_REPORT):
+        pytest.fail("reports/stage4_dual_target_portability.json missing: run "
+                    "scripts/synth_stage4.py then scripts/verify_stage4.py. "
+                    "Stage-4 verification must never be silently skipped.")
+    with open(STAGE4_REPORT) as fh:
+        return json.load(fh)
+
+
+@pytest.fixture(scope="session")
+def stage4_synth(stage4_report):
+    import json
+    if not os.path.exists(STAGE4_SYNTH):
+        pytest.fail("build/stage4/stage4_synth.json missing: run "
+                    "scripts/synth_stage4.py")
+    with open(STAGE4_SYNTH) as fh:
+        return json.load(fh)
+
+
+# ---------------------------------------------------------------------------
+# Stage-5 fixtures
+# ---------------------------------------------------------------------------
+
+STAGE5_REPORT = os.path.join(ROOT, "reports", "stage5_openrom_physical.json")
+STAGE5_BUILD = os.path.join(ROOT, "build", "stage5",
+                            "stage5_openrom_build.json")
+STAGE5_SWEEP = os.path.join(ROOT, "build", "stage5", "stage5_sweep.json")
+STAGE5_DRCLVS = os.path.join(ROOT, "build", "stage5", "stage5_drclvs.json")
+
+
+def _load_or_fail(path, hint):
+    import json
+    if not os.path.exists(path):
+        pytest.fail("%s missing: %s. Stage-5 physical verification must never "
+                    "be silently skipped." % (os.path.relpath(path, ROOT), hint))
+    with open(path) as fh:
+        return json.load(fh)
+
+
+@pytest.fixture(scope="session")
+def stage5_report():
+    return _load_or_fail(STAGE5_REPORT, "run scripts/verify_stage5.py")
+
+
+@pytest.fixture(scope="session")
+def stage5_build():
+    return _load_or_fail(STAGE5_BUILD, "run scripts/gen_openrom_stage5.py")
+
+
+@pytest.fixture(scope="session")
+def stage5_sweep():
+    return _load_or_fail(STAGE5_SWEEP, "run scripts/sweep_stage5.py")
+
+
+@pytest.fixture(scope="session")
+def stage5_drclvs():
+    return _load_or_fail(STAGE5_DRCLVS,
+                         "run scripts/verify_physical_stage5.py")
+
+
+@pytest.fixture(scope="session")
+def physical_images(param_images):
+    from model2rtl import phys_image as P
+    return P.build_physical_images(param_images)

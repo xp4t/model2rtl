@@ -1,0 +1,690 @@
+{
+  "alternate_model": {
+    "fabric_sha256_after": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+    "fabric_sha256_before": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+    "fabric_unchanged": true,
+    "generated_backend_only": "../../../tmp/model2rtl_stage3_29010eam/alt/mnist_mlp_params_portable.v",
+    "hidden_mismatches": 0,
+    "mismatches_vs_integer_golden": 0,
+    "mismatches_vs_msa_reference": 0,
+    "note": "the real trained model was NOT retrained or modified; only a second parameter backend was generated",
+    "parameter_image_sha256": {
+      "bias_l1": "963d37aedd9505f3cb7f473803a98091b4d862952b2dabc96c340ccf74038c3f",
+      "bias_l2": "8d9bdb84bfa6e1ee3c0b5b2d4e42a7d5055a5b9ccb24734e8471657b45ef7322",
+      "weights_l1": "583468a3f00c2beafd64c8dd617683c5f4fb68a8227b9ba35ad72fa31f73424a",
+      "weights_l2": "753b4745f1af03ccd55b810d8d72cb2c67d5ecd433de17c2811e7a51929afdfe"
+    },
+    "vectors_tested": 8
+  },
+  "argmax": {
+    "cases": [
+      {
+        "case": "unique maximum at class 0",
+        "logits": [
+          100,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 0,
+        "pass": true,
+        "rtl_prediction": 0
+      },
+      {
+        "case": "unique maximum at class 1",
+        "logits": [
+          -5,
+          100,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 1,
+        "pass": true,
+        "rtl_prediction": 1
+      },
+      {
+        "case": "unique maximum at class 2",
+        "logits": [
+          -5,
+          -5,
+          100,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 2,
+        "pass": true,
+        "rtl_prediction": 2
+      },
+      {
+        "case": "unique maximum at class 3",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          100,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 3,
+        "pass": true,
+        "rtl_prediction": 3
+      },
+      {
+        "case": "unique maximum at class 4",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          -5,
+          100,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 4,
+        "pass": true,
+        "rtl_prediction": 4
+      },
+      {
+        "case": "unique maximum at class 5",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          100,
+          -5,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 5,
+        "pass": true,
+        "rtl_prediction": 5
+      },
+      {
+        "case": "unique maximum at class 6",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          100,
+          -5,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 6,
+        "pass": true,
+        "rtl_prediction": 6
+      },
+      {
+        "case": "unique maximum at class 7",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          100,
+          -5,
+          -5
+        ],
+        "numpy_argmax": 7,
+        "pass": true,
+        "rtl_prediction": 7
+      },
+      {
+        "case": "unique maximum at class 8",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          100,
+          -5
+        ],
+        "numpy_argmax": 8,
+        "pass": true,
+        "rtl_prediction": 8
+      },
+      {
+        "case": "unique maximum at class 9",
+        "logits": [
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          -5,
+          100
+        ],
+        "numpy_argmax": 9,
+        "pass": true,
+        "rtl_prediction": 9
+      },
+      {
+        "case": "two-way tie at classes 0 and 1",
+        "logits": [
+          7,
+          7,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          0,
+          -1
+        ],
+        "numpy_argmax": 0,
+        "pass": true,
+        "rtl_prediction": 0
+      },
+      {
+        "case": "four-way tie at classes 1,2,3",
+        "logits": [
+          1,
+          9,
+          9,
+          9,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "numpy_argmax": 1,
+        "pass": true,
+        "rtl_prediction": 1
+      },
+      {
+        "case": "ten-way tie",
+        "logits": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "numpy_argmax": 0,
+        "pass": true,
+        "rtl_prediction": 0
+      },
+      {
+        "case": "all logits negative",
+        "logits": [
+          -12,
+          -3,
+          -99,
+          -3,
+          -40,
+          -7,
+          -8,
+          -9,
+          -10,
+          -11
+        ],
+        "numpy_argmax": 1,
+        "pass": true,
+        "rtl_prediction": 1
+      },
+      {
+        "case": "logits at the representable extrema",
+        "logits": [
+          -65536,
+          -65536,
+          -65536,
+          -65536,
+          65535,
+          -65536,
+          -65536,
+          -65536,
+          -65536,
+          -65536
+        ],
+        "numpy_argmax": 4,
+        "pass": true,
+        "rtl_prediction": 4
+      }
+    ],
+    "failures": 0,
+    "tie_rule": "lowest index wins, matching numpy.argmax"
+  },
+  "arithmetic_edges": {
+    "activation_cases": [
+      {
+        "case": "x=0 against alphabet levels -8..+7",
+        "hidden_exact": true,
+        "logits_exact": true,
+        "pass": true
+      },
+      {
+        "case": "x=1 against alphabet levels -8..+7",
+        "hidden_exact": true,
+        "logits_exact": true,
+        "pass": true
+      },
+      {
+        "case": "x=255 against alphabet levels -8..+7",
+        "hidden_exact": true,
+        "logits_exact": true,
+        "pass": true
+      }
+    ],
+    "failures": 0,
+    "special_cases": [
+      {
+        "case": "hidden saturates to 255",
+        "expected": 255,
+        "observed_hidden": 255,
+        "pass": true
+      },
+      {
+        "case": "ReLU forces hidden to 0",
+        "expected": 0,
+        "observed_hidden": 0,
+        "pass": true
+      },
+      {
+        "case": "round-half-up boundaries [-1, 0, 127, 128, 129, 255, 256, 383, 384, 65279, 65280, 65281]",
+        "expected": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          255,
+          255,
+          255
+        ],
+        "observed": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          255,
+          255,
+          255
+        ],
+        "pass": true
+      },
+      {
+        "case": "all logits negative",
+        "observed": [
+          -1000,
+          -1007,
+          -1014,
+          -1021,
+          -1028,
+          -1035,
+          -1042,
+          -1049,
+          -1056,
+          -1063
+        ],
+        "pass": true
+      },
+      {
+        "case": "all logits positive",
+        "observed": [
+          1000,
+          1007,
+          1014,
+          1021,
+          1028,
+          1035,
+          1042,
+          1049,
+          1056,
+          1063
+        ],
+        "pass": true
+      }
+    ]
+  },
+  "back_to_back": {
+    "done_pulse_is_single_cycle": true,
+    "mismatches": 0,
+    "note": "all 500 images ran consecutively in one simulator process with no reset between them",
+    "prediction_valid_semantics_checked": true,
+    "transactions": 500
+  },
+  "backend_to_backend": {
+    "cycle_mismatches": 0,
+    "hidden_mismatches": 0,
+    "logit_mismatches": 0,
+    "prediction_mismatches": 0
+  },
+  "failures": [],
+  "integer_golden_accuracy_on_subset": 0.98,
+  "internal_checkpointing": {
+    "checks": {
+      "accumulator": 48320,
+      "bias_word": 840,
+      "fin_l1": 640,
+      "fin_l2": 200,
+      "logit": 200,
+      "mac_l1": 15680,
+      "mac_l2": 640,
+      "product": 95360,
+      "requant": 640,
+      "weight_word": 16320
+    },
+    "failures": 0,
+    "first_failures": [],
+    "images_traced": 20,
+    "purpose": "localise the FIRST causal divergence, not only the top-level result",
+    "signals": [
+      "state",
+      "mac_valid",
+      "layer_r",
+      "fin_valid",
+      "fin_idx",
+      "act_pipe",
+      "wmem_data",
+      "bmem_data",
+      "acc1",
+      "l1_sel_ext",
+      "l1_accb",
+      "hid_next",
+      "acc2",
+      "l2_sel_ext",
+      "logit_next",
+      "prod_00",
+      "prod_09",
+      "prod_15"
+    ],
+    "total_checks": 178840,
+    "traced_neurons_layer1": [
+      0,
+      1,
+      31
+    ],
+    "traced_neurons_layer2": [
+      0,
+      9
+    ]
+  },
+  "lint": {
+    "openram_behavioral": {
+      "icarus_verilog2001": "PASS",
+      "ok": true,
+      "sources": [
+        "mnist_mlp_fabric.v",
+        "mnist_mlp_params_openram.v",
+        "mnist_mlp_params_sel_openram.v",
+        "mnist_mlp_top.v"
+      ],
+      "yosys_check_assert": "PASS (Found and reported 0 problems)",
+      "yosys_hierarchy_check": "PASS",
+      "yosys_inferred_latches": 0,
+      "yosys_multiple_drivers": false,
+      "yosys_read_verilog": "PASS",
+      "yosys_undriven_nets": false
+    },
+    "portable": {
+      "icarus_verilog2001": "PASS",
+      "ok": true,
+      "sources": [
+        "mnist_mlp_fabric.v",
+        "mnist_mlp_params_portable.v",
+        "mnist_mlp_params_sel_portable.v",
+        "mnist_mlp_top.v"
+      ],
+      "yosys_check_assert": "PASS (Found and reported 0 problems)",
+      "yosys_hierarchy_check": "PASS",
+      "yosys_inferred_latches": 0,
+      "yosys_multiple_drivers": false,
+      "yosys_read_verilog": "PASS",
+      "yosys_undriven_nets": false
+    }
+  },
+  "memory_pipeline": {
+    "bias_word_alignment_checks": 840,
+    "cases_covered": [
+      "consecutive layer-1 addresses (784 per image)",
+      "layer-1 to layer-2 transition",
+      "consecutive layer-2 addresses",
+      "consecutive bias addresses, both layers",
+      "enable held low during input stalls",
+      "layer switch on the weight and bias ports",
+      "first address after every state transition"
+    ],
+    "method": "every cycle in which the fabric consumes wmem_data or bmem_data, the trace checker asserts that the value is the one belonging to the address issued exactly one cycle earlier",
+    "off_by_one_failures": 0,
+    "weight_word_alignment_checks": 16320
+  },
+  "meta": {
+    "fabric_sha256": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+    "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+    "numpy": "1.26.4",
+    "openram_backend_sha256": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395",
+    "platform": "Linux-4.18.0-553.33.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "portable_backend_sha256": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+    "python": "3.11.11",
+    "top_sha256": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb"
+  },
+  "metrics_note": "Three distinct metrics are kept separate: (1) bit-exact RTL vs the integer golden model, (2) the integer model's own MNIST accuracy, (3) the RTL's MNIST accuracy. Stage 3 PASS requires (1) to be zero mismatches; it does not require 100% classification accuracy.",
+  "not_claimed": [
+    "FPGA portability verified",
+    "FPGA gate-level equivalence",
+    "ASIC gate-level equivalence",
+    "physical OpenROM signoff"
+  ],
+  "openram_behavioral_backend": {
+    "cycles_per_inference": [
+      864
+    ],
+    "hidden_mismatches": 0,
+    "hidden_values_compared": 16000,
+    "images": 500,
+    "label": "behavioural representation of the canonical OpenROM contents; NOT physical OpenROM verification",
+    "logit_mismatches": 0,
+    "logits_compared": 5000,
+    "prediction_comparisons": 500,
+    "prediction_mismatches": 0,
+    "rtl_label_accuracy": 0.98
+  },
+  "openrom_physical_status": {
+    "banking": "not attempted in Stage 3, as instructed",
+    "bias_l1_l2": "word widths of 22 and 17 bits are not representable by this OpenROM version (word_size is in bytes)",
+    "drc_lvs": "no trustworthy signoff in this environment: the upstream reference macro also fails DRC and LVS here",
+    "status": "PARTIAL, unchanged from Stage 2",
+    "weights_l1": "not generated: OpenROM fails at the directly requested organisation",
+    "weights_l2": "physically generated (gds, sp, lvs.sp, lef, v, py, log)"
+  },
+  "oracle": "Stage-0 NumPy integer golden model (never Keras)",
+  "portable_backend": {
+    "cycles_per_inference": [
+      864
+    ],
+    "hidden_mismatches": 0,
+    "hidden_values_compared": 16000,
+    "images": 500,
+    "logit_mismatches": 0,
+    "logits_compared": 5000,
+    "prediction_comparisons": 500,
+    "prediction_mismatches": 0,
+    "rtl_label_accuracy": 0.98,
+    "runtime_seconds": 36.4
+  },
+  "reset": {
+    "points_tested": 6,
+    "results": {
+      "early layer 1": {
+        "post_reset_hidden_exact": true,
+        "post_reset_logits_exact": true,
+        "reset_at_cycles_after_start": 20,
+        "stale_state_failures": 0
+      },
+      "idle, before start": {
+        "post_reset_hidden_exact": true,
+        "post_reset_logits_exact": true,
+        "reset_at_cycles_after_start": -1,
+        "stale_state_failures": 0
+      },
+      "late layer 1": {
+        "post_reset_hidden_exact": true,
+        "post_reset_logits_exact": true,
+        "reset_at_cycles_after_start": 700,
+        "stale_state_failures": 0
+      },
+      "layer 2": {
+        "post_reset_hidden_exact": true,
+        "post_reset_logits_exact": true,
+        "reset_at_cycles_after_start": 830,
+        "stale_state_failures": 0
+      },
+      "layer-1 finalisation": {
+        "post_reset_hidden_exact": true,
+        "post_reset_logits_exact": true,
+        "reset_at_cycles_after_start": 795,
+        "stale_state_failures": 0
+      },
+      "layer-2 finalisation": {
+        "post_reset_hidden_exact": true,
+        "post_reset_logits_exact": true,
+        "reset_at_cycles_after_start": 855,
+        "stale_state_failures": 0
+      }
+    },
+    "stale_state_failures_total": 0
+  },
+  "shortcut_scan": {
+    "clean": true,
+    "files_scanned": [
+      "rtl/mnist_mlp_fabric.v",
+      "rtl/mnist_mlp_top.v"
+    ],
+    "findings": [],
+    "model_dependent_production_rtl": [
+      "rtl/mnist_mlp_params_portable.v",
+      "rtl/mnist_mlp_params_openram.v"
+    ]
+  },
+  "stage": 3,
+  "stalls": {
+    "none": {
+      "cycles_max": 864,
+      "cycles_min": 864,
+      "hidden_mismatches": 0,
+      "images": 50,
+      "logit_mismatches": 0,
+      "pattern": "no stalls",
+      "prediction_mismatches": 0
+    },
+    "periodic_7": {
+      "cycles_max": 975,
+      "cycles_min": 975,
+      "hidden_mismatches": 0,
+      "images": 50,
+      "logit_mismatches": 0,
+      "pattern": "periodic (every Nth input)",
+      "prediction_mismatches": 0
+    },
+    "pseudorandom_lfsr": {
+      "cycles_max": 1297,
+      "cycles_min": 1223,
+      "hidden_mismatches": 0,
+      "images": 50,
+      "logit_mismatches": 0,
+      "pattern": "deterministic pseudo-random (LFSR)",
+      "prediction_mismatches": 0
+    }
+  },
+  "status": "PASS",
+  "test_set": {
+    "count": 500,
+    "images_sha256": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+    "indices_first": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "indices_last": [
+      490,
+      491,
+      492,
+      493,
+      494,
+      495,
+      496,
+      497,
+      498,
+      499
+    ],
+    "indices_sha256": "0c3fc3e2e8b0514136a044efedc6d6aa32df05e1f58c8cca9cc665e1521f4c8c",
+    "label_histogram": [
+      42,
+      67,
+      55,
+      45,
+      55,
+      50,
+      43,
+      49,
+      40,
+      54
+    ],
+    "labels_sha256": "d9c1ee129708614296525e1d5d088e7f6c31867941fca58d4df714564188c7d2",
+    "selection_policy": "first 500 images of the official MNIST test set, in order; no filtering of any kind"
+  }
+}

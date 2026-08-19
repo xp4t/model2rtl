@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ---------------------------------------------------------------------------
+# Regenerable build output.
+#
+# build/ holds ~274 MB. Everything ignored below is either a second
+# serialisation of a file that IS committed, or a diagnostic / throwaway run
+# whose result is recorded in that stage's JSON report. No test reads any of
+# these paths, so a fresh clone still passes the full suite without
+# regenerating anything.
+#
+# What stays committed: the seven physical macro views (gds, sp, lvs.sp, lef,
+# v), both Stage-4 gate-level netlists, every stage's JSON record, the OpenROM
+# configs and the ROM data images.
+# ---------------------------------------------------------------------------
+
+# determinism re-runs; the comparison result is in build/stage4/stage4_synth.json
+build/**/repeat_*/
+
+# fabric-only diagnostic synthesis, not part of the portability claim
+build/stage4/diag_fabric_*/
+
+# throwaway experiments: words_per_row probing and a mapping smoke test
+build/stage5/probe/
+build/stage5/_asictest/
+build/**/_scratch/
+
+# sweep macro views; every measured area is in build/stage5/stage5_sweep.json
+build/stage5/sweep/*/out/
+
+# Yosys JSON netlists: the .v beside them is committed and is the readable form
+build/**/*_netlist.json
+
+# compiled Icarus simulations
+build/**/*.vvp
+
+/scripts/git_commit_stages.sh

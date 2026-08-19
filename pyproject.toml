@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "model2rtl"
+version = "0.1.0"
+description = "Trained quantized MLP to portable, synthesizable RTL compiler (Multiply-Select-Add fabric)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "rithwik" }]
+
+# Runtime dependency of the compiler and of the integer golden model.
+# TensorFlow is deliberately NOT here: it is a training-time tool only.
+dependencies = ["numpy>=1.21"]
+
+[project.optional-dependencies]
+train = ["tensorflow-cpu==2.16.2"]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "openram_physical: checks that depend on the SKY130/OpenRAM installation",
+]

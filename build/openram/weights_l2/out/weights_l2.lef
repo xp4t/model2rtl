@@ -344,13 +344,13 @@ MACRO weights_l2
       SHAPE ABUTMENT ; 
       PORT
          LAYER met4 ;
-         RECT  209.71 -7.48 211.45 67.88 ;
+         RECT  -7.48 -7.48 -5.74 67.88 ;
          LAYER met3 ;
          RECT  -7.48 -7.48 211.45 -5.74 ;
+         LAYER met4 ;
+         RECT  209.71 -7.48 211.45 67.88 ;
          LAYER met3 ;
          RECT  -7.48 66.14 211.45 67.88 ;
-         LAYER met4 ;
-         RECT  -7.48 -7.48 -5.74 67.88 ;
       END
    END vccd1
    PIN vssd1
@@ -358,14 +358,14 @@ MACRO weights_l2
       USE GROUND ; 
       SHAPE ABUTMENT ; 
       PORT
-         LAYER met4 ;
-         RECT  -4.0 -4.0 -2.26 64.4 ;
-         LAYER met4 ;
-         RECT  206.23 -4.0 207.97 64.4 ;
          LAYER met3 ;
          RECT  -4.0 -4.0 207.97 -2.26 ;
          LAYER met3 ;
          RECT  -4.0 62.66 207.97 64.4 ;
+         LAYER met4 ;
+         RECT  206.23 -4.0 207.97 64.4 ;
+         LAYER met4 ;
+         RECT  -4.0 -4.0 -2.26 64.4 ;
       END
    END vssd1
    OBS

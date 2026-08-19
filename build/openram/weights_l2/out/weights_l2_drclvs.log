@@ -1,27 +1,27 @@
-[2026-08-18 16:28:52.697504] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+[2026-08-18 17:54:27.325361] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
 
-[2026-08-18 16:28:53.527512] |==============================================================================|
-[2026-08-18 16:28:53.527694] |=========                      OpenRAM v1.2.49                       =========|
-[2026-08-18 16:28:53.527745] |=========                                                            =========|
-[2026-08-18 16:28:53.527772] |=========               VLSI Design and Automation Lab               =========|
-[2026-08-18 16:28:53.527792] |=========        Computer Science and Engineering Department         =========|
-[2026-08-18 16:28:53.527812] |=========            University of California Santa Cruz             =========|
-[2026-08-18 16:28:53.527833] |=========                                                            =========|
-[2026-08-18 16:28:53.527852] |=========          Usage help: openram-user-group@ucsc.edu           =========|
-[2026-08-18 16:28:53.527870] |=========        Development help: openram-dev-group@ucsc.edu        =========|
-[2026-08-18 16:28:53.527889] |=========                See LICENSE for license info                =========|
-[2026-08-18 16:28:53.527906] |==============================================================================|
-[2026-08-18 16:28:53.527930] ** Start: 08/18/2026 16:28:53
-[2026-08-18 16:28:53.527952] Output files are: 
-[2026-08-18 16:28:53.527970] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.sp
-[2026-08-18 16:28:53.527986] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.v
-[2026-08-18 16:28:53.528003] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.lef
-[2026-08-18 16:28:53.528019] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.gds
-[2026-08-18 16:28:53.528322] create rom of word size 5 with 32 num of words
-[2026-08-18 16:28:54.632664] ** Submodules: 1.1 seconds
-[2026-08-18 16:28:54.633239] ** Placement: 0.0 seconds
-[2026-08-18 16:29:03.006344] ** Routing: 8.4 seconds
-[2026-08-18 16:29:22.134030] WARNING: file magic.py: line 254: DRC Errors weights_l2_drclvs	780
+[2026-08-18 17:54:28.129764] |==============================================================================|
+[2026-08-18 17:54:28.129943] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 17:54:28.129991] |=========                                                            =========|
+[2026-08-18 17:54:28.130018] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 17:54:28.130038] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 17:54:28.130058] |=========            University of California Santa Cruz             =========|
+[2026-08-18 17:54:28.130078] |=========                                                            =========|
+[2026-08-18 17:54:28.130097] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 17:54:28.130115] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 17:54:28.130134] |=========                See LICENSE for license info                =========|
+[2026-08-18 17:54:28.130152] |==============================================================================|
+[2026-08-18 17:54:28.130176] ** Start: 08/18/2026 17:54:28
+[2026-08-18 17:54:28.130197] Output files are: 
+[2026-08-18 17:54:28.130215] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.sp
+[2026-08-18 17:54:28.130232] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.v
+[2026-08-18 17:54:28.130248] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.lef
+[2026-08-18 17:54:28.130265] /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2_drclvs.gds
+[2026-08-18 17:54:28.130566] create rom of word size 5 with 32 num of words
+[2026-08-18 17:54:29.216824] ** Submodules: 1.1 seconds
+[2026-08-18 17:54:29.217398] ** Placement: 0.0 seconds
+[2026-08-18 17:54:37.531579] ** Routing: 8.3 seconds
+[2026-08-18 17:54:55.657974] WARNING: file magic.py: line 254: DRC Errors weights_l2_drclvs	780
 
-[2026-08-18 16:29:23.197355] ERROR: file magic.py: line 385: weights_l2_drclvs	LVS mismatch (results in /tmp/openram_rithwik_279869_temp/weights_l2_drclvs.lvs.report)
+[2026-08-18 17:54:56.722716] ERROR: file magic.py: line 385: weights_l2_drclvs	LVS mismatch (results in /tmp/openram_rithwik_305213_temp/weights_l2_drclvs.lvs.report)
 

@@ -722,196 +722,332 @@ XXMUX159
 + weights_l2_rom_column_mux
 .ENDS weights_l2_rom_column_mux_array
 
-* spice ptx X{0} {1} sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=5.0 l=0.15 pd=10.30 ps=10.30 as=1.88u ad=1.88u
 
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=1.68 l=0.15 pd=3.66 ps=3.66 as=0.63u ad=0.63u
 
-.SUBCKT weights_l2_pinv
+.SUBCKT weights_l2_pinv_dec_4
 + A Z vdd gnd
 * INPUT : A 
 * OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-* size: 1
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
-.ENDS weights_l2_pinv
+* size: 4
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=5.0 l=0.15 pd=10.30 ps=10.30 as=1.88u ad=1.88u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=1.68 l=0.15 pd=3.66 ps=3.66 as=0.63u ad=0.63u
+.ENDS weights_l2_pinv_dec_4
 
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=2 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=2 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
-
-.SUBCKT weights_l2_pinv_0
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
+.SUBCKT weights_l2_rom_output_buffer
++ in_0 in_1 in_2 in_3 in_4 in_5 in_6 in_7 in_8 in_9 in_10 in_11 in_12
++ in_13 in_14 in_15 in_16 in_17 in_18 in_19 in_20 in_21 in_22 in_23
++ in_24 in_25 in_26 in_27 in_28 in_29 in_30 in_31 in_32 in_33 in_34
++ in_35 in_36 in_37 in_38 in_39 out_0 out_1 out_2 out_3 out_4 out_5
++ out_6 out_7 out_8 out_9 out_10 out_11 out_12 out_13 out_14 out_15
++ out_16 out_17 out_18 out_19 out_20 out_21 out_22 out_23 out_24 out_25
++ out_26 out_27 out_28 out_29 out_30 out_31 out_32 out_33 out_34 out_35
++ out_36 out_37 out_38 out_39 vdd gnd
+* INPUT : in_0 
+* INPUT : in_1 
+* INPUT : in_2 
+* INPUT : in_3 
+* INPUT : in_4 
+* INPUT : in_5 
+* INPUT : in_6 
+* INPUT : in_7 
+* INPUT : in_8 
+* INPUT : in_9 
+* INPUT : in_10 
+* INPUT : in_11 
+* INPUT : in_12 
+* INPUT : in_13 
+* INPUT : in_14 
+* INPUT : in_15 
+* INPUT : in_16 
+* INPUT : in_17 
+* INPUT : in_18 
+* INPUT : in_19 
+* INPUT : in_20 
+* INPUT : in_21 
+* INPUT : in_22 
+* INPUT : in_23 
+* INPUT : in_24 
+* INPUT : in_25 
+* INPUT : in_26 
+* INPUT : in_27 
+* INPUT : in_28 
+* INPUT : in_29 
+* INPUT : in_30 
+* INPUT : in_31 
+* INPUT : in_32 
+* INPUT : in_33 
+* INPUT : in_34 
+* INPUT : in_35 
+* INPUT : in_36 
+* INPUT : in_37 
+* INPUT : in_38 
+* INPUT : in_39 
+* OUTPUT: out_0 
+* OUTPUT: out_1 
+* OUTPUT: out_2 
+* OUTPUT: out_3 
+* OUTPUT: out_4 
+* OUTPUT: out_5 
+* OUTPUT: out_6 
+* OUTPUT: out_7 
+* OUTPUT: out_8 
+* OUTPUT: out_9 
+* OUTPUT: out_10 
+* OUTPUT: out_11 
+* OUTPUT: out_12 
+* OUTPUT: out_13 
+* OUTPUT: out_14 
+* OUTPUT: out_15 
+* OUTPUT: out_16 
+* OUTPUT: out_17 
+* OUTPUT: out_18 
+* OUTPUT: out_19 
+* OUTPUT: out_20 
+* OUTPUT: out_21 
+* OUTPUT: out_22 
+* OUTPUT: out_23 
+* OUTPUT: out_24 
+* OUTPUT: out_25 
+* OUTPUT: out_26 
+* OUTPUT: out_27 
+* OUTPUT: out_28 
+* OUTPUT: out_29 
+* OUTPUT: out_30 
+* OUTPUT: out_31 
+* OUTPUT: out_32 
+* OUTPUT: out_33 
+* OUTPUT: out_34 
+* OUTPUT: out_35 
+* OUTPUT: out_36 
+* OUTPUT: out_37 
+* OUTPUT: out_38 
+* OUTPUT: out_39 
 * POWER : vdd 
 * GROUND: gnd 
-* size: 2
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=2 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=2 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-.ENDS weights_l2_pinv_0
+* rows: 40 Buffer size of: 4
+Xwld0
++ in_0 out_0 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld1
++ in_1 out_1 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld2
++ in_2 out_2 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld3
++ in_3 out_3 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld4
++ in_4 out_4 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld5
++ in_5 out_5 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld6
++ in_6 out_6 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld7
++ in_7 out_7 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld8
++ in_8 out_8 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld9
++ in_9 out_9 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld10
++ in_10 out_10 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld11
++ in_11 out_11 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld12
++ in_12 out_12 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld13
++ in_13 out_13 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld14
++ in_14 out_14 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld15
++ in_15 out_15 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld16
++ in_16 out_16 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld17
++ in_17 out_17 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld18
++ in_18 out_18 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld19
++ in_19 out_19 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld20
++ in_20 out_20 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld21
++ in_21 out_21 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld22
++ in_22 out_22 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld23
++ in_23 out_23 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld24
++ in_24 out_24 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld25
++ in_25 out_25 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld26
++ in_26 out_26 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld27
++ in_27 out_27 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld28
++ in_28 out_28 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld29
++ in_29 out_29 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld30
++ in_30 out_30 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld31
++ in_31 out_31 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld32
++ in_32 out_32 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld33
++ in_33 out_33 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld34
++ in_34 out_34 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld35
++ in_35 out_35 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld36
++ in_36 out_36 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld37
++ in_37 out_37 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld38
++ in_38 out_38 vdd gnd
++ weights_l2_pinv_dec_4
+Xwld39
++ in_39 out_39 vdd gnd
++ weights_l2_pinv_dec_4
+.ENDS weights_l2_rom_output_buffer
+* Copyright 2020 The SkyWater PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* SPDX-License-Identifier: Apache-2.0
 
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+* NGSPICE file created from sky130_fd_bd_sram__openram_sp_nand2_dec.ext - technology: EFS8A
 
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
 
-.SUBCKT weights_l2_pinv_4
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 57
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-.ENDS weights_l2_pinv_4
+* Top level circuit sky130_fd_bd_sram__openram_sp_nand2_dec
+.subckt sky130_fd_bd_sram__openram_sp_nand2_dec A B Z VDD GND
 
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=7 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+X1001 Z B VDD VDD sky130_fd_pr__pfet_01v8 W=1.12 L=0.15
+X1002 VDD A Z VDD sky130_fd_pr__pfet_01v8 W=1.12 L=0.15
+X1000 Z A a_n722_276# GND sky130_fd_pr__nfet_01v8 W=0.74 L=0.15
+X1003 a_n722_276# B GND GND sky130_fd_pr__nfet_01v8 W=0.74 L=0.15
+.ends
 
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=7 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-
-.SUBCKT weights_l2_pinv_3
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 19
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=7 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=7 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
-.ENDS weights_l2_pinv_3
-
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=4 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
-
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=4 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
-
-.SUBCKT weights_l2_pinv_2
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 6
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=4 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=4 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
-.ENDS weights_l2_pinv_2
-
-.SUBCKT weights_l2_rom_precharge_driver
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* sizes: [1, 1, 1, 2, 6, 19, 57]
-Xbuf_inv1
-+ A Zb1_int vdd gnd
-+ weights_l2_pinv
-Xbuf_inv2
-+ Zb1_int Zb2_int vdd gnd
-+ weights_l2_pinv
-Xbuf_inv3
-+ Zb2_int Zb3_int vdd gnd
-+ weights_l2_pinv
-Xbuf_inv4
-+ Zb3_int Zb4_int vdd gnd
-+ weights_l2_pinv_0
-Xbuf_inv5
-+ Zb4_int Zb5_int vdd gnd
-+ weights_l2_pinv_2
-Xbuf_inv6
-+ Zb5_int Zb6_int vdd gnd
-+ weights_l2_pinv_3
-Xbuf_inv7
-+ Zb6_int Z vdd gnd
-+ weights_l2_pinv_4
-.ENDS weights_l2_rom_precharge_driver
-
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-
-.SUBCKT weights_l2_pinv_1
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 7
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-.ENDS weights_l2_pinv_1
-
-.SUBCKT weights_l2_rom_clock_driver
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* sizes: [1, 1, 2, 7]
-Xbuf_inv1
-+ A Zb1_int vdd gnd
-+ weights_l2_pinv
-Xbuf_inv2
-+ Zb1_int Zb2_int vdd gnd
-+ weights_l2_pinv
-Xbuf_inv3
-+ Zb2_int Zb3_int vdd gnd
-+ weights_l2_pinv_0
-Xbuf_inv4
-+ Zb3_int Z vdd gnd
-+ weights_l2_pinv_1
-.ENDS weights_l2_rom_clock_driver
 
 * spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
 
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
 
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
-
-.SUBCKT weights_l2_rom_control_nand
-+ A B Z vdd gnd
+.SUBCKT weights_l2_inv_array_mod
++ A Z vdd gnd
 * INPUT : A 
-* INPUT : B 
 * OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-* size: 1
-Xpnand2_pmos1 vdd A Z vdd sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
-Xpnand2_pmos2 Z B vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
-Xpnand2_nmos1 Z B net1 gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-Xpnand2_nmos2 net1 A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-.ENDS weights_l2_rom_control_nand
+* size: 1.9600000000000002
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+.ENDS weights_l2_inv_array_mod
 
-.SUBCKT weights_l2_rom_control_logic
-+ clk_in CS prechrg clk_out vdd gnd
-* INPUT : clk_in 
-* INPUT : CS 
-* OUTPUT: prechrg 
-* OUTPUT: clk_out 
+.SUBCKT weights_l2_rom_address_control_buf
++ A_in A_out Abar_out clk vdd gnd
+* INPUT : A_in 
+* INOUT : A_out 
+* OUTPUT: Abar_out 
+* INPUT : clk 
 * POWER : vdd 
 * GROUND: gnd 
-Xclk_driver
-+ clk_in clk_out vdd gnd
-+ weights_l2_rom_clock_driver
-Xcontrol_nand
-+ CS clk_out pre_drive vdd gnd
-+ weights_l2_rom_control_nand
-Xprecharge_driver
-+ pre_drive prechrg vdd gnd
-+ weights_l2_rom_precharge_driver
-.ENDS weights_l2_rom_control_logic
+XXinvAbar
++ A_in Abar_internal vdd gnd
++ weights_l2_inv_array_mod
+XXnand_addr
++ clk Abar_internal A_out vdd gnd
++ sky130_fd_bd_sram__openram_sp_nand2_dec
+XXnand_addr_bar
++ clk A_out Abar_out vdd gnd
++ sky130_fd_bd_sram__openram_sp_nand2_dec
+.ENDS weights_l2_rom_address_control_buf
+
+.SUBCKT weights_l2_rom_address_control_array
++ A0_in A1_in A2_in A0_out A1_out A2_out Abar0_out Abar1_out Abar2_out
++ clk vdd gnd
+* INPUT : A0_in 
+* INPUT : A1_in 
+* INPUT : A2_in 
+* OUTPUT: A0_out 
+* OUTPUT: A1_out 
+* OUTPUT: A2_out 
+* OUTPUT: Abar0_out 
+* OUTPUT: Abar1_out 
+* OUTPUT: Abar2_out 
+* INPUT : clk 
+* POWER : vdd 
+* GROUND: gnd 
+XXaddr_buf_0
++ A0_in A0_out Abar0_out clk vdd gnd
++ weights_l2_rom_address_control_buf
+XXaddr_buf_1
++ A1_in A1_out Abar1_out clk vdd gnd
++ weights_l2_rom_address_control_buf
+XXaddr_buf_2
++ A2_in A2_out Abar2_out clk vdd gnd
++ weights_l2_rom_address_control_buf
+.ENDS weights_l2_rom_address_control_array
 
 * spice ptx X{0} {1} sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
 
-.SUBCKT weights_l2_rom_base_one_cell
-+ bl_h bl_l wl gnd
-* INOUT : bl_h 
-* INOUT : bl_l 
+.SUBCKT weights_l2_rom_base_zero_cell
++ bl wl gnd
+* INOUT : bl 
 * INPUT : wl 
 * GROUND: gnd 
-Xweights_l2_rom_base_one_cell_nmos bl_h wl bl_l gnd sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
-.ENDS weights_l2_rom_base_one_cell
+Xweights_l2_rom_base_zero_cell_nmos bl wl bl gnd sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
+.ENDS weights_l2_rom_base_zero_cell
 
 * spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=0.42 l=0.15 pd=1.14 ps=1.14 as=0.16u ad=0.16u
 
@@ -922,6 +1058,369 @@ Xweights_l2_rom_base_one_cell_nmos bl_h wl bl_l gnd sky130_fd_pr__special_nfet_0
 * OUTPUT: bitline 
 Xprecharge_pmos bitline gate vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=0.42 l=0.15 pd=1.14 ps=1.14 as=0.16u ad=0.16u
 .ENDS weights_l2_precharge_cell
+
+.SUBCKT weights_l2_rom_precharge_array_0
++ pre_bl0_out pre_bl1_out pre_bl2_out pre_bl3_out pre_bl4_out
++ pre_bl5_out pre_bl6_out pre_bl7_out gate vdd
+* OUTPUT: pre_bl0_out 
+* OUTPUT: pre_bl1_out 
+* OUTPUT: pre_bl2_out 
+* OUTPUT: pre_bl3_out 
+* OUTPUT: pre_bl4_out 
+* OUTPUT: pre_bl5_out 
+* OUTPUT: pre_bl6_out 
+* OUTPUT: pre_bl7_out 
+* INPUT : gate 
+* POWER : vdd 
+Xpmos_c0
++ vdd gate pre_bl0_out
++ weights_l2_precharge_cell
+Xpmos_c1
++ vdd gate pre_bl1_out
++ weights_l2_precharge_cell
+Xpmos_c2
++ vdd gate pre_bl2_out
++ weights_l2_precharge_cell
+Xpmos_c3
++ vdd gate pre_bl3_out
++ weights_l2_precharge_cell
+Xpmos_c4
++ vdd gate pre_bl4_out
++ weights_l2_precharge_cell
+Xpmos_c5
++ vdd gate pre_bl5_out
++ weights_l2_precharge_cell
+Xpmos_c6
++ vdd gate pre_bl6_out
++ weights_l2_precharge_cell
+Xpmos_c7
++ vdd gate pre_bl7_out
++ weights_l2_precharge_cell
+.ENDS weights_l2_rom_precharge_array_0
+
+.SUBCKT weights_l2_rom_base_one_cell
++ bl_h bl_l wl gnd
+* INOUT : bl_h 
+* INOUT : bl_l 
+* INPUT : wl 
+* GROUND: gnd 
+Xweights_l2_rom_base_one_cell_nmos bl_h wl bl_l gnd sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
+.ENDS weights_l2_rom_base_one_cell
+
+.SUBCKT weights_l2_rom_row_decode_array
++ bl_0_0 bl_0_1 bl_0_2 bl_0_3 bl_0_4 bl_0_5 bl_0_6 bl_0_7 wl_0_0 wl_0_1
++ wl_0_2 wl_0_3 wl_0_4 wl_0_5 precharge vdd gnd
+* OUTPUT: bl_0_0 
+* OUTPUT: bl_0_1 
+* OUTPUT: bl_0_2 
+* OUTPUT: bl_0_3 
+* OUTPUT: bl_0_4 
+* OUTPUT: bl_0_5 
+* OUTPUT: bl_0_6 
+* OUTPUT: bl_0_7 
+* INPUT : wl_0_0 
+* INPUT : wl_0_1 
+* INPUT : wl_0_2 
+* INPUT : wl_0_3 
+* INPUT : wl_0_4 
+* INPUT : wl_0_5 
+* INPUT : precharge 
+* POWER : vdd 
+* GROUND: gnd 
+Xbit_r0_c0
++ bl_int_0_0 bl_0_0 wl_0_0 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r0_c1
++ bl_int_0_1 bl_0_1 wl_0_0 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r0_c2
++ bl_int_0_2 bl_0_2 wl_0_0 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r0_c3
++ bl_int_0_3 bl_0_3 wl_0_0 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r0_c4
++ bl_0_4 wl_0_0 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r0_c5
++ bl_0_5 wl_0_0 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r0_c6
++ bl_0_6 wl_0_0 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r0_c7
++ bl_0_7 wl_0_0 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r1_c0
++ bl_int_0_0 wl_0_1 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r1_c1
++ bl_int_0_1 wl_0_1 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r1_c2
++ bl_int_0_2 wl_0_1 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r1_c3
++ bl_int_0_3 wl_0_1 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r1_c4
++ bl_int_1_4 bl_0_4 wl_0_1 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r1_c5
++ bl_int_1_5 bl_0_5 wl_0_1 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r1_c6
++ bl_int_1_6 bl_0_6 wl_0_1 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r1_c7
++ bl_int_1_7 bl_0_7 wl_0_1 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r2_c0
++ bl_int_2_0 bl_int_0_0 wl_0_2 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r2_c1
++ bl_int_2_1 bl_int_0_1 wl_0_2 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r2_c2
++ bl_int_0_2 wl_0_2 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r2_c3
++ bl_int_0_3 wl_0_2 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r2_c4
++ bl_int_2_4 bl_int_1_4 wl_0_2 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r2_c5
++ bl_int_2_5 bl_int_1_5 wl_0_2 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r2_c6
++ bl_int_1_6 wl_0_2 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r2_c7
++ bl_int_1_7 wl_0_2 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r3_c0
++ bl_int_2_0 wl_0_3 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r3_c1
++ bl_int_2_1 wl_0_3 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r3_c2
++ bl_int_3_2 bl_int_0_2 wl_0_3 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r3_c3
++ bl_int_3_3 bl_int_0_3 wl_0_3 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r3_c4
++ bl_int_2_4 wl_0_3 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r3_c5
++ bl_int_2_5 wl_0_3 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r3_c6
++ bl_int_3_6 bl_int_1_6 wl_0_3 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r3_c7
++ bl_int_3_7 bl_int_1_7 wl_0_3 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r4_c0
++ bl_int_4_0 bl_int_2_0 wl_0_4 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r4_c1
++ bl_int_2_1 wl_0_4 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r4_c2
++ bl_int_4_2 bl_int_3_2 wl_0_4 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r4_c3
++ bl_int_3_3 wl_0_4 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r4_c4
++ bl_int_4_4 bl_int_2_4 wl_0_4 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r4_c5
++ bl_int_2_5 wl_0_4 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r4_c6
++ bl_int_4_6 bl_int_3_6 wl_0_4 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r4_c7
++ bl_int_3_7 wl_0_4 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r5_c0
++ bl_int_4_0 wl_0_5 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r5_c1
++ bl_int_5_1 bl_int_2_1 wl_0_5 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r5_c2
++ bl_int_4_2 wl_0_5 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r5_c3
++ bl_int_5_3 bl_int_3_3 wl_0_5 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r5_c4
++ bl_int_4_4 wl_0_5 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r5_c5
++ bl_int_5_5 bl_int_2_5 wl_0_5 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r5_c6
++ bl_int_4_6 wl_0_5 gnd
++ weights_l2_rom_base_zero_cell
+Xbit_r5_c7
++ bl_int_5_7 bl_int_3_7 wl_0_5 gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c0
++ gnd bl_int_4_0 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c1
++ gnd bl_int_5_1 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c2
++ gnd bl_int_4_2 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c3
++ gnd bl_int_5_3 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c4
++ gnd bl_int_4_4 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c5
++ gnd bl_int_5_5 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c6
++ gnd bl_int_4_6 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbit_r6_c7
++ gnd bl_int_5_7 precharge gnd
++ weights_l2_rom_base_one_cell
+Xbitcell_array_precharge
++ bl_0_0 bl_0_1 bl_0_2 bl_0_3 bl_0_4 bl_0_5 bl_0_6 bl_0_7 precharge vdd
++ weights_l2_rom_precharge_array_0
+.ENDS weights_l2_rom_row_decode_array
+
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
+
+.SUBCKT weights_l2_pinv_dec_0
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
+* POWER : vdd 
+* GROUND: gnd 
+* size: 5
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+.ENDS weights_l2_pinv_dec_0
+
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
+
+.SUBCKT weights_l2_pinv_dec_1
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
+* POWER : vdd 
+* GROUND: gnd 
+* size: 20
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
+.ENDS weights_l2_pinv_dec_1
+
+.SUBCKT weights_l2_pbuf_dec
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
+* POWER : vdd 
+* GROUND: gnd 
+* size: 20
+Xbuf_inv1
++ A zb_int vdd gnd
++ weights_l2_pinv_dec_0
+Xbuf_inv2
++ zb_int Z vdd gnd
++ weights_l2_pinv_dec_1
+.ENDS weights_l2_pbuf_dec
+
+.SUBCKT weights_l2_rom_row_decode_wordline_buffer
++ in_0 in_1 in_2 in_3 in_4 in_5 in_6 in_7 out_0 out_1 out_2 out_3 out_4
++ out_5 out_6 out_7 vdd gnd
+* INPUT : in_0 
+* INPUT : in_1 
+* INPUT : in_2 
+* INPUT : in_3 
+* INPUT : in_4 
+* INPUT : in_5 
+* INPUT : in_6 
+* INPUT : in_7 
+* OUTPUT: out_0 
+* OUTPUT: out_1 
+* OUTPUT: out_2 
+* OUTPUT: out_3 
+* OUTPUT: out_4 
+* OUTPUT: out_5 
+* OUTPUT: out_6 
+* OUTPUT: out_7 
+* POWER : vdd 
+* GROUND: gnd 
+* rows: 8 Buffer size of: 20
+Xwld0
++ in_0 out_0 vdd gnd
++ weights_l2_pbuf_dec
+Xwld1
++ in_1 out_1 vdd gnd
++ weights_l2_pbuf_dec
+Xwld2
++ in_2 out_2 vdd gnd
++ weights_l2_pbuf_dec
+Xwld3
++ in_3 out_3 vdd gnd
++ weights_l2_pbuf_dec
+Xwld4
++ in_4 out_4 vdd gnd
++ weights_l2_pbuf_dec
+Xwld5
++ in_5 out_5 vdd gnd
++ weights_l2_pbuf_dec
+Xwld6
++ in_6 out_6 vdd gnd
++ weights_l2_pbuf_dec
+Xwld7
++ in_7 out_7 vdd gnd
++ weights_l2_pbuf_dec
+.ENDS weights_l2_rom_row_decode_wordline_buffer
+
+.SUBCKT weights_l2_rom_row_decode
++ A0 A1 A2 wl_0 wl_1 wl_2 wl_3 wl_4 wl_5 wl_6 wl_7 precharge clk vdd gnd
+* INPUT : A0 
+* INPUT : A1 
+* INPUT : A2 
+* OUTPUT: wl_0 
+* OUTPUT: wl_1 
+* OUTPUT: wl_2 
+* OUTPUT: wl_3 
+* OUTPUT: wl_4 
+* OUTPUT: wl_5 
+* OUTPUT: wl_6 
+* OUTPUT: wl_7 
+* INPUT : precharge 
+* INPUT : clk 
+* POWER : vdd 
+* GROUND: gnd 
+Xdecode_array_inst
++ wl_int0 wl_int1 wl_int2 wl_int3 wl_int4 wl_int5 wl_int6 wl_int7
++ Ab_int_2 A_int_2 Ab_int_1 A_int_1 Ab_int_0 A_int_0 precharge vdd gnd
++ weights_l2_rom_row_decode_array
+Xpre_control_array
++ A0 A1 A2 A_int_0 A_int_1 A_int_2 Ab_int_0 Ab_int_1 Ab_int_2 clk vdd
++ gnd
++ weights_l2_rom_address_control_array
+Xrom_wordline_driver
++ wl_int0 wl_int1 wl_int2 wl_int3 wl_int4 wl_int5 wl_int6 wl_int7 wl_0
++ wl_1 wl_2 wl_3 wl_4 wl_5 wl_6 wl_7 vdd gnd
++ weights_l2_rom_row_decode_wordline_buffer
+.ENDS weights_l2_rom_row_decode
 
 .SUBCKT weights_l2_rom_precharge_array
 + pre_bl0_out pre_bl1_out pre_bl2_out pre_bl3_out pre_bl4_out
@@ -1600,14 +2099,6 @@ Xpmos_c159
 + vdd gate pre_bl159_out
 + weights_l2_precharge_cell
 .ENDS weights_l2_rom_precharge_array
-
-.SUBCKT weights_l2_rom_base_zero_cell
-+ bl wl gnd
-* INOUT : bl 
-* INPUT : wl 
-* GROUND: gnd 
-Xweights_l2_rom_base_zero_cell_nmos bl wl bl gnd sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
-.ENDS weights_l2_rom_base_zero_cell
 
 .SUBCKT weights_l2_rom_base_array
 + bl_0_0 bl_0_1 bl_0_2 bl_0_3 bl_0_4 bl_0_5 bl_0_6 bl_0_7 bl_0_8 bl_0_9
@@ -6148,17 +6639,69 @@ Xbitcell_array_precharge
 + weights_l2_rom_precharge_array
 .ENDS weights_l2_rom_base_array
 
-.SUBCKT weights_l2_rom_precharge_array_0
-+ pre_bl0_out pre_bl1_out pre_bl2_out pre_bl3_out pre_bl4_out
-+ pre_bl5_out pre_bl6_out pre_bl7_out gate vdd
+.SUBCKT weights_l2_pinv_dec_2
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
+* POWER : vdd 
+* GROUND: gnd 
+* size: 2
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+.ENDS weights_l2_pinv_dec_2
+
+.SUBCKT weights_l2_rom_column_decode_wordline_buffer
++ in_0 in_1 in_2 in_3 out_0 out_1 out_2 out_3 vdd gnd
+* INPUT : in_0 
+* INPUT : in_1 
+* INPUT : in_2 
+* INPUT : in_3 
+* OUTPUT: out_0 
+* OUTPUT: out_1 
+* OUTPUT: out_2 
+* OUTPUT: out_3 
+* POWER : vdd 
+* GROUND: gnd 
+* rows: 4 Buffer size of: 2
+Xwld0
++ in_0 out_0 vdd gnd
++ weights_l2_pinv_dec_2
+Xwld1
++ in_1 out_1 vdd gnd
++ weights_l2_pinv_dec_2
+Xwld2
++ in_2 out_2 vdd gnd
++ weights_l2_pinv_dec_2
+Xwld3
++ in_3 out_3 vdd gnd
++ weights_l2_pinv_dec_2
+.ENDS weights_l2_rom_column_decode_wordline_buffer
+
+.SUBCKT weights_l2_rom_address_control_array_0
++ A0_in A1_in A0_out A1_out Abar0_out Abar1_out clk vdd gnd
+* INPUT : A0_in 
+* INPUT : A1_in 
+* OUTPUT: A0_out 
+* OUTPUT: A1_out 
+* OUTPUT: Abar0_out 
+* OUTPUT: Abar1_out 
+* INPUT : clk 
+* POWER : vdd 
+* GROUND: gnd 
+XXaddr_buf_0
++ A0_in A0_out Abar0_out clk vdd gnd
++ weights_l2_rom_address_control_buf
+XXaddr_buf_1
++ A1_in A1_out Abar1_out clk vdd gnd
++ weights_l2_rom_address_control_buf
+.ENDS weights_l2_rom_address_control_array_0
+
+.SUBCKT weights_l2_rom_precharge_array_1
++ pre_bl0_out pre_bl1_out pre_bl2_out pre_bl3_out gate vdd
 * OUTPUT: pre_bl0_out 
 * OUTPUT: pre_bl1_out 
 * OUTPUT: pre_bl2_out 
 * OUTPUT: pre_bl3_out 
-* OUTPUT: pre_bl4_out 
-* OUTPUT: pre_bl5_out 
-* OUTPUT: pre_bl6_out 
-* OUTPUT: pre_bl7_out 
 * INPUT : gate 
 * POWER : vdd 
 Xpmos_c0
@@ -6173,37 +6716,19 @@ Xpmos_c2
 Xpmos_c3
 + vdd gate pre_bl3_out
 + weights_l2_precharge_cell
-Xpmos_c4
-+ vdd gate pre_bl4_out
-+ weights_l2_precharge_cell
-Xpmos_c5
-+ vdd gate pre_bl5_out
-+ weights_l2_precharge_cell
-Xpmos_c6
-+ vdd gate pre_bl6_out
-+ weights_l2_precharge_cell
-Xpmos_c7
-+ vdd gate pre_bl7_out
-+ weights_l2_precharge_cell
-.ENDS weights_l2_rom_precharge_array_0
+.ENDS weights_l2_rom_precharge_array_1
 
-.SUBCKT weights_l2_rom_row_decode_array
-+ bl_0_0 bl_0_1 bl_0_2 bl_0_3 bl_0_4 bl_0_5 bl_0_6 bl_0_7 wl_0_0 wl_0_1
-+ wl_0_2 wl_0_3 wl_0_4 wl_0_5 precharge vdd gnd
+.SUBCKT weights_l2_rom_column_decode_array
++ bl_0_0 bl_0_1 bl_0_2 bl_0_3 wl_0_0 wl_0_1 wl_0_2 wl_0_3 precharge vdd
++ gnd
 * OUTPUT: bl_0_0 
 * OUTPUT: bl_0_1 
 * OUTPUT: bl_0_2 
 * OUTPUT: bl_0_3 
-* OUTPUT: bl_0_4 
-* OUTPUT: bl_0_5 
-* OUTPUT: bl_0_6 
-* OUTPUT: bl_0_7 
 * INPUT : wl_0_0 
 * INPUT : wl_0_1 
 * INPUT : wl_0_2 
 * INPUT : wl_0_3 
-* INPUT : wl_0_4 
-* INPUT : wl_0_5 
 * INPUT : precharge 
 * POWER : vdd 
 * GROUND: gnd 
@@ -6214,22 +6739,10 @@ Xbit_r0_c1
 + bl_int_0_1 bl_0_1 wl_0_0 gnd
 + weights_l2_rom_base_one_cell
 Xbit_r0_c2
-+ bl_int_0_2 bl_0_2 wl_0_0 gnd
-+ weights_l2_rom_base_one_cell
++ bl_0_2 wl_0_0 gnd
++ weights_l2_rom_base_zero_cell
 Xbit_r0_c3
-+ bl_int_0_3 bl_0_3 wl_0_0 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r0_c4
-+ bl_0_4 wl_0_0 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r0_c5
-+ bl_0_5 wl_0_0 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r0_c6
-+ bl_0_6 wl_0_0 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r0_c7
-+ bl_0_7 wl_0_0 gnd
++ bl_0_3 wl_0_0 gnd
 + weights_l2_rom_base_zero_cell
 Xbit_r1_c0
 + bl_int_0_0 wl_0_1 gnd
@@ -6238,361 +6751,75 @@ Xbit_r1_c1
 + bl_int_0_1 wl_0_1 gnd
 + weights_l2_rom_base_zero_cell
 Xbit_r1_c2
-+ bl_int_0_2 wl_0_1 gnd
-+ weights_l2_rom_base_zero_cell
++ bl_int_1_2 bl_0_2 wl_0_1 gnd
++ weights_l2_rom_base_one_cell
 Xbit_r1_c3
-+ bl_int_0_3 wl_0_1 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r1_c4
-+ bl_int_1_4 bl_0_4 wl_0_1 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r1_c5
-+ bl_int_1_5 bl_0_5 wl_0_1 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r1_c6
-+ bl_int_1_6 bl_0_6 wl_0_1 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r1_c7
-+ bl_int_1_7 bl_0_7 wl_0_1 gnd
++ bl_int_1_3 bl_0_3 wl_0_1 gnd
 + weights_l2_rom_base_one_cell
 Xbit_r2_c0
 + bl_int_2_0 bl_int_0_0 wl_0_2 gnd
 + weights_l2_rom_base_one_cell
 Xbit_r2_c1
-+ bl_int_2_1 bl_int_0_1 wl_0_2 gnd
-+ weights_l2_rom_base_one_cell
++ bl_int_0_1 wl_0_2 gnd
++ weights_l2_rom_base_zero_cell
 Xbit_r2_c2
-+ bl_int_0_2 wl_0_2 gnd
-+ weights_l2_rom_base_zero_cell
++ bl_int_2_2 bl_int_1_2 wl_0_2 gnd
++ weights_l2_rom_base_one_cell
 Xbit_r2_c3
-+ bl_int_0_3 wl_0_2 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r2_c4
-+ bl_int_2_4 bl_int_1_4 wl_0_2 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r2_c5
-+ bl_int_2_5 bl_int_1_5 wl_0_2 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r2_c6
-+ bl_int_1_6 wl_0_2 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r2_c7
-+ bl_int_1_7 wl_0_2 gnd
++ bl_int_1_3 wl_0_2 gnd
 + weights_l2_rom_base_zero_cell
 Xbit_r3_c0
 + bl_int_2_0 wl_0_3 gnd
 + weights_l2_rom_base_zero_cell
 Xbit_r3_c1
-+ bl_int_2_1 wl_0_3 gnd
-+ weights_l2_rom_base_zero_cell
++ bl_int_3_1 bl_int_0_1 wl_0_3 gnd
++ weights_l2_rom_base_one_cell
 Xbit_r3_c2
-+ bl_int_3_2 bl_int_0_2 wl_0_3 gnd
-+ weights_l2_rom_base_one_cell
++ bl_int_2_2 wl_0_3 gnd
++ weights_l2_rom_base_zero_cell
 Xbit_r3_c3
-+ bl_int_3_3 bl_int_0_3 wl_0_3 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r3_c4
-+ bl_int_2_4 wl_0_3 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r3_c5
-+ bl_int_2_5 wl_0_3 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r3_c6
-+ bl_int_3_6 bl_int_1_6 wl_0_3 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r3_c7
-+ bl_int_3_7 bl_int_1_7 wl_0_3 gnd
++ bl_int_3_3 bl_int_1_3 wl_0_3 gnd
 + weights_l2_rom_base_one_cell
 Xbit_r4_c0
-+ bl_int_4_0 bl_int_2_0 wl_0_4 gnd
++ gnd bl_int_2_0 precharge gnd
 + weights_l2_rom_base_one_cell
 Xbit_r4_c1
-+ bl_int_2_1 wl_0_4 gnd
-+ weights_l2_rom_base_zero_cell
++ gnd bl_int_3_1 precharge gnd
++ weights_l2_rom_base_one_cell
 Xbit_r4_c2
-+ bl_int_4_2 bl_int_3_2 wl_0_4 gnd
++ gnd bl_int_2_2 precharge gnd
 + weights_l2_rom_base_one_cell
 Xbit_r4_c3
-+ bl_int_3_3 wl_0_4 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r4_c4
-+ bl_int_4_4 bl_int_2_4 wl_0_4 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r4_c5
-+ bl_int_2_5 wl_0_4 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r4_c6
-+ bl_int_4_6 bl_int_3_6 wl_0_4 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r4_c7
-+ bl_int_3_7 wl_0_4 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r5_c0
-+ bl_int_4_0 wl_0_5 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r5_c1
-+ bl_int_5_1 bl_int_2_1 wl_0_5 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r5_c2
-+ bl_int_4_2 wl_0_5 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r5_c3
-+ bl_int_5_3 bl_int_3_3 wl_0_5 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r5_c4
-+ bl_int_4_4 wl_0_5 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r5_c5
-+ bl_int_5_5 bl_int_2_5 wl_0_5 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r5_c6
-+ bl_int_4_6 wl_0_5 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r5_c7
-+ bl_int_5_7 bl_int_3_7 wl_0_5 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c0
-+ gnd bl_int_4_0 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c1
-+ gnd bl_int_5_1 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c2
-+ gnd bl_int_4_2 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c3
-+ gnd bl_int_5_3 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c4
-+ gnd bl_int_4_4 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c5
-+ gnd bl_int_5_5 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c6
-+ gnd bl_int_4_6 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r6_c7
-+ gnd bl_int_5_7 precharge gnd
++ gnd bl_int_3_3 precharge gnd
 + weights_l2_rom_base_one_cell
 Xbitcell_array_precharge
-+ bl_0_0 bl_0_1 bl_0_2 bl_0_3 bl_0_4 bl_0_5 bl_0_6 bl_0_7 precharge vdd
-+ weights_l2_rom_precharge_array_0
-.ENDS weights_l2_rom_row_decode_array
++ bl_0_0 bl_0_1 bl_0_2 bl_0_3 precharge vdd
++ weights_l2_rom_precharge_array_1
+.ENDS weights_l2_rom_column_decode_array
 
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
-
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
-
-.SUBCKT weights_l2_pinv_dec_1
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 20
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
-.ENDS weights_l2_pinv_dec_1
-
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
-
-.SUBCKT weights_l2_pinv_dec_0
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 5
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=7.0 l=0.15 pd=14.30 ps=14.30 as=2.62u ad=2.62u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
-.ENDS weights_l2_pinv_dec_0
-
-.SUBCKT weights_l2_pbuf_dec
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 20
-Xbuf_inv1
-+ A zb_int vdd gnd
-+ weights_l2_pinv_dec_0
-Xbuf_inv2
-+ zb_int Z vdd gnd
-+ weights_l2_pinv_dec_1
-.ENDS weights_l2_pbuf_dec
-
-.SUBCKT weights_l2_rom_row_decode_wordline_buffer
-+ in_0 in_1 in_2 in_3 in_4 in_5 in_6 in_7 out_0 out_1 out_2 out_3 out_4
-+ out_5 out_6 out_7 vdd gnd
-* INPUT : in_0 
-* INPUT : in_1 
-* INPUT : in_2 
-* INPUT : in_3 
-* INPUT : in_4 
-* INPUT : in_5 
-* INPUT : in_6 
-* INPUT : in_7 
-* OUTPUT: out_0 
-* OUTPUT: out_1 
-* OUTPUT: out_2 
-* OUTPUT: out_3 
-* OUTPUT: out_4 
-* OUTPUT: out_5 
-* OUTPUT: out_6 
-* OUTPUT: out_7 
-* POWER : vdd 
-* GROUND: gnd 
-* rows: 8 Buffer size of: 20
-Xwld0
-+ in_0 out_0 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld1
-+ in_1 out_1 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld2
-+ in_2 out_2 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld3
-+ in_3 out_3 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld4
-+ in_4 out_4 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld5
-+ in_5 out_5 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld6
-+ in_6 out_6 vdd gnd
-+ weights_l2_pbuf_dec
-Xwld7
-+ in_7 out_7 vdd gnd
-+ weights_l2_pbuf_dec
-.ENDS weights_l2_rom_row_decode_wordline_buffer
-
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-
-.SUBCKT weights_l2_inv_array_mod
-+ A Z vdd gnd
-* INPUT : A 
-* OUTPUT: Z 
-* POWER : vdd 
-* GROUND: gnd 
-* size: 1.9600000000000002
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-.ENDS weights_l2_inv_array_mod
-* Copyright 2020 The SkyWater PDK Authors
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     https://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-* SPDX-License-Identifier: Apache-2.0
-
-* NGSPICE file created from sky130_fd_bd_sram__openram_sp_nand2_dec.ext - technology: EFS8A
-
-
-* Top level circuit sky130_fd_bd_sram__openram_sp_nand2_dec
-.subckt sky130_fd_bd_sram__openram_sp_nand2_dec A B Z VDD GND
-
-X1001 Z B VDD VDD sky130_fd_pr__pfet_01v8 W=1.12 L=0.15
-X1002 VDD A Z VDD sky130_fd_pr__pfet_01v8 W=1.12 L=0.15
-X1000 Z A a_n722_276# GND sky130_fd_pr__nfet_01v8 W=0.74 L=0.15
-X1003 a_n722_276# B GND GND sky130_fd_pr__nfet_01v8 W=0.74 L=0.15
-.ends
-
-
-.SUBCKT weights_l2_rom_address_control_buf
-+ A_in A_out Abar_out clk vdd gnd
-* INPUT : A_in 
-* INOUT : A_out 
-* OUTPUT: Abar_out 
-* INPUT : clk 
-* POWER : vdd 
-* GROUND: gnd 
-XXinvAbar
-+ A_in Abar_internal vdd gnd
-+ weights_l2_inv_array_mod
-XXnand_addr
-+ clk Abar_internal A_out vdd gnd
-+ sky130_fd_bd_sram__openram_sp_nand2_dec
-XXnand_addr_bar
-+ clk A_out Abar_out vdd gnd
-+ sky130_fd_bd_sram__openram_sp_nand2_dec
-.ENDS weights_l2_rom_address_control_buf
-
-.SUBCKT weights_l2_rom_address_control_array
-+ A0_in A1_in A2_in A0_out A1_out A2_out Abar0_out Abar1_out Abar2_out
-+ clk vdd gnd
-* INPUT : A0_in 
-* INPUT : A1_in 
-* INPUT : A2_in 
-* OUTPUT: A0_out 
-* OUTPUT: A1_out 
-* OUTPUT: A2_out 
-* OUTPUT: Abar0_out 
-* OUTPUT: Abar1_out 
-* OUTPUT: Abar2_out 
-* INPUT : clk 
-* POWER : vdd 
-* GROUND: gnd 
-XXaddr_buf_0
-+ A0_in A0_out Abar0_out clk vdd gnd
-+ weights_l2_rom_address_control_buf
-XXaddr_buf_1
-+ A1_in A1_out Abar1_out clk vdd gnd
-+ weights_l2_rom_address_control_buf
-XXaddr_buf_2
-+ A2_in A2_out Abar2_out clk vdd gnd
-+ weights_l2_rom_address_control_buf
-.ENDS weights_l2_rom_address_control_array
-
-.SUBCKT weights_l2_rom_row_decode
-+ A0 A1 A2 wl_0 wl_1 wl_2 wl_3 wl_4 wl_5 wl_6 wl_7 precharge clk vdd gnd
+.SUBCKT weights_l2_rom_column_decode
++ A0 A1 wl_0 wl_1 wl_2 wl_3 precharge clk vdd gnd
 * INPUT : A0 
 * INPUT : A1 
-* INPUT : A2 
 * OUTPUT: wl_0 
 * OUTPUT: wl_1 
 * OUTPUT: wl_2 
 * OUTPUT: wl_3 
-* OUTPUT: wl_4 
-* OUTPUT: wl_5 
-* OUTPUT: wl_6 
-* OUTPUT: wl_7 
 * INPUT : precharge 
 * INPUT : clk 
 * POWER : vdd 
 * GROUND: gnd 
 Xdecode_array_inst
-+ wl_int0 wl_int1 wl_int2 wl_int3 wl_int4 wl_int5 wl_int6 wl_int7
-+ Ab_int_2 A_int_2 Ab_int_1 A_int_1 Ab_int_0 A_int_0 precharge vdd gnd
-+ weights_l2_rom_row_decode_array
++ wl_int0 wl_int1 wl_int2 wl_int3 Ab_int_1 A_int_1 Ab_int_0 A_int_0
++ precharge vdd gnd
++ weights_l2_rom_column_decode_array
 Xpre_control_array
-+ A0 A1 A2 A_int_0 A_int_1 A_int_2 Ab_int_0 Ab_int_1 Ab_int_2 clk vdd
-+ gnd
-+ weights_l2_rom_address_control_array
++ A0 A1 A_int_0 A_int_1 Ab_int_0 Ab_int_1 clk vdd gnd
++ weights_l2_rom_address_control_array_0
 Xrom_wordline_driver
-+ wl_int0 wl_int1 wl_int2 wl_int3 wl_int4 wl_int5 wl_int6 wl_int7 wl_0
-+ wl_1 wl_2 wl_3 wl_4 wl_5 wl_6 wl_7 vdd gnd
-+ weights_l2_rom_row_decode_wordline_buffer
-.ENDS weights_l2_rom_row_decode
-
-* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=5.0 l=0.15 pd=10.30 ps=10.30 as=1.88u ad=1.88u
-
-* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=1.68 l=0.15 pd=3.66 ps=3.66 as=0.63u ad=0.63u
++ wl_int0 wl_int1 wl_int2 wl_int3 wl_0 wl_1 wl_2 wl_3 vdd gnd
++ weights_l2_rom_column_decode_wordline_buffer
+.ENDS weights_l2_rom_column_decode
 
 .SUBCKT weights_l2_pinv_dec_3
 + A Z vdd gnd
@@ -7444,412 +7671,185 @@ Xwld159
 + weights_l2_pinv_dec_3
 .ENDS weights_l2_rom_bitline_inverter
 
-.SUBCKT weights_l2_pinv_dec_4
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+
+.SUBCKT weights_l2_pinv_4
 + A Z vdd gnd
 * INPUT : A 
 * OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-* size: 4
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=5.0 l=0.15 pd=10.30 ps=10.30 as=1.88u ad=1.88u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=1.68 l=0.15 pd=3.66 ps=3.66 as=0.63u ad=0.63u
-.ENDS weights_l2_pinv_dec_4
+* size: 57
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=21 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+.ENDS weights_l2_pinv_4
 
-.SUBCKT weights_l2_rom_output_buffer
-+ in_0 in_1 in_2 in_3 in_4 in_5 in_6 in_7 in_8 in_9 in_10 in_11 in_12
-+ in_13 in_14 in_15 in_16 in_17 in_18 in_19 in_20 in_21 in_22 in_23
-+ in_24 in_25 in_26 in_27 in_28 in_29 in_30 in_31 in_32 in_33 in_34
-+ in_35 in_36 in_37 in_38 in_39 out_0 out_1 out_2 out_3 out_4 out_5
-+ out_6 out_7 out_8 out_9 out_10 out_11 out_12 out_13 out_14 out_15
-+ out_16 out_17 out_18 out_19 out_20 out_21 out_22 out_23 out_24 out_25
-+ out_26 out_27 out_28 out_29 out_30 out_31 out_32 out_33 out_34 out_35
-+ out_36 out_37 out_38 out_39 vdd gnd
-* INPUT : in_0 
-* INPUT : in_1 
-* INPUT : in_2 
-* INPUT : in_3 
-* INPUT : in_4 
-* INPUT : in_5 
-* INPUT : in_6 
-* INPUT : in_7 
-* INPUT : in_8 
-* INPUT : in_9 
-* INPUT : in_10 
-* INPUT : in_11 
-* INPUT : in_12 
-* INPUT : in_13 
-* INPUT : in_14 
-* INPUT : in_15 
-* INPUT : in_16 
-* INPUT : in_17 
-* INPUT : in_18 
-* INPUT : in_19 
-* INPUT : in_20 
-* INPUT : in_21 
-* INPUT : in_22 
-* INPUT : in_23 
-* INPUT : in_24 
-* INPUT : in_25 
-* INPUT : in_26 
-* INPUT : in_27 
-* INPUT : in_28 
-* INPUT : in_29 
-* INPUT : in_30 
-* INPUT : in_31 
-* INPUT : in_32 
-* INPUT : in_33 
-* INPUT : in_34 
-* INPUT : in_35 
-* INPUT : in_36 
-* INPUT : in_37 
-* INPUT : in_38 
-* INPUT : in_39 
-* OUTPUT: out_0 
-* OUTPUT: out_1 
-* OUTPUT: out_2 
-* OUTPUT: out_3 
-* OUTPUT: out_4 
-* OUTPUT: out_5 
-* OUTPUT: out_6 
-* OUTPUT: out_7 
-* OUTPUT: out_8 
-* OUTPUT: out_9 
-* OUTPUT: out_10 
-* OUTPUT: out_11 
-* OUTPUT: out_12 
-* OUTPUT: out_13 
-* OUTPUT: out_14 
-* OUTPUT: out_15 
-* OUTPUT: out_16 
-* OUTPUT: out_17 
-* OUTPUT: out_18 
-* OUTPUT: out_19 
-* OUTPUT: out_20 
-* OUTPUT: out_21 
-* OUTPUT: out_22 
-* OUTPUT: out_23 
-* OUTPUT: out_24 
-* OUTPUT: out_25 
-* OUTPUT: out_26 
-* OUTPUT: out_27 
-* OUTPUT: out_28 
-* OUTPUT: out_29 
-* OUTPUT: out_30 
-* OUTPUT: out_31 
-* OUTPUT: out_32 
-* OUTPUT: out_33 
-* OUTPUT: out_34 
-* OUTPUT: out_35 
-* OUTPUT: out_36 
-* OUTPUT: out_37 
-* OUTPUT: out_38 
-* OUTPUT: out_39 
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=4 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
+
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=4 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+
+.SUBCKT weights_l2_pinv_2
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-* rows: 40 Buffer size of: 4
-Xwld0
-+ in_0 out_0 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld1
-+ in_1 out_1 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld2
-+ in_2 out_2 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld3
-+ in_3 out_3 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld4
-+ in_4 out_4 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld5
-+ in_5 out_5 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld6
-+ in_6 out_6 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld7
-+ in_7 out_7 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld8
-+ in_8 out_8 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld9
-+ in_9 out_9 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld10
-+ in_10 out_10 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld11
-+ in_11 out_11 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld12
-+ in_12 out_12 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld13
-+ in_13 out_13 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld14
-+ in_14 out_14 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld15
-+ in_15 out_15 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld16
-+ in_16 out_16 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld17
-+ in_17 out_17 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld18
-+ in_18 out_18 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld19
-+ in_19 out_19 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld20
-+ in_20 out_20 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld21
-+ in_21 out_21 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld22
-+ in_22 out_22 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld23
-+ in_23 out_23 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld24
-+ in_24 out_24 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld25
-+ in_25 out_25 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld26
-+ in_26 out_26 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld27
-+ in_27 out_27 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld28
-+ in_28 out_28 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld29
-+ in_29 out_29 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld30
-+ in_30 out_30 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld31
-+ in_31 out_31 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld32
-+ in_32 out_32 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld33
-+ in_33 out_33 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld34
-+ in_34 out_34 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld35
-+ in_35 out_35 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld36
-+ in_36 out_36 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld37
-+ in_37 out_37 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld38
-+ in_38 out_38 vdd gnd
-+ weights_l2_pinv_dec_4
-Xwld39
-+ in_39 out_39 vdd gnd
-+ weights_l2_pinv_dec_4
-.ENDS weights_l2_rom_output_buffer
+* size: 6
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=4 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=4 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
+.ENDS weights_l2_pinv_2
 
-.SUBCKT weights_l2_pinv_dec_2
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=7 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=7 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+
+.SUBCKT weights_l2_pinv_3
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
+* POWER : vdd 
+* GROUND: gnd 
+* size: 19
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=7 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=7 w=2.0 l=0.15 pd=4.30 ps=4.30 as=0.75u ad=0.75u
+.ENDS weights_l2_pinv_3
+
+* spice ptx X{0} {1} sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
+
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
+
+.SUBCKT weights_l2_pinv
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
+* POWER : vdd 
+* GROUND: gnd 
+* size: 1
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__special_nfet_01v8 m=1 w=0.36 l=0.15 pd=1.02 ps=1.02 as=0.14u ad=0.14u
+.ENDS weights_l2_pinv
+
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=2 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
+
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=2 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+
+.SUBCKT weights_l2_pinv_0
 + A Z vdd gnd
 * INPUT : A 
 * OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
 * size: 2
-Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
-Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
-.ENDS weights_l2_pinv_dec_2
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=2 w=1.26 l=0.15 pd=2.82 ps=2.82 as=0.47u ad=0.47u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=2 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+.ENDS weights_l2_pinv_0
 
-.SUBCKT weights_l2_rom_column_decode_wordline_buffer
-+ in_0 in_1 in_2 in_3 out_0 out_1 out_2 out_3 vdd gnd
-* INPUT : in_0 
-* INPUT : in_1 
-* INPUT : in_2 
-* INPUT : in_3 
-* OUTPUT: out_0 
-* OUTPUT: out_1 
-* OUTPUT: out_2 
-* OUTPUT: out_3 
+.SUBCKT weights_l2_rom_precharge_driver
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-* rows: 4 Buffer size of: 2
-Xwld0
-+ in_0 out_0 vdd gnd
-+ weights_l2_pinv_dec_2
-Xwld1
-+ in_1 out_1 vdd gnd
-+ weights_l2_pinv_dec_2
-Xwld2
-+ in_2 out_2 vdd gnd
-+ weights_l2_pinv_dec_2
-Xwld3
-+ in_3 out_3 vdd gnd
-+ weights_l2_pinv_dec_2
-.ENDS weights_l2_rom_column_decode_wordline_buffer
+* sizes: [1, 1, 1, 2, 6, 19, 57]
+Xbuf_inv1
++ A Zb1_int vdd gnd
++ weights_l2_pinv
+Xbuf_inv2
++ Zb1_int Zb2_int vdd gnd
++ weights_l2_pinv
+Xbuf_inv3
++ Zb2_int Zb3_int vdd gnd
++ weights_l2_pinv
+Xbuf_inv4
++ Zb3_int Zb4_int vdd gnd
++ weights_l2_pinv_0
+Xbuf_inv5
++ Zb4_int Zb5_int vdd gnd
++ weights_l2_pinv_2
+Xbuf_inv6
++ Zb5_int Zb6_int vdd gnd
++ weights_l2_pinv_3
+Xbuf_inv7
++ Zb6_int Z vdd gnd
++ weights_l2_pinv_4
+.ENDS weights_l2_rom_precharge_driver
 
-.SUBCKT weights_l2_rom_address_control_array_0
-+ A0_in A1_in A0_out A1_out Abar0_out Abar1_out clk vdd gnd
-* INPUT : A0_in 
-* INPUT : A1_in 
-* OUTPUT: A0_out 
-* OUTPUT: A1_out 
-* OUTPUT: Abar0_out 
-* OUTPUT: Abar1_out 
-* INPUT : clk 
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
+
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+
+.SUBCKT weights_l2_rom_control_nand
++ A B Z vdd gnd
+* INPUT : A 
+* INPUT : B 
+* OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-XXaddr_buf_0
-+ A0_in A0_out Abar0_out clk vdd gnd
-+ weights_l2_rom_address_control_buf
-XXaddr_buf_1
-+ A1_in A1_out Abar1_out clk vdd gnd
-+ weights_l2_rom_address_control_buf
-.ENDS weights_l2_rom_address_control_array_0
+* size: 1
+Xpnand2_pmos1 vdd A Z vdd sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
+Xpnand2_pmos2 Z B vdd vdd sky130_fd_pr__pfet_01v8 m=1 w=1.12 l=0.15 pd=2.54 ps=2.54 as=0.42u ad=0.42u
+Xpnand2_nmos1 Z B net1 gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+Xpnand2_nmos2 net1 A gnd gnd sky130_fd_pr__nfet_01v8 m=1 w=0.74 l=0.15 pd=1.78 ps=1.78 as=0.28u ad=0.28u
+.ENDS weights_l2_rom_control_nand
 
-.SUBCKT weights_l2_rom_precharge_array_1
-+ pre_bl0_out pre_bl1_out pre_bl2_out pre_bl3_out gate vdd
-* OUTPUT: pre_bl0_out 
-* OUTPUT: pre_bl1_out 
-* OUTPUT: pre_bl2_out 
-* OUTPUT: pre_bl3_out 
-* INPUT : gate 
-* POWER : vdd 
-Xpmos_c0
-+ vdd gate pre_bl0_out
-+ weights_l2_precharge_cell
-Xpmos_c1
-+ vdd gate pre_bl1_out
-+ weights_l2_precharge_cell
-Xpmos_c2
-+ vdd gate pre_bl2_out
-+ weights_l2_precharge_cell
-Xpmos_c3
-+ vdd gate pre_bl3_out
-+ weights_l2_precharge_cell
-.ENDS weights_l2_rom_precharge_array_1
+* spice ptx X{0} {1} sky130_fd_pr__pfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
 
-.SUBCKT weights_l2_rom_column_decode_array
-+ bl_0_0 bl_0_1 bl_0_2 bl_0_3 wl_0_0 wl_0_1 wl_0_2 wl_0_3 precharge vdd
-+ gnd
-* OUTPUT: bl_0_0 
-* OUTPUT: bl_0_1 
-* OUTPUT: bl_0_2 
-* OUTPUT: bl_0_3 
-* INPUT : wl_0_0 
-* INPUT : wl_0_1 
-* INPUT : wl_0_2 
-* INPUT : wl_0_3 
-* INPUT : precharge 
+* spice ptx X{0} {1} sky130_fd_pr__nfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+
+.SUBCKT weights_l2_pinv_1
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-Xbit_r0_c0
-+ bl_int_0_0 bl_0_0 wl_0_0 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r0_c1
-+ bl_int_0_1 bl_0_1 wl_0_0 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r0_c2
-+ bl_0_2 wl_0_0 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r0_c3
-+ bl_0_3 wl_0_0 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r1_c0
-+ bl_int_0_0 wl_0_1 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r1_c1
-+ bl_int_0_1 wl_0_1 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r1_c2
-+ bl_int_1_2 bl_0_2 wl_0_1 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r1_c3
-+ bl_int_1_3 bl_0_3 wl_0_1 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r2_c0
-+ bl_int_2_0 bl_int_0_0 wl_0_2 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r2_c1
-+ bl_int_0_1 wl_0_2 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r2_c2
-+ bl_int_2_2 bl_int_1_2 wl_0_2 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r2_c3
-+ bl_int_1_3 wl_0_2 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r3_c0
-+ bl_int_2_0 wl_0_3 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r3_c1
-+ bl_int_3_1 bl_int_0_1 wl_0_3 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r3_c2
-+ bl_int_2_2 wl_0_3 gnd
-+ weights_l2_rom_base_zero_cell
-Xbit_r3_c3
-+ bl_int_3_3 bl_int_1_3 wl_0_3 gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r4_c0
-+ gnd bl_int_2_0 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r4_c1
-+ gnd bl_int_3_1 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r4_c2
-+ gnd bl_int_2_2 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbit_r4_c3
-+ gnd bl_int_3_3 precharge gnd
-+ weights_l2_rom_base_one_cell
-Xbitcell_array_precharge
-+ bl_0_0 bl_0_1 bl_0_2 bl_0_3 precharge vdd
-+ weights_l2_rom_precharge_array_1
-.ENDS weights_l2_rom_column_decode_array
+* size: 7
+Xpinv_pmos Z A vdd vdd sky130_fd_pr__pfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+Xpinv_nmos Z A gnd gnd sky130_fd_pr__nfet_01v8 m=3 w=3.0 l=0.15 pd=6.30 ps=6.30 as=1.12u ad=1.12u
+.ENDS weights_l2_pinv_1
 
-.SUBCKT weights_l2_rom_column_decode
-+ A0 A1 wl_0 wl_1 wl_2 wl_3 precharge clk vdd gnd
-* INPUT : A0 
-* INPUT : A1 
-* OUTPUT: wl_0 
-* OUTPUT: wl_1 
-* OUTPUT: wl_2 
-* OUTPUT: wl_3 
-* INPUT : precharge 
-* INPUT : clk 
+.SUBCKT weights_l2_rom_clock_driver
++ A Z vdd gnd
+* INPUT : A 
+* OUTPUT: Z 
 * POWER : vdd 
 * GROUND: gnd 
-Xdecode_array_inst
-+ wl_int0 wl_int1 wl_int2 wl_int3 Ab_int_1 A_int_1 Ab_int_0 A_int_0
-+ precharge vdd gnd
-+ weights_l2_rom_column_decode_array
-Xpre_control_array
-+ A0 A1 A_int_0 A_int_1 Ab_int_0 Ab_int_1 clk vdd gnd
-+ weights_l2_rom_address_control_array_0
-Xrom_wordline_driver
-+ wl_int0 wl_int1 wl_int2 wl_int3 wl_0 wl_1 wl_2 wl_3 vdd gnd
-+ weights_l2_rom_column_decode_wordline_buffer
-.ENDS weights_l2_rom_column_decode
+* sizes: [1, 1, 2, 7]
+Xbuf_inv1
++ A Zb1_int vdd gnd
++ weights_l2_pinv
+Xbuf_inv2
++ Zb1_int Zb2_int vdd gnd
++ weights_l2_pinv
+Xbuf_inv3
++ Zb2_int Zb3_int vdd gnd
++ weights_l2_pinv_0
+Xbuf_inv4
++ Zb3_int Z vdd gnd
++ weights_l2_pinv_1
+.ENDS weights_l2_rom_clock_driver
+
+.SUBCKT weights_l2_rom_control_logic
++ clk_in CS prechrg clk_out vdd gnd
+* INPUT : clk_in 
+* INPUT : CS 
+* OUTPUT: prechrg 
+* OUTPUT: clk_out 
+* POWER : vdd 
+* GROUND: gnd 
+Xclk_driver
++ clk_in clk_out vdd gnd
++ weights_l2_rom_clock_driver
+Xcontrol_nand
++ CS clk_out pre_drive vdd gnd
++ weights_l2_rom_control_nand
+Xprecharge_driver
++ pre_drive prechrg vdd gnd
++ weights_l2_rom_precharge_driver
+.ENDS weights_l2_rom_control_logic
 
 .SUBCKT weights_l2
 + clk0 cs0 addr0[0] addr0[1] addr0[2] addr0[3] addr0[4] dout0[0]

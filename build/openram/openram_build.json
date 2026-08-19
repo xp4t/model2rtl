@@ -1,5 +1,111 @@
 {
   "macros": {
+    "bias_l1": {
+      "blocked_reason": "OpenROM's word_size is expressed in BYTES (rom_config.py sets word_bits = word_size * 8), so a 22-bit word cannot be requested. Generating this macro would require changing the word width, which Stage 2 forbids without explicit approval.",
+      "canonical_image_sha256": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+      "macro": "bias_l1",
+      "proposed_fix_not_implemented": "pad the word to 24 bits (3 bytes) in the physical macro and slice it back in the wrapper",
+      "requested_depth": 32,
+      "requested_width_bits": 22,
+      "status": "BLOCKED"
+    },
+    "bias_l2": {
+      "blocked_reason": "OpenROM's word_size is expressed in BYTES (rom_config.py sets word_bits = word_size * 8), so a 17-bit word cannot be requested. Generating this macro would require changing the word width, which Stage 2 forbids without explicit approval.",
+      "canonical_image_sha256": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+      "macro": "bias_l2",
+      "proposed_fix_not_implemented": "pad the word to 24 bits (3 bytes) in the physical macro and slice it back in the wrapper",
+      "requested_depth": 10,
+      "requested_width_bits": 17,
+      "status": "BLOCKED"
+    },
+    "weights_l1": {
+      "canonical_image_sha256": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+      "compile_log": "build/openram/weights_l1/weights_l1_compile.log",
+      "config": "/home/rithwik/model2rtl/build/openram/weights_l1/weights_l1_cfg.py",
+      "elapsed_seconds": 2209.1,
+      "error_signature": {
+        "exception": null,
+        "last_openram_frame": "File \"/home/rithwik/OpenRAM/compiler/debug.py\", line 48, in error",
+        "note": "OpenRAM enters pdb on internal errors, so the log tail is BdbQuit; the frame above is the actual failure point."
+      },
+      "failure_tail": [
+        "    return self.dispatch_line(frame)",
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"/usr/lib64/python3.11/bdb.py\", line 115, in dispatch_line",
+        "    if self.quitting: raise BdbQuit",
+        "                      ^^^^^^^^^^^^^",
+        "bdb.BdbQuit"
+      ],
+      "lvsdrc_probe": {
+        "drc_status": "not run",
+        "lvs_status": "not run",
+        "note": "physical verification not attempted for this macro"
+      },
+      "macro": "weights_l1",
+      "missing_expected_views": [
+        "gds",
+        "sp",
+        "v",
+        "lef"
+      ],
+      "physical_cols": 256,
+      "physical_rows": 392,
+      "physical_verification": {
+        "drc_status": "not run",
+        "lvs_status": "not run",
+        "note": "physical verification not attempted for this macro"
+      },
+      "requested_depth": 784,
+      "requested_width_bits": 128,
+      "returncode": 1,
+      "rom_data": {
+        "bits": 100352,
+        "bitstream_matches_canonical_image": true,
+        "canonical_image_sha256": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+        "path": "/home/rithwik/model2rtl/build/openram/weights_l1/weights_l1.hex",
+        "sha256": "b7ae6dcf7dec0a31398aad71e78d6eeb291b7d1ed9a434ce53a9ea8941d8b1bb"
+      },
+      "status": "FAIL",
+      "views": {
+        "log": {
+          "bytes": 2139,
+          "path": "build/openram/weights_l1/out/weights_l1.log",
+          "sha256": "4c0fb7eab3866c65c4f29289f32f416079abe08304a0b3d0bc2ed99f4e0e18cb"
+        }
+      },
+      "views_generated": [
+        "log"
+      ],
+      "words_per_row": 2,
+      "words_per_row_attempts": [
+        {
+          "error": "rom_address_control_array has no attribute 'local_insts' (col_bits = 0 when words_per_row = 1)",
+          "physical": "784 rows x 128 cols",
+          "result": "FAIL",
+          "words_per_row": 1
+        },
+        {
+          "elapsed_seconds": 2209.1,
+          "error": "signal_escape_router: IndexError: list index out of range",
+          "physical": "392 rows x 256 cols",
+          "result": "FAIL",
+          "words_per_row": 2
+        },
+        {
+          "elapsed_seconds": 2256,
+          "error": "signal_escape_router: IndexError: list index out of range",
+          "physical": "196 rows x 512 cols",
+          "result": "FAIL",
+          "words_per_row": 4
+        },
+        {
+          "error": "not run to completion; the two shapes above each failed after roughly 37 minutes",
+          "physical": "98 rows x 1024 cols",
+          "result": "NOT COMPLETED",
+          "words_per_row": 8
+        }
+      ]
+    },
     "weights_l2": {
       "canonical_image_sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
       "compile_log": "build/openram/weights_l2/weights_l2_compile.log",
@@ -8,14 +114,14 @@
       "lvsdrc_probe": {
         "drc_errors": 780,
         "drc_status": "780 errors",
-        "elapsed_seconds": 2238.8,
+        "elapsed_seconds": 29.8,
         "fatal_lines": [
-          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_273700_temp/weights_l2_drclvs.lvs.report)"
+          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_305213_temp/weights_l2_drclvs.lvs.report)"
         ],
         "log": "build/openram/weights_l2/weights_l2_drclvs.log",
         "lvs_status": "MISMATCH",
         "reports_found": {},
-        "returncode": -9
+        "returncode": 1
       },
       "macro": "weights_l2",
       "missing_expected_views": [],
@@ -24,14 +130,14 @@
       "physical_verification": {
         "drc_errors": 780,
         "drc_status": "780 errors",
-        "elapsed_seconds": 2238.8,
+        "elapsed_seconds": 29.8,
         "fatal_lines": [
-          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_273700_temp/weights_l2_drclvs.lvs.report)"
+          "ERROR: file magic.py: line 385: weights_l2_drclvs\tLVS mismatch (results in /tmp/openram_rithwik_305213_temp/weights_l2_drclvs.lvs.report)"
         ],
         "log": "build/openram/weights_l2/weights_l2_drclvs.log",
         "lvs_status": "MISMATCH",
         "reports_found": {},
-        "returncode": -9
+        "returncode": 1
       },
       "requested_depth": 32,
       "requested_width_bits": 40,
@@ -46,24 +152,24 @@
       "status": "PASS",
       "views": {
         "gds": {
-          "bytes": 920564,
+          "bytes": 920628,
           "path": "build/openram/weights_l2/out/weights_l2.gds",
-          "sha256": "fa40478db04bdfd56d7306b5ee631fa09c1c7d97a49e0f0ae94d86fb3bb80ec8"
+          "sha256": "7f007d7200fbd742dbcd406f7d226b9966de11fff5f3d284b8d1b1c09db3d8fa"
         },
         "lef": {
           "bytes": 7937,
           "path": "build/openram/weights_l2/out/weights_l2.lef",
-          "sha256": "b50d0daac72be1efed18e3fecf71918a43637b78bd745d631c2a6b8f722833e7"
+          "sha256": "59baff34bf01cbeff64e33f6724798b0600d6ef0b5c91a752625737a3bb52c61"
         },
         "log": {
           "bytes": 3262,
           "path": "build/openram/weights_l2/out/weights_l2.log",
-          "sha256": "2c7f162a429342253823e8cdbc5c1bfebcc9f190ed8ed20bf1fa4ef717e6f73e"
+          "sha256": "870cd948e07f504513d154b78cd95406e3c8a976e84bb97a51e71e8c36b62060"
         },
         "lvs.sp": {
           "bytes": 197468,
           "path": "build/openram/weights_l2/out/weights_l2.lvs.sp",
-          "sha256": "9629e1ed110f7cf1ca7e7d41ba5508aa22f627cb2af24b756e09cd93eb74aa1b"
+          "sha256": "2fa0e8fe3ec9960705b4bf9ab9347c9ebf688823ad6d1f6b4de74c3d36067ad7"
         },
         "py": {
           "bytes": 586,
@@ -73,7 +179,7 @@
         "sp": {
           "bytes": 198478,
           "path": "build/openram/weights_l2/out/weights_l2.sp",
-          "sha256": "777978f7b4572d682b31645393983dad0457372f2d2458bc898841b7eaffed0d"
+          "sha256": "67e60d0d46ecc5fa7b3cfc795660358b675e72b32281ddde585a9746cdf547a8"
         },
         "v": {
           "bytes": 1481,
@@ -90,7 +196,40 @@
         "sp",
         "v"
       ],
-      "words_per_row": 4
+      "words_per_row": 4,
+      "words_per_row_attempts": [
+        {
+          "error": "rom_address_control_array has no attribute 'local_insts'",
+          "physical": "32 rows x 40 cols",
+          "result": "FAIL",
+          "words_per_row": 1
+        },
+        {
+          "error": "signal_escape_router: IndexError: list index out of range",
+          "physical": "16 rows x 80 cols",
+          "result": "FAIL",
+          "words_per_row": 2
+        },
+        {
+          "elapsed_seconds": 10.8,
+          "error": null,
+          "physical": "8 rows x 160 cols",
+          "result": "PASS",
+          "words_per_row": 4
+        },
+        {
+          "error": "signal_escape_router: IndexError: list index out of range",
+          "physical": "4 rows x 320 cols",
+          "result": "FAIL",
+          "words_per_row": 8
+        },
+        {
+          "error": "signal_escape_router: IndexError: list index out of range",
+          "physical": "2 rows x 640 cols",
+          "result": "FAIL",
+          "words_per_row": 16
+        }
+      ]
     }
   },
   "openram_root": "/home/rithwik/OpenRAM",

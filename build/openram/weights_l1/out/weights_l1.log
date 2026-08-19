@@ -1,20 +1,22 @@
-[2026-08-18 16:43:56.018970] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+[2026-08-18 17:16:19.969473] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
 
-[2026-08-18 16:43:56.826509] |==============================================================================|
-[2026-08-18 16:43:56.826645] |=========                      OpenRAM v1.2.49                       =========|
-[2026-08-18 16:43:56.826683] |=========                                                            =========|
-[2026-08-18 16:43:56.826706] |=========               VLSI Design and Automation Lab               =========|
-[2026-08-18 16:43:56.826724] |=========        Computer Science and Engineering Department         =========|
-[2026-08-18 16:43:56.826744] |=========            University of California Santa Cruz             =========|
-[2026-08-18 16:43:56.826764] |=========                                                            =========|
-[2026-08-18 16:43:56.826783] |=========          Usage help: openram-user-group@ucsc.edu           =========|
-[2026-08-18 16:43:56.826801] |=========        Development help: openram-dev-group@ucsc.edu        =========|
-[2026-08-18 16:43:56.826818] |=========                See LICENSE for license info                =========|
-[2026-08-18 16:43:56.826836] |==============================================================================|
-[2026-08-18 16:43:56.826860] ** Start: 08/18/2026 16:43:56
-[2026-08-18 16:43:56.826880] Output files are: 
-[2026-08-18 16:43:56.826898] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.sp
-[2026-08-18 16:43:56.826914] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.v
-[2026-08-18 16:43:56.826931] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.lef
-[2026-08-18 16:43:56.826948] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.gds
-[2026-08-18 16:43:56.845814] create rom of word size 16 with 784 num of words
+[2026-08-18 17:16:20.804004] |==============================================================================|
+[2026-08-18 17:16:20.804157] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-18 17:16:20.804209] |=========                                                            =========|
+[2026-08-18 17:16:20.804233] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-18 17:16:20.804252] |=========        Computer Science and Engineering Department         =========|
+[2026-08-18 17:16:20.804271] |=========            University of California Santa Cruz             =========|
+[2026-08-18 17:16:20.804307] |=========                                                            =========|
+[2026-08-18 17:16:20.804327] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-18 17:16:20.804344] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-18 17:16:20.804362] |=========                See LICENSE for license info                =========|
+[2026-08-18 17:16:20.804378] |==============================================================================|
+[2026-08-18 17:16:20.804402] ** Start: 08/18/2026 17:16:20
+[2026-08-18 17:16:20.804423] Output files are: 
+[2026-08-18 17:16:20.804440] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.sp
+[2026-08-18 17:16:20.804456] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.v
+[2026-08-18 17:16:20.804472] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.lef
+[2026-08-18 17:16:20.804489] /home/rithwik/model2rtl/build/openram/weights_l1/out/weights_l1.gds
+[2026-08-18 17:16:20.823367] create rom of word size 16 with 784 num of words
+[2026-08-18 17:20:36.683315] ERROR: file signal_escape_router.py: line 70: Couldn't route from (clk0 layer=m3 ll=v[-8.54,51.325] ur=v[-8.05,51.815]) to (clk0 layer=m3 ll=v[-8.43,51.38] ur=v[-8.05,51.76]).
+

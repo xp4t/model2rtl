@@ -43,10 +43,10 @@
 //   not assumed.
 //
 // PHYSICAL MACRO STATUS AT GENERATION TIME
-//   weights_l1  physical macro NOT generated: not attempted
+//   weights_l1  physical macro NOT generated: FAIL
 //   weights_l2  physical macro generated (gds, lef, log, lvs.sp, py, sp, v)
-//   bias_l1     physical macro NOT generated: not attempted
-//   bias_l2     physical macro NOT generated: not attempted
+//   bias_l1     physical macro NOT generated: BLOCKED
+//   bias_l2     physical macro NOT generated: BLOCKED
 //
 // The behavioural macro models below are OURS. OpenROM's own .v output
 // is a byte-oriented, delay-based, non-synthesizable stub and is not used.

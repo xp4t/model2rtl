@@ -195,7 +195,10 @@ def build_macro(macro: str, img: ParamImage, check_lvsdrc: bool,
                os.path.join(OPENRAM_ROOT, "rom_compiler.py"), "-d", cfg_path]
         t0 = time.time()
         try:
+            # stdin must be closed: OpenRAM drops into pdb on an internal
+            # error and would otherwise block forever waiting for input
             p = subprocess.run(cmd, cwd=outdir, env=openram_env(),
+                               stdin=subprocess.DEVNULL,
                                capture_output=True, text=True, timeout=timeout)
             rc, out = p.returncode, p.stdout + p.stderr
         except subprocess.TimeoutExpired as e:
@@ -254,7 +257,29 @@ def build_macro(macro: str, img: ParamImage, check_lvsdrc: bool,
     result["status"] = "PASS" if (rc == 0 and not missing) else "FAIL"
     if rc != 0:
         result["failure_tail"] = out.strip().splitlines()[-6:]
+        result["error_signature"] = error_signature(out)
     return result
+
+
+def error_signature(log_text: str) -> dict:
+    """The real failure, not the debugger noise OpenRAM prints afterwards.
+
+    OpenRAM drops into pdb on an internal error, so the last lines of the log
+    are always BdbQuit. The informative frame is the last one before that.
+    """
+    lines = log_text.splitlines()
+    frames = [l.strip() for l in lines
+              if l.strip().startswith('File "') and "/openram/" in l.lower()
+              or l.strip().startswith('File "/home/rithwik/OpenRAM')]
+    exc = [l.strip() for l in lines
+           if re.match(r"^\w*(Error|Exception)\b", l.strip())
+           and "BdbQuit" not in l]
+    return {
+        "last_openram_frame": frames[-1] if frames else None,
+        "exception": exc[-1] if exc else None,
+        "note": "OpenRAM enters pdb on internal errors, so the log tail is "
+                "BdbQuit; the frame above is the actual failure point.",
+    }
 
 
 def main() -> int:
@@ -275,9 +300,12 @@ def main() -> int:
     os.makedirs(BUILD, exist_ok=True)
     results_path = os.path.join(BUILD, "openram_build.json")
 
-    results = {}
-    if args.skip_build and os.path.exists(results_path):
-        results = json.load(open(results_path))["macros"]
+    # merge with any previous run so building one macro never erases the
+    # recorded outcome of the others
+    results = (json.load(open(results_path))["macros"]
+               if os.path.exists(results_path) else {})
+    if args.skip_build:
+        pass
     else:
         for macro in args.macros:
             print("== OpenROM macro: %s ==" % macro)

@@ -9,7 +9,7 @@
 |=========        Development help: openram-dev-group@ucsc.edu        =========|
 |=========                See LICENSE for license info                =========|
 |==============================================================================|
-** Start: 08/18/2026 16:43:02
+** Start: 08/18/2026 17:54:57
 Output files are: 
 /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.sp
 /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.v
@@ -33,5 +33,5 @@ Config: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_
 ** Config: 0.0 seconds
 Verilog: Writing to /home/rithwik/model2rtl/build/openram/weights_l2/out/weights_l2.v
 ** Verilog: 0.0 seconds
-** End: 9.7 seconds
+** End: 9.6 seconds
 WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage

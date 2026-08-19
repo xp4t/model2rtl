@@ -1,0 +1,44 @@
+|==============================================================================|
+|=========                      OpenRAM v1.2.49                       =========|
+|=========                                                            =========|
+|=========               VLSI Design and Automation Lab               =========|
+|=========        Computer Science and Engineering Department         =========|
+|=========            University of California Santa Cruz             =========|
+|=========                                                            =========|
+|=========          Usage help: openram-user-group@ucsc.edu           =========|
+|=========        Development help: openram-dev-group@ucsc.edu        =========|
+|=========                See LICENSE for license info                =========|
+|==============================================================================|
+** Start: 08/19/2026 11:33:07
+Output files are: 
+/home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.sp
+/home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.v
+/home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.lef
+/home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.gds
+create rom of word size 3 with 10 num of words
+** Submodules: 0.3 seconds
+** Placement: 0.0 seconds
+WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+Traceback (most recent call last):
+  File "/home/rithwik/OpenRAM/rom_compiler.py", line 65, in <module>
+    r = rom()
+        ^^^^^
+  File "/home/rithwik/OpenRAM/compiler/rom.py", line 54, in __init__
+    self.r.create_layout()
+  File "/home/rithwik/OpenRAM/compiler/modules/rom_bank.py", line 86, in create_layout
+    self.route_layout()
+  File "/home/rithwik/OpenRAM/compiler/modules/rom_bank.py", line 124, in route_layout
+    self.route_escape_pins(init_bbox)
+  File "/home/rithwik/OpenRAM/compiler/modules/rom_bank.py", line 534, in route_escape_pins
+    rtr.route(pins_to_route)
+  File "/home/rithwik/OpenRAM/compiler/router/signal_escape_router.py", line 73, in route
+    self.new_pins[source.name] = new_wires[-1]
+                                 ~~~~~~~~~^^^^
+IndexError: list index out of range

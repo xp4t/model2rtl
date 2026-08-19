@@ -1,0 +1,27 @@
+[2026-08-19 11:37:07.479957] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-19 11:37:08.610677] |==============================================================================|
+[2026-08-19 11:37:08.610818] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-19 11:37:08.610857] |=========                                                            =========|
+[2026-08-19 11:37:08.610879] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-19 11:37:08.610899] |=========        Computer Science and Engineering Department         =========|
+[2026-08-19 11:37:08.610920] |=========            University of California Santa Cruz             =========|
+[2026-08-19 11:37:08.610941] |=========                                                            =========|
+[2026-08-19 11:37:08.610960] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-19 11:37:08.610978] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-19 11:37:08.610998] |=========                See LICENSE for license info                =========|
+[2026-08-19 11:37:08.611016] |==============================================================================|
+[2026-08-19 11:37:08.611040] ** Start: 08/19/2026 11:37:08
+[2026-08-19 11:37:08.611061] Output files are: 
+[2026-08-19 11:37:08.611079] /home/rithwik/model2rtl/build/stage5/drclvs/weights_l2/out/weights_l2.sp
+[2026-08-19 11:37:08.611098] /home/rithwik/model2rtl/build/stage5/drclvs/weights_l2/out/weights_l2.v
+[2026-08-19 11:37:08.611116] /home/rithwik/model2rtl/build/stage5/drclvs/weights_l2/out/weights_l2.lef
+[2026-08-19 11:37:08.611141] /home/rithwik/model2rtl/build/stage5/drclvs/weights_l2/out/weights_l2.gds
+[2026-08-19 11:37:08.611471] create rom of word size 5 with 32 num of words
+[2026-08-19 11:37:09.847115] ** Submodules: 1.2 seconds
+[2026-08-19 11:37:09.848001] ** Placement: 0.0 seconds
+[2026-08-19 11:37:18.796063] ** Routing: 8.9 seconds
+[2026-08-19 11:37:37.924313] WARNING: file magic.py: line 254: DRC Errors weights_l2	780
+
+[2026-08-19 11:37:38.988207] ERROR: file magic.py: line 385: weights_l2	LVS mismatch (results in /tmp/openram_rithwik_103546_temp/weights_l2.lvs.report)
+

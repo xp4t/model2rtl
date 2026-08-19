@@ -1,0 +1,50 @@
+|==============================================================================|
+|=========                      OpenRAM v1.2.49                       =========|
+|=========                                                            =========|
+|=========               VLSI Design and Automation Lab               =========|
+|=========        Computer Science and Engineering Department         =========|
+|=========            University of California Santa Cruz             =========|
+|=========                                                            =========|
+|=========          Usage help: openram-user-group@ucsc.edu           =========|
+|=========        Development help: openram-dev-group@ucsc.edu        =========|
+|=========                See LICENSE for license info                =========|
+|==============================================================================|
+** Start: 08/19/2026 11:37:08
+Output files are: 
+/home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.sp
+/home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.v
+/home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.lef
+/home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.gds
+create rom of word size 1 with 1024 num of words
+** Submodules: 15.8 seconds
+** Placement: 0.0 seconds
+** Routing: 24.8 seconds
+> /home/rithwik/OpenRAM/compiler/debug.py(48)error()
+-> assert return_value == 0
+(Pdb) 
+WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+WARNING: file magic.py: line 254: DRC Errors control_rom_1kbyte_upstream	830
+ERROR: file magic.py: line 385: control_rom_1kbyte_upstream	LVS mismatch (results in /tmp/openram_rithwik_103539_temp/control_rom_1kbyte_upstream.lvs.report)
+Traceback (most recent call last):
+  File "/home/rithwik/OpenRAM/rom_compiler.py", line 65, in <module>
+    r = rom()
+        ^^^^^
+  File "/home/rithwik/OpenRAM/compiler/rom.py", line 54, in __init__
+    self.r.create_layout()
+  File "/home/rithwik/OpenRAM/compiler/modules/rom_bank.py", line 94, in create_layout
+    self.DRC_LVS(final_verification=OPTS.route_supplies, force_check=OPTS.check_lvsdrc)
+  File "/home/rithwik/OpenRAM/compiler/base/hierarchy_design.py", line 71, in DRC_LVS
+    self.lvs_errors = verify.run_lvs(self.cell_name, tempgds, tempspice, final_verification=final_verification)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rithwik/OpenRAM/compiler/verify/magic.py", line 385, in run_lvs
+    debug.error("{0}\tLVS mismatch (results in {1})".format(cell_name,
+  File "/home/rithwik/OpenRAM/compiler/debug.py", line 48, in error
+    assert return_value == 0
+           ^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/bdb.py", line 90, in trace_dispatch
+    return self.dispatch_line(frame)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/bdb.py", line 115, in dispatch_line
+    if self.quitting: raise BdbQuit
+                      ^^^^^^^^^^^^^
+bdb.BdbQuit

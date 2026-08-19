@@ -1,0 +1,509 @@
+{
+  "liberty": "/home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
+  "liberty_corner": "sky130_fd_sc_hd, tt, 25 C, 1.80 V",
+  "method": {
+    "caveat": "These are different kinds of area. The hard-macro bounding box already contains its own decoders, precharge and supply ring; the standard-cell number is a cell-area sum with no placement utilisation or routing overhead. The sweep locates where their ORDER changes; it is not an exact final-chip area ratio.",
+    "openrom_area": "GDS bounding box, measured with KLayout, hierarchy resolved",
+    "portable_area": "Yosys `stat -liberty` cell-area sum after ABC mapping to sky130_fd_sc_hd"
+  },
+  "points": {
+    "128x32": {
+      "bits": 4096,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "879d0906e47d4871da3bd96487b5f292f733720d78de027bc1aca7a8a5ce83f7",
+      "depth": 128,
+      "openrom": {
+        "area_um2": 18466.51,
+        "attempts": [
+          {
+            "elapsed_seconds": 19.7,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 4
+          }
+        ],
+        "bbox": {
+          "area_um2": 18466.51,
+          "bottom_um": -7.48,
+          "cells": 86,
+          "dbu": 0.001,
+          "gds_sha256": "01685d80a9a4819c432a912c432e8bdeb07508403a34a47da9056124a097cc30",
+          "height_um": 98.2,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 180.57,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_128x32",
+          "top_um": 90.72,
+          "width_um": 188.04999999999998
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 4096,
+          "cells_in_netlist": 4224,
+          "data_rows": 32,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 128,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_128x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 14408.0116,
+          "height_um": 83.24,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 173.09
+        },
+        "seconds": 19.7,
+        "words_per_row": 4
+      },
+      "portable": {
+        "area_um2": 4773.328,
+        "blackboxes": [],
+        "combinational_area_um2": 3812.4064,
+        "combinational_cells": 647,
+        "netlist": "build/stage5/sweep/sweep_128x32/sweep_128x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 0.4,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 679
+      },
+      "ratio_openrom_over_portable": 3.8687,
+      "smaller": "portable",
+      "width_bits": 32
+    },
+    "1568x32": {
+      "bits": 50176,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "642126d2143067d802cd0b77d531eba49372f2b51ce72e3f77bed6e46d414080",
+      "depth": 1568,
+      "openrom": {
+        "area_um2": 92011.464,
+        "attempts": [
+          {
+            "elapsed_seconds": 633.5,
+            "generated": false,
+            "returncode": 1,
+            "words_per_row": 4
+          },
+          {
+            "elapsed_seconds": 586.7,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 8
+          }
+        ],
+        "bbox": {
+          "area_um2": 92011.464,
+          "bottom_um": -7.48,
+          "cells": 99,
+          "dbu": 0.001,
+          "gds_sha256": "fb6a62a6bafed0658aeab34f79318889f0f3da458fa264dc611a798e46289b6b",
+          "height_um": 280.48,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 320.57,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_1568x32",
+          "top_um": 273.0,
+          "width_um": 328.05
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 50176,
+          "cells_in_netlist": 50432,
+          "data_rows": 196,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 256,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_1568x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 83131.65679999998,
+          "height_um": 265.52,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 313.09
+        },
+        "seconds": 1220.3,
+        "words_per_row": 8
+      },
+      "portable": {
+        "area_um2": 30934.6688,
+        "blackboxes": [],
+        "combinational_area_um2": 29973.7472,
+        "combinational_cells": 5181,
+        "netlist": "build/stage5/sweep/sweep_1568x32/sweep_1568x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 2.6,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 5213
+      },
+      "ratio_openrom_over_portable": 2.9744,
+      "smaller": "portable",
+      "width_bits": 32
+    },
+    "256x32": {
+      "bits": 8192,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "d0e35c840cfaabf74dd9c9584fe76f2c43ad12e0b8b60ff16c60f75f112d1407",
+      "depth": 256,
+      "openrom": {
+        "area_um2": 25266.762799999997,
+        "attempts": [
+          {
+            "elapsed_seconds": 39.8,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 4
+          }
+        ],
+        "bbox": {
+          "area_um2": 25266.762799999997,
+          "bottom_um": -7.48,
+          "cells": 95,
+          "dbu": 0.001,
+          "gds_sha256": "859a41c2dae447cb4aa9558a7aa62064ec661d106efca923d4946498883d7fdc",
+          "height_um": 132.92,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 182.61,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_256x32",
+          "top_um": 125.44,
+          "width_um": 190.09
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 8192,
+          "cells_in_netlist": 8320,
+          "data_rows": 64,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 128,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_256x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 20658.334799999997,
+          "height_um": 117.96,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 175.13
+        },
+        "seconds": 39.9,
+        "words_per_row": 4
+      },
+      "portable": {
+        "area_um2": 8165.3312,
+        "blackboxes": [],
+        "combinational_area_um2": 7204.4096,
+        "combinational_cells": 1162,
+        "netlist": "build/stage5/sweep/sweep_256x32/sweep_256x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 0.6,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 1194
+      },
+      "ratio_openrom_over_portable": 3.0944,
+      "smaller": "portable",
+      "width_bits": 32
+    },
+    "32x32": {
+      "bits": 1024,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "845fc23fdcca9676fdec7b6a9d3c5e34c43c15b3291a3f78745f124388325b13",
+      "depth": 32,
+      "openrom": {
+        "area_um2": 13275.275200000002,
+        "attempts": [
+          {
+            "elapsed_seconds": 8.9,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 4
+          }
+        ],
+        "bbox": {
+          "area_um2": 13275.275200000002,
+          "bottom_um": -7.48,
+          "cells": 89,
+          "dbu": 0.001,
+          "gds_sha256": "3f90a22f01a69e415a2eff69b085aae88f1c11394b8a20c8d6a46466f7320c20",
+          "height_um": 72.16000000000001,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 176.49,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_32x32",
+          "top_um": 64.68,
+          "width_um": 183.97
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 1024,
+          "cells_in_netlist": 1152,
+          "data_rows": 8,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 128,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_32x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 9667.372,
+          "height_um": 57.2,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 169.01
+        },
+        "seconds": 8.9,
+        "words_per_row": 4
+      },
+      "portable": {
+        "area_um2": 1964.384,
+        "blackboxes": [],
+        "combinational_area_um2": 1003.4624,
+        "combinational_cells": 171,
+        "netlist": "build/stage5/sweep/sweep_32x32/sweep_32x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 0.3,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 203
+      },
+      "ratio_openrom_over_portable": 6.758,
+      "smaller": "portable",
+      "width_bits": 32
+    },
+    "512x32": {
+      "bits": 16384,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "3c4deb0a25e082d229479b14b0eae8eecc02912482c0560ddd4c113ad711c29d",
+      "depth": 512,
+      "openrom": {
+        "area_um2": 38879.426799999994,
+        "attempts": [
+          {
+            "elapsed_seconds": 99.3,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 4
+          }
+        ],
+        "bbox": {
+          "area_um2": 38879.426799999994,
+          "bottom_um": -7.48,
+          "cells": 95,
+          "dbu": 0.001,
+          "gds_sha256": "b6f7050b209804af9a58c10d788f00568cf758e7f8894dc40f2d63ce95932777",
+          "height_um": 202.35999999999999,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 184.65,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_512x32",
+          "top_um": 194.88,
+          "width_um": 192.13
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 16384,
+          "cells_in_netlist": 16512,
+          "data_rows": 128,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 128,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_512x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 33201.657999999996,
+          "height_um": 187.4,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 177.17
+        },
+        "seconds": 99.3,
+        "words_per_row": 4
+      },
+      "portable": {
+        "area_um2": 13753.1904,
+        "blackboxes": [],
+        "combinational_area_um2": 12792.2688,
+        "combinational_cells": 2118,
+        "netlist": "build/stage5/sweep/sweep_512x32/sweep_512x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 1.0,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 2150
+      },
+      "ratio_openrom_over_portable": 2.8269,
+      "smaller": "portable",
+      "width_bits": 32
+    },
+    "64x32": {
+      "bits": 2048,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "ed7fd112f0a26b4ab7902a551d1827604d03bcba6c9103a3a2948b2b6379f57c",
+      "depth": 64,
+      "openrom": {
+        "area_um2": 15037.0484,
+        "attempts": [
+          {
+            "elapsed_seconds": 11.7,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 4
+          }
+        ],
+        "bbox": {
+          "area_um2": 15037.0484,
+          "bottom_um": -7.48,
+          "cells": 92,
+          "dbu": 0.001,
+          "gds_sha256": "ae474fea6660c51f4a8ec215eb4ebf49ebbe51b0766a60722c240bfb8e5174a2",
+          "height_um": 80.84,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 178.53,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_64x32",
+          "top_um": 73.36,
+          "width_um": 186.01
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 2048,
+          "cells_in_netlist": 2176,
+          "data_rows": 16,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 128,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_64x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 11268.774,
+          "height_um": 65.88,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 171.05
+        },
+        "seconds": 11.7,
+        "words_per_row": 4
+      },
+      "portable": {
+        "area_um2": 2916.5472,
+        "blackboxes": [],
+        "combinational_area_um2": 1955.6256,
+        "combinational_cells": 343,
+        "netlist": "build/stage5/sweep/sweep_64x32/sweep_64x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 0.4,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 375
+      },
+      "ratio_openrom_over_portable": 5.1558,
+      "smaller": "portable",
+      "width_bits": 32
+    },
+    "784x32": {
+      "bits": 25088,
+      "contents": "deterministic 64-bit LCG, seed 1234; identical for both implementations at this point",
+      "contents_sha256": "aaca181e3556227274d5b6c552bec7639902c5592032d33d4c5b30b5b03f8101",
+      "depth": 784,
+      "openrom": {
+        "area_um2": 53668.588,
+        "attempts": [
+          {
+            "elapsed_seconds": 190.5,
+            "generated": true,
+            "returncode": 0,
+            "words_per_row": 4
+          }
+        ],
+        "bbox": {
+          "area_um2": 53668.588,
+          "bottom_um": -7.48,
+          "cells": 95,
+          "dbu": 0.001,
+          "gds_sha256": "7cf7e3aca6c47742b0e3d626e717a475e726cb14e160433554e3103a61afd6ba",
+          "height_um": 276.40000000000003,
+          "left_um": -7.48,
+          "n_top_cells": 1,
+          "right_um": 186.69,
+          "source": "GDS, measured with KLayout (hierarchy resolved)",
+          "top_cell": "sweep_784x32",
+          "top_um": 268.92,
+          "width_um": 194.17
+        },
+        "content_verification": {
+          "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+          "bit_mismatches": 0,
+          "bits_checked": 25088,
+          "cells_in_netlist": 25216,
+          "data_rows": 196,
+          "exact": true,
+          "first_mismatches": [],
+          "non_data_cells": 128,
+          "non_data_cells_all_ones": true,
+          "spice": "sweep_784x32.sp"
+        },
+        "generated": true,
+        "lef_size": {
+          "area_um2": 46852.6624,
+          "height_um": 261.44,
+          "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+          "width_um": 179.21
+        },
+        "seconds": 190.5,
+        "words_per_row": 4
+      },
+      "portable": {
+        "area_um2": 18433.9296,
+        "blackboxes": [],
+        "combinational_area_um2": 17473.008,
+        "combinational_cells": 3000,
+        "netlist": "build/stage5/sweep/sweep_784x32/sweep_784x32_portable_sky130.v",
+        "ok": true,
+        "seconds": 1.4,
+        "sequential_area_um2": 960.9216,
+        "sequential_cells": 32,
+        "total_cells": 3032
+      },
+      "ratio_openrom_over_portable": 2.9114,
+      "smaller": "portable",
+      "width_bits": 32
+    }
+  },
+  "toolchain": {
+    "klayout": "KLayout 0.28.17",
+    "magic": "8.3.486",
+    "netgen": "Netgen 1.5.323 compiled on Tue Aug 18 15:41:47 IST 2026",
+    "openram_branch": "stable",
+    "openram_commit": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a",
+    "openram_describe": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a 2026-08-16T10:01:32-07:00",
+    "openram_root": "/home/rithwik/OpenRAM",
+    "openram_tracked_files_modified": false,
+    "openram_untracked_paths": [
+      "technology/sky130/mag_lib/",
+      "technology/sky130/maglef_lib/"
+    ],
+    "pdk_root": "/home/rithwik/pdk",
+    "pdk_sky130A_present": true
+  }
+}

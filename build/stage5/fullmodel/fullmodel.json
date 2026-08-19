@@ -1,0 +1,76 @@
+{
+  "backend_to_backend": {
+    "hidden_mismatches": 0,
+    "logit_mismatches": 0,
+    "prediction_mismatches": 0
+  },
+  "openrom_phys": {
+    "cycles": [
+      864
+    ],
+    "hidden_compared": 16000,
+    "hidden_mismatches": 0,
+    "images": 500,
+    "label_accuracy": 0.98,
+    "logit_mismatches": 0,
+    "logits_compared": 5000,
+    "prediction_mismatches": 0,
+    "seconds": 67.6
+  },
+  "portable": {
+    "cycles": [
+      864
+    ],
+    "hidden_compared": 16000,
+    "hidden_mismatches": 0,
+    "images": 500,
+    "label_accuracy": 0.98,
+    "logit_mismatches": 0,
+    "logits_compared": 5000,
+    "prediction_mismatches": 0,
+    "seconds": 37.5
+  },
+  "test_set": {
+    "count": 500,
+    "images_sha256": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+    "indices_first": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "indices_last": [
+      490,
+      491,
+      492,
+      493,
+      494,
+      495,
+      496,
+      497,
+      498,
+      499
+    ],
+    "indices_sha256": "0c3fc3e2e8b0514136a044efedc6d6aa32df05e1f58c8cca9cc665e1521f4c8c",
+    "label_histogram": [
+      42,
+      67,
+      55,
+      45,
+      55,
+      50,
+      43,
+      49,
+      40,
+      54
+    ],
+    "labels_sha256": "d9c1ee129708614296525e1d5d088e7f6c31867941fca58d4df714564188c7d2",
+    "selection_policy": "first 500 images of the official MNIST test set, in order; no filtering of any kind"
+  }
+}

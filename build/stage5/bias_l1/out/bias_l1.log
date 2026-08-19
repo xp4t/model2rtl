@@ -1,0 +1,38 @@
+[2026-08-19 11:32:59.976349] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-19 11:33:00.755380] |==============================================================================|
+[2026-08-19 11:33:00.755525] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-19 11:33:00.755560] |=========                                                            =========|
+[2026-08-19 11:33:00.755582] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-19 11:33:00.755600] |=========        Computer Science and Engineering Department         =========|
+[2026-08-19 11:33:00.755619] |=========            University of California Santa Cruz             =========|
+[2026-08-19 11:33:00.755639] |=========                                                            =========|
+[2026-08-19 11:33:00.755657] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-19 11:33:00.755674] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-19 11:33:00.755691] |=========                See LICENSE for license info                =========|
+[2026-08-19 11:33:00.755707] |==============================================================================|
+[2026-08-19 11:33:00.755729] ** Start: 08/19/2026 11:33:00
+[2026-08-19 11:33:00.755749] Output files are: 
+[2026-08-19 11:33:00.755767] /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.sp
+[2026-08-19 11:33:00.755784] /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.v
+[2026-08-19 11:33:00.755800] /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.lef
+[2026-08-19 11:33:00.755816] /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.gds
+[2026-08-19 11:33:00.756027] create rom of word size 3 with 32 num of words
+[2026-08-19 11:33:01.324013] ** Submodules: 0.6 seconds
+[2026-08-19 11:33:01.324540] ** Placement: 0.0 seconds
+[2026-08-19 11:33:06.557297] ** Routing: 5.2 seconds
+[2026-08-19 11:33:06.557453] ** Verification: 0.0 seconds
+[2026-08-19 11:33:06.557483] ** ROM creation: 5.8 seconds
+[2026-08-19 11:33:06.557508] SP: Writing to /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.sp
+[2026-08-19 11:33:06.569304] ** Spice writing: 0.0 seconds
+[2026-08-19 11:33:06.569359] GDS: Writing to /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.gds
+[2026-08-19 11:33:06.608884] ** GDS: 0.0 seconds
+[2026-08-19 11:33:06.608934] LEF: Writing to /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.lef
+[2026-08-19 11:33:06.609848] ** LEF: 0.0 seconds
+[2026-08-19 11:33:06.609887] LVS: Writing to /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.lvs.sp
+[2026-08-19 11:33:06.621216] ** LVS writing: 0.0 seconds
+[2026-08-19 11:33:06.621483] Config: Writing to /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.py
+[2026-08-19 11:33:06.621520] ** Config: 0.0 seconds
+[2026-08-19 11:33:06.621540] Verilog: Writing to /home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.v
+[2026-08-19 11:33:06.621619] ** Verilog: 0.0 seconds
+[2026-08-19 11:33:06.621746] ** End: 5.9 seconds

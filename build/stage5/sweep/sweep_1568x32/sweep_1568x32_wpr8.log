@@ -1,0 +1,37 @@
+|==============================================================================|
+|=========                      OpenRAM v1.2.49                       =========|
+|=========                                                            =========|
+|=========               VLSI Design and Automation Lab               =========|
+|=========        Computer Science and Engineering Department         =========|
+|=========            University of California Santa Cruz             =========|
+|=========                                                            =========|
+|=========          Usage help: openram-user-group@ucsc.edu           =========|
+|=========        Development help: openram-dev-group@ucsc.edu        =========|
+|=========                See LICENSE for license info                =========|
+|==============================================================================|
+** Start: 08/19/2026 13:00:52
+Output files are: 
+/home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.sp
+/home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.v
+/home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.lef
+/home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.gds
+create rom of word size 4 with 1568 num of words
+** Submodules: 465.0 seconds
+** Placement: 0.0 seconds
+** Routing: 116.3 seconds
+** Verification: 0.0 seconds
+** ROM creation: 581.2 seconds
+SP: Writing to /home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.sp
+** Spice writing: 0.4 seconds
+GDS: Writing to /home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.gds
+** GDS: 0.4 seconds
+LEF: Writing to /home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.lef
+** LEF: 0.0 seconds
+LVS: Writing to /home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.lvs.sp
+** LVS writing: 0.4 seconds
+Config: Writing to /home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.py
+** Config: 0.0 seconds
+Verilog: Writing to /home/rithwik/model2rtl/build/stage5/sweep/sweep_1568x32/out/sweep_1568x32.v
+** Verilog: 0.0 seconds
+** End: 582.5 seconds
+WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage

@@ -1,0 +1,41 @@
+[2026-08-19 11:37:07.482192] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-19 11:37:08.654014] |==============================================================================|
+[2026-08-19 11:37:08.654140] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-19 11:37:08.654184] |=========                                                            =========|
+[2026-08-19 11:37:08.654207] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-19 11:37:08.654226] |=========        Computer Science and Engineering Department         =========|
+[2026-08-19 11:37:08.654246] |=========            University of California Santa Cruz             =========|
+[2026-08-19 11:37:08.654266] |=========                                                            =========|
+[2026-08-19 11:37:08.654286] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-19 11:37:08.654304] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-19 11:37:08.654322] |=========                See LICENSE for license info                =========|
+[2026-08-19 11:37:08.654339] |==============================================================================|
+[2026-08-19 11:37:08.654363] ** Start: 08/19/2026 11:37:08
+[2026-08-19 11:37:08.654385] Output files are: 
+[2026-08-19 11:37:08.654403] /home/rithwik/model2rtl/build/stage5/drclvs/bias_l2/out/bias_l2.sp
+[2026-08-19 11:37:08.654420] /home/rithwik/model2rtl/build/stage5/drclvs/bias_l2/out/bias_l2.v
+[2026-08-19 11:37:08.654437] /home/rithwik/model2rtl/build/stage5/drclvs/bias_l2/out/bias_l2.lef
+[2026-08-19 11:37:08.654453] /home/rithwik/model2rtl/build/stage5/drclvs/bias_l2/out/bias_l2.gds
+[2026-08-19 11:37:08.654586] create rom of word size 3 with 10 num of words
+[2026-08-19 11:37:08.902176] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:08.902970] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:08.903522] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:08.904010] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:08.904622] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:08.905114] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:08.905602] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:37:09.127494] ** Submodules: 0.5 seconds
+[2026-08-19 11:37:09.128110] ** Placement: 0.0 seconds
+[2026-08-19 11:37:14.676024] ** Routing: 5.5 seconds
+[2026-08-19 11:37:20.737595] WARNING: file magic.py: line 254: DRC Errors bias_l2	615
+
+[2026-08-19 11:37:21.754645] ERROR: file magic.py: line 385: bias_l2	LVS mismatch (results in /tmp/openram_rithwik_103549_temp/bias_l2.lvs.report)
+

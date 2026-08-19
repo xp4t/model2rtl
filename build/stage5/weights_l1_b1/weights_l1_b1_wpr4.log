@@ -1,0 +1,37 @@
+|==============================================================================|
+|=========                      OpenRAM v1.2.49                       =========|
+|=========                                                            =========|
+|=========               VLSI Design and Automation Lab               =========|
+|=========        Computer Science and Engineering Department         =========|
+|=========            University of California Santa Cruz             =========|
+|=========                                                            =========|
+|=========          Usage help: openram-user-group@ucsc.edu           =========|
+|=========        Development help: openram-dev-group@ucsc.edu        =========|
+|=========                See LICENSE for license info                =========|
+|==============================================================================|
+** Start: 08/19/2026 11:22:44
+Output files are: 
+/home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.sp
+/home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.v
+/home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.lef
+/home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.gds
+create rom of word size 4 with 784 num of words
+** Submodules: 124.9 seconds
+** Placement: 0.0 seconds
+** Routing: 75.6 seconds
+** Verification: 0.0 seconds
+** ROM creation: 200.5 seconds
+SP: Writing to /home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.sp
+** Spice writing: 0.2 seconds
+GDS: Writing to /home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.gds
+** GDS: 0.3 seconds
+LEF: Writing to /home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.lef
+** LEF: 0.0 seconds
+LVS: Writing to /home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.lvs.sp
+** LVS writing: 0.2 seconds
+Config: Writing to /home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.py
+** Config: 0.0 seconds
+Verilog: Writing to /home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.v
+** Verilog: 0.0 seconds
+** End: 201.3 seconds
+WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage

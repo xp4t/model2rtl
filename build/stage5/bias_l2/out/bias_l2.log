@@ -1,0 +1,52 @@
+[2026-08-19 11:33:11.615971] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-19 11:33:12.396118] |==============================================================================|
+[2026-08-19 11:33:12.396254] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-19 11:33:12.396289] |=========                                                            =========|
+[2026-08-19 11:33:12.396311] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-19 11:33:12.396331] |=========        Computer Science and Engineering Department         =========|
+[2026-08-19 11:33:12.396351] |=========            University of California Santa Cruz             =========|
+[2026-08-19 11:33:12.396371] |=========                                                            =========|
+[2026-08-19 11:33:12.396389] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-19 11:33:12.396407] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-19 11:33:12.396435] |=========                See LICENSE for license info                =========|
+[2026-08-19 11:33:12.396451] |==============================================================================|
+[2026-08-19 11:33:12.396474] ** Start: 08/19/2026 11:33:12
+[2026-08-19 11:33:12.396495] Output files are: 
+[2026-08-19 11:33:12.396513] /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.sp
+[2026-08-19 11:33:12.396530] /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.v
+[2026-08-19 11:33:12.396555] /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.lef
+[2026-08-19 11:33:12.396570] /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.gds
+[2026-08-19 11:33:12.396688] create rom of word size 3 with 10 num of words
+[2026-08-19 11:33:12.620020] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.620687] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.621194] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.621677] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.622270] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.622747] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.623217] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2026-08-19 11:33:12.819478] ** Submodules: 0.4 seconds
+[2026-08-19 11:33:12.819960] ** Placement: 0.0 seconds
+[2026-08-19 11:33:17.659358] ** Routing: 4.8 seconds
+[2026-08-19 11:33:17.659498] ** Verification: 0.0 seconds
+[2026-08-19 11:33:17.659528] ** ROM creation: 5.3 seconds
+[2026-08-19 11:33:17.659553] SP: Writing to /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.sp
+[2026-08-19 11:33:17.668818] ** Spice writing: 0.0 seconds
+[2026-08-19 11:33:17.668873] GDS: Writing to /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.gds
+[2026-08-19 11:33:17.709171] ** GDS: 0.0 seconds
+[2026-08-19 11:33:17.709222] LEF: Writing to /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.lef
+[2026-08-19 11:33:17.710110] ** LEF: 0.0 seconds
+[2026-08-19 11:33:17.710152] LVS: Writing to /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.lvs.sp
+[2026-08-19 11:33:17.719046] ** LVS writing: 0.0 seconds
+[2026-08-19 11:33:17.719316] Config: Writing to /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.py
+[2026-08-19 11:33:17.719353] ** Config: 0.0 seconds
+[2026-08-19 11:33:17.719375] Verilog: Writing to /home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.v
+[2026-08-19 11:33:17.719457] ** Verilog: 0.0 seconds
+[2026-08-19 11:33:17.719585] ** End: 5.3 seconds

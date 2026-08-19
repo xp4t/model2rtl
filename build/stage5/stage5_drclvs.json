@@ -1,0 +1,120 @@
+{
+  "control": {
+    "config": "build/stage5/drclvs/control_rom_1kbyte_upstream/control_rom_1kbyte_upstream_cfg.py",
+    "drc_error_tiles": [],
+    "drc_errors": 830,
+    "drc_status": "830 errors",
+    "elapsed_seconds": 245.0,
+    "log": "build/stage5/drclvs/control_rom_1kbyte_upstream/control_rom_1kbyte_upstream_drclvs.log",
+    "lvs_status": "MISMATCH",
+    "macro": "control_rom_1kbyte_upstream",
+    "reached_verification": true,
+    "returncode": 1
+  },
+  "control_description": "OpenRAM's own upstream reference ROM (rom_configs/example_1kbyte.bin, word_size 1, the settings sky130_rom_1kbyte.py uses). Nothing in the OpenRAM tree was modified; only the output directory was redirected.",
+  "control_is_clean": false,
+  "macros": {
+    "bias_l1": {
+      "config": "build/stage5/drclvs/bias_l1/bias_l1_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 500,
+      "drc_status": "500 errors",
+      "elapsed_seconds": 20.3,
+      "log": "build/stage5/drclvs/bias_l1/bias_l1_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "bias_l1",
+      "reached_verification": true,
+      "returncode": 1
+    },
+    "bias_l2": {
+      "config": "build/stage5/drclvs/bias_l2/bias_l2_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 615,
+      "drc_status": "615 errors",
+      "elapsed_seconds": 14.6,
+      "log": "build/stage5/drclvs/bias_l2/bias_l2_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "bias_l2",
+      "reached_verification": true,
+      "returncode": 1
+    },
+    "weights_l1_b0": {
+      "config": "build/stage5/drclvs/weights_l1_b0/weights_l1_b0_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 1244,
+      "drc_status": "1244 errors",
+      "elapsed_seconds": 1016.9,
+      "log": "build/stage5/drclvs/weights_l1_b0/weights_l1_b0_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "weights_l1_b0",
+      "reached_verification": true,
+      "returncode": 1
+    },
+    "weights_l1_b1": {
+      "config": "build/stage5/drclvs/weights_l1_b1/weights_l1_b1_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 1244,
+      "drc_status": "1244 errors",
+      "elapsed_seconds": 1016.1,
+      "log": "build/stage5/drclvs/weights_l1_b1/weights_l1_b1_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "weights_l1_b1",
+      "reached_verification": true,
+      "returncode": 1
+    },
+    "weights_l1_b2": {
+      "config": "build/stage5/drclvs/weights_l1_b2/weights_l1_b2_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 1244,
+      "drc_status": "1244 errors",
+      "elapsed_seconds": 1022.8,
+      "log": "build/stage5/drclvs/weights_l1_b2/weights_l1_b2_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "weights_l1_b2",
+      "reached_verification": true,
+      "returncode": 1
+    },
+    "weights_l1_b3": {
+      "config": "build/stage5/drclvs/weights_l1_b3/weights_l1_b3_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 1244,
+      "drc_status": "1244 errors",
+      "elapsed_seconds": 1020.0,
+      "log": "build/stage5/drclvs/weights_l1_b3/weights_l1_b3_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "weights_l1_b3",
+      "reached_verification": true,
+      "returncode": 1
+    },
+    "weights_l2": {
+      "config": "build/stage5/drclvs/weights_l2/weights_l2_cfg.py",
+      "drc_error_tiles": [],
+      "drc_errors": 780,
+      "drc_status": "780 errors",
+      "elapsed_seconds": 31.9,
+      "log": "build/stage5/drclvs/weights_l2/weights_l2_drclvs.log",
+      "lvs_status": "MISMATCH",
+      "macro": "weights_l2",
+      "reached_verification": true,
+      "returncode": 1
+    }
+  },
+  "signoff_reasoning": "The upstream reference macro itself fails in this environment, so no DRC or LVS result produced here is evidence about model2rtl's macros. Physical GENERATION is reported separately from physical SIGNOFF, and signoff is UNVERIFIED.",
+  "signoff_status": "UNVERIFIED",
+  "toolchain": {
+    "klayout": "KLayout 0.28.17",
+    "magic": "8.3.486",
+    "netgen": "Netgen 1.5.323 compiled on Tue Aug 18 15:41:47 IST 2026",
+    "openram_branch": "stable",
+    "openram_commit": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a",
+    "openram_describe": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a 2026-08-16T10:01:32-07:00",
+    "openram_root": "/home/rithwik/OpenRAM",
+    "openram_tracked_files_modified": false,
+    "openram_untracked_paths": [
+      "technology/sky130/mag_lib/",
+      "technology/sky130/maglef_lib/"
+    ],
+    "pdk_root": "/home/rithwik/pdk",
+    "pdk_sky130A_present": true
+  }
+}

@@ -1,0 +1,27 @@
+[2026-08-19 11:37:07.478895] WARNING: file globals.py: line 168: Failed to find coverage installation. This can be installed with pip3 install coverage
+
+[2026-08-19 11:37:08.611185] |==============================================================================|
+[2026-08-19 11:37:08.611310] |=========                      OpenRAM v1.2.49                       =========|
+[2026-08-19 11:37:08.611364] |=========                                                            =========|
+[2026-08-19 11:37:08.611389] |=========               VLSI Design and Automation Lab               =========|
+[2026-08-19 11:37:08.611410] |=========        Computer Science and Engineering Department         =========|
+[2026-08-19 11:37:08.611432] |=========            University of California Santa Cruz             =========|
+[2026-08-19 11:37:08.611455] |=========                                                            =========|
+[2026-08-19 11:37:08.611477] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2026-08-19 11:37:08.611496] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2026-08-19 11:37:08.611515] |=========                See LICENSE for license info                =========|
+[2026-08-19 11:37:08.611534] |==============================================================================|
+[2026-08-19 11:37:08.611560] ** Start: 08/19/2026 11:37:08
+[2026-08-19 11:37:08.611584] Output files are: 
+[2026-08-19 11:37:08.611604] /home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.sp
+[2026-08-19 11:37:08.611622] /home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.v
+[2026-08-19 11:37:08.611640] /home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.lef
+[2026-08-19 11:37:08.611658] /home/rithwik/model2rtl/build/stage5/drclvs/control_rom_1kbyte_upstream/out/control_rom_1kbyte_upstream.gds
+[2026-08-19 11:37:08.613121] create rom of word size 1 with 1024 num of words
+[2026-08-19 11:37:24.386208] ** Submodules: 15.8 seconds
+[2026-08-19 11:37:24.386793] ** Placement: 0.0 seconds
+[2026-08-19 11:37:49.227901] ** Routing: 24.8 seconds
+[2026-08-19 11:41:03.493002] WARNING: file magic.py: line 254: DRC Errors control_rom_1kbyte_upstream	830
+
+[2026-08-19 11:41:11.495696] ERROR: file magic.py: line 385: control_rom_1kbyte_upstream	LVS mismatch (results in /tmp/openram_rithwik_103539_temp/control_rom_1kbyte_upstream.lvs.report)
+

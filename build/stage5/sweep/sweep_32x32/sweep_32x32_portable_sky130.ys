@@ -1,0 +1,18 @@
+read_liberty -lib /home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog /home/rithwik/model2rtl/build/stage5/sweep/sweep_32x32/sweep_32x32_portable.v
+hierarchy -check -top sweep_32x32_portable
+proc
+flatten
+opt -full
+memory
+opt -full
+techmap
+opt -full
+simplemap
+dfflibmap -liberty /home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty /home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+setundef -zero
+opt_clean -purge
+check -assert
+stat -liberty /home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+write_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage5/sweep/sweep_32x32/sweep_32x32_portable_sky130.v

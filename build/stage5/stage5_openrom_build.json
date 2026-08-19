@@ -1,0 +1,1397 @@
+{
+  "logical_images": {
+    "bias_l1": {
+      "depth": 32,
+      "name": "bias_l1",
+      "orientation": "[out_features]",
+      "packing": "row[j] = two's-complement bias of output neuron j",
+      "sha256": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+      "signed": true,
+      "total_bits": 704,
+      "width": 22
+    },
+    "bias_l2": {
+      "depth": 10,
+      "name": "bias_l2",
+      "orientation": "[out_features]",
+      "packing": "row[j] = two's-complement bias of output neuron j",
+      "sha256": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+      "signed": true,
+      "total_bits": 170,
+      "width": 17
+    },
+    "weights_l1": {
+      "depth": 784,
+      "name": "weights_l1",
+      "orientation": "[in_features, out_features] (Stage-0 orientation)",
+      "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+      "sha256": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+      "signed": false,
+      "total_bits": 100352,
+      "width": 128
+    },
+    "weights_l2": {
+      "depth": 32,
+      "name": "weights_l2",
+      "orientation": "[in_features, out_features] (Stage-0 orientation)",
+      "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+      "sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+      "signed": false,
+      "total_bits": 1280,
+      "width": 40
+    }
+  },
+  "macros": {
+    "bias_l1": {
+      "array_cols": 96,
+      "array_rows": 8,
+      "attempts": [
+        {
+          "array_cols": 96,
+          "array_rows": 8,
+          "elapsed_seconds": 6.9,
+          "generated": true,
+          "log": "build/stage5/bias_l1/bias_l1_wpr4.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 4
+        }
+      ],
+      "bbox": {
+        "area_um2": 10268.833600000002,
+        "bottom_um": -7.48,
+        "cells": 90,
+        "dbu": 0.001,
+        "gds_sha256": "a20af94094efb621c992b1d86faa250c97d24d483f03d89db712d9ec40cad155",
+        "height_um": 68.96000000000001,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 141.43,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "bias_l1",
+        "top_um": 61.480000000000004,
+        "width_um": 148.91
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 768,
+        "cells_in_netlist": 864,
+        "data_rows": 8,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 96,
+        "non_data_cells_all_ones": true,
+        "spice": "bias_l1.sp"
+      },
+      "data_image": {
+        "bits": 768,
+        "hex_digits": 192,
+        "path": "build/stage5/bias_l1/bias_l1.hex",
+        "sha256": "453bc2602420979f3a447f0be47d1d8ca3759cc6d02f1f360ce3b4de61aebf1c"
+      },
+      "elapsed_seconds": 6.9,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1464,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "bias_l1"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/bias_l1/out/bias_l1.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 7233.299999999999,
+        "height_um": 54.0,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 133.95
+      },
+      "logical_memory": "bias_l1",
+      "macro": "bias_l1",
+      "physical_image": {
+        "bank_count": 1,
+        "bank_index": 0,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[21:0]",
+        "logical_depth": 32,
+        "logical_memory": "bias_l1",
+        "logical_width": 22,
+        "macro": "bias_l1",
+        "physical_bits": 768,
+        "physical_depth": 32,
+        "physical_width": 24,
+        "sha256": "bd8e7f6a00b5e5530cf80dd08f5cee1fb1803b956a3412e7f896f39826ada9a3",
+        "sign_padded": true,
+        "transform": "physical_row = sign_extend_24(logical_row_22); the wrapper truncates back to 22 bits and re-extends to the 22-bit bus",
+        "word_size_bytes": 3
+      },
+      "physical_image_sha256": "bd8e7f6a00b5e5530cf80dd08f5cee1fb1803b956a3412e7f896f39826ada9a3",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 32,
+      "requested_width_bits": 24,
+      "status": "PASS",
+      "total_wall_seconds": 6.9,
+      "views": {
+        "gds": {
+          "bytes": 619588,
+          "path": "build/stage5/bias_l1/out/bias_l1.gds",
+          "sha256": "a20af94094efb621c992b1d86faa250c97d24d483f03d89db712d9ec40cad155"
+        },
+        "lef": {
+          "bytes": 5582,
+          "path": "build/stage5/bias_l1/out/bias_l1.lef",
+          "sha256": "18cea4389463e0fcdee71218064c651848fad765d4716dc85964e69cd290f58d"
+        },
+        "log": {
+          "bytes": 3192,
+          "path": "build/stage5/bias_l1/out/bias_l1.log",
+          "sha256": "b3e98edc916acf738eb7cd463846107e2f7f19e8ceb71d120defa726d344d81c"
+        },
+        "lvs.sp": {
+          "bytes": 121448,
+          "path": "build/stage5/bias_l1/out/bias_l1.lvs.sp",
+          "sha256": "7a2a707dfadeea3aaadf09accf3a77770779c4d11d1543fd43746f89180ac4ea"
+        },
+        "py": {
+          "bytes": 518,
+          "path": "build/stage5/bias_l1/out/bias_l1.py",
+          "sha256": "9751a8e04ef467491d8048c263a4dbf5ab5e5445231028f0d554abd825c22689"
+        },
+        "sp": {
+          "bytes": 122458,
+          "path": "build/stage5/bias_l1/out/bias_l1.sp",
+          "sha256": "6106bdd89085c9b1690896357e1104f12867dd6923c9015c713684e15e0cd6b8"
+        },
+        "v": {
+          "bytes": 1464,
+          "path": "build/stage5/bias_l1/out/bias_l1.v",
+          "sha256": "ff5cb907946d1cd45c21bb6ad189144e0733c5b2baea85d55f4464f81758d23e"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    },
+    "bias_l2": {
+      "array_cols": 120,
+      "array_rows": 2,
+      "attempts": [
+        {
+          "array_cols": 48,
+          "array_rows": 5,
+          "elapsed_seconds": 4.5,
+          "error_signature": {
+            "exception": "IndexError: list index out of range",
+            "last_openram_frame": "File \"/home/rithwik/OpenRAM/compiler/router/signal_escape_router.py\", line 73, in route",
+            "note": "OpenRAM enters pdb on internal errors, so the log tail is always BdbQuit; the frame above is the real failure point.",
+            "openram_error_lines": []
+          },
+          "generated": false,
+          "log": "build/stage5/bias_l2/bias_l2_wpr2.log",
+          "missing_required_views": [
+            "gds",
+            "sp",
+            "lvs.sp",
+            "lef",
+            "v"
+          ],
+          "returncode": 1,
+          "views_generated": [
+            "log"
+          ],
+          "words_per_row": 2
+        },
+        {
+          "array_cols": 120,
+          "array_rows": 2,
+          "elapsed_seconds": 6.4,
+          "generated": true,
+          "log": "build/stage5/bias_l2/bias_l2_wpr5.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 5
+        }
+      ],
+      "bbox": {
+        "area_um2": 10939.8566,
+        "bottom_um": -7.48,
+        "cells": 87,
+        "dbu": 0.001,
+        "gds_sha256": "53ffa536a9fc0931e730250cbf488a9d1dd3338da15a026d02937dd12f2454d1",
+        "height_um": 63.86,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 163.83,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "bias_l2",
+        "top_um": 56.38,
+        "width_um": 171.31
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 240,
+        "cells_in_netlist": 360,
+        "data_rows": 2,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 120,
+        "non_data_cells_all_ones": true,
+        "spice": "bias_l2.sp"
+      },
+      "data_image": {
+        "bits": 240,
+        "hex_digits": 60,
+        "path": "build/stage5/bias_l2/bias_l2.hex",
+        "sha256": "affe625ca709a77491ce127bdf215228c393962749a5b9602d17f9df69ff49e9"
+      },
+      "elapsed_seconds": 6.4,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1464,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "bias_l2"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/bias_l2/out/bias_l2.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 7645.514999999999,
+        "height_um": 48.9,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 156.35
+      },
+      "logical_memory": "bias_l2",
+      "macro": "bias_l2",
+      "physical_image": {
+        "bank_count": 1,
+        "bank_index": 0,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[16:0]",
+        "logical_depth": 10,
+        "logical_memory": "bias_l2",
+        "logical_width": 17,
+        "macro": "bias_l2",
+        "physical_bits": 240,
+        "physical_depth": 10,
+        "physical_width": 24,
+        "sha256": "86d4111b7cb6b5d8291d0f99da06f7901c7f0cf66889ed2dbcf28efbfe8ea8b2",
+        "sign_padded": true,
+        "transform": "physical_row = sign_extend_24(logical_row_17); the wrapper truncates back to 17 bits and re-extends to the 22-bit bus",
+        "word_size_bytes": 3
+      },
+      "physical_image_sha256": "86d4111b7cb6b5d8291d0f99da06f7901c7f0cf66889ed2dbcf28efbfe8ea8b2",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 10,
+      "requested_width_bits": 24,
+      "status": "PASS",
+      "total_wall_seconds": 10.9,
+      "views": {
+        "gds": {
+          "bytes": 606650,
+          "path": "build/stage5/bias_l2/out/bias_l2.gds",
+          "sha256": "53ffa536a9fc0931e730250cbf488a9d1dd3338da15a026d02937dd12f2454d1"
+        },
+        "lef": {
+          "bytes": 5432,
+          "path": "build/stage5/bias_l2/out/bias_l2.lef",
+          "sha256": "6b0a317fce4115385c8e4cd5bf779fcf8816ffea8b7e721ad927bff4ee236f46"
+        },
+        "log": {
+          "bytes": 4207,
+          "path": "build/stage5/bias_l2/out/bias_l2.log",
+          "sha256": "97a5ebf90c824a4657576f73133ca9829babb082c00945845abc84cb43824b6a"
+        },
+        "lvs.sp": {
+          "bytes": 90026,
+          "path": "build/stage5/bias_l2/out/bias_l2.lvs.sp",
+          "sha256": "3ac015a0972becaa94ea4292537c2bb01c4ea5c2bf588b9410d8078bb2d1aa16"
+        },
+        "py": {
+          "bytes": 518,
+          "path": "build/stage5/bias_l2/out/bias_l2.py",
+          "sha256": "6b58d421adacd82aeb1e54d42fc685b043c5e2ecbc25512f3aa0720fdbe1d2c5"
+        },
+        "sp": {
+          "bytes": 90978,
+          "path": "build/stage5/bias_l2/out/bias_l2.sp",
+          "sha256": "71d374c0d9bc2f06e4077fe4282006729cca0188fc587b4d53b867903a94b5fa"
+        },
+        "v": {
+          "bytes": 1464,
+          "path": "build/stage5/bias_l2/out/bias_l2.v",
+          "sha256": "7added6b3aed6ccd3f2cdd336af1e8154d9aeb5ea8a1c9c99cd0ead6c26018a6"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 5
+    },
+    "weights_l1_b0": {
+      "array_cols": 128,
+      "array_rows": 196,
+      "attempts": [
+        {
+          "array_cols": 128,
+          "array_rows": 196,
+          "elapsed_seconds": 205.9,
+          "generated": true,
+          "log": "build/stage5/weights_l1_b0/weights_l1_b0_wpr4.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 4
+        }
+      ],
+      "bbox": {
+        "area_um2": 53668.588,
+        "bottom_um": -7.48,
+        "cells": 95,
+        "dbu": 0.001,
+        "gds_sha256": "779cdf2b4c5c9fc29bae066be06804593c3d8b6ff2f56edbcf313fa2b9675ed1",
+        "height_um": 276.40000000000003,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 186.69,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "weights_l1_b0",
+        "top_um": 268.92,
+        "width_um": 194.17
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 25088,
+        "cells_in_netlist": 25216,
+        "data_rows": 196,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 128,
+        "non_data_cells_all_ones": true,
+        "spice": "weights_l1_b0.sp"
+      },
+      "data_image": {
+        "bits": 25088,
+        "hex_digits": 6272,
+        "path": "build/stage5/weights_l1_b0/weights_l1_b0.hex",
+        "sha256": "a78c850361c1ecb48a4c6b80948a4954de260ade01615b401f1da42f17096b2a"
+      },
+      "elapsed_seconds": 205.9,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1496,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "weights_l1_b0"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/weights_l1_b0/out/weights_l1_b0.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 46852.6624,
+        "height_um": 261.44,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 179.21
+      },
+      "logical_memory": "weights_l1",
+      "macro": "weights_l1_b0",
+      "physical_image": {
+        "bank_count": 4,
+        "bank_index": 0,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[31:0]",
+        "logical_depth": 784,
+        "logical_memory": "weights_l1",
+        "logical_width": 128,
+        "macro": "weights_l1_b0",
+        "physical_bits": 25088,
+        "physical_depth": 784,
+        "physical_width": 32,
+        "sha256": "53ac6dd7e7011873f8648240e1202e34fdc824c0db85e97f2408b955e157f8d0",
+        "sign_padded": false,
+        "transform": "physical_row = (logical_row >> 0) & 0xffffffff; all 4 banks share one address and are read in parallel",
+        "word_size_bytes": 4
+      },
+      "physical_image_sha256": "53ac6dd7e7011873f8648240e1202e34fdc824c0db85e97f2408b955e157f8d0",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 784,
+      "requested_width_bits": 32,
+      "status": "PASS",
+      "total_wall_seconds": 205.9,
+      "views": {
+        "gds": {
+          "bytes": 5686746,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.gds",
+          "sha256": "779cdf2b4c5c9fc29bae066be06804593c3d8b6ff2f56edbcf313fa2b9675ed1"
+        },
+        "lef": {
+          "bytes": 7505,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.lef",
+          "sha256": "a87109069165de098cee944838b689fb3ac6087ff62e0cc053cec03c0efd2d3e"
+        },
+        "log": {
+          "bytes": 3320,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.log",
+          "sha256": "7e46ffea4d26f23921257f703d2b58b1b2e074293498c5fe8eb18a57c6583ce3"
+        },
+        "lvs.sp": {
+          "bytes": 2494808,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.lvs.sp",
+          "sha256": "48172872eda2c9f22c186380d2344004c2ece861c7e263379dffb8d378570fa8"
+        },
+        "py": {
+          "bytes": 542,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.py",
+          "sha256": "df29ded7d64f3606810c8b02248c78f7c9419731a4a0ad584e26d5a0b7a888aa"
+        },
+        "sp": {
+          "bytes": 2495946,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.sp",
+          "sha256": "b9bd1c11a79a4aed44547aa551a85cb99073bf7cf0a55f9f2a79d4125ddc04ca"
+        },
+        "v": {
+          "bytes": 1496,
+          "path": "build/stage5/weights_l1_b0/out/weights_l1_b0.v",
+          "sha256": "983fd7c904c9ef52581f9cad52ee7050c104c6a5d17b4544e867a0b3c8881828"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    },
+    "weights_l1_b1": {
+      "array_cols": 128,
+      "array_rows": 196,
+      "attempts": [
+        {
+          "array_cols": 128,
+          "array_rows": 196,
+          "elapsed_seconds": 204.2,
+          "generated": true,
+          "log": "build/stage5/weights_l1_b1/weights_l1_b1_wpr4.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 4
+        }
+      ],
+      "bbox": {
+        "area_um2": 53668.588,
+        "bottom_um": -7.48,
+        "cells": 95,
+        "dbu": 0.001,
+        "gds_sha256": "190f6dea735369ea6f537a27562a7896dcfbabf9c9941047a5cab0bf745d9c22",
+        "height_um": 276.40000000000003,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 186.69,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "weights_l1_b1",
+        "top_um": 268.92,
+        "width_um": 194.17
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 25088,
+        "cells_in_netlist": 25216,
+        "data_rows": 196,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 128,
+        "non_data_cells_all_ones": true,
+        "spice": "weights_l1_b1.sp"
+      },
+      "data_image": {
+        "bits": 25088,
+        "hex_digits": 6272,
+        "path": "build/stage5/weights_l1_b1/weights_l1_b1.hex",
+        "sha256": "9386eb1095b1ddc8c460e1587636eafdc38db15cc05634333e70aee057fd30be"
+      },
+      "elapsed_seconds": 204.2,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1496,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "weights_l1_b1"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/weights_l1_b1/out/weights_l1_b1.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 46852.6624,
+        "height_um": 261.44,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 179.21
+      },
+      "logical_memory": "weights_l1",
+      "macro": "weights_l1_b1",
+      "physical_image": {
+        "bank_count": 4,
+        "bank_index": 1,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[63:32]",
+        "logical_depth": 784,
+        "logical_memory": "weights_l1",
+        "logical_width": 128,
+        "macro": "weights_l1_b1",
+        "physical_bits": 25088,
+        "physical_depth": 784,
+        "physical_width": 32,
+        "sha256": "9fcbdaed9ac116404d64602cc82bf1b8ca4074b1851fe2c7e7c9d959d7a537a3",
+        "sign_padded": false,
+        "transform": "physical_row = (logical_row >> 32) & 0xffffffff; all 4 banks share one address and are read in parallel",
+        "word_size_bytes": 4
+      },
+      "physical_image_sha256": "9fcbdaed9ac116404d64602cc82bf1b8ca4074b1851fe2c7e7c9d959d7a537a3",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 784,
+      "requested_width_bits": 32,
+      "status": "PASS",
+      "total_wall_seconds": 204.2,
+      "views": {
+        "gds": {
+          "bytes": 5686362,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.gds",
+          "sha256": "190f6dea735369ea6f537a27562a7896dcfbabf9c9941047a5cab0bf745d9c22"
+        },
+        "lef": {
+          "bytes": 7505,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.lef",
+          "sha256": "50961494388d15259118bcc072723d09edd9bc1545ca328cb38f7ac039911f9a"
+        },
+        "log": {
+          "bytes": 3320,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.log",
+          "sha256": "7ba547611af5821df776a6811a2c1f0497ae106cc12eb4224b2825ea0acbbebe"
+        },
+        "lvs.sp": {
+          "bytes": 2495677,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.lvs.sp",
+          "sha256": "e469173258a528d2997a6f230af7b726870b5b2fd736198de24f9fb0538929ae"
+        },
+        "py": {
+          "bytes": 542,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.py",
+          "sha256": "61a0fd916de73a111bf8e1a40c15ddbef59ba3446e317e0bdf4fa2fe8f578c7a"
+        },
+        "sp": {
+          "bytes": 2496815,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.sp",
+          "sha256": "35eb9112506c3427c3669599dfba4f839b2c1a8d1cd8c2168addf40ba35c5ad2"
+        },
+        "v": {
+          "bytes": 1496,
+          "path": "build/stage5/weights_l1_b1/out/weights_l1_b1.v",
+          "sha256": "b1acb8c376b04144b1c6711d2ddc92e9610c9bf137b220f750d76460cd3e9491"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    },
+    "weights_l1_b2": {
+      "array_cols": 128,
+      "array_rows": 196,
+      "attempts": [
+        {
+          "array_cols": 128,
+          "array_rows": 196,
+          "elapsed_seconds": 199.6,
+          "generated": true,
+          "log": "build/stage5/weights_l1_b2/weights_l1_b2_wpr4.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 4
+        }
+      ],
+      "bbox": {
+        "area_um2": 53668.588,
+        "bottom_um": -7.48,
+        "cells": 95,
+        "dbu": 0.001,
+        "gds_sha256": "16442ecee022b2a7413c7ca84896c1b8c6b4623106629786ad0d35ccc83bc106",
+        "height_um": 276.40000000000003,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 186.69,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "weights_l1_b2",
+        "top_um": 268.92,
+        "width_um": 194.17
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 25088,
+        "cells_in_netlist": 25216,
+        "data_rows": 196,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 128,
+        "non_data_cells_all_ones": true,
+        "spice": "weights_l1_b2.sp"
+      },
+      "data_image": {
+        "bits": 25088,
+        "hex_digits": 6272,
+        "path": "build/stage5/weights_l1_b2/weights_l1_b2.hex",
+        "sha256": "3245d3fd0bdc8bec949d986d25abe10661af9430c011a3be452bb0b1565d800a"
+      },
+      "elapsed_seconds": 199.6,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1496,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "weights_l1_b2"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/weights_l1_b2/out/weights_l1_b2.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 46852.6624,
+        "height_um": 261.44,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 179.21
+      },
+      "logical_memory": "weights_l1",
+      "macro": "weights_l1_b2",
+      "physical_image": {
+        "bank_count": 4,
+        "bank_index": 2,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[95:64]",
+        "logical_depth": 784,
+        "logical_memory": "weights_l1",
+        "logical_width": 128,
+        "macro": "weights_l1_b2",
+        "physical_bits": 25088,
+        "physical_depth": 784,
+        "physical_width": 32,
+        "sha256": "b676a3b5f89cb4f054730f059b08a7e117ebdff3fc499a789052028fd2441ece",
+        "sign_padded": false,
+        "transform": "physical_row = (logical_row >> 64) & 0xffffffff; all 4 banks share one address and are read in parallel",
+        "word_size_bytes": 4
+      },
+      "physical_image_sha256": "b676a3b5f89cb4f054730f059b08a7e117ebdff3fc499a789052028fd2441ece",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 784,
+      "requested_width_bits": 32,
+      "status": "PASS",
+      "total_wall_seconds": 199.6,
+      "views": {
+        "gds": {
+          "bytes": 5686490,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.gds",
+          "sha256": "16442ecee022b2a7413c7ca84896c1b8c6b4623106629786ad0d35ccc83bc106"
+        },
+        "lef": {
+          "bytes": 7505,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.lef",
+          "sha256": "b283bc57052ef248bb01e4f9f4495934f9ff631410a696c825969ae2f9f4acae"
+        },
+        "log": {
+          "bytes": 3320,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.log",
+          "sha256": "6f0b3387eee87f68ea0f629f65131c4b3c2b22708f326ca15715e7134a05a39b"
+        },
+        "lvs.sp": {
+          "bytes": 2497412,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.lvs.sp",
+          "sha256": "66f46139ccbaa23bc10afa0921b044273230007f40c7cc05fb3ad62ebb73961a"
+        },
+        "py": {
+          "bytes": 542,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.py",
+          "sha256": "d78dfdff3b6d73e4abfd4e46cbd27988e87d25695f88f5a5b43bef651b0efe1d"
+        },
+        "sp": {
+          "bytes": 2498550,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.sp",
+          "sha256": "147e4ea5f860ff1e2c13544c227d9d5b34e562c8c7ef72c9847f7313d6dfb9f8"
+        },
+        "v": {
+          "bytes": 1496,
+          "path": "build/stage5/weights_l1_b2/out/weights_l1_b2.v",
+          "sha256": "bb2e51248c78e69c1114d8c580e8eacb605d9cbdef8b31dd9401a830fdafd723"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    },
+    "weights_l1_b3": {
+      "array_cols": 128,
+      "array_rows": 196,
+      "attempts": [
+        {
+          "array_cols": 128,
+          "array_rows": 196,
+          "elapsed_seconds": 201.2,
+          "generated": true,
+          "log": "build/stage5/weights_l1_b3/weights_l1_b3_wpr4.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 4
+        }
+      ],
+      "bbox": {
+        "area_um2": 53668.588,
+        "bottom_um": -7.48,
+        "cells": 95,
+        "dbu": 0.001,
+        "gds_sha256": "ba0b771bba4020f056ecfc27941478b44be633d6d4a7acbaac2a438256b68876",
+        "height_um": 276.40000000000003,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 186.69,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "weights_l1_b3",
+        "top_um": 268.92,
+        "width_um": 194.17
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 25088,
+        "cells_in_netlist": 25216,
+        "data_rows": 196,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 128,
+        "non_data_cells_all_ones": true,
+        "spice": "weights_l1_b3.sp"
+      },
+      "data_image": {
+        "bits": 25088,
+        "hex_digits": 6272,
+        "path": "build/stage5/weights_l1_b3/weights_l1_b3.hex",
+        "sha256": "b7b75d1e5cb21d167ad25ad68d341304bb059d195d934e817de9d6e4b9b4c037"
+      },
+      "elapsed_seconds": 201.2,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1496,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "weights_l1_b3"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/weights_l1_b3/out/weights_l1_b3.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 46852.6624,
+        "height_um": 261.44,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 179.21
+      },
+      "logical_memory": "weights_l1",
+      "macro": "weights_l1_b3",
+      "physical_image": {
+        "bank_count": 4,
+        "bank_index": 3,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[127:96]",
+        "logical_depth": 784,
+        "logical_memory": "weights_l1",
+        "logical_width": 128,
+        "macro": "weights_l1_b3",
+        "physical_bits": 25088,
+        "physical_depth": 784,
+        "physical_width": 32,
+        "sha256": "8c38b42b18a653797f39ea846fc8a6fd91ff8e175e4fd5e657a39c6d7b773a2e",
+        "sign_padded": false,
+        "transform": "physical_row = (logical_row >> 96) & 0xffffffff; all 4 banks share one address and are read in parallel",
+        "word_size_bytes": 4
+      },
+      "physical_image_sha256": "8c38b42b18a653797f39ea846fc8a6fd91ff8e175e4fd5e657a39c6d7b773a2e",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 784,
+      "requested_width_bits": 32,
+      "status": "PASS",
+      "total_wall_seconds": 201.2,
+      "views": {
+        "gds": {
+          "bytes": 5686618,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.gds",
+          "sha256": "ba0b771bba4020f056ecfc27941478b44be633d6d4a7acbaac2a438256b68876"
+        },
+        "lef": {
+          "bytes": 7505,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.lef",
+          "sha256": "a659eaa45cfa0a68e2e9ef78a437a5325706ac2511dadd9e9ef4f8f03769bfe9"
+        },
+        "log": {
+          "bytes": 3320,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.log",
+          "sha256": "591d1921085ae85241ab7e924e309aa1cd37c382fce9797e74afe6fd3364077a"
+        },
+        "lvs.sp": {
+          "bytes": 2497150,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.lvs.sp",
+          "sha256": "f3fb2ab20fd8780562bc413430a076e51adabec446b1e274ef63581f21bf30f5"
+        },
+        "py": {
+          "bytes": 542,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.py",
+          "sha256": "f1b678cf744297e0264528e5a882cabf0b15af12cc8f0a39c9a1eb1d38181fd7"
+        },
+        "sp": {
+          "bytes": 2498288,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.sp",
+          "sha256": "7dadebd83fad6dbc0bcc7f902452f5b02aaf26f77280d37eeb7f8002ab632aec"
+        },
+        "v": {
+          "bytes": 1496,
+          "path": "build/stage5/weights_l1_b3/out/weights_l1_b3.v",
+          "sha256": "fcd88c561dd8623701c8d69cae2f2f4f56d83dea6d975500faf7e95572bbc3f1"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    },
+    "weights_l2": {
+      "array_cols": 160,
+      "array_rows": 8,
+      "attempts": [
+        {
+          "array_cols": 160,
+          "array_rows": 8,
+          "elapsed_seconds": 10.3,
+          "generated": true,
+          "log": "build/stage5/weights_l2/weights_l2_wpr4.log",
+          "missing_required_views": [],
+          "returncode": 0,
+          "views_generated": [
+            "gds",
+            "lef",
+            "log",
+            "lvs.sp",
+            "py",
+            "sp",
+            "v"
+          ],
+          "words_per_row": 4
+        }
+      ],
+      "bbox": {
+        "area_um2": 16498.5648,
+        "bottom_um": -7.48,
+        "cells": 90,
+        "dbu": 0.001,
+        "gds_sha256": "e4610ee7693d31d8573b049f037e64a23a0624ded359c2acd098e30c1e9accf1",
+        "height_um": 75.36,
+        "left_um": -7.48,
+        "n_top_cells": 1,
+        "right_um": 211.45000000000002,
+        "source": "GDS, measured with KLayout (hierarchy resolved)",
+        "top_cell": "weights_l2",
+        "top_um": 67.88,
+        "width_um": 218.93
+      },
+      "content_verification": {
+        "bit_map": "row = addr // words_per_row; col = bit*words_per_row + addr % words_per_row with bit numbered MSB first; rom_base_one_cell = 1, rom_base_zero_cell = 0",
+        "bit_mismatches": 0,
+        "bits_checked": 1280,
+        "cells_in_netlist": 1440,
+        "data_rows": 8,
+        "exact": true,
+        "first_mismatches": [],
+        "non_data_cells": 160,
+        "non_data_cells_all_ones": true,
+        "spice": "weights_l2.sp"
+      },
+      "data_image": {
+        "bits": 1280,
+        "hex_digits": 320,
+        "path": "build/stage5/weights_l2/weights_l2.hex",
+        "sha256": "2c51c785841633f248bf9787f681bda0c444f55c4f7ad3fc0c3276dc31084d63"
+      },
+      "elapsed_seconds": 10.3,
+      "generated": true,
+      "generated_verilog": {
+        "byte_oriented_interface": false,
+        "bytes": 1479,
+        "has_delays": false,
+        "has_negedge": true,
+        "module_names": [
+          "weights_l2"
+        ],
+        "path": "/home/rithwik/model2rtl/build/stage5/weights_l2/out/weights_l2.v",
+        "port_lines": [
+          "inout vccd1;",
+          "inout vssd1;",
+          "input  clk0; // clock",
+          "input   cs0; // active high chip select",
+          "input [ADDR_WIDTH-1:0]  addr0;",
+          "output [DATA_WIDTH-1:0] dout0;"
+        ],
+        "uses_readmemb": false,
+        "uses_readmemh": true,
+        "verdict": "upstream artefact only: it is NOT used as the model2rtl functional backend"
+      },
+      "lef_size": {
+        "area_um2": 12319.788,
+        "height_um": 60.4,
+        "note": "LEF abstract outline; the GDS bounding box is the reported area and is usually larger",
+        "width_um": 203.97
+      },
+      "logical_memory": "weights_l2",
+      "macro": "weights_l2",
+      "physical_image": {
+        "bank_count": 1,
+        "bank_index": 0,
+        "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+        "logical_bit_slice": "[39:0]",
+        "logical_depth": 32,
+        "logical_memory": "weights_l2",
+        "logical_width": 40,
+        "macro": "weights_l2",
+        "physical_bits": 1280,
+        "physical_depth": 32,
+        "physical_width": 40,
+        "sha256": "0f475f7ea7b7dff0fd6f14cf958f157e1239adebeecbb98f7e0357dc2d314a0c",
+        "sign_padded": false,
+        "transform": "identity: the logical word is already byte granular",
+        "word_size_bytes": 5
+      },
+      "physical_image_sha256": "0f475f7ea7b7dff0fd6f14cf958f157e1239adebeecbb98f7e0357dc2d314a0c",
+      "physical_verification": {
+        "checked_during_generation": false,
+        "drc_errors": null,
+        "drc_status": "not run / not reported",
+        "lvs_status": "not run"
+      },
+      "requested_depth": 32,
+      "requested_width_bits": 40,
+      "status": "PASS",
+      "total_wall_seconds": 10.3,
+      "views": {
+        "gds": {
+          "bytes": 920500,
+          "path": "build/stage5/weights_l2/out/weights_l2.gds",
+          "sha256": "e4610ee7693d31d8573b049f037e64a23a0624ded359c2acd098e30c1e9accf1"
+        },
+        "lef": {
+          "bytes": 7937,
+          "path": "build/stage5/weights_l2/out/weights_l2.lef",
+          "sha256": "62c8186e23f4bb2f4551bc1b9fb3ccb017d13d1a33adad926e5c94d51f6d3f03"
+        },
+        "log": {
+          "bytes": 3252,
+          "path": "build/stage5/weights_l2/out/weights_l2.log",
+          "sha256": "4d88e136619ae31c321dda3b05da4671a108cefb85938870b056e2cfa57d78fd"
+        },
+        "lvs.sp": {
+          "bytes": 197468,
+          "path": "build/stage5/weights_l2/out/weights_l2.lvs.sp",
+          "sha256": "5c401d344efb8ea9d705c0e4455833d4be944d9b76df8cde57560c65afc137fc"
+        },
+        "py": {
+          "bytes": 530,
+          "path": "build/stage5/weights_l2/out/weights_l2.py",
+          "sha256": "48833fa7b621b385889ee22c80525dd5ba53a0928fbf98d70cbcdee57eeca5b9"
+        },
+        "sp": {
+          "bytes": 198478,
+          "path": "build/stage5/weights_l2/out/weights_l2.sp",
+          "sha256": "d2e86837339a2e611223f0e4f529d8e1ec755ed95707e3602d1e30b608ffe558"
+        },
+        "v": {
+          "bytes": 1479,
+          "path": "build/stage5/weights_l2/out/weights_l2.v",
+          "sha256": "9250b5b188983b29a52601b9b893fdc6d0f662d6b75267df85fbf4662c3474a6"
+        }
+      },
+      "views_generated": [
+        "gds",
+        "lef",
+        "log",
+        "lvs.sp",
+        "py",
+        "sp",
+        "v"
+      ],
+      "words_per_row": 4
+    }
+  },
+  "physical_images": {
+    "bias_l1": {
+      "bank_count": 1,
+      "bank_index": 0,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[21:0]",
+      "logical_depth": 32,
+      "logical_memory": "bias_l1",
+      "logical_width": 22,
+      "macro": "bias_l1",
+      "physical_bits": 768,
+      "physical_depth": 32,
+      "physical_width": 24,
+      "sha256": "bd8e7f6a00b5e5530cf80dd08f5cee1fb1803b956a3412e7f896f39826ada9a3",
+      "sign_padded": true,
+      "transform": "physical_row = sign_extend_24(logical_row_22); the wrapper truncates back to 22 bits and re-extends to the 22-bit bus",
+      "word_size_bytes": 3
+    },
+    "bias_l2": {
+      "bank_count": 1,
+      "bank_index": 0,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[16:0]",
+      "logical_depth": 10,
+      "logical_memory": "bias_l2",
+      "logical_width": 17,
+      "macro": "bias_l2",
+      "physical_bits": 240,
+      "physical_depth": 10,
+      "physical_width": 24,
+      "sha256": "86d4111b7cb6b5d8291d0f99da06f7901c7f0cf66889ed2dbcf28efbfe8ea8b2",
+      "sign_padded": true,
+      "transform": "physical_row = sign_extend_24(logical_row_17); the wrapper truncates back to 17 bits and re-extends to the 22-bit bus",
+      "word_size_bytes": 3
+    },
+    "weights_l1_b0": {
+      "bank_count": 4,
+      "bank_index": 0,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[31:0]",
+      "logical_depth": 784,
+      "logical_memory": "weights_l1",
+      "logical_width": 128,
+      "macro": "weights_l1_b0",
+      "physical_bits": 25088,
+      "physical_depth": 784,
+      "physical_width": 32,
+      "sha256": "53ac6dd7e7011873f8648240e1202e34fdc824c0db85e97f2408b955e157f8d0",
+      "sign_padded": false,
+      "transform": "physical_row = (logical_row >> 0) & 0xffffffff; all 4 banks share one address and are read in parallel",
+      "word_size_bytes": 4
+    },
+    "weights_l1_b1": {
+      "bank_count": 4,
+      "bank_index": 1,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[63:32]",
+      "logical_depth": 784,
+      "logical_memory": "weights_l1",
+      "logical_width": 128,
+      "macro": "weights_l1_b1",
+      "physical_bits": 25088,
+      "physical_depth": 784,
+      "physical_width": 32,
+      "sha256": "9fcbdaed9ac116404d64602cc82bf1b8ca4074b1851fe2c7e7c9d959d7a537a3",
+      "sign_padded": false,
+      "transform": "physical_row = (logical_row >> 32) & 0xffffffff; all 4 banks share one address and are read in parallel",
+      "word_size_bytes": 4
+    },
+    "weights_l1_b2": {
+      "bank_count": 4,
+      "bank_index": 2,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[95:64]",
+      "logical_depth": 784,
+      "logical_memory": "weights_l1",
+      "logical_width": 128,
+      "macro": "weights_l1_b2",
+      "physical_bits": 25088,
+      "physical_depth": 784,
+      "physical_width": 32,
+      "sha256": "b676a3b5f89cb4f054730f059b08a7e117ebdff3fc499a789052028fd2441ece",
+      "sign_padded": false,
+      "transform": "physical_row = (logical_row >> 64) & 0xffffffff; all 4 banks share one address and are read in parallel",
+      "word_size_bytes": 4
+    },
+    "weights_l1_b3": {
+      "bank_count": 4,
+      "bank_index": 3,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[127:96]",
+      "logical_depth": 784,
+      "logical_memory": "weights_l1",
+      "logical_width": 128,
+      "macro": "weights_l1_b3",
+      "physical_bits": 25088,
+      "physical_depth": 784,
+      "physical_width": 32,
+      "sha256": "8c38b42b18a653797f39ea846fc8a6fd91ff8e175e4fd5e657a39c6d7b773a2e",
+      "sign_padded": false,
+      "transform": "physical_row = (logical_row >> 96) & 0xffffffff; all 4 banks share one address and are read in parallel",
+      "word_size_bytes": 4
+    },
+    "weights_l2": {
+      "bank_count": 1,
+      "bank_index": 0,
+      "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+      "logical_bit_slice": "[39:0]",
+      "logical_depth": 32,
+      "logical_memory": "weights_l2",
+      "logical_width": 40,
+      "macro": "weights_l2",
+      "physical_bits": 1280,
+      "physical_depth": 32,
+      "physical_width": 40,
+      "sha256": "0f475f7ea7b7dff0fd6f14cf958f157e1239adebeecbb98f7e0357dc2d314a0c",
+      "sign_padded": false,
+      "transform": "identity: the logical word is already byte granular",
+      "word_size_bytes": 5
+    }
+  },
+  "roundtrip": {
+    "mismatches": 0,
+    "per_memory": {
+      "bias_l1": {
+        "first_mismatches": [],
+        "macros": [
+          "bias_l1"
+        ],
+        "mismatches": 0,
+        "rows_checked": 32
+      },
+      "bias_l2": {
+        "first_mismatches": [],
+        "macros": [
+          "bias_l2"
+        ],
+        "mismatches": 0,
+        "rows_checked": 10
+      },
+      "weights_l1": {
+        "first_mismatches": [],
+        "macros": [
+          "weights_l1_b0",
+          "weights_l1_b1",
+          "weights_l1_b2",
+          "weights_l1_b3"
+        ],
+        "mismatches": 0,
+        "rows_checked": 784
+      },
+      "weights_l2": {
+        "first_mismatches": [],
+        "macros": [
+          "weights_l2"
+        ],
+        "mismatches": 0,
+        "rows_checked": 32
+      }
+    },
+    "rows_checked": 858
+  },
+  "toolchain": {
+    "klayout": "KLayout 0.28.17",
+    "magic": "8.3.486",
+    "netgen": "Netgen 1.5.323 compiled on Tue Aug 18 15:41:47 IST 2026",
+    "openram_branch": "stable",
+    "openram_commit": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a",
+    "openram_describe": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a 2026-08-16T10:01:32-07:00",
+    "openram_root": "/home/rithwik/OpenRAM",
+    "openram_tracked_files_modified": false,
+    "openram_untracked_paths": [
+      "technology/sky130/mag_lib/",
+      "technology/sky130/maglef_lib/"
+    ],
+    "pdk_root": "/home/rithwik/pdk",
+    "pdk_sky130A_present": true
+  }
+}

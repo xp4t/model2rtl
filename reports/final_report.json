@@ -1,0 +1,2063 @@
+{
+  "architecture": {
+    "K": 16,
+    "concept": "For each input activation x_i, compute x_i times all 16 alphabet levels once; share those 16 products across every output neuron of the active layer; select per synapse with its 4-bit weight index; accumulate.",
+    "execution": "input-serial, output-parallel",
+    "latency": {
+      "caveat": "These are cycle counts divided by an assumed clock. No timing analysis was run at any stage and no Fmax is claimed.",
+      "examples_architectural_only": {
+        "100MHz_us": 8.64,
+        "50MHz_us": 17.28
+      },
+      "formula": "n_in + 2*n_hidden + n_out + 6",
+      "nominal_cycles": 864
+    },
+    "operation_counts": {
+      "fully_spatial_msa_product_generators": 13056,
+      "implemented_active_shared_product_expressions": 16,
+      "kind": "SOURCE-LEVEL operation counts, not synthesized resources and not physical multiplier counts",
+      "naive_fully_spatial_synapse_multiplications": 25408
+    },
+    "product_bank_reuse": "one 16-product bank, reused across all neurons, across input cycles and across both layers",
+    "sharing_note": "Product-generator sharing reduces the raw product count only when a layer's output fanout exceeds K. Layer 1 has fanout 32 > K=16 so sharing wins; layer 2 has fanout 10 < K=16 so sharing costs more product generators than the naive form.",
+    "structure_verified_in_netlist": {
+      "active_shared_product_generators": 16,
+      "elaborated_multiplier_cells": 16,
+      "msa_fully_spatial_product_generators": 13056,
+      "naive_fully_spatial_multipliers": 25408,
+      "note": "Stage-0's operator analysis counts a fully UNROLLED design. Stage 1 implements the same arithmetic time multiplexed, so the implemented product-generator count is K = 16 reused over input cycles rather than 25408 (naive) or 13056 (fully spatial MSA). Both Stage-0 numbers remain valid as analytical fully-spatial counts; they are not superseded. The trade is area down, latency up: 864 cycles per inference instead of one.",
+      "selector_instances": 42,
+      "stage1_input_serial_product_generators": 16
+    },
+    "tradeoff": "Area and parallelism are exchanged for latency: one inference costs 864 cycles instead of one."
+  },
+  "area": {
+    "caveat": "These two numbers are NOT the same kind of area and their ratio is NOT a finished-chip area ratio. A placed portable block would occupy cell area divided by its utilisation, which is not measured here because Stage 5 runs no place-and-route. There is also no floorplan: the macro figure is a raw sum of bounding boxes, not a floorplanned area, and no placement density is claimed.",
+    "floorplanned_area": "not available: no floorplan was produced",
+    "measurement_kinds": {
+      "openrom": "hard-macro GDS bounding box, measured with KLayout (hierarchy resolved). It already contains the decoders, column mux, precharge and the supply ring.",
+      "portable": "synthesized standard-cell area: the sum of the sky130_fd_sc_hd liberty cell areas after ABC mapping. It excludes placement utilisation and routing overhead."
+    },
+    "openrom_per_macro_um2": {
+      "bias_l1": 10268.833600000002,
+      "bias_l2": 10939.8566,
+      "weights_l1_b0": 53668.588,
+      "weights_l1_b1": 53668.588,
+      "weights_l1_b2": 53668.588,
+      "weights_l1_b3": 53668.588,
+      "weights_l2": 16498.5648
+    },
+    "openrom_total_macro_bbox_um2": 252381.607,
+    "openrom_weights_l1_bank_sum_um2": 214674.352,
+    "portable_asic_storage": {
+      "area_source": "Yosys `stat -liberty`: the sum of the liberty cell areas of the mapped cells. This is a standard-cell AREA ESTIMATE and excludes placement utilisation and routing overhead; it is NOT a placed block area and not directly comparable to a hard macro's GDS bounding box.",
+      "blackboxes": [],
+      "chip_area_um2": 58335.9488,
+      "combinational_area_um2": 54191.9744,
+      "combinational_cells": 9268,
+      "liberty": "/home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
+      "liberty_corner": "sky130_fd_sc_hd, tt, 25 C, 1.80 V",
+      "qualifications": [
+        "No place and route was run, so this is a cell-area sum and not a placed block area.",
+        "No timing constraint was applied; ABC mapped for area with the default script.",
+        "The number covers the whole parameter backend (all four logical memories, 102506 bits) as ONE synthesized block, which lets the mapper share logic across memories."
+      ],
+      "sequential_area_um2": 4143.9744,
+      "sequential_cells": 138,
+      "top": "mnist_mlp_params_portable",
+      "total_cells": 9406
+    },
+    "portable_mapped_cell_area_um2": 58335.9488,
+    "ratio_openrom_over_portable": 4.3263
+  },
+  "behavioral_verification": {
+    "alternate_model": {
+      "fabric_sha256_after": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "fabric_sha256_before": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "fabric_unchanged": true,
+      "generated_backend_only": "../../../tmp/model2rtl_stage3_29010eam/alt/mnist_mlp_params_portable.v",
+      "hidden_mismatches": 0,
+      "mismatches_vs_integer_golden": 0,
+      "mismatches_vs_msa_reference": 0,
+      "note": "the real trained model was NOT retrained or modified; only a second parameter backend was generated",
+      "parameter_image_sha256": {
+        "bias_l1": "963d37aedd9505f3cb7f473803a98091b4d862952b2dabc96c340ccf74038c3f",
+        "bias_l2": "8d9bdb84bfa6e1ee3c0b5b2d4e42a7d5055a5b9ccb24734e8471657b45ef7322",
+        "weights_l1": "583468a3f00c2beafd64c8dd617683c5f4fb68a8227b9ba35ad72fa31f73424a",
+        "weights_l2": "753b4745f1af03ccd55b810d8d72cb2c67d5ecd433de17c2811e7a51929afdfe"
+      },
+      "vectors_tested": 8
+    },
+    "argmax": {
+      "cases": 15,
+      "failures": 0,
+      "tie_rule": "lowest index wins, matching numpy.argmax"
+    },
+    "arithmetic_edges": {
+      "activation_cases": 3,
+      "failures": 0,
+      "special_cases": 5
+    },
+    "back_to_back": {
+      "done_pulse_is_single_cycle": true,
+      "mismatches": 0,
+      "note": "all 500 images ran consecutively in one simulator process with no reset between them",
+      "prediction_valid_semantics_checked": true,
+      "transactions": 500
+    },
+    "backend_to_backend": {
+      "cycle_mismatches": 0,
+      "hidden_mismatches": 0,
+      "logit_mismatches": 0,
+      "prediction_mismatches": 0
+    },
+    "cycle_level_trace": {
+      "failures": 0,
+      "images_traced": 20,
+      "total_checks": 178840
+    },
+    "images": 500,
+    "memory_pipeline": {
+      "bias_word_alignment_checks": 840,
+      "cases_covered": [
+        "consecutive layer-1 addresses (784 per image)",
+        "layer-1 to layer-2 transition",
+        "consecutive layer-2 addresses",
+        "consecutive bias addresses, both layers",
+        "enable held low during input stalls",
+        "layer switch on the weight and bias ports",
+        "first address after every state transition"
+      ],
+      "method": "every cycle in which the fabric consumes wmem_data or bmem_data, the trace checker asserts that the value is the one belonging to the address issued exactly one cycle earlier",
+      "off_by_one_failures": 0,
+      "weight_word_alignment_checks": 16320
+    },
+    "openram_behavioral_backend": {
+      "cycles_per_inference": [
+        864
+      ],
+      "hidden_mismatches": 0,
+      "hidden_values_compared": 16000,
+      "images": 500,
+      "label": "behavioural representation of the canonical OpenROM contents; NOT physical OpenROM verification",
+      "logit_mismatches": 0,
+      "logits_compared": 5000,
+      "prediction_comparisons": 500,
+      "prediction_mismatches": 0,
+      "rtl_label_accuracy": 0.98
+    },
+    "oracle": "Stage-0 NumPy integer golden model (never Keras)",
+    "portable_backend": {
+      "cycles_per_inference": [
+        864
+      ],
+      "hidden_mismatches": 0,
+      "hidden_values_compared": 16000,
+      "images": 500,
+      "logit_mismatches": 0,
+      "logits_compared": 5000,
+      "prediction_comparisons": 500,
+      "prediction_mismatches": 0,
+      "rtl_label_accuracy": 0.98,
+      "runtime_seconds": 36.4
+    },
+    "reset": {
+      "points_tested": 6,
+      "results": {
+        "early layer 1": {
+          "post_reset_hidden_exact": true,
+          "post_reset_logits_exact": true,
+          "reset_at_cycles_after_start": 20,
+          "stale_state_failures": 0
+        },
+        "idle, before start": {
+          "post_reset_hidden_exact": true,
+          "post_reset_logits_exact": true,
+          "reset_at_cycles_after_start": -1,
+          "stale_state_failures": 0
+        },
+        "late layer 1": {
+          "post_reset_hidden_exact": true,
+          "post_reset_logits_exact": true,
+          "reset_at_cycles_after_start": 700,
+          "stale_state_failures": 0
+        },
+        "layer 2": {
+          "post_reset_hidden_exact": true,
+          "post_reset_logits_exact": true,
+          "reset_at_cycles_after_start": 830,
+          "stale_state_failures": 0
+        },
+        "layer-1 finalisation": {
+          "post_reset_hidden_exact": true,
+          "post_reset_logits_exact": true,
+          "reset_at_cycles_after_start": 795,
+          "stale_state_failures": 0
+        },
+        "layer-2 finalisation": {
+          "post_reset_hidden_exact": true,
+          "post_reset_logits_exact": true,
+          "reset_at_cycles_after_start": 855,
+          "stale_state_failures": 0
+        }
+      },
+      "stale_state_failures_total": 0
+    },
+    "shortcut_scan": {
+      "clean": true,
+      "files_scanned": [
+        "rtl/mnist_mlp_fabric.v",
+        "rtl/mnist_mlp_top.v"
+      ],
+      "findings": [],
+      "model_dependent_production_rtl": [
+        "rtl/mnist_mlp_params_portable.v",
+        "rtl/mnist_mlp_params_openram.v"
+      ]
+    },
+    "stalls": {
+      "none": {
+        "cycles_max": 864,
+        "cycles_min": 864,
+        "hidden_mismatches": 0,
+        "images": 50,
+        "logit_mismatches": 0,
+        "pattern": "no stalls",
+        "prediction_mismatches": 0
+      },
+      "periodic_7": {
+        "cycles_max": 975,
+        "cycles_min": 975,
+        "hidden_mismatches": 0,
+        "images": 50,
+        "logit_mismatches": 0,
+        "pattern": "periodic (every Nth input)",
+        "prediction_mismatches": 0
+      },
+      "pseudorandom_lfsr": {
+        "cycles_max": 1297,
+        "cycles_min": 1223,
+        "hidden_mismatches": 0,
+        "images": 50,
+        "logit_mismatches": 0,
+        "pattern": "deterministic pseudo-random (LFSR)",
+        "prediction_mismatches": 0
+      }
+    },
+    "test_set": {
+      "count": 500,
+      "images_sha256": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+      "indices_first": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "indices_last": [
+        490,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499
+      ],
+      "indices_sha256": "0c3fc3e2e8b0514136a044efedc6d6aa32df05e1f58c8cca9cc665e1521f4c8c",
+      "label_histogram": [
+        42,
+        67,
+        55,
+        45,
+        55,
+        50,
+        43,
+        49,
+        40,
+        54
+      ],
+      "labels_sha256": "d9c1ee129708614296525e1d5d088e7f6c31867941fca58d4df714564188c7d2",
+      "selection_policy": "first 500 images of the official MNIST test set, in order; no filtering of any kind"
+    }
+  },
+  "claim": "model2rtl demonstrates that a trained quantized neural network can be compiled into a portable RTL implementation using a shared Multiply-Select-Add architecture, verified behaviourally and after independent FPGA-oriented and generic/ASIC-oriented synthesis, with an optional ASIC physical ROM representation of its parameters.",
+  "claim_scope": "The claim covers the demonstrated MNIST 784-32-10 MLP only. It is not a claim of production ASIC readiness, timing closure, full-chip physical implementation, DRC- or LVS-clean macros, arbitrary-model compilation, or reproduction of any proprietary implementation.",
+  "constant_multiplication": {
+    "bit_classification": {
+      "fpga": {
+        "activation_register_alias": 41,
+        "constant": 37,
+        "no_driver_fused_downstream": 114
+      },
+      "generic": {
+        "activation_register_alias": 41,
+        "constant": 33,
+        "no_driver_fused_downstream": 118
+      }
+    },
+    "correct_wording": "The architecture exposes only sixteen constant-weight product alternatives per activation, and synthesis further eliminates explicit multiplier hardware.",
+    "explanation": "Each of the 16 products has a fixed small integer constant as one operand, so synthesis replaces them with wiring, shifts, negation, add/subtract and LUT/carry logic, and fuses the shared product logic into the selector logic.",
+    "multiplier_or_dsp_cells_fpga": 0,
+    "multiplier_or_dsp_cells_generic": 0,
+    "product_wire_drivers_fpga": {
+      "prod_00": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [11:3], 3'h0 }",
+      "prod_01": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [23:15], \\u_fabric.act_pipe [2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_02": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [35:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+      "prod_03": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [47:37], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_04": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [58], \\u_fabric.L1_SELECT[0].u_sel.bank [58:51], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 2'h0 }",
+      "prod_05": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [70], \\u_fabric.L1_SELECT[0].u_sel.bank [70:63], \\u_fabric.L1_SELECT[0].u_sel.bank [27:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_06": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [81], \\u_fabric.L1_SELECT[0].u_sel.bank [81], \\u_fabric.L1_SELECT[0].u_sel.bank [81:74], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+      "prod_07": "{ \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92], \\u_fabric.L1_SELECT[0].u_sel.bank [92:85], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_08": "12'h000",
+      "prod_09": "{ 4'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_10": "{ 3'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+      "prod_11": "{ 2'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [141:133], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_12": "{ 2'h0, \\u_fabric.act_pipe [7:2], \\u_fabric.L1_SELECT[0].u_sel.bank [26], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 2'h0 }",
+      "prod_13": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [166:159], \\u_fabric.L1_SELECT[0].u_sel.bank [27:26], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }",
+      "prod_14": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [141:133], \\u_fabric.L1_SELECT[0].u_sel.bank [3], 1'h0 }",
+      "prod_15": "{ 1'h0, \\u_fabric.L1_SELECT[0].u_sel.bank [190:182], \\u_fabric.L1_SELECT[0].u_sel.bank [37], \\u_fabric.L1_SELECT[0].u_sel.bank [3] }"
+    },
+    "source_multiply_operators": 16,
+    "wording_to_avoid": "'we reduced 25,408 physical multipliers to 16 physical multipliers' -- that is NOT what synthesis showed. The three operation counts are source-level quantities and the synthesized results are a different kind of measurement."
+  },
+  "cross_stage_consistency": {
+    "checked": 13,
+    "checks": [
+      {
+        "agree": true,
+        "quantity": "fabric SHA-256",
+        "source_a": "stage1.generated.sha256",
+        "source_b": "stage4.source_freeze.after",
+        "value_a": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "value_b": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c"
+      },
+      {
+        "agree": true,
+        "quantity": "fabric SHA-256 (stage 5)",
+        "source_a": "stage4.source_freeze",
+        "source_b": "stage5.source_freeze",
+        "value_a": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "value_b": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c"
+      },
+      {
+        "agree": true,
+        "quantity": "fabric SHA-256 (stage 3 alternate-model proof)",
+        "source_a": "stage3.alternate_model",
+        "source_b": "stage5.source_freeze",
+        "value_a": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "value_b": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c"
+      },
+      {
+        "agree": true,
+        "quantity": "verification image-set SHA-256 (stage 3 vs 4)",
+        "source_a": "stage3.test_set",
+        "source_b": "stage4.image_selection",
+        "value_a": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+        "value_b": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae"
+      },
+      {
+        "agree": true,
+        "quantity": "verification image-set SHA-256 (stage 4 vs 5)",
+        "source_a": "stage4.image_selection",
+        "source_b": "stage5.full_model.test_set",
+        "value_a": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+        "value_b": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae"
+      },
+      {
+        "agree": true,
+        "quantity": "total weight indices",
+        "source_a": "stage0.model_size",
+        "source_b": "stage5.readback",
+        "value_a": 25408,
+        "value_b": 25408
+      },
+      {
+        "agree": true,
+        "quantity": "nominal cycles per inference (stage 1 vs 4)",
+        "source_a": "stage1.architecture",
+        "source_b": "stage4.fpga.no_stall",
+        "value_a": 864,
+        "value_b": 864
+      },
+      {
+        "agree": true,
+        "quantity": "nominal cycles per inference (stage 4 vs 5)",
+        "source_a": "stage4.fpga.no_stall",
+        "source_b": "stage5.full_model",
+        "value_a": [
+          864
+        ],
+        "value_b": [
+          864
+        ]
+      },
+      {
+        "agree": true,
+        "quantity": "portable backend logit mismatches (stage 3 vs 5)",
+        "source_a": "stage3.portable_backend",
+        "source_b": "stage5.full_model.portable",
+        "value_a": 0,
+        "value_b": 0
+      },
+      {
+        "agree": true,
+        "quantity": "canonical image SHA-256 (bias_l1)",
+        "source_a": "stage2.canonical_images",
+        "source_b": "stage5.logical_images",
+        "value_a": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+        "value_b": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d"
+      },
+      {
+        "agree": true,
+        "quantity": "canonical image SHA-256 (bias_l2)",
+        "source_a": "stage2.canonical_images",
+        "source_b": "stage5.logical_images",
+        "value_a": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+        "value_b": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482"
+      },
+      {
+        "agree": true,
+        "quantity": "canonical image SHA-256 (weights_l1)",
+        "source_a": "stage2.canonical_images",
+        "source_b": "stage5.logical_images",
+        "value_a": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+        "value_b": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14"
+      },
+      {
+        "agree": true,
+        "quantity": "canonical image SHA-256 (weights_l2)",
+        "source_a": "stage2.canonical_images",
+        "source_b": "stage5.logical_images",
+        "value_a": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+        "value_b": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec"
+      }
+    ],
+    "disagreements": 0
+  },
+  "crossover": {
+    "break_even_utilisation": {
+      "meaning": "A placed portable block occupies cell_area / utilisation. At the deepest measured point the two areas would be equal only if the portable block were placed at this utilisation or worse. This is a derived sensitivity, not a measurement.",
+      "value": 0.3362
+    },
+    "conclusion": "No crossover was measured. The OpenROM bounding box exceeds the portable mapped cell area at all 7 points, and the ratio is 6.76 at the smallest point and 2.97 at the largest, so it flattens rather than converging towards 1. Any statement about sizes beyond 50176 bits would be extrapolation and is not made.",
+    "measured_crossover_interval": "none: the portable standard-cell mapping is smaller at every measured point from 1024 to 50176 bits",
+    "measured_points": [
+      {
+        "bits": 1024,
+        "openrom_bbox_um2": 13275.275200000002,
+        "openrom_words_per_row": 4,
+        "point": "32x32",
+        "portable_cell_area_um2": 1964.384,
+        "portable_cells": 203,
+        "ratio_openrom_over_portable": 6.758,
+        "smaller": "portable"
+      },
+      {
+        "bits": 2048,
+        "openrom_bbox_um2": 15037.0484,
+        "openrom_words_per_row": 4,
+        "point": "64x32",
+        "portable_cell_area_um2": 2916.5472,
+        "portable_cells": 375,
+        "ratio_openrom_over_portable": 5.1558,
+        "smaller": "portable"
+      },
+      {
+        "bits": 4096,
+        "openrom_bbox_um2": 18466.51,
+        "openrom_words_per_row": 4,
+        "point": "128x32",
+        "portable_cell_area_um2": 4773.328,
+        "portable_cells": 679,
+        "ratio_openrom_over_portable": 3.8687,
+        "smaller": "portable"
+      },
+      {
+        "bits": 8192,
+        "openrom_bbox_um2": 25266.762799999997,
+        "openrom_words_per_row": 4,
+        "point": "256x32",
+        "portable_cell_area_um2": 8165.3312,
+        "portable_cells": 1194,
+        "ratio_openrom_over_portable": 3.0944,
+        "smaller": "portable"
+      },
+      {
+        "bits": 16384,
+        "openrom_bbox_um2": 38879.426799999994,
+        "openrom_words_per_row": 4,
+        "point": "512x32",
+        "portable_cell_area_um2": 13753.1904,
+        "portable_cells": 2150,
+        "ratio_openrom_over_portable": 2.8269,
+        "smaller": "portable"
+      },
+      {
+        "bits": 25088,
+        "openrom_bbox_um2": 53668.588,
+        "openrom_words_per_row": 4,
+        "point": "784x32",
+        "portable_cell_area_um2": 18433.9296,
+        "portable_cells": 3032,
+        "ratio_openrom_over_portable": 2.9114,
+        "smaller": "portable"
+      },
+      {
+        "bits": 50176,
+        "openrom_bbox_um2": 92011.464,
+        "openrom_words_per_row": 8,
+        "point": "1568x32",
+        "portable_cell_area_um2": 30934.6688,
+        "portable_cells": 5213,
+        "ratio_openrom_over_portable": 2.9744,
+        "smaller": "portable"
+      }
+    ],
+    "smallest_openrom_winning_point": null
+  },
+  "dual_target_portability": {
+    "claim": "The exact same RTL source was synthesized through an FPGA-oriented Yosys flow and a generic/ASIC-oriented Yosys flow with no source patching, and BOTH synthesized netlists were gate-level simulated against the Stage-0 integer golden model.",
+    "cross_target": {
+      "cycle_mismatches": 0,
+      "identical": true,
+      "logit_mismatches": 0,
+      "prediction_mismatches": 0
+    },
+    "fpga": {
+      "cells": {
+        "$scopeinfo": 45,
+        "SB_CARRY": 1004,
+        "SB_DFF": 61,
+        "SB_DFFE": 68,
+        "SB_DFFESR": 1479,
+        "SB_DFFSR": 6,
+        "SB_LUT4": 6429,
+        "SB_RAM40_4K": 32
+      },
+      "family": "ice40",
+      "flow": "synth_ice40",
+      "gate_level": {
+        "back_to_back": {
+          "compile_seconds": 1.4,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 0.9166666666666666,
+          "images": 12,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 120,
+          "note": "12 inferences issued back to back inside ONE simulation, no reset and no restart between them",
+          "ok": true,
+          "prediction_comparisons": 12,
+          "prediction_mismatches": 0,
+          "sim_seconds": 49.2,
+          "testbench_self_checks_passed": true
+        },
+        "handshake_checks_passed": true,
+        "icarus_language_level": "-g2012 (required by the official Yosys cell library; the production RTL itself remains Verilog-2001)",
+        "netlist_path": "build/stage4/fpga/fpga_netlist.v",
+        "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
+        "no_stall": {
+          "compile_seconds": 1.5,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 0.98,
+          "images": 500,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 5000,
+          "ok": true,
+          "prediction_comparisons": 500,
+          "prediction_mismatches": 0,
+          "sim_seconds": 2287.3,
+          "testbench_self_checks_passed": true
+        },
+        "observable_handshake_checks": [
+          "done asserted exactly once per inference (pulse counted)",
+          "prediction_valid high on the cycle done is high",
+          "busy high on the cycle done is high",
+          "done low again one cycle later (single-cycle pulse)",
+          "in_ready respected: no activation issued while it is low"
+        ],
+        "reset": {
+          "clean_reset_before_inference": {
+            "compile_seconds": 1.5,
+            "cycles_per_inference": [
+              864
+            ],
+            "gate_level_label_accuracy": 1.0,
+            "images": 1,
+            "latency_contract_cycles": 864,
+            "latency_contract_held": true,
+            "logit_mismatches": 0,
+            "logits_compared": 10,
+            "ok": true,
+            "prediction_comparisons": 1,
+            "prediction_mismatches": 0,
+            "reset_asserted_after_activations": 0,
+            "sim_seconds": 4.9,
+            "stale_state_observed": false,
+            "testbench_self_checks_passed": true
+          },
+          "reset_mid_inference": {
+            "compile_seconds": 1.4,
+            "cycles_per_inference": [
+              864
+            ],
+            "gate_level_label_accuracy": 1.0,
+            "images": 1,
+            "latency_contract_cycles": 864,
+            "latency_contract_held": true,
+            "logit_mismatches": 0,
+            "logits_compared": 10,
+            "ok": true,
+            "prediction_comparisons": 1,
+            "prediction_mismatches": 0,
+            "reset_asserted_after_activations": 391,
+            "sim_seconds": 6.5,
+            "stale_state_observed": false,
+            "testbench_self_checks_passed": true
+          }
+        },
+        "simulation_library": "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v",
+        "simulation_library_sha256": "b5b2bcd86c0d6eea269015aaebff1d5fb66e7ec3f7eded0bde07406e5ac99527",
+        "source_list_guard": {
+          "behavioural_implementation_in_source_list": false,
+          "duplicate_module_definitions": 0,
+          "production_rtl_in_source_list": false,
+          "sources": [
+            "/tmp/model2rtl_stage4_qp1pj9g6/fpga/tb_gls.v",
+            "build/stage4/fpga/fpga_netlist.v",
+            "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v"
+          ],
+          "top_defined_by": "build/stage4/fpga/fpga_netlist.v"
+        },
+        "stalls": {
+          "compile_seconds": 1.5,
+          "cycles_exceed_nominal": true,
+          "cycles_per_inference": [
+            975
+          ],
+          "gate_level_label_accuracy": 0.9166666666666666,
+          "images": 12,
+          "logit_mismatches": 0,
+          "logits_compared": 120,
+          "ok": true,
+          "pattern": "in_valid bubble after every 7th accepted activation",
+          "prediction_comparisons": 12,
+          "prediction_mismatches": 0,
+          "sim_seconds": 50.4,
+          "testbench_self_checks_passed": true
+        }
+      },
+      "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
+      "parameter_rom_mapping": "inferred as 32 SB_RAM40_4K block RAMs holding 131072 bits of INIT data; the ROM did not become LUT or mux logic",
+      "rationale": "synth_ice40 is present in the installed Yosys and the matching official simulation library <datdir>/ice40/cells_sim.v exists and is complete, so the synthesized netlist can be simulated with the vendor-equivalent cell models rather than hand-written stand-ins.  ECP5 was therefore not needed.",
+      "resources": {
+        "arithmetic_or_multiplier_cells": 0,
+        "carry": 1004,
+        "dsp": 0,
+        "ff": 1614,
+        "latches": 0,
+        "lut": 6429,
+        "other": 0,
+        "other_types": [],
+        "ram": 32,
+        "total_cells": 9079
+      }
+    },
+    "generic": {
+      "cells": {
+        "$_AND_": 20159,
+        "$_DFF_P_": 1742,
+        "$_MUX_": 1351,
+        "$_NOT_": 2439,
+        "$_OR_": 18603,
+        "$_XOR_": 1413
+      },
+      "flow": "proc/flatten/opt/memory/techmap/simplemap/dfflegalize/abc -g simple",
+      "gate_level": {
+        "back_to_back": {
+          "compile_seconds": 1.6,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 0.9166666666666666,
+          "images": 12,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 120,
+          "note": "12 inferences issued back to back inside ONE simulation, no reset and no restart between them",
+          "ok": true,
+          "prediction_comparisons": 12,
+          "prediction_mismatches": 0,
+          "sim_seconds": 39.5,
+          "testbench_self_checks_passed": true
+        },
+        "handshake_checks_passed": true,
+        "icarus_language_level": "-g2012 (required by the official Yosys cell library; the production RTL itself remains Verilog-2001)",
+        "netlist_path": "build/stage4/generic/generic_netlist.v",
+        "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
+        "no_stall": {
+          "compile_seconds": 1.6,
+          "cycles_per_inference": [
+            864
+          ],
+          "gate_level_label_accuracy": 0.98,
+          "images": 500,
+          "latency_contract_cycles": 864,
+          "latency_contract_held": true,
+          "logit_mismatches": 0,
+          "logits_compared": 5000,
+          "ok": true,
+          "prediction_comparisons": 500,
+          "prediction_mismatches": 0,
+          "sim_seconds": 1603.7,
+          "testbench_self_checks_passed": true
+        },
+        "observable_handshake_checks": [
+          "done asserted exactly once per inference (pulse counted)",
+          "prediction_valid high on the cycle done is high",
+          "busy high on the cycle done is high",
+          "done low again one cycle later (single-cycle pulse)",
+          "in_ready respected: no activation issued while it is low"
+        ],
+        "reset": {
+          "clean_reset_before_inference": {
+            "compile_seconds": 1.6,
+            "cycles_per_inference": [
+              864
+            ],
+            "gate_level_label_accuracy": 1.0,
+            "images": 1,
+            "latency_contract_cycles": 864,
+            "latency_contract_held": true,
+            "logit_mismatches": 0,
+            "logits_compared": 10,
+            "ok": true,
+            "prediction_comparisons": 1,
+            "prediction_mismatches": 0,
+            "reset_asserted_after_activations": 0,
+            "sim_seconds": 4.1,
+            "stale_state_observed": false,
+            "testbench_self_checks_passed": true
+          },
+          "reset_mid_inference": {
+            "compile_seconds": 1.6,
+            "cycles_per_inference": [
+              864
+            ],
+            "gate_level_label_accuracy": 1.0,
+            "images": 1,
+            "latency_contract_cycles": 864,
+            "latency_contract_held": true,
+            "logit_mismatches": 0,
+            "logits_compared": 10,
+            "ok": true,
+            "prediction_comparisons": 1,
+            "prediction_mismatches": 0,
+            "reset_asserted_after_activations": 391,
+            "sim_seconds": 5.6,
+            "stale_state_observed": false,
+            "testbench_self_checks_passed": true
+          }
+        },
+        "simulation_library": "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v",
+        "simulation_library_sha256": "63918d5fd356ffcda0780eccfa4304a9888603a5266bbc1c812bf5a9bdd65b3c",
+        "source_list_guard": {
+          "behavioural_implementation_in_source_list": false,
+          "duplicate_module_definitions": 0,
+          "production_rtl_in_source_list": false,
+          "sources": [
+            "/tmp/model2rtl_stage4_qp1pj9g6/generic/tb_gls.v",
+            "build/stage4/generic/generic_netlist.v",
+            "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v"
+          ],
+          "top_defined_by": "build/stage4/generic/generic_netlist.v"
+        },
+        "stalls": {
+          "compile_seconds": 1.6,
+          "cycles_exceed_nominal": true,
+          "cycles_per_inference": [
+            975
+          ],
+          "gate_level_label_accuracy": 0.9166666666666666,
+          "images": 12,
+          "logit_mismatches": 0,
+          "logits_compared": 120,
+          "ok": true,
+          "pattern": "in_valid bubble after every 7th accepted activation",
+          "prediction_comparisons": 12,
+          "prediction_mismatches": 0,
+          "sim_seconds": 47.5,
+          "testbench_self_checks_passed": true
+        }
+      },
+      "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
+      "parameter_rom_mapping": "the generic gate vocabulary has no memory primitive, so the ROM was synthesized into constant combinational logic",
+      "resources": {
+        "and": 20159,
+        "aoi_oai": 0,
+        "arithmetic_or_multiplier_cells": 0,
+        "latches": 0,
+        "mux": 1351,
+        "not": 2439,
+        "or": 18603,
+        "other": 0,
+        "other_types": [],
+        "sequential": 1742,
+        "total_cells": 45707,
+        "xor": 1413
+      }
+    },
+    "not_claimed": "This proves synthesis portability and post-synthesis functional equivalence for this RTL. It does NOT prove place-and-route or timing portability; neither was run.",
+    "reproducibility": {
+      "fpga_family": "ice40",
+      "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+      "python": "3.11.11",
+      "repeat_synthesis": {
+        "fpga": {
+          "cells": {
+            "$scopeinfo": 45,
+            "SB_CARRY": 1004,
+            "SB_DFF": 61,
+            "SB_DFFE": 68,
+            "SB_DFFESR": 1479,
+            "SB_DFFSR": 6,
+            "SB_LUT4": 6429,
+            "SB_RAM40_4K": 32
+          },
+          "exit_status": 0,
+          "identical_to_first_run": true,
+          "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
+          "same_cell_counts": true,
+          "seconds": 25.39
+        },
+        "generic": {
+          "cells": {
+            "$_AND_": 20159,
+            "$_DFF_P_": 1742,
+            "$_MUX_": 1351,
+            "$_NOT_": 2439,
+            "$_OR_": 18603,
+            "$_XOR_": 1413
+          },
+          "exit_status": 0,
+          "identical_to_first_run": true,
+          "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
+          "same_cell_counts": true,
+          "seconds": 11.87
+        }
+      },
+      "simulation_libraries": {
+        "fpga": {
+          "path": "/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v",
+          "sha256": "b5b2bcd86c0d6eea269015aaebff1d5fb66e7ec3f7eded0bde07406e5ac99527"
+        },
+        "generic": {
+          "path": "/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v",
+          "sha256": "63918d5fd356ffcda0780eccfa4304a9888603a5266bbc1c812bf5a9bdd65b3c"
+        }
+      },
+      "yosys": "Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]",
+      "yosys_datdir": "/home/rithwik/klayout_cf/yosys/share/yosys"
+    },
+    "same_source": {
+      "fpga_gls": "PASS",
+      "fpga_source_hashes": {
+        "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+        "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+        "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb"
+      },
+      "generic_gls": "PASS",
+      "generic_source_hashes": {
+        "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+        "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+        "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb"
+      },
+      "matches_working_tree": true,
+      "same_source_rtl": true,
+      "source_patches_applied": false,
+      "sources_read_from": [
+        "rtl/mnist_mlp_fabric.v",
+        "rtl/mnist_mlp_params_portable.v",
+        "rtl/mnist_mlp_params_sel_portable.v",
+        "rtl/mnist_mlp_top.v"
+      ]
+    }
+  },
+  "environment": {
+    "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+    "klayout": "KLayout 0.28.17",
+    "liberty": "/home/rithwik/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
+    "magic": "8.3.486",
+    "netgen": "Netgen 1.5.323 compiled on Tue Aug 18 15:41:47 IST 2026",
+    "note": "This environment is NOT one-click portable. The functional flow needs only Python, Yosys and Icarus; the physical OpenROM flow additionally needs a user-space OpenRAM checkout, the SKY130 PDK, magic, netgen and KLayout at the exact paths recorded above.",
+    "openram": {
+      "openram_branch": "stable",
+      "openram_commit": "b2b069ce119d1488cbe6883b2240bceb5c7ce29a",
+      "openram_root": "/home/rithwik/OpenRAM",
+      "openram_tracked_files_modified": false
+    },
+    "pdk": {
+      "provenance": "installed with ciel into PDK_ROOT; the old ~/.volare/sky130A layout does not exist on this machine",
+      "root": "/home/rithwik/pdk",
+      "sky130A_present": true
+    },
+    "platform": "Linux-4.18.0-553.33.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "python": "3.11.11",
+    "yosys": "Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]",
+    "yosys_datdir": "/home/rithwik/klayout_cf/yosys/share/yosys"
+  },
+  "frozen_artifacts": {
+    "model/mnist_weights_indices.npz": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46",
+    "model/quant_params.json": "2ad884b42e797bb4400ecaa2f9de46da7aa16b5abf32fe21e77a657bdd82eec7",
+    "reports/stage0_quantization.json": "c0c4fa1f89fe279559f82e429660d59327c3fbe1f607fc186d94611d8f6da9a0",
+    "reports/stage1_compute_fabric.json": "9a7a501a89c15b42e00361c8096f184a6d7b9db5aa16342119aa3c921b282786",
+    "reports/stage2_parameter_backends.json": "3ef8042d8134e8541961e105f9e585130b6bfbe91fb52cddce64e1f9447f798b",
+    "reports/stage3_behavioral_verification.json": "d433742d54461c9d66677b49e9ce187e12383baf72c0856544ffd7f186b7518d",
+    "reports/stage4_dual_target_portability.json": "6d5829c0f05aceae87e09e70f294dbaa8e1d93cdf3ed8be890e5f872c2174941",
+    "reports/stage5_openrom_physical.json": "e24fb00fd59605dfab6eb539ad431e2a8c8761c890172abb1b96318c4c778f5b",
+    "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+    "rtl/mnist_mlp_params_openram.v": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395",
+    "rtl/mnist_mlp_params_openrom_phys.v": "5d320cef91fe7c5c159d8b6ea717db781fa37ba2811b12bc3249e291d9abf24f",
+    "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+    "rtl/mnist_mlp_params_sel_openram.v": "0e820585cb6230cbf39570d9f38269e9bbdd71c0fd2f6d43b35f6df0132d3cb0",
+    "rtl/mnist_mlp_params_sel_openrom_phys.v": "b8126c459178284b9cac48e3fd3063958b7d178ac7674051325d148223298d3c",
+    "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+    "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb",
+    "src/model2rtl/contract.py": "0fbe4877f7f49b9b8da6d3947a49ba7bab85e4b36ba011e4337f5fc3d3480b12",
+    "src/model2rtl/fabric.py": "ae7e8d93660a6f141fdc9b1ee59130f7c93c0098c9995b66426d153913ff7981",
+    "src/model2rtl/golden.py": "e10eb33a952c6ae5fd67ad33791985c3a62a7d5d25fd3b5edc13819cb20e5270",
+    "src/model2rtl/param_image.py": "5a0e883f7e7216c9e910ba2c75310d80c095686cd6b325411f989be4d8563a76",
+    "src/model2rtl/param_verilog.py": "3c89ad83caed752b3b4c19ea0d62b7c56b97febb74772ddb351aa24423e8026b",
+    "src/model2rtl/phys_image.py": "4ff5d86b524296fa1dfa4906c4a9a4c7c2bbb2a3dfc804a35adf8e5998766ec7",
+    "src/model2rtl/phys_verilog.py": "e5e62c1e5886a643b3bf0fb270a57ad0048ab2306231e01962e1317b55287727",
+    "src/model2rtl/storage.py": "57618e982731c334bae76811d386b018e031b88f910fafad92a5656fdaed6b47",
+    "src/model2rtl/verilog_emit.py": "4ee554f39c53185d9aeb2189e392ad6955c14c9bd449b0e58c0467621f225a97"
+  },
+  "future_work": [
+    {
+      "item": "generic model importer (ONNX / TFLite)",
+      "rank": 1
+    },
+    {
+      "item": "arbitrary dense-layer topology compiler",
+      "rank": 2
+    },
+    {
+      "item": "configurable K, activation width and layer sizes",
+      "rank": 3
+    },
+    {
+      "item": "convolution lowering",
+      "rank": 4
+    },
+    {
+      "item": "architecture selection: fully spatial, input-serial, tiled",
+      "rank": 5
+    },
+    {
+      "item": "FPGA place-and-route plus timing analysis",
+      "rank": 6
+    },
+    {
+      "item": "full SKY130 ASIC implementation",
+      "rank": 7
+    },
+    {
+      "item": "a trustworthy OpenROM DRC/LVS environment",
+      "rank": 8
+    },
+    {
+      "item": "memory-architecture exploration: portable ROM, SRAM, hard ROM, banking",
+      "rank": 9
+    },
+    {
+      "item": "model and architecture co-optimization",
+      "rank": 10
+    }
+  ],
+  "limitations": [
+    "MNIST only; no other dataset or task was attempted.",
+    "The compiler is fixed to the 784-32-10 topology it was written for; there is no general topology support.",
+    "Weights are 4-bit, 16 fixed levels; activations are uint8.",
+    "No convolution support of any kind.",
+    "No ONNX or TFLite ingestion exists; the model comes from this project's own training script.",
+    "Input-serial execution trades latency for area: 864 cycles per inference.",
+    "No FPGA place-and-route, no device fit, no bitstream, no FPGA timing analysis.",
+    "No ASIC place-and-route, no floorplan, no full-chip physical implementation, no ASIC timing analysis.",
+    "OpenROM physical signoff is UNVERIFIED: the environment's own control macro fails DRC and LVS.",
+    "The hard ROM did not beat portable synthesized storage in area anywhere in the measured range.",
+    "The physical banking scheme is specific to the demonstrated ROM shape; it is not a general banking compiler.",
+    "No claim is made of reproducing any proprietary implementation."
+  ],
+  "model": {
+    "accuracy_change_points": -0.07,
+    "accuracy_change_wording": "quantization LOSES 0.07 percentage points of test accuracy relative to float",
+    "artifact_hashes": {
+      "mnist_weights_indices.npz": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46",
+      "model_parameter_sha256": "6d54c2e75088bf85db83f83097c3a0dd06dc98281216eb29559e664f89cbfeb6",
+      "quant_params.json": "2ad884b42e797bb4400ecaa2f9de46da7aa16b5abf32fe21e77a657bdd82eec7"
+    },
+    "dataset": {
+      "split_rule": "MNIST train[:55000] / train[55000:60000] / official test",
+      "test_images": 10000,
+      "train_images": 55000,
+      "val_images": 5000,
+      "x_test_sha256": "ba1ed81f08b0bc5f87541e3b60cc09cd8a851564187aedfcfa2d49a5df13143d",
+      "x_train_sha256": "3b82d920ed966a9875cd49b0b6fd43301269bd184e2edd2698ea65f003b8a1f3",
+      "y_test_sha256": "602442a0cd4693d10568d685b52fb88b0b92a6ba7667ba0dd79420d5136fc0f5"
+    },
+    "float_test_accuracy": 0.9652,
+    "quantized_integer_test_accuracy": 0.9645,
+    "task": "MNIST handwritten-digit classification",
+    "topology": "784 -> 32 -> ReLU -> 10"
+  },
+  "not_claimed": [
+    "production ASIC readiness",
+    "timing closure or any maximum clock frequency",
+    "full-chip physical implementation",
+    "DRC-clean OpenROM macros",
+    "LVS-clean OpenROM macros",
+    "general arbitrary-model compilation",
+    "support beyond the demonstrated MNIST MLP",
+    "reproduction of any proprietary implementation"
+  ],
+  "parameter_backends": {
+    "canonical_images": {
+      "bias_l1": {
+        "depth": 32,
+        "name": "bias_l1",
+        "orientation": "[out_features]",
+        "packing": "row[j] = two's-complement bias of output neuron j",
+        "sha256": "ac8563c111b41dd72a09b55ee3136ab71e4f538a567b84a50c9de949f520364d",
+        "signed": true,
+        "total_bits": 704,
+        "width": 22
+      },
+      "bias_l2": {
+        "depth": 10,
+        "name": "bias_l2",
+        "orientation": "[out_features]",
+        "packing": "row[j] = two's-complement bias of output neuron j",
+        "sha256": "efb63bb9cc7b26d721b4fc53f19aaed428916dae6dc1ed29074f8e0dac942482",
+        "signed": true,
+        "total_bits": 170,
+        "width": 17
+      },
+      "weights_l1": {
+        "depth": 784,
+        "name": "weights_l1",
+        "orientation": "[in_features, out_features] (Stage-0 orientation)",
+        "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+        "sha256": "e7fd9a1668b71ff64616466a0ed0f77a3dae098836fde86d5906f53416216d14",
+        "signed": false,
+        "total_bits": 100352,
+        "width": 128
+      },
+      "weights_l2": {
+        "depth": 32,
+        "name": "weights_l2",
+        "orientation": "[in_features, out_features] (Stage-0 orientation)",
+        "packing": "row[i] bits [j*4 +: 4] = weight_index[i][j]; neuron 0 in the least significant nibble",
+        "sha256": "b3866b5dcbd1e60e75300794786c9c75fa8e08361dbb31144182748bee934cec",
+        "signed": false,
+        "total_bits": 1280,
+        "width": 40
+      }
+    },
+    "interface": {
+      "capture_model": "always @(posedge clk) if (en) data_r <= MEM[{layer, addr}];\nassign data = data_r;",
+      "description": {
+        "bias_port": {
+          "ports": [
+            {
+              "direction": "output",
+              "memory_direction": "input",
+              "name": "bmem_en",
+              "role": "read strobe for this cycle's address",
+              "width": 1
+            },
+            {
+              "direction": "output",
+              "memory_direction": "input",
+              "name": "bmem_layer",
+              "role": "0 = layer 1, 1 = layer 2",
+              "width": 1
+            },
+            {
+              "direction": "output",
+              "memory_direction": "input",
+              "name": "bmem_addr",
+              "role": "output-neuron index j being finalised",
+              "width": 6
+            },
+            {
+              "direction": "input",
+              "memory_direction": "output",
+              "name": "bmem_data",
+              "role": "that neuron's signed bias, sign extended to 22 bits",
+              "width": 22
+            }
+          ],
+          "spaces": [
+            {
+              "addr_used_bits": 5,
+              "depth": 32,
+              "description": "32 signed 22-bit biases",
+              "layer_select": 0,
+              "name": "layer1_bias",
+              "used_data_bits": 22
+            },
+            {
+              "addr_used_bits": 4,
+              "depth": 10,
+              "description": "10 signed 17-bit biases",
+              "layer_select": 1,
+              "name": "layer2_bias",
+              "used_data_bits": 17
+            }
+          ]
+        },
+        "capture_model": "always @(posedge clk) if (en) data_r <= MEM[{layer, addr}];\nassign data = data_r;",
+        "clock": {
+          "direction": "input",
+          "name": "clk",
+          "role": "single clock; both backends are clocked by it",
+          "width": 1
+        },
+        "out_of_range_note": "The fabric's address counter reaches n_in (=784) for one cycle at the end of layer-1 streaming, and n_hidden (=32) at the end of layer-2 streaming, while wmem_en is LOW. An enable-gated backend never sees those addresses. A free-running backend would read one past the end of the array; its data is never consumed, but the backend must still not produce X on the bus in that cycle.",
+        "packing": {
+          "layer1_field": "bits [127:0] of wmem_data",
+          "layer2_field": "bits [39:0] of wmem_data",
+          "neuron0_position": "least significant nibble",
+          "orientation": "[in_features, out_features] (Stage-0 orientation, not transposed)",
+          "rule": "weight_index[i][j] = wmem_data[j*4 +: 4]",
+          "unused_bits": "bits above the active layer's field are ignored by the fabric; a backend may drive them to zero"
+        },
+        "read_latency_cycles": 1,
+        "reset": {
+          "direction": "input",
+          "name": "rst",
+          "role": "synchronous, active high; the fabric's reset. A parameter memory holds no architectural state, so a backend need not use it.",
+          "width": 1
+        },
+        "storage_footprint": {
+          "all_parameter_bits": 102506,
+          "all_parameter_bytes": 12814,
+          "bias_bits_total": 874,
+          "layer1_bias_bits_total": 704,
+          "layer1_weight_bits": 100352,
+          "layer2_bias_bits_total": 170,
+          "layer2_weight_bits": 1280,
+          "weight_bits_total": 101632
+        },
+        "timing_contract": "Synchronous read, 1 cycle latency, enable gated with hold: an address and layer driven during cycle T are captured on the posedge that ends cycle T; the corresponding data must be presented throughout cycle T+1. When en is low the previously captured data must be held unchanged.",
+        "weight_port": {
+          "ports": [
+            {
+              "direction": "output",
+              "memory_direction": "input",
+              "name": "wmem_en",
+              "role": "read strobe for this cycle's address",
+              "width": 1
+            },
+            {
+              "direction": "output",
+              "memory_direction": "input",
+              "name": "wmem_layer",
+              "role": "0 = layer 1, 1 = layer 2",
+              "width": 1
+            },
+            {
+              "direction": "output",
+              "memory_direction": "input",
+              "name": "wmem_addr",
+              "role": "input-feature index i of the currently streamed activation",
+              "width": 10
+            },
+            {
+              "direction": "input",
+              "memory_direction": "output",
+              "name": "wmem_data",
+              "role": "one word holding EVERY output neuron's 4-bit index for input feature i",
+              "width": 128
+            }
+          ],
+          "spaces": [
+            {
+              "addr_used_bits": 10,
+              "depth": 784,
+              "description": "784 entries x 128 bits (32 neurons x 4 bits)",
+              "layer_select": 0,
+              "name": "layer1_weights",
+              "used_data_bits": 128
+            },
+            {
+              "addr_used_bits": 5,
+              "depth": 32,
+              "description": "32 entries x 40 bits (10 neurons x 4 bits)",
+              "layer_select": 1,
+              "name": "layer2_weights",
+              "used_data_bits": 40
+            }
+          ]
+        }
+      },
+      "fabric_sha256": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "fabric_sha256_matches_stage1": true,
+      "timing_contract": "Synchronous read, 1 cycle latency, enable gated with hold: an address and layer driven during cycle T are captured on the posedge that ends cycle T; the corresponding data must be presented throughout cycle T+1. When en is low the previously captured data must be held unchanged.",
+      "verification_status": "PASS (memif.verify_against_rtl re-parses the fabric port list and fails closed on drift)"
+    },
+    "openram_behavioral": {
+      "path": "rtl/mnist_mlp_params_openram.v",
+      "sha256": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395",
+      "summary": {
+        "authorship": "model2rtl behavioural model of the generated OpenROM contents. NOT OpenROM-generated Verilog.",
+        "lint": {
+          "icarus_verilog2001": "PASS",
+          "ok": true,
+          "sources": [
+            "mnist_mlp_params_openram.v"
+          ],
+          "yosys_cell_counts": {
+            "$dff": 8,
+            "$logic_and": 8,
+            "$logic_or": 2,
+            "$lt": 4,
+            "$meminit": 4,
+            "$memrd_v2": 4,
+            "$mux": 12,
+            "$not": 6,
+            "rom_macro_bias_l1": 1,
+            "rom_macro_bias_l2": 1,
+            "rom_macro_weights_l1": 1,
+            "rom_macro_weights_l2": 1
+          },
+          "yosys_check_assert": "PASS (Found and reported 0 problems)",
+          "yosys_hierarchy_check": "PASS",
+          "yosys_inferred_latches": 0,
+          "yosys_multiple_drivers": false,
+          "yosys_read_verilog": "PASS",
+          "yosys_undriven_nets": false
+        },
+        "openrom_verilog_note": "OpenROM does emit a .v file, but it is a byte-oriented, delay-based ($readmemb on a binary file, negedge data with #DELAY) non-synthesizable stub that does not implement this project's read contract, so it is not used.",
+        "rtl": "rtl/mnist_mlp_params_openram.v",
+        "rtl_sha256": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395"
+      }
+    },
+    "openrom_physical": {
+      "logical_vs_physical": {
+        "bias_l1": "sign extended 22 -> 24 bits",
+        "bias_l2": "sign extended 17 -> 24 bits, then recovered and sign extended 17 -> 22 on the bus",
+        "weights_l1": "banked into 4 parallel macros of 784 x 32; all banks share one address and are read together, so the external latency stays one cycle",
+        "weights_l2": "identity: already byte granular"
+      },
+      "note": "All transformations are PHYSICAL REPRESENTATION ONLY. The logical memories, the bit packing and the fabric interface never changed.",
+      "path": "rtl/mnist_mlp_params_openrom_phys.v",
+      "physical_images": {
+        "bias_l1": {
+          "bank_count": 1,
+          "bank_index": 0,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[21:0]",
+          "logical_depth": 32,
+          "logical_memory": "bias_l1",
+          "logical_width": 22,
+          "macro": "bias_l1",
+          "physical_bits": 768,
+          "physical_depth": 32,
+          "physical_width": 24,
+          "sha256": "bd8e7f6a00b5e5530cf80dd08f5cee1fb1803b956a3412e7f896f39826ada9a3",
+          "sign_padded": true,
+          "transform": "physical_row = sign_extend_24(logical_row_22); the wrapper truncates back to 22 bits and re-extends to the 22-bit bus",
+          "word_size_bytes": 3
+        },
+        "bias_l2": {
+          "bank_count": 1,
+          "bank_index": 0,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[16:0]",
+          "logical_depth": 10,
+          "logical_memory": "bias_l2",
+          "logical_width": 17,
+          "macro": "bias_l2",
+          "physical_bits": 240,
+          "physical_depth": 10,
+          "physical_width": 24,
+          "sha256": "86d4111b7cb6b5d8291d0f99da06f7901c7f0cf66889ed2dbcf28efbfe8ea8b2",
+          "sign_padded": true,
+          "transform": "physical_row = sign_extend_24(logical_row_17); the wrapper truncates back to 17 bits and re-extends to the 22-bit bus",
+          "word_size_bytes": 3
+        },
+        "weights_l1_b0": {
+          "bank_count": 4,
+          "bank_index": 0,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[31:0]",
+          "logical_depth": 784,
+          "logical_memory": "weights_l1",
+          "logical_width": 128,
+          "macro": "weights_l1_b0",
+          "physical_bits": 25088,
+          "physical_depth": 784,
+          "physical_width": 32,
+          "sha256": "53ac6dd7e7011873f8648240e1202e34fdc824c0db85e97f2408b955e157f8d0",
+          "sign_padded": false,
+          "transform": "physical_row = (logical_row >> 0) & 0xffffffff; all 4 banks share one address and are read in parallel",
+          "word_size_bytes": 4
+        },
+        "weights_l1_b1": {
+          "bank_count": 4,
+          "bank_index": 1,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[63:32]",
+          "logical_depth": 784,
+          "logical_memory": "weights_l1",
+          "logical_width": 128,
+          "macro": "weights_l1_b1",
+          "physical_bits": 25088,
+          "physical_depth": 784,
+          "physical_width": 32,
+          "sha256": "9fcbdaed9ac116404d64602cc82bf1b8ca4074b1851fe2c7e7c9d959d7a537a3",
+          "sign_padded": false,
+          "transform": "physical_row = (logical_row >> 32) & 0xffffffff; all 4 banks share one address and are read in parallel",
+          "word_size_bytes": 4
+        },
+        "weights_l1_b2": {
+          "bank_count": 4,
+          "bank_index": 2,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[95:64]",
+          "logical_depth": 784,
+          "logical_memory": "weights_l1",
+          "logical_width": 128,
+          "macro": "weights_l1_b2",
+          "physical_bits": 25088,
+          "physical_depth": 784,
+          "physical_width": 32,
+          "sha256": "b676a3b5f89cb4f054730f059b08a7e117ebdff3fc499a789052028fd2441ece",
+          "sign_padded": false,
+          "transform": "physical_row = (logical_row >> 64) & 0xffffffff; all 4 banks share one address and are read in parallel",
+          "word_size_bytes": 4
+        },
+        "weights_l1_b3": {
+          "bank_count": 4,
+          "bank_index": 3,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[127:96]",
+          "logical_depth": 784,
+          "logical_memory": "weights_l1",
+          "logical_width": 128,
+          "macro": "weights_l1_b3",
+          "physical_bits": 25088,
+          "physical_depth": 784,
+          "physical_width": 32,
+          "sha256": "8c38b42b18a653797f39ea846fc8a6fd91ff8e175e4fd5e657a39c6d7b773a2e",
+          "sign_padded": false,
+          "transform": "physical_row = (logical_row >> 96) & 0xffffffff; all 4 banks share one address and are read in parallel",
+          "word_size_bytes": 4
+        },
+        "weights_l2": {
+          "bank_count": 1,
+          "bank_index": 0,
+          "bit_order_transform": "dout0[b] = word_bit(word_bits-1-b); the hex input file is big-endian, row 0 first",
+          "logical_bit_slice": "[39:0]",
+          "logical_depth": 32,
+          "logical_memory": "weights_l2",
+          "logical_width": 40,
+          "macro": "weights_l2",
+          "physical_bits": 1280,
+          "physical_depth": 32,
+          "physical_width": 40,
+          "sha256": "0f475f7ea7b7dff0fd6f14cf958f157e1239adebeecbb98f7e0357dc2d314a0c",
+          "sign_padded": false,
+          "transform": "identity: the logical word is already byte granular",
+          "word_size_bytes": 5
+        }
+      },
+      "sha256": "5d320cef91fe7c5c159d8b6ea717db781fa37ba2811b12bc3249e291d9abf24f"
+    },
+    "portable": {
+      "description": "pure synthesizable Verilog-2001, synchronous one-cycle enable-gated read, case/constant representation; the same source feeds both synthesis targets",
+      "path": "rtl/mnist_mlp_params_portable.v",
+      "sha256": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+      "summary": {
+        "complete_readback": {
+          "layer1_bias_exact": true,
+          "layer1_bias_rows": "32/32",
+          "layer1_weight_rows": "784/784",
+          "layer2_bias_exact": true,
+          "layer2_bias_rows": "10/10",
+          "layer2_weight_rows": "32/32",
+          "weight_indices_exact": "25408/25408"
+        },
+        "generator": "scripts/gen_weight_rom_portable.py",
+        "invalid_address_behaviour": "all zeros; no invalid address aliases a valid parameter row (tested)",
+        "lint": {
+          "icarus_verilog2001": "PASS",
+          "ok": true,
+          "sources": [
+            "mnist_mlp_params_portable.v"
+          ],
+          "yosys_cell_counts": {
+            "$dff": 2,
+            "$logic_not": 2,
+            "$meminit": 4,
+            "$memrd_v2": 4,
+            "$mux": 7,
+            "$not": 3
+          },
+          "yosys_check_assert": "PASS (Found and reported 0 problems)",
+          "yosys_hierarchy_check": "PASS",
+          "yosys_inferred_latches": 0,
+          "yosys_multiple_drivers": false,
+          "yosys_read_verilog": "PASS",
+          "yosys_undriven_nets": false
+        },
+        "rtl": "rtl/mnist_mlp_params_portable.v",
+        "rtl_sha256": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe"
+      }
+    }
+  },
+  "physical_openrom": {
+    "content_verification": {
+      "bias_mismatches": 0,
+      "bias_values": 42,
+      "logical_row_mismatches": 0,
+      "logical_rows": 858,
+      "programmed_cell_mismatches": 0,
+      "programmed_cells_checked": 102640,
+      "weight_index_mismatches": 0,
+      "weight_indices": 25408
+    },
+    "full_model": {
+      "backend_to_backend": {
+        "hidden_mismatches": 0,
+        "logit_mismatches": 0,
+        "prediction_mismatches": 0
+      },
+      "openrom_phys": {
+        "cycles": [
+          864
+        ],
+        "hidden_compared": 16000,
+        "hidden_mismatches": 0,
+        "images": 500,
+        "label_accuracy": 0.98,
+        "logit_mismatches": 0,
+        "logits_compared": 5000,
+        "prediction_mismatches": 0,
+        "seconds": 67.6
+      },
+      "portable": {
+        "cycles": [
+          864
+        ],
+        "hidden_compared": 16000,
+        "hidden_mismatches": 0,
+        "images": 500,
+        "label_accuracy": 0.98,
+        "logit_mismatches": 0,
+        "logits_compared": 5000,
+        "prediction_mismatches": 0,
+        "seconds": 37.5
+      },
+      "test_set": {
+        "count": 500,
+        "images_sha256": "33b682baf07158d5557e1e88c0093c695b2fe18003ae4fd53375a6e8a41d40ae",
+        "indices_first": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "indices_last": [
+          490,
+          491,
+          492,
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499
+        ],
+        "indices_sha256": "0c3fc3e2e8b0514136a044efedc6d6aa32df05e1f58c8cca9cc665e1521f4c8c",
+        "label_histogram": [
+          42,
+          67,
+          55,
+          45,
+          55,
+          50,
+          43,
+          49,
+          40,
+          54
+        ],
+        "labels_sha256": "d9c1ee129708614296525e1d5d088e7f6c31867941fca58d4df714564188c7d2",
+        "selection_policy": "first 500 images of the official MNIST test set, in order; no filtering of any kind"
+      }
+    },
+    "logical_equivalence": {
+      "backend_to_backend": {
+        "openram_vs_openrom_phys": {
+          "bias": 0,
+          "weight": 0
+        },
+        "portable_vs_openram": {
+          "bias": 0,
+          "weight": 0
+        },
+        "portable_vs_openrom_phys": {
+          "bias": 0,
+          "weight": 0
+        }
+      },
+      "backends": [
+        "portable",
+        "openram",
+        "openrom_phys"
+      ],
+      "bias_comparisons": 2907,
+      "examples": [],
+      "mismatches": 0,
+      "stimulus_coverage": "every valid address of every logical memory, plus holds, layer switches, invalid addresses, first/last address and a new address every cycle",
+      "stimulus_cycles": 969,
+      "undriven_cycles_before_first_read": 0,
+      "vs_canonical_image": {
+        "openram": {
+          "bias_vs_image": 0,
+          "weight_vs_image": 0
+        },
+        "openrom_phys": {
+          "bias_vs_image": 0,
+          "weight_vs_image": 0
+        },
+        "portable": {
+          "bias_vs_image": 0,
+          "weight_vs_image": 0
+        }
+      },
+      "weight_comparisons": 2907
+    },
+    "macros": {
+      "bias_l1": {
+        "bbox_um2": 10268.833600000002,
+        "bit_mismatches": 0,
+        "bits_verified": 768,
+        "drc_status": "500 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "32 x 24",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 4
+      },
+      "bias_l2": {
+        "bbox_um2": 10939.8566,
+        "bit_mismatches": 0,
+        "bits_verified": 240,
+        "drc_status": "615 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "10 x 24",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 5
+      },
+      "weights_l1_b0": {
+        "bbox_um2": 53668.588,
+        "bit_mismatches": 0,
+        "bits_verified": 25088,
+        "drc_status": "1244 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "784 x 32",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 4
+      },
+      "weights_l1_b1": {
+        "bbox_um2": 53668.588,
+        "bit_mismatches": 0,
+        "bits_verified": 25088,
+        "drc_status": "1244 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "784 x 32",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 4
+      },
+      "weights_l1_b2": {
+        "bbox_um2": 53668.588,
+        "bit_mismatches": 0,
+        "bits_verified": 25088,
+        "drc_status": "1244 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "784 x 32",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 4
+      },
+      "weights_l1_b3": {
+        "bbox_um2": 53668.588,
+        "bit_mismatches": 0,
+        "bits_verified": 25088,
+        "drc_status": "1244 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "784 x 32",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 4
+      },
+      "weights_l2": {
+        "bbox_um2": 16498.5648,
+        "bit_mismatches": 0,
+        "bits_verified": 1280,
+        "drc_status": "780 errors",
+        "generated": true,
+        "lvs_status": "MISMATCH",
+        "shape": "32 x 40",
+        "views": [
+          "gds",
+          "lef",
+          "log",
+          "lvs.sp",
+          "py",
+          "sp",
+          "v"
+        ],
+        "words_per_row": 4
+      }
+    },
+    "signoff": {
+      "control": {
+        "config": "build/stage5/drclvs/control_rom_1kbyte_upstream/control_rom_1kbyte_upstream_cfg.py",
+        "drc_error_tiles": [],
+        "drc_errors": 830,
+        "drc_status": "830 errors",
+        "elapsed_seconds": 245.0,
+        "log": "build/stage5/drclvs/control_rom_1kbyte_upstream/control_rom_1kbyte_upstream_drclvs.log",
+        "lvs_status": "MISMATCH",
+        "macro": "control_rom_1kbyte_upstream",
+        "reached_verification": true,
+        "returncode": 1
+      },
+      "control_description": "OpenRAM's own upstream reference ROM (rom_configs/example_1kbyte.bin, word_size 1, the settings sky130_rom_1kbyte.py uses). Nothing in the OpenRAM tree was modified; only the output directory was redirected.",
+      "control_is_clean": false,
+      "macro_results": {
+        "bias_l1": {
+          "drc_errors": 500,
+          "drc_status": "500 errors",
+          "log": "build/stage5/drclvs/bias_l1/bias_l1_drclvs.log",
+          "lvs_status": "MISMATCH"
+        },
+        "bias_l2": {
+          "drc_errors": 615,
+          "drc_status": "615 errors",
+          "log": "build/stage5/drclvs/bias_l2/bias_l2_drclvs.log",
+          "lvs_status": "MISMATCH"
+        },
+        "weights_l1_b0": {
+          "drc_errors": 1244,
+          "drc_status": "1244 errors",
+          "log": "build/stage5/drclvs/weights_l1_b0/weights_l1_b0_drclvs.log",
+          "lvs_status": "MISMATCH"
+        },
+        "weights_l1_b1": {
+          "drc_errors": 1244,
+          "drc_status": "1244 errors",
+          "log": "build/stage5/drclvs/weights_l1_b1/weights_l1_b1_drclvs.log",
+          "lvs_status": "MISMATCH"
+        },
+        "weights_l1_b2": {
+          "drc_errors": 1244,
+          "drc_status": "1244 errors",
+          "log": "build/stage5/drclvs/weights_l1_b2/weights_l1_b2_drclvs.log",
+          "lvs_status": "MISMATCH"
+        },
+        "weights_l1_b3": {
+          "drc_errors": 1244,
+          "drc_status": "1244 errors",
+          "log": "build/stage5/drclvs/weights_l1_b3/weights_l1_b3_drclvs.log",
+          "lvs_status": "MISMATCH"
+        },
+        "weights_l2": {
+          "drc_errors": 780,
+          "drc_status": "780 errors",
+          "log": "build/stage5/drclvs/weights_l2/weights_l2_drclvs.log",
+          "lvs_status": "MISMATCH"
+        }
+      },
+      "physical_generation": "PASS",
+      "reasoning": "The upstream reference macro itself fails in this environment, so no DRC or LVS result produced here is evidence about model2rtl's macros. Physical GENERATION is reported separately from physical SIGNOFF, and signoff is UNVERIFIED.",
+      "status": "UNVERIFIED"
+    }
+  },
+  "prior_art_note": "This project explores a digital RTL interpretation of publicly disclosed high-level Multiply-Select-Add ideas associated with public Taalas patent material. No Taalas source code, netlist, layout or transistor-level mask-ROM detail was used, consulted or reproduced, and nothing here is claimed to be equivalent to Taalas hardware.",
+  "project": "model2rtl",
+  "quantization": {
+    "activation": "uint8, zero point 0, range [0, 255]",
+    "activation_statistics": {
+      "hidden_elements_evaluated": 320000,
+      "hidden_pre_saturation_max_observed": 204,
+      "hidden_range_declared": [
+        0,
+        255
+      ],
+      "hidden_range_observed_test": [
+        0,
+        204
+      ],
+      "hidden_saturation_count": 0,
+      "hidden_saturation_percentage": 0.0,
+      "hidden_zero_count": 129278,
+      "hidden_zero_percentage": 40.399375,
+      "input_range_declared": [
+        0,
+        255
+      ],
+      "input_range_observed_test": [
+        0,
+        255
+      ],
+      "input_signedness": "unsigned",
+      "input_width_bits": 8,
+      "layer1_accumulator_range_observed": [
+        -71470,
+        52160
+      ],
+      "logit_range_observed": [
+        -3216,
+        2417
+      ]
+    },
+    "all_sixteen_levels_used": true,
+    "arithmetic_contract": {
+      "accumulator_signedness": "signed",
+      "accumulator_width_bits": {
+        "layer1": 23,
+        "layer2": 18
+      },
+      "bias_format": "signed integer in the layer accumulator domain, added directly to the dot product",
+      "bias_width_bits": {
+        "layer1": 22,
+        "layer2": 17
+      },
+      "input_signedness": "unsigned",
+      "input_width_bits": 8,
+      "input_zero_point": 0,
+      "output_logit_signedness": "signed",
+      "output_logit_width_bits": 18,
+      "prediction_rule": "argmax over the 10 signed logits; lowest index wins ties",
+      "product_signedness": "signed",
+      "product_width_bits": {
+        "layer1": 12,
+        "layer2": 12
+      },
+      "relu_semantics": "ReLU applied to the signed accumulator BEFORE the shift, so the shifted operand is never negative and the shift direction is unambiguous",
+      "requantization_rule": "hidden: h = clamp((max(acc1, 0) + 128) >> 8, 0, 255); output: none (raw signed logits)",
+      "requantization_shift": 8,
+      "rounding_rule": "round-half-up (add 1 << (shift-1), then arithmetic right shift)",
+      "saturation_rule": "clamp to [0, 255] (unsigned 8-bit)",
+      "scale_note": "No multiplicative requantisation scale exists anywhere in the datapath. The only requantisation operator is a fixed power-of-two shift that is an architectural constant, so no trained-model scale constant can leak into the fixed compute fabric.",
+      "weight_alphabet_rule": "alphabet[i] = i - 8",
+      "weight_alphabet_values": [
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "weight_index_width_bits": 4,
+      "weight_value_signedness": "signed",
+      "weight_value_width_bits": 4
+    },
+    "prediction_rule": "argmax over the 10 signed logits; lowest index wins ties",
+    "requantization_rule": "hidden: h = clamp((max(acc1, 0) + 128) >> 8, 0, 255); output: none (raw signed logits)",
+    "requantization_shift": 8,
+    "rounding_rule": "round-half-up (add 1 << (shift-1), then arithmetic right shift)",
+    "saturation_rule": "clamp to [0, 255] (unsigned 8-bit)",
+    "scale_note": "No multiplicative requantisation scale exists anywhere in the datapath. The only requantisation operator is a fixed power-of-two shift that is an architectural constant, so no trained-model scale constant can leak into the fixed compute fabric.",
+    "synapses": {
+      "index_bits_total": 101632,
+      "layer1": 25088,
+      "layer2": 320,
+      "total": 25408
+    },
+    "weight_alphabet": [
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "weight_alphabet_rule": "alphabet[i] = i - 8",
+    "weight_index_bits": 4,
+    "weight_index_histogram": {
+      "layer1": {
+        "-1": 3702,
+        "-2": 2572,
+        "-3": 1696,
+        "-4": 1013,
+        "-5": 569,
+        "-6": 312,
+        "-7": 204,
+        "-8": 228,
+        "0": 4201,
+        "1": 3876,
+        "2": 2868,
+        "3": 1795,
+        "4": 997,
+        "5": 523,
+        "6": 279,
+        "7": 253
+      },
+      "layer2": {
+        "-1": 29,
+        "-2": 16,
+        "-3": 24,
+        "-4": 18,
+        "-5": 21,
+        "-6": 8,
+        "-7": 11,
+        "-8": 23,
+        "0": 22,
+        "1": 32,
+        "2": 28,
+        "3": 28,
+        "4": 26,
+        "5": 16,
+        "6": 10,
+        "7": 8
+      }
+    },
+    "weight_saturation": {
+      "layer1_percent": 0.9167729591836735,
+      "layer2_percent": 7.5,
+      "note": "Saturation counts weights clipped to the alphabet extremes during quantization-aware training. Layer 2 saturates more often because it has only 320 synapses and a wider dynamic range per synapse; final integer accuracy is unaffected at 96.45%."
+    },
+    "widths": {
+      "layer1": {
+        "accumulator_bits": 23,
+        "accumulator_max": 3496591,
+        "accumulator_min": -3696512,
+        "act_in_bits": 8,
+        "act_in_max": 255,
+        "act_in_min": 0,
+        "act_in_signed": false,
+        "bias_bits": 22,
+        "dot_bits": 22,
+        "dot_max": 1399440,
+        "dot_min": -1599360,
+        "n_inputs": 784,
+        "n_outputs": 32,
+        "name": "layer1",
+        "output_bits": 8,
+        "output_max": 255,
+        "output_min": 0,
+        "output_signed": false,
+        "product_bits": 12,
+        "product_max": 1785,
+        "product_min": -2040,
+        "requant_shift": 8,
+        "weight_index_bits": 4,
+        "weight_value_bits": 4
+      },
+      "layer2": {
+        "accumulator_bits": 18,
+        "accumulator_max": 122655,
+        "accumulator_min": -130816,
+        "act_in_bits": 8,
+        "act_in_max": 255,
+        "act_in_min": 0,
+        "act_in_signed": false,
+        "bias_bits": 17,
+        "dot_bits": 17,
+        "dot_max": 57120,
+        "dot_min": -65280,
+        "n_inputs": 32,
+        "n_outputs": 10,
+        "name": "layer2",
+        "output_bits": 18,
+        "output_max": 122655,
+        "output_min": -130816,
+        "output_signed": true,
+        "product_bits": 12,
+        "product_max": 1785,
+        "product_min": -2040,
+        "requant_shift": null,
+        "weight_index_bits": 4,
+        "weight_value_bits": 4
+      }
+    }
+  },
+  "rtl": {
+    "fabric": {
+      "clocks": 1,
+      "language": "Verilog-2001",
+      "path": "rtl/mnist_mlp_fabric.v",
+      "ports": {
+        "bias_interface": "option B, indexed read: bmem_addr = neuron index, bmem_data = that neuron's signed bias sign extended to 22 bits. Chosen over a wide packed port because finalisation is already one neuron per cycle, so the indexed read costs no extra cycles and keeps the Stage-2 ROM shape identical to the weight interface.",
+        "bmem_en/bmem_layer/bmem_addr[5:0]/bmem_data[21:0]": "bias memory, synchronous read, 1-cycle latency",
+        "busy/done/prediction_valid": "status",
+        "clk": "input, single clock domain",
+        "in_ready/in_valid/in_data[7:0]": "activation stream handshake; exactly 784 transfers, index order 0..783",
+        "logits[179:0]": "10 signed logits of 18 bits, logit j at [j*18 +: 18]",
+        "memory_read_semantics": "an address driven during cycle T is captured on the posedge ending cycle T; the data must be presented during cycle T+1.",
+        "prediction[3:0]": "argmax index",
+        "reset_start_done_semantics": "rst is synchronous and clears all state. start is sampled while idle and clears the accumulators. done is high for exactly one cycle. prediction_valid is high from that cycle until the next start; logits and prediction hold over the same window.",
+        "rst": "input, synchronous, active high",
+        "start": "input, one-cycle pulse while idle",
+        "weight_word_packing": "weight_index[i][j] = wmem_data[j*4 +: 4]; wmem_addr = input feature i; Stage-0 orientation [in_features, out_features]; neuron 0 in the least significant nibble; layer 1 uses 128 bits, layer 2 uses 40 bits",
+        "wmem_en/wmem_layer/wmem_addr[9:0]/wmem_data[127:0]": "weight-index memory, synchronous read, 1-cycle latency"
+      },
+      "resets": "1 synchronous",
+      "sha256": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "vendor_neutral": true,
+      "weight_independence": {
+        "committed_fabric_sha256": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "committed_matches_fresh_generation": true,
+        "fabric_sha256_with_alternate_biases": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "fabric_sha256_with_alternate_weight_set": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "fabric_sha256_with_trained_weights": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+        "identical_after_bias_change": true,
+        "identical_after_weight_change": true,
+        "trained_npz_restored": true,
+        "trained_npz_sha256_after": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46",
+        "trained_npz_sha256_before": "1e231ad80e12e1045bb2941f12a84b1f8f1fa6ff4e93c3f7cd2077ebb4337e46"
+      }
+    },
+    "files": {
+      "rtl/mnist_mlp_fabric.v": "7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c",
+      "rtl/mnist_mlp_params_openram.v": "0e52cd13324b6b8fcec830440cb9018bfdc5d05a26a1e869be28a02ccbb6e395",
+      "rtl/mnist_mlp_params_openrom_phys.v": "5d320cef91fe7c5c159d8b6ea717db781fa37ba2811b12bc3249e291d9abf24f",
+      "rtl/mnist_mlp_params_portable.v": "d9c1aecd5f15872e1fb8011824d957766ad93f2b3598d2d9bc9df4f88dca9ebe",
+      "rtl/mnist_mlp_params_sel_openram.v": "0e820585cb6230cbf39570d9f38269e9bbdd71c0fd2f6d43b35f6df0132d3cb0",
+      "rtl/mnist_mlp_params_sel_openrom_phys.v": "b8126c459178284b9cac48e3fd3063958b7d178ac7674051325d148223298d3c",
+      "rtl/mnist_mlp_params_sel_portable.v": "902994346f1ad992427c1d83dbb00395c8efe7689e0bd1c94d6dcc92015c814f",
+      "rtl/mnist_mlp_top.v": "0763242015ce86e8b6edc3681d1e9834f5e9a5d3199f233bce0f3c17ae701eeb"
+    }
+  },
+  "stage": 6,
+  "stage_status": {
+    "stage0_quantization": "PASS",
+    "stage1_compute_fabric": "PASS",
+    "stage2_parameter_backends": "PARTIAL",
+    "stage3_behavioral_verification": "PASS",
+    "stage4_dual_target_portability": "PASS",
+    "stage5_physical_generation": "PASS",
+    "stage5_physical_signoff": "UNVERIFIED"
+  },
+  "test_evolution": {
+    "cumulative": {
+      "stage0": 35,
+      "stage1": 79,
+      "stage2": 137,
+      "stage3": 174,
+      "stage4": 245,
+      "stage5": 381
+    },
+    "final_measured": {
+      "collected": 408,
+      "command": "pytest tests",
+      "failed": 0,
+      "passed": 408,
+      "skipped": 0
+    },
+    "note": "Cumulative pytest count at the close of each stage. The per-stage figures are the baselines recorded at the time; the final figure is measured by the Stage-6 run."
+  },
+  "title": "final technical report"
+}

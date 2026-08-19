@@ -163,6 +163,37 @@ def render(rep: dict) -> str:
     add("Nothing was installed system wide, no system Python was modified, and no")
     add("`sudo` was used. OpenRAM is upstream and unmodified.")
     add("")
+    add("**Prerequisites and exact install steps used on this machine:**")
+    add("")
+    add("```bash")
+    add("# 1. OpenRAM itself (upstream, unmodified)")
+    add("git clone https://github.com/VLSIDA/OpenRAM.git ~/OpenRAM")
+    add("cd ~/OpenRAM && python3.11 -m venv .venv")
+    add(".venv/bin/pip install -r requirements.txt      # pulls ciel")
+    add("")
+    add("# 2. SKY130 PDK + SRAM cell library, into user space")
+    add("export PDK_ROOT=%s" % env["pdk_root"])
+    add("export PATH=~/OpenRAM/.venv/bin:$PATH")
+    add("make sky130-pdk PDK_ROOT=$PDK_ROOT       # ciel fetches sky130A")
+    add("make sky130-install PDK_ROOT=$PDK_ROOT   # links cells into technology/sky130")
+    add("")
+    add("# 3. physical verification tools (user space, no sudo)")
+    add("conda create -p ~/klayout_cf/magic -c conda-forge magic")
+    add("git clone https://github.com/RTimothyEdwards/netgen.git ~/netgen-lvs")
+    add("cd ~/netgen-lvs && ./configure --prefix=~/netgen-install \\")
+    add("    --with-tcl=~/klayout_cf/magic/lib --with-tk=~/klayout_cf/magic/lib")
+    add("make && make install")
+    add("")
+    add("# 4. environment for every OpenROM run")
+    add("source build/openram/openram_env.sh")
+    add("```")
+    add("")
+    add("Two things this OpenRAM version needs that its docs do not mention:")
+    add("`use_nix = False` must be set in every config (otherwise it aborts")
+    add("demanding a Nix toolchain bootstrap), and the conda-forge package named")
+    add("`netgen` is the **mesh generator**, not the LVS tool — netgen-lvs must be")
+    add("built from source.")
+    add("")
     sm = env["smoke_test"]
     add("**Smoke test** (%s): generation %s in %ds, views `%s`. "
         % (sm["design"], sm["generation"], sm["elapsed_seconds"],
@@ -230,6 +261,14 @@ def render(rep: dict) -> str:
     for lim in rep["limitations"]:
         add("- %s" % lim)
     add("")
+    add("Two of these limitations were written at Stage 2 and have since been")
+    add("addressed. Stage 4 ran both synthesis flows and gate-level simulated")
+    add("both netlists (section 14). Stage 5 generated every physical macro,")
+    add("using approved byte padding for the bias ROMs and four parallel banks")
+    add("for the 784 x 128 layer-1 memory, and verified all 102,640 bits against")
+    add("the generated netlists (section 15). What still stands: DRC and LVS")
+    add("remain untrustworthy here, so physical SIGNOFF is UNVERIFIED.")
+    add("")
     return "\n".join(L)
 
 
@@ -249,7 +288,14 @@ def main() -> int:
         return 1
     head, rest = text.split(START, 1)
     _, tail = rest.split(END, 1)
-    open(readme, "w").write(head + START + render(rep) + END + tail)
+    # render BEFORE opening for write: a failure here must never truncate the
+    # README that is already on disk
+    body = render(rep)
+    new_text = head + START + body + END + tail
+    tmp = readme + ".tmp"
+    with open(tmp, "w") as fh:
+        fh.write(new_text)
+    os.replace(tmp, readme)
     print("README.md Stage-2 results block updated")
     return 0
 

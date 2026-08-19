@@ -113,10 +113,11 @@ def test_report_matches_the_saved_artifacts(stage0_report, integer_model, paths)
 
 
 def test_generated_artifacts_stay_inside_the_current_stage(root):
-    """Stage 1 may emit exactly one RTL file: the fixed compute fabric.
+    """rtl/ holds exactly the files the completed stages are allowed to emit.
 
-    No weight ROM (Stage 2), no OpenRAM output (Stage 2/5) and no synthesis
-    build product (Stage 4) may exist yet.
+    This is a stage-boundary allowlist, not a freeze: it fails when a stage
+    emits RTL it was not authorised to emit.  Each entry names the stage that
+    introduced it, so an unplanned file is still caught.
     """
     import os
     allowed_rtl = {
@@ -126,13 +127,18 @@ def test_generated_artifacts_stay_inside_the_current_stage(root):
         "mnist_mlp_params_sel_portable.v",
         "mnist_mlp_params_sel_openram.v",
         "mnist_mlp_top.v",
+        # Stage 5: the physical OpenROM organisation went into NEW files
+        # because the Stage-2 backend and its selector are frozen.
+        "mnist_mlp_params_openrom_phys.v",
+        "mnist_mlp_params_sel_openrom_phys.v",
     }
     rtl = [f for f in os.listdir(os.path.join(root, "rtl"))
            if not f.startswith(".")]
     assert set(rtl) <= allowed_rtl, "unexpected RTL for this stage: %s" % (
         sorted(set(rtl) - allowed_rtl),)
-    # Stage 3+ artefacts must not exist yet
+    # build/ is organised per stage; no stage may drop artefacts at its root
     build = os.path.join(root, "build")
-    for banned in ("synth", "gate_level", "netlist"):
-        assert banned not in os.listdir(build), \
-            "%s belongs to a later stage" % banned
+    allowed_build = {"param_images", "openram", "stage4", "stage5"}
+    assert set(os.listdir(build)) <= allowed_build, \
+        "unexpected build directory: %s" % (
+            sorted(set(os.listdir(build)) - allowed_build),)

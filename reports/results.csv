@@ -1,0 +1,32 @@
+metric,value,source
+Float MNIST test accuracy,96.52%,reports/stage0_quantization.json
+Quantized integer MNIST test accuracy,96.45%,reports/stage0_quantization.json
+Accuracy change from quantization,-0.07 points,reports/stage0_quantization.json
+Total weight indices,25408,reports/stage0_quantization.json
+Weight alphabet levels,16,reports/stage0_quantization.json
+Fabric active shared product expressions,16,reports/stage1_compute_fabric.json
+Nominal cycles per inference,864,reports/stage1_compute_fabric.json
+Behavioral verification images,500,reports/stage3_behavioral_verification.json
+Behavioral RTL-vs-golden mismatches,0,reports/stage3_behavioral_verification.json
+Cycle-level trace checks,178840,reports/stage3_behavioral_verification.json
+Cycle-level trace failures,0,reports/stage3_behavioral_verification.json
+FPGA post-synthesis images,500,reports/stage4_dual_target_portability.json
+FPGA post-synthesis logit mismatches,0,reports/stage4_dual_target_portability.json
+Generic post-synthesis images,500,reports/stage4_dual_target_portability.json
+Generic post-synthesis logit mismatches,0,reports/stage4_dual_target_portability.json
+iCE40 total cells,9079,reports/stage4_dual_target_portability.json
+iCE40 SB_LUT4,6429,reports/stage4_dual_target_portability.json
+iCE40 flip-flops,1614,reports/stage4_dual_target_portability.json
+iCE40 SB_CARRY,1004,reports/stage4_dual_target_portability.json
+iCE40 SB_RAM40_4K,32,reports/stage4_dual_target_portability.json
+iCE40 SB_MAC16 (DSP),0,reports/stage4_dual_target_portability.json
+Generic total cells,45707,reports/stage4_dual_target_portability.json
+Generic multiplier/arithmetic cells,0,reports/stage4_dual_target_portability.json
+OpenROM macros generated,7,reports/stage5_openrom_physical.json
+OpenROM programmed cells verified,102640,reports/stage5_openrom_physical.json
+OpenROM programmed-cell mismatches,0,reports/stage5_openrom_physical.json
+Weight indices recovered from physical macros,25408,reports/stage5_openrom_physical.json
+OpenROM total macro GDS bounding-box area,252381.6 um^2,reports/stage5_openrom_physical.json
+"Portable storage mapped to SKY130, cells",9406,reports/stage5_openrom_physical.json
+"Portable storage mapped to SKY130, liberty cell area",58335.9 um^2,reports/stage5_openrom_physical.json
+Physical signoff,UNVERIFIED,reports/stage5_openrom_physical.json

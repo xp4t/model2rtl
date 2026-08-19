@@ -145,7 +145,14 @@ def main() -> int:
         return 1
     head, rest = text.split(START, 1)
     _, tail = rest.split(END, 1)
-    open(readme, "w").write(head + START + render(rep) + END + tail)
+    # render BEFORE opening for write: a failure here must never truncate the
+    # README that is already on disk
+    body = render(rep)
+    new_text = head + START + body + END + tail
+    tmp = readme + ".tmp"
+    with open(tmp, "w") as fh:
+        fh.write(new_text)
+    os.replace(tmp, readme)
     print("README.md Stage-0 results block updated")
     return 0
 

@@ -64,7 +64,8 @@ def render(rep: dict) -> str:
     add("counts a fully *unrolled* design and remains valid as an analytical")
     add("fully-spatial count; it is not superseded by this table. And because every")
     add("product has a constant 4-bit operand, none of these source-level counts is")
-    add("a physical multiplier or DSP count. Stage 4 measures synthesized resources.")
+    add("a physical multiplier or DSP count. Section 14 reports the synthesized")
+    add("resources Stage 4 actually measured.")
     add("")
     add("### Latency (architectural only — no clock frequency is claimed)")
     add("")
@@ -93,8 +94,9 @@ def render(rep: dict) -> str:
         % (a["expected_latency_100mhz_us"], a["inferences_per_second_100mhz"]))
     add("")
     add("These are cycle counts divided by an assumed clock. **No maximum clock")
-    add("frequency has been established** — that needs synthesis and timing")
-    add("analysis, which is Stage 4.")
+    add("frequency has been established.** Stage 4 ran synthesis but no timing")
+    add("analysis and no place-and-route, so these remain architectural latency")
+    add("examples only.")
     add("")
     add("### Interface")
     add("")
@@ -221,7 +223,14 @@ def main() -> int:
         return 1
     head, rest = text.split(START, 1)
     _, tail = rest.split(END, 1)
-    open(readme, "w").write(head + START + render(rep) + END + tail)
+    # render BEFORE opening for write: a failure here must never truncate the
+    # README that is already on disk
+    body = render(rep)
+    new_text = head + START + body + END + tail
+    tmp = readme + ".tmp"
+    with open(tmp, "w") as fh:
+        fh.write(new_text)
+    os.replace(tmp, readme)
     print("README.md Stage-1 results block updated")
     return 0
 

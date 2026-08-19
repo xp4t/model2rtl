@@ -1,291 +1,236 @@
 # model2rtl
 
-**A compiler from a trained, quantized neural network to portable, synthesizable RTL for both FPGA and ASIC targets.**
-
-> ## CURRENT STATUS: STAGE 2 — PARAMETER BACKENDS VERIFIED
->
-> Stages 0 (training + integer golden model), 1 (the fixed Multiply-Select-Add
-> compute fabric) and 2 (two interchangeable parameter-storage backends) are
-> complete.
->
-> `rtl/mnist_mlp_top.v` runs real MNIST images bit-exactly against the Stage-0
-> integer golden model with **either** backend, and `rtl/mnist_mlp_fabric.v` is
-> byte-for-byte unchanged from Stage 1.
->
-> - **Portable backend** (`rtl/mnist_mlp_params_portable.v`): pure synthesizable
->   Verilog-2001, `case`/constant lookup. **FPGA and ASIC.** This is the default.
-> - **OpenRAM/OpenROM backend** (`rtl/mnist_mlp_params_openram.v`): **ASIC /
->   SKY130 only**, no FPGA portability claimed. Physical macro generation is
->   **partial** — see the Stage-2 section for exactly which macros were built,
->   which are blocked by a tool limitation, and what DRC/LVS actually reported.
->
-> **What does not exist yet:**
-> - **No synthesis portability claim.** Only `read_verilog` / `hierarchy -check` /
->   `proc` / `check -assert` and Icarus compilation have been run. `synth_ice40`,
->   `synth_ecp5` and a generic ASIC synthesis flow have not.
-> - **No FPGA gate-level verification.** None has been run.
-> - **No ASIC gate-level verification.** None has been run.
-> - **No clean DRC or LVS result** for any macro — including OpenRAM's own
->   reference macro, which also fails in this environment.
-> - **No area, DSP, cell-area or timing number**, and no maximum clock frequency.
->
-> `build/` holds generated artefacts only. Nothing here has been synthesized,
-> placed, routed, or taped out.
-
----
-
-## 1. Objective
-
-Take a trained quantized MLP and emit synthesizable Verilog that implements a
-**bit-exact integer inference specification**, portable across FPGA and ASIC
-flows with no source changes.
-
-The first supported network is an MNIST MLP:
+**Compile a quantized neural network into portable synthesizable RTL.**
 
 ```
-784 uint8 inputs
-  -> Dense(32)  4-bit weight indices
-  -> ReLU + requantize to uint8
-  -> Dense(10)  4-bit weight indices
-  -> signed integer logits
-  -> argmax
+MNIST  784 -> 32 -> ReLU -> 10
+       4-bit weight indices, 16 fixed levels
+       uint8 activations
+       16 shared constant-weight products per activation
+       Verilog-2001, no vendor primitives
+       FPGA-oriented and generic/ASIC-oriented synthesis, same source
+       500-image post-synthesis verification on both, zero mismatches
 ```
 
-## 2. Multiply-Select-Add fabric (the architecture being targeted)
+model2rtl demonstrates that a trained quantized neural network can be compiled into a portable RTL implementation using a shared Multiply-Select-Add architecture, verified behaviourally and after independent FPGA-oriented and generic/ASIC-oriented synthesis, with an optional ASIC physical ROM representation of its parameters.
 
-Weights are quantized to exactly **K = 16** levels, so every synapse stores only
-a 4-bit index. For a given input activation `x_i` there are therefore only 16
-distinct products it can ever participate in, no matter how many neurons it
-feeds:
+> **Scope.** The claim covers the demonstrated MNIST 784-32-10 MLP only. It is not a claim of production ASIC readiness, timing closure, full-chip physical implementation, DRC- or LVS-clean macros, arbitrary-model compilation, or reproduction of any proprietary implementation.
+
+## Results
+
+| Metric | Result |
+|---|---|
+| Float MNIST test accuracy | 96.52% |
+| Quantized integer test accuracy | 96.45% |
+| Behavioral RTL vs integer golden model | **0 mismatches** |
+| Behavioral verification images | 500 |
+| Cycle-level internal trace checks | 178,840, 0 failures |
+| FPGA post-synthesis gate-level | 500 images, **0 mismatches** |
+| Generic post-synthesis gate-level | 500 images, **0 mismatches** |
+| Nominal cycles per inference | 864 |
+| Fabric active shared product alternatives | 16 |
+| iCE40 `SB_MAC16` (DSP) | **0** |
+| iCE40 `SB_LUT4` | 6,429 |
+| iCE40 flip-flops | 1,614 |
+| iCE40 `SB_RAM40_4K` | 32 |
+| Generic-gate cells | 45,707 |
+| Generic multiplier/arithmetic cells | **0** |
+| OpenROM physical macro contents | **bit-exact** (102,640 / 102,640 cells) |
+| OpenROM total macro GDS bounding box | 252,381.6 um² |
+| Same storage as SKY130 standard cells | 9,406 cells, 58,335.9 um² |
+| Physical DRC/LVS signoff | **UNVERIFIED** |
+
+Full detail: **[FINAL-REPORT.md](FINAL-REPORT.md)**. Machine-readable: [`reports/final_report.json`](reports/final_report.json) and [`reports/results.csv`](reports/results.csv). Every number above was extracted from the six per-stage reports, not retyped.
+
+## The architecture
+
+Weights are quantized to exactly **K = 16** levels, so every synapse stores only a 4-bit index. For a given activation `x_i` there are therefore only 16 distinct products it can ever take part in, however many neurons it feeds.
 
 ```
-            x_i
-             |
-   +---------+---------+ ... +---------+     product bank (K = 16 generators)
-   |         |         |     |         |
- x_i*a[0]  x_i*a[1]  x_i*a[2] ...   x_i*a[15]
-   \_________\_________\_____/________/
-                  |
-        16:1 select, chosen by the synapse's 4-bit weight index
-                  |
-        accumulate into the destination neuron
+                          activation x_i
+                                |
+        +-----------+-----------+-----------+-----------+
+        |           |           |           |           |
+     x_i*-8      x_i*-7       .....       x_i*+6      x_i*+7
+        |           |           |           |           |
+        +-----------+--- 16 shared products -+-----------+
+                                |
+              +-----------+------+------+-----------+
+              |           |             |           |
+           mux j0      mux j1   .....  mux jN    (4-bit weight index
+              |           |             |          selects per synapse)
+            acc0        acc1          accN
+              |           |             |
+              +-----------+-------------+
+                                |
+                          next activation
 ```
 
-The **product bank is shared across the complete fanout of that input**. There is
-no multiplier per synapse.
+Execution is **input-serial, output-parallel**: one activation enters per cycle, every neuron of the active layer accumulates in parallel, and the same 16-product bank is reused across all neurons, across input cycles and across both layers.
 
-### Source-level operator counts for this topology
+Three counts are easy to conflate, so they are kept apart — **all three are source-level operation counts, none is a physical multiplier count**:
 
-| Layer | Inputs | Outputs | Naive multipliers | Shared product generators | Selectors (K:1) | Ratio naive/shared |
-|-------|--------|---------|-------------------|---------------------------|-----------------|--------------------|
-| 1     | 784    | 32      | 25,088            | 12,544                    | 25,088          | 2.000              |
-| 2     | 32     | 10      | 320               | 512                       | 320             | 0.625              |
-| Total |        |         | 25,408            | 13,056                    | 25,408          | 1.946              |
+| | Count |
+|---|---|
+| naive fully spatial synapse multiplications | 25,408 |
+| fully spatial MSA product generators | 13,056 |
+| **implemented** active shared product expressions | **16** |
 
-**Sharing is not universally cheaper.** In raw product-generator count, sharing
-wins only when a layer's output fanout exceeds K:
+Area and parallelism are traded for latency: **864 cycles** per inference instead of one.
 
-- Layer 1: fanout 32 > K = 16, so sharing halves the product generators.
-- Layer 2: fanout 10 < K = 16, so sharing **costs 1.6x more** product generators
-  than the naive form. The crossover is at fanout = K.
+After synthesis there are **0 multiplier or DSP cells left in either netlist**. Each product has a fixed small constant operand, so synthesis turns them into wiring, shifts, negation and LUT/carry logic. The honest statement is: *The architecture exposes only sixteen constant-weight product alternatives per activation, and synthesis further eliminates explicit multiplier hardware.*
 
-**Source-level multiplier counts are not physical multiplier or DSP counts.**
-Every product here has a constant 4-bit operand, so synthesis is free to
-implement it as shifts, adds and negations, and a constant-weight naive
-multiplier may collapse to almost nothing. Synthesized cell counts, DSP
-inference and area are separate measurements and will be reported from actual
-tool output in Stages 4 and 5 — not estimated from this table.
+## Parameter flow
 
-## 3. Public prior-art / IP note
+```
+   trained model  (Stage 0, quantization-aware training)
+        |
+   4-bit weight-index image + integer biases
+        |
+   canonical parameter images        <- one hashed source of truth
+        |
+   +----+-----------------------+
+   |                            |
+   portable Verilog ROM      OpenROM physical macros (SKY130)
+   (FPGA + ASIC)             (ASIC only; banked + byte-padded)
+   |                            |
+   +----+-----------------------+
+        |
+   ONE fixed logical parameter interface
+        |
+   the SAME unchanged compute fabric
+```
 
-This project explores a digital RTL interpretation of publicly disclosed
-quantized Multiply-Select-Add concepts. It does not reproduce or claim to
-implement proprietary Taalas circuit, mask-ROM, physical-design, or
-manufacturing techniques.
+The fabric contains **no trained value**. Regenerating it with a different weight set and different biases produces a byte-identical file, so the compute architecture and the model are genuinely separable. The fabric has not changed a byte since Stage 1:
 
-The architectural inspiration comes from publicly disclosed high-level ideas in:
+```
+rtl/mnist_mlp_fabric.v  7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c
+```
 
-- **WO2025217724A1** — "Mask Programmable ROM using Shared Connections"
-- the companion public patent application describing a
-  **"Large Parameter Set Computation Accelerator"**
+Backend choice is a build-time source-list decision — no runtime mux, no parameter. Compile exactly one selector file:
 
-Only the publicly disclosed high-level idea is used here:
+```bash
+# portable (FPGA or ASIC)
+rtl/mnist_mlp_top.v rtl/mnist_mlp_fabric.v \
+  rtl/mnist_mlp_params_portable.v rtl/mnist_mlp_params_sel_portable.v
 
-> precompute the products for the quantization alphabet -> select one by the
-> stored parameter index -> accumulate.
+# physical OpenROM organisation (ASIC / SKY130)
+rtl/mnist_mlp_top.v rtl/mnist_mlp_fabric.v \
+  rtl/mnist_mlp_params_openrom_phys.v \
+  rtl/mnist_mlp_params_sel_openrom_phys.v
+```
 
-This is a personal educational/demo implementation. It deliberately does **not**
-attempt to reproduce proprietary physical implementation details, mask layouts,
-transistor-level structures, confidential implementation details, or any
-undocumented design information.
+## Status
 
-## 4. Integer golden-model philosophy
+| Stage | Scope | Status |
+|---|---|---|
+| 0 | training, quantization, integer golden model, arithmetic contract | **PASS** |
+| 1 | weight-independent Multiply-Select-Add compute fabric | **PASS** |
+| 2 | two interchangeable parameter-storage backends | **PARTIAL** |
+| 3 | behavioral RTL verification | **PASS** |
+| 4 | dual-target synthesis portability + gate-level verification | **PASS** |
+| 5 | physical OpenROM generation | **PASS** |
+| 5 | physical DRC/LVS signoff | **UNVERIFIED** |
+| 6 | final report and consolidation | **PASS** |
 
-The RTL must implement a bit-exact integer specification, so the arithmetic
-contract is fixed **before** any Verilog is written.
+Stage 2 closed as PARTIAL because two of the four logical memory shapes could not be built by the installed OpenROM at the time; Stage 5 completed them. The Stage-2 verdict is left as recorded.
 
-- `src/model2rtl/contract.py` defines the arithmetic contract analytically:
-  alphabet, signedness, product widths, accumulator widths, bias format,
-  requantization, rounding, saturation, ReLU semantics, logit format. Widths are
-  **computed**, never guessed.
-- `src/model2rtl/golden.py` is a pure-NumPy integer inference path. It performs
-  no floating-point Dense operation: activation -> index -> alphabet lookup ->
-  integer multiply -> widened integer accumulate -> bias -> requantize ->
-  saturate -> activation.
-- **Keras float predictions are not the RTL oracle.** The NumPy integer model
-  is, for behavioral simulation, gate-level simulation and the physical ROM
-  backend alike.
+### What does not exist
 
-Training uses quantization-aware training whose forward graph simulates that
-exact integer pipeline with straight-through estimators. The exported integer
-model is then cross-checked against the TensorFlow graph and must agree on
-**every logit of all 10,000 test images, bit for bit**, or the run fails.
+- **No DRC or LVS signoff.** OpenRAM's *own* upstream reference ROM fails in this environment (830 errors, LVS MISMATCH), so no physical-verification result here is evidence about these macros in either direction. No macro is called clean.
+- **No place-and-route**, on either target: no device fit, no bitstream, no floorplan, no routing, no full-chip flow.
+- **No timing analysis** anywhere, and no maximum clock frequency. The 50/100 MHz figures in the appendices are cycle counts divided by an assumed clock.
+- **No floorplanned area and no placement density.** The macro figure is a raw sum of bounding boxes.
+- **No general model compiler.** MNIST 784 -> 32 -> ReLU -> 10 only; no convolution, no ONNX or TFLite ingestion.
 
-## 5. The arithmetic contract
+## Public prior-art / IP note
+
+This project explores a digital RTL interpretation of publicly disclosed high-level Multiply-Select-Add ideas associated with public Taalas patent material. No Taalas source code, netlist, layout or transistor-level mask-ROM detail was used, consulted or reproduced, and nothing here is claimed to be equivalent to Taalas hardware.
+
+## The arithmetic contract
+
+The integer specification was fixed **analytically, before any RTL existed**, and never moved. A pure-NumPy integer model implementing it is the sole oracle for every stage; Keras float output is a reference number and was never used to check RTL arithmetic.
 
 | Item | Value |
-|------|-------|
-| Input activation | `uint8`, range `[0, 255]`, zero-point 0, no rescaling (a raw MNIST pixel byte) |
-| Weight index | `uint4`, values `0..15`, K = 16 |
-| Weight alphabet | `alphabet[i] = i - 8`, i.e. the signed levels `-8 .. +7` (plain two's-complement int4) |
-| Weight value | signed, 4 bits |
-| Product | signed, 12 bits (`255 * -8 = -2040` .. `255 * 7 = 1785`) |
-| Layer 1 dot product | signed, 22 bits (784 terms, `[-1599360, +1399440]`) |
-| Layer 1 accumulator | signed, 23 bits (dot product + 22-bit bias) |
-| Layer 2 dot product | signed, 17 bits (32 terms, `[-65280, +57120]`) |
-| Layer 2 accumulator | signed, 18 bits (dot product + 17-bit bias) |
-| Bias | signed integer **in the layer's accumulator domain**, added directly to the dot product with no pre-scaling. Width is defined as the layer's dot-product width — 22 bits (layer 1), 17 bits (layer 2) — so it too is derived from topology and alphabet, not from the trained model. Stored as `int32` in the NPZ and sign-extended |
-| Hidden requantization | `h = clamp((max(acc1, 0) + 128) >> 8, 0, 255)` |
-| Rounding | round-half-up: add `1 << (shift-1)`, then arithmetic right shift |
-| Saturation | clamp to `[0, 255]` (unsigned 8-bit) |
-| ReLU | applied to the **signed accumulator before the shift**, so the shifted operand is never negative and the shift direction is unambiguous |
-| Output | raw signed logits, no requantization; `prediction = argmax(logits)`, lowest index wins ties |
+|---|---|
+| weight alphabet | `alphabet[i] = i - 8`, i.e. -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7 |
+| weight index | 4 bits |
+| activations | uint8, zero point 0, range [0, 255] |
+| product | signed, 12 bits |
+| layer1 dot / bias / accumulator | 22 / 22 / 23 bits |
+| layer2 dot / bias / accumulator | 17 / 17 / 18 bits |
+| requantization | `hidden: h = clamp((max(acc1, 0) + 128) >> 8, 0, 255); output: none (raw signed logits)` |
+| rounding | round-half-up (add 1 << (shift-1), then arithmetic right shift) |
+| prediction | argmax over the 10 signed logits; lowest index wins ties |
 
-### There is no multiplicative requantization scale anywhere
+There is **no multiplicative requantization scale anywhere in the datapath** — the only requantization operator is a fixed power-of-two shift of 8. That is precisely why no trained value can leak into the fabric.
 
-The only requantization operator in the datapath is a **fixed power-of-two
-shift** (`HIDDEN_REQUANT_SHIFT = 8`), which is an architectural constant, not a
-trained one. Consequently:
-
-- No per-tensor scale, zero-point or multiplier constant derived from the
-  trained model can leak into the compute fabric.
-- The float scales `s_x`, `s_w`, `s_h` exist only as documentation of what the
-  integers *mean*; they never appear in the datapath, so they cannot appear in
-  the RTL.
-
-The shift value was selected once by the `--sweep-hidden-shift` diagnostic and
-then frozen. Shifts 5..10 all landed within ~1.9 percentage points on the
-validation split, so the choice is not accuracy critical; 8 is used because it
-is the largest shift that keeps the observed hidden activations inside `uint8`
-with zero saturation, giving the cleanest hardware semantics.
-
-## 6. Weight independence (the central design rule)
-
-The future `rtl/mnist_mlp_fabric.v` must depend only on:
-
-- topology (784 / 32 / 10)
-- K = 16
-- activation format (uint8)
-- the fixed arithmetic contract above
-- the fixed weight alphabet
-
-and **must not** depend on any trained per-synapse value. Changing the trained
-weight indices must not require regenerating the compute topology.
-
-The split is enforced by the artefact layout:
-
-| File | Contains | Fabric may depend on it? |
-|------|----------|--------------------------|
-| `model/quant_params.json` | the fixed contract: alphabet, widths, shift, limits, orientation | yes |
-| `model/mnist_weights_indices.npz` | **model parameters only**: 4-bit synapse indices and integer biases | **no** — these belong to the weight ROM |
-
-Stage-0 tests assert that `quant_params.json` contains no bulk tensor and no
-per-synapse value, and that the computed contract is byte-identical when a
-completely different random weight-index set is substituted.
-
-## 7. Portability objective
-
-The same two source files must synthesize unchanged through an FPGA-oriented
-Yosys flow (`synth_ice40` / `synth_ecp5`) and a generic/ASIC-oriented Yosys
-flow. Requirements for the emitted RTL: synthesizable Verilog-2001 subset, no
-SystemVerilog, no vendor primitives, no vendor attributes, no IP cores, no
-tool-specific pragmas, one clock, one synchronous reset, no latches, no
-multiply-driven nets.
-
-Weight storage sits behind a **single fixed logical interface** (`clk`, `addr`,
-`data`) with identical documented timing semantics, so the top level cannot tell
-which backend is underneath:
-
-- **Backend A (default, portable):** pure synthesizable Verilog `case`/
-  `localparam` lookup, usable for FPGA and ASIC alike.
-- **Backend B (ASIC):** a physical ROM macro from the installed OpenRAM /
-  OpenROM, targeting `~/.volare/sky130A`, behind a thin wrapper with the same
-  logical interface. OpenRAM will not be vendored or modified, and only the
-  views the installed version actually emits will be claimed.
-
-## 8. Repository layout
+## Repository layout
 
 ```
 model2rtl/
-├── README.md
-├── pyproject.toml
-├── scripts/
-│   ├── train_mnist_mlp.py          Stage 0: train, quantize, export, report
-│   ├── gen_compute_fabric.py       Stage 1: emit the fixed compute fabric
-│   ├── verify_stage1.py            Stage 1: run every check, write the report
-│   ├── gen_weight_rom_portable.py  Stage 2: portable parameter backend
-│   ├── gen_weight_rom_openram.py   Stage 2: OpenROM macros + wrapper + top
-│   └── verify_stage2.py            Stage 2: run every check, write the report
-├── src/model2rtl/
-│   ├── contract.py                 fixed arithmetic contract + width analysis
-│   ├── golden.py                   pure-NumPy integer golden model
-│   ├── qat.py                      quantization-aware training (TensorFlow)
-│   ├── data.py                     MNIST as raw uint8 activations
-│   ├── storage.py                  NPZ / quant_params.json persistence
-│   └── report.py                   Stage-0 report assembly
-├── model/
-│   ├── mnist_weights_indices.npz   trained 4-bit indices + integer biases
-│   └── quant_params.json           fixed contract (weight independent)
-├── reports/
-│   ├── stage0_quantization.json      full Stage-0 report
-│   ├── stage1_compute_fabric.json    full Stage-1 report
-│   └── stage2_parameter_backends.json full Stage-2 report
-├── tests/                          Stage-0 validation suite
-├── rtl/                            all GENERATED
-│   ├── mnist_mlp_fabric.v          weight-independent fabric (Stage 1)
-│   ├── mnist_mlp_params_portable.v portable parameter backend (Stage 2)
-│   ├── mnist_mlp_params_openram.v  OpenROM backend wrapper (Stage 2)
-│   ├── mnist_mlp_params_sel_*.v    build-time backend selectors (Stage 2)
-│   └── mnist_mlp_top.v             fabric + selected backend (Stage 2)
-├── openram/                        (empty — Stage 2/5)
-└── build/                          (empty — Stage 4+)
+├── FINAL-REPORT.md            the technical report
+├── README.md                  this file
+├── model/                     trained 4-bit indices + integer biases
+├── rtl/                       all GENERATED, all Verilog-2001
+│   ├── mnist_mlp_fabric.v             weight-independent MSA fabric
+│   ├── mnist_mlp_params_portable.v    portable parameter ROM
+│   ├── mnist_mlp_params_openram.v     OpenRAM behavioural backend
+│   ├── mnist_mlp_params_openrom_phys.v physical OpenROM backend
+│   ├── mnist_mlp_params_sel_*.v       build-time backend selectors
+│   └── mnist_mlp_top.v                fabric + selected backend
+├── src/model2rtl/             the compiler and its verification model
+├── scripts/                   one driver per stage, plus renderers
+├── tests/                     the whole verification suite
+├── reports/                   per-stage JSON + final_report.json
+└── build/                     generated artifacts per stage
+    ├── param_images/          canonical parameter images
+    ├── openram/               Stage-2 OpenROM attempts
+    ├── stage4/                synthesized netlists and logs
+    └── stage5/                physical macros, sweep, DRC/LVS
 ```
 
-This project is **standalone**. It does not import from, depend on, reuse code
-from, or modify `rtl2gdsagi`.
+This project is **standalone**. It does not import from, depend on, reuse code from, or modify `rtl2gdsagi`.
 
-## 9. Reproducing Stage 0
+## Reproducing
+
+The functional flow needs only Python, Yosys and Icarus. The physical flow additionally needs a user-space OpenRAM checkout, the SKY130 PDK, magic, netgen and KLayout. **The environment is not one-click portable**; exact versions and paths are in [FINAL-REPORT.md](FINAL-REPORT.md) section 19.
 
 ```bash
 python3.11 -m venv .venv
 .venv/bin/pip install -e ".[train,test]"
+
+# functional flow
 .venv/bin/python scripts/train_mnist_mlp.py --sweep-hidden-shift
-.venv/bin/python -m pytest tests -v
+.venv/bin/python scripts/gen_compute_fabric.py
+.venv/bin/python scripts/verify_stage1.py
+.venv/bin/python scripts/gen_weight_rom_portable.py
+.venv/bin/python scripts/verify_stage2.py
+.venv/bin/python scripts/verify_stage3.py --images 500
+.venv/bin/python scripts/synth_stage4.py
+.venv/bin/python scripts/verify_stage4.py --images 500
+
+# physical flow (optional; needs the OpenRAM + SKY130 environment)
+source build/openram/openram_env.sh
+.venv/bin/python scripts/gen_weight_rom_openram.py
+.venv/bin/python scripts/gen_openrom_stage5.py
+.venv/bin/python scripts/gen_openrom_phys_rtl.py
+.venv/bin/python scripts/sweep_stage5.py
+.venv/bin/python scripts/verify_physical_stage5.py
+.venv/bin/python scripts/verify_stage5.py --images 500
+
+# consolidate and test
+.venv/bin/python scripts/build_final_report.py
+.venv/bin/python scripts/render_final_report.py
+.venv/bin/python -m pytest tests -q
 ```
 
-Seed 1234; MNIST split `train[:55000]` / `train[55000:60000]` / official 10,000-image
-test set. Seeds, package versions, Python version, dataset fingerprint and
-SHA-256 hashes of both artefacts are recorded in
-`reports/stage0_quantization.json` under `meta`.
+Seed 1234; MNIST split `MNIST train[:55000] / train[55000:60000] / official test`. TensorFlow is a **training-time dependency only** — the compiler, the integer golden model and every verification path depend on NumPy alone.
 
-TensorFlow is a **training-time dependency only**. The compiler and the integer
-golden model depend on NumPy alone.
+---
 
-## 10. Stage 0 results
-
-See `reports/stage0_quantization.json` for the full report; the headline numbers
-are summarised in the "Stage 0 results" section below, which is regenerated from
-that report.
+The appendices below are the per-stage results, regenerated from the stage reports. They are the detailed evidence behind the summary above; start with [FINAL-REPORT.md](FINAL-REPORT.md) if you want the narrative.
+## Appendix A — Stage 0: quantization
 
 <!-- STAGE0_RESULTS_START -->
 ### Accuracy
@@ -349,7 +294,7 @@ Hidden saturation: **0 of 320000 hidden activations (0.0000%)** hit the uint8 cl
 Shift **8** was frozen into the contract.
 <!-- STAGE0_RESULTS_END -->
 
-## 11. Stage 1 results — the fixed compute fabric
+## Appendix B — Stage 1: the compute fabric
 
 <!-- STAGE1_RESULTS_START -->
 ### Architecture: input-serial / output-parallel Multiply-Select-Add
@@ -387,7 +332,8 @@ inference takes 864 cycles instead of one. The Stage-0 operator analysis
 counts a fully *unrolled* design and remains valid as an analytical
 fully-spatial count; it is not superseded by this table. And because every
 product has a constant 4-bit operand, none of these source-level counts is
-a physical multiplier or DSP count. Stage 4 measures synthesized resources.
+a physical multiplier or DSP count. Section 14 reports the synthesized
+resources Stage 4 actually measured.
 
 ### Latency (architectural only — no clock frequency is claimed)
 
@@ -411,8 +357,9 @@ Formula: `n_in + 2*n_hidden + n_out + 6`. The cycle count is data independent (v
 | 100 MHz | 8.64 us | 115741 |
 
 These are cycle counts divided by an assumed clock. **No maximum clock
-frequency has been established** — that needs synthesis and timing
-analysis, which is Stage 4.
+frequency has been established.** Stage 4 ran synthesis but no timing
+analysis and no place-and-route, so these remain architectural latency
+examples only.
 
 ### Interface
 
@@ -507,7 +454,7 @@ explainable constants, so no trained value can hide in it.
 Tool versions used: Icarus Verilog version 13.0 (stable) (v13_0); Yosys 0.68+.
 <!-- STAGE1_RESULTS_END -->
 
-## 12. Stage 2 results — parameter storage backends
+## Appendix C — Stage 2: parameter-storage backends
 
 <!-- STAGE2_RESULTS_START -->
 Stage 2 supplies the trained parameters to the **unchanged** Stage-1
@@ -630,6 +577,37 @@ unchanged from Stage 1 at 864 cycles for both builds.
 Nothing was installed system wide, no system Python was modified, and no
 `sudo` was used. OpenRAM is upstream and unmodified.
 
+**Prerequisites and exact install steps used on this machine:**
+
+```bash
+# 1. OpenRAM itself (upstream, unmodified)
+git clone https://github.com/VLSIDA/OpenRAM.git ~/OpenRAM
+cd ~/OpenRAM && python3.11 -m venv .venv
+.venv/bin/pip install -r requirements.txt      # pulls ciel
+
+# 2. SKY130 PDK + SRAM cell library, into user space
+export PDK_ROOT=/home/rithwik/pdk
+export PATH=~/OpenRAM/.venv/bin:$PATH
+make sky130-pdk PDK_ROOT=$PDK_ROOT       # ciel fetches sky130A
+make sky130-install PDK_ROOT=$PDK_ROOT   # links cells into technology/sky130
+
+# 3. physical verification tools (user space, no sudo)
+conda create -p ~/klayout_cf/magic -c conda-forge magic
+git clone https://github.com/RTimothyEdwards/netgen.git ~/netgen-lvs
+cd ~/netgen-lvs && ./configure --prefix=~/netgen-install \
+    --with-tcl=~/klayout_cf/magic/lib --with-tk=~/klayout_cf/magic/lib
+make && make install
+
+# 4. environment for every OpenROM run
+source build/openram/openram_env.sh
+```
+
+Two things this OpenRAM version needs that its docs do not mention:
+`use_nix = False` must be set in every config (otherwise it aborts
+demanding a Nix toolchain bootstrap), and the conda-forge package named
+`netgen` is the **mesh generator**, not the LVS tool — netgen-lvs must be
+built from source.
+
 **Smoke test** (official OpenRAM sample sky130 1 kbyte ROM): generation PASS in 235s, views `gds, lef, log, lvs.sp, py, sp, v`. 
 DRC: **830 errors**. LVS: **MISMATCH**. The UPSTREAM REFERENCE macro itself fails DRC and LVS in this environment, so physical-verification results here are not evidence about model2rtl's data. Generation of all views works.
 
@@ -643,11 +621,18 @@ Evidence: build/openram/diag: a 1024-word one-hot-per-byte diagnostic ROM was ge
 
 | Macro | Requested | Status | words/row | Physical array | Views generated | DRC | LVS | Runtime |
 |---|---|---|---|---|---|---|---|---|
-| `weights_l1` | — | not attempted | — | — | — | — | — | — |
-| `weights_l2` | 32 x 40 | **PASS** | 4 | 8 rows x 160 cols | gds, lef, log, lvs.sp, py, sp, v | 780 errors | MISMATCH | 10.9s |
+| `weights_l1` | 784 x 128 | **FAIL** | — | — | — | — | — | — |
+| `weights_l2` | 32 x 40 | **PASS** | 4 | 8 rows x 160 cols | gds, lef, log, lvs.sp, py, sp, v | 780 errors | MISMATCH | 10.8s |
 | `bias_l1` | 32 x 22 | **BLOCKED** | — | — | — | — | — | — |
 | `bias_l2` | 10 x 17 | **BLOCKED** | — | — | — | — | — | — |
 
+- **`weights_l1` FAILED to generate.** Last lines of the tool output:
+  ```
+    File "/usr/lib64/python3.11/bdb.py", line 115, in dispatch_line
+      if self.quitting: raise BdbQuit
+                        ^^^^^^^^^^^^^
+  bdb.BdbQuit
+  ```
 - **`bias_l1` is BLOCKED.** OpenROM's word_size is expressed in BYTES (rom_config.py sets word_bits = word_size * 8), so a 22-bit word cannot be requested. Generating this macro would require changing the word width, which Stage 2 forbids without explicit approval.
   Proposed fix, *not implemented without approval*: pad the word to 24 bits (3 bytes) in the physical macro and slice it back in the wrapper.
 - **`bias_l2` is BLOCKED.** OpenROM's word_size is expressed in BYTES (rom_config.py sets word_bits = word_size * 8), so a 17-bit word cannot be requested. Generating this macro would require changing the word width, which Stage 2 forbids without explicit approval.
@@ -673,32 +658,662 @@ check the ROM input data bit-for-bit against those images.
 - No synthesis, FPGA or ASIC gate-level verification has been run; that is Stage 4.
 - No area, timing or cell-area number is claimed.
 - Stage 3's formal behavioural verification campaign is not implemented.
+
+Two of these limitations were written at Stage 2 and have since been
+addressed. Stage 4 ran both synthesis flows and gate-level simulated
+both netlists (section 14). Stage 5 generated every physical macro,
+using approved byte padding for the bias ROMs and four parallel banks
+for the 784 x 128 layer-1 memory, and verified all 102,640 bits against
+the generated netlists (section 15). What still stands: DRC and LVS
+remain untrustworthy here, so physical SIGNOFF is UNVERIFIED.
 <!-- STAGE2_RESULTS_END -->
 
-## 13. Roadmap (documented, NOT implemented)
+## Appendix D — Stage 3: behavioral verification
 
-| Stage | Content | Status |
-|-------|---------|--------|
-| 0 | Training, quantization, integer golden model, contract, reports, tests | **done** |
-| 1 | `scripts/gen_compute_fabric.py` -> `rtl/mnist_mlp_fabric.v`, weight-independent Multiply-Select-Add fabric; elaborated and structurally checked with Yosys, compiled with Icarus, verified against the Stage-0 golden model | **done** |
-| 2 | Parameter backends behind one fixed interface: portable Verilog (`gen_weight_rom_portable.py`) and OpenRAM/OpenROM (`gen_weight_rom_openram.py`); plus `rtl/mnist_mlp_top.v` | **done (OpenROM macros partial)** |
-| 3 | Behavioral RTL verification of ~200 MNIST images against the Stage-0 integer golden model; plus proof that one fabric serves two different weight-index sets | not started |
-| 4 | Dual-target portability: identical sources through an FPGA Yosys flow and a generic/ASIC Yosys flow, each followed by **gate-level simulation** (a clean exit code is not verification) | not started |
-| 5 | OpenRAM/OpenROM ASIC backend verification and portable-ROM vs macro area comparison with a crossover estimate | not started |
-| 6 | Final report | not started |
+<!-- STAGE3_RESULTS_START -->
+Stage 3 runs the frozen production RTL against the Stage-0 NumPy integer
+golden model. **Keras float output is never used as an oracle.**
 
-A full SKY130 GDS run through `rtl2gdsagi` is explicitly **out of scope** for
-this project.
+### Three metrics, kept separate
 
-### Not claimed, because it has not happened
+These are not the same thing, and Stage 3 only gates on the first:
 
-- No clean DRC or LVS result exists for any generated macro.
-- The layer-1 and layer-2 bias ROMs have no physical macro at all.
-- No synthesis has been run, so no portability claim is made.
-- No FPGA synthesis or FPGA gate-level verification has been run.
-- No ASIC synthesis or ASIC gate-level verification has been run.
-- No OpenRAM/OpenROM integration exists; OpenRAM has not been invoked.
-- No area, cell-area, DSP or timing number has been measured, and no maximum
-  clock frequency is claimed. The Yosys cell counts quoted below are
-  pre-synthesis elaborated generic cells, nothing more.
-- Autonomous end-to-end compilation does not exist.
+| Metric | Value |
+|---|---|
+| **1. RTL vs integer golden model (the PASS criterion)** | **0 mismatches** out of 5000 logit, 16000 hidden and 500 prediction comparisons |
+| 2. Quantized integer model MNIST accuracy | 96.45% over the full 10,000-image test set (Stage 0); 98.00% on this 500-image subset |
+| 3. RTL MNIST accuracy | 98.00% on the same subset |
+
+Metrics 2 and 3 are identical *because* metric 1 is zero. An image the
+integer model gets wrong is still a perfect RTL implementation.
+
+### Test set
+
+| Item | Value |
+|---|---|
+| selection | first 500 images of the official MNIST test set, in order; no filtering of any kind |
+| images | 500 |
+| label histogram (0-9) | [42, 67, 55, 45, 55, 50, 43, 49, 40, 54] |
+| indices SHA-256 | `0c3fc3e2e8b0514136a044efedc6d6aa` |
+| images SHA-256 | `33b682baf07158d5557e1e88c0093c69` |
+| labels SHA-256 | `d9c1ee129708614296525e1d5d088e7f` |
+
+### Backend results
+
+| | Portable | OpenRAM behavioural |
+|---|---|---|
+| images | 500 | 500 |
+| hidden values compared | 16000 | 16000 |
+| logits compared | 5000 | 5000 |
+| prediction comparisons | 500 | 500 |
+| **hidden mismatches** | **0** | **0** |
+| **logit mismatches** | **0** | **0** |
+| **prediction mismatches** | **0** | **0** |
+| label accuracy | 0.9800 | 0.9800 |
+| cycles per inference | [864] | [864] |
+
+Backend-to-backend: 0 hidden, 0 logit, 0 prediction and 0 cycle-count
+mismatches. The OpenRAM figure is a **behavioural representation of the
+canonical OpenROM contents** — it is not physical OpenROM verification.
+
+### Cycle-level internal checkpointing
+
+For 20 images every cycle of the fabric was captured and replayed against
+the golden model, so a mismatch would be localised to a specific
+(image, cycle, signal) rather than only showing up at the top level.
+
+| Checkpoint | Comparisons |
+|---|---|
+| accumulator state before each update | 48320 |
+| bias ROM word vs address issued one cycle earlier | 840 |
+| layer-1 finalisation cycles | 640 |
+| layer-2 finalisation cycles | 200 |
+| final signed logits | 200 |
+| layer-1 multiply-select-add cycles | 15680 |
+| layer-2 multiply-select-add cycles | 640 |
+| shared product-bank entries and selected products | 95360 |
+| biased accumulator and requantised hidden value | 640 |
+| weight ROM word vs address issued one cycle earlier | 16320 |
+| **total** | **178840** |
+| **failures** | **0** |
+
+Traced neurons: layer 1 [0, 1, 31], layer 2 [0, 9]. Signals: `state`, `mac_valid`, `layer_r`, `fin_valid`, `fin_idx`, `act_pipe`, `wmem_data`, `bmem_data`, `acc1`, `l1_sel_ext`, `l1_accb`, `hid_next`, `acc2`, `l2_sel_ext`, `logit_next`, `prod_00`, `prod_09`, `prod_15`.
+
+### Memory pipeline (no off-by-one)
+
+The fabric pipelines its parameter reads, so every cycle in which it
+consumes `wmem_data` or `bmem_data` was checked against the address it
+issued exactly one cycle earlier: **16320 weight-word and 840 bias-word
+alignment checks, 0 failures.** Cases covered:
+
+- consecutive layer-1 addresses (784 per image)
+- layer-1 to layer-2 transition
+- consecutive layer-2 addresses
+- consecutive bias addresses, both layers
+- enable held low during input stalls
+- layer switch on the weight and bias ports
+- first address after every state transition
+
+### Input handshake under different legal timings
+
+| Pattern | Images | Cycles | Mismatches |
+|---|---|---|---|
+| no stalls | 50 | 864–864 | 0 |
+| periodic (every Nth input) | 50 | 975–975 | 0 |
+| deterministic pseudo-random (LFSR) | 50 | 1223–1297 | 0 |
+
+Results are bit-identical regardless of input timing; only latency
+changes. No activation was lost or duplicated.
+
+### Synchronous reset
+
+| Reset point | Cycles after start | Stale-state failures | Fresh inference exact |
+|---|---|---|---|
+| early layer 1 | 20 | 0 | logits True, hidden True |
+| idle, before start | n/a (idle) | 0 | logits True, hidden True |
+| late layer 1 | 700 | 0 | logits True, hidden True |
+| layer 2 | 830 | 0 | logits True, hidden True |
+| layer-1 finalisation | 795 | 0 | logits True, hidden True |
+| layer-2 finalisation | 855 | 0 | logits True, hidden True |
+
+After every reset, `busy`, `done`, `prediction_valid` and `in_ready` are
+low and all accumulators, hidden registers and logit registers read zero.
+
+### Back-to-back transactions
+
+500 inferences ran consecutively in one simulator process with no reset
+between them: 0 mismatches. `done` is a single-cycle pulse every time,
+and `prediction_valid` holds until the next `start`.
+
+### Argmax
+
+15 cases, 0 failures. Tie rule: **lowest index wins, matching numpy.argmax**.
+Covered: a unique maximum at every class 0-9, a two-way tie, a
+three-way tie, a ten-way tie, all-negative logits, and logits at the
+representable extrema.
+
+### Arithmetic edge cases at the top level
+
+3 activation cases and 5 special cases, 0 failures.
+Covered: x = 0, 1 and 255 against every alphabet level (including -8,
+-1, 0, +1, +7); a strongly negative layer-1 accumulator forced through
+ReLU to hidden = 0; hidden saturating to 255; the round-half-up
+boundaries; and all-negative and all-positive logits. No wraparound.
+
+### A second parameter set on the unchanged fabric
+
+| Item | Value |
+|---|---|
+| fabric SHA-256 before | `7757362642b37fd0044bb7b323467116` |
+| fabric SHA-256 after | `7757362642b37fd0044bb7b323467116` |
+| **identical** | **True** |
+| vectors tested | 8 |
+| mismatches vs the MSA integer reference | **0** |
+| alternate `weights_l1` image SHA-256 | `583468a3f00c2beafd64c8dd617683c5` |
+
+Only the parameter backend was regenerated. the real trained model was NOT retrained or modified; only a second parameter backend was generated
+
+### Lint and elaboration of both production variants
+
+| Build | Yosys `check -assert` | Latches | Multi-driven | Undriven | Icarus `-g2001 -Wall` |
+|---|---|---|---|---|---|
+| top + openram_behavioral | PASS (Found and reported 0 problems) | 0 | False | False | PASS |
+| top + portable | PASS (Found and reported 0 problems) | 0 | False | False | PASS |
+
+### No model-specific shortcuts
+
+`mnist_mlp_fabric.v` and `mnist_mlp_top.v` were scanned for MNIST labels,
+embedded test images, expected logits and hard-coded predictions: **clean**.
+The only model-dependent production RTL is the parameter backend.
+
+### OpenROM physical status as of Stage 3: PARTIAL
+
+*Superseded by Stage 5, which generated all seven macros. Kept here as
+the Stage-3 record.*
+
+- `weights_l2`: physically generated (gds, sp, lvs.sp, lef, v, py, log)
+- `weights_l1`: not generated: OpenROM fails at the directly requested organisation
+- bias macros: word widths of 22 and 17 bits are not representable by this OpenROM version (word_size is in bytes)
+- DRC/LVS: no trustworthy signoff in this environment: the upstream reference macro also fails DRC and LVS here
+- Banking: not attempted in Stage 3, as instructed
+
+### Not claimed
+
+- FPGA portability verified
+- FPGA gate-level equivalence
+- ASIC gate-level equivalence
+- physical OpenROM signoff
+
+These four statements were written at Stage 3. Stage 4 has since
+verified FPGA-oriented and generic/ASIC-oriented synthesis portability
+and gate-level simulated both netlists against the Stage-0 integer
+golden model — see section 14. Formal gate-level *equivalence
+checking* and physical OpenROM signoff are still not claimed, and
+neither is place-and-route or timing closure on either target.
+<!-- STAGE3_RESULTS_END -->
+
+## Appendix E — Stage 4: dual-target synthesis portability
+
+<!-- STAGE4_RESULTS_START -->
+The same portable Verilog source was synthesized through an
+FPGA-oriented Yosys flow and a generic/ASIC-oriented Yosys flow, and
+both synthesized netlists were gate-level simulated against the Stage-0
+integer golden model.
+
+Stage 4 uses the **portable backend only**. The OpenRAM behavioural
+backend and the physical OpenROM macros are deliberately out of scope
+here — the point is that one vendor-neutral source targets both flows.
+
+### Same source, two targets
+
+| File | SHA-256 | Read by FPGA flow | Read by generic flow |
+|---|---|---|---|
+| `rtl/mnist_mlp_fabric.v` | `7757362642b37fd0044bb7b323467116` | yes | yes |
+| `rtl/mnist_mlp_params_portable.v` | `d9c1aecd5f15872e1fb8011824d95776` | yes | yes |
+| `rtl/mnist_mlp_params_sel_portable.v` | `902994346f1ad992427c1d83dbb00395` | yes | yes |
+| `rtl/mnist_mlp_top.v` | `0763242015ce86e8b6edc3681d1e9834` | yes | yes |
+
+| Invariant | Result |
+|---|---|
+| identical source hashes on both targets | **True** |
+| every file read straight out of `rtl/` | **True** |
+| source patched or copy-edited before synthesis | **False** |
+| production RTL byte-identical before and after Stage 4 | **True** |
+
+### Target A — FPGA-oriented (`ice40`)
+
+synth_ice40 is present in the installed Yosys and the matching official simulation library <datdir>/ice40/cells_sim.v exists and is complete, so the synthesized netlist can be simulated with the vendor-equivalent cell models rather than hand-written stand-ins.  ECP5 was therefore not needed.
+
+```
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v
+read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_top.v
+synth_ice40 -top mnist_mlp_top
+check -assert
+stat
+write_json /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.json
+write_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.v
+```
+
+| Item | Value |
+|---|---|
+| status | **PASS** |
+| Yosys `check` problems | 0 |
+| unresolved blackboxes | none |
+| inferred latches | 0 |
+| netlist | `build/stage4/fpga/fpga_netlist.v` |
+| netlist SHA-256 | `bf0c87a67504a532e27c529997727e2b` |
+| synthesis time | 25.3 s |
+
+| iCE40 resource | Count |
+|---|---|
+| `SB_LUT4` | 6429 |
+| `SB_CARRY` | 1004 |
+| flip-flops (`SB_DFF*`) | 1614 |
+| `SB_RAM40_4K` | 32 |
+| `SB_MAC16` (DSP) | 0 |
+| **total cells** | **9079** |
+
+### Target B — generic / ASIC-oriented
+
+Standard Yosys logic synthesis down to the Yosys generic gate
+vocabulary. This is **not** a SKY130 flow and **not** ASIC signoff; it
+exists to prove the source is not FPGA-shaped.
+
+```
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v
+read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_top.v
+hierarchy -check -top mnist_mlp_top
+proc
+flatten
+opt -full
+memory
+opt -full
+techmap
+opt -full
+simplemap
+dfflegalize -cell $_DFF_P_ 01
+abc -g simple
+setundef -zero
+opt_clean -purge
+check -assert
+stat
+write_json /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.json
+write_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.v
+```
+
+| Item | Value |
+|---|---|
+| status | **PASS** |
+| Yosys `check` problems | 0 |
+| unresolved blackboxes | none |
+| inferred latches | 0 |
+| netlist | `build/stage4/generic/generic_netlist.v` |
+| netlist SHA-256 | `725723fa6b9e9bf122b420e60e779356` |
+| synthesis time | 11.8 s |
+
+| Generic cell | Count |
+|---|---|
+| `$_AND_` | 20159 |
+| `$_DFF_P_` | 1742 |
+| `$_MUX_` | 1351 |
+| `$_NOT_` | 2439 |
+| `$_OR_` | 18603 |
+| `$_XOR_` | 1413 |
+| **total cells** | **45707** |
+
+Physical area is **not available at this stage**: no characterized
+standard-cell library was used, so these counts cannot be converted to
+area, and no timing analysis was performed.
+
+### Gate-level simulation — the part that proves it
+
+Both netlists were simulated with the official Yosys cell models. The
+testbench observes **top-level ports only**, because synthesis
+legitimately destroys internal names; the production RTL was never
+compiled into these simulations.
+
+| Item | Value |
+|---|---|
+| images | 500 |
+| selection | first 500 images of the official MNIST test set, in order; no filtering of any kind |
+| reused from Stage 3 | True |
+| images SHA-256 | `33b682baf07158d5557e1e88c0093c69` |
+| oracle | Stage-0 NumPy integer golden model |
+| integer golden accuracy on this set | 98.00% |
+
+| Measurement | FPGA netlist | Generic netlist |
+|---|---|---|
+| logits compared | 5000 | 5000 |
+| prediction comparisons | 500 | 500 |
+| **logit mismatches** | **0** | **0** |
+| **prediction mismatches** | **0** | **0** |
+| label accuracy | 98.00% | 98.00% |
+| cycles per inference (no stalls) | [864] | [864] |
+| back-to-back inferences, mismatches | 12, 0 | 12, 0 |
+| stalled traffic cycles, mismatches | [975], 0 | [975], 0 |
+| reset points, stale-state failures | 2, 0 | 2, 0 |
+| simulation runtime | 2287 s | 1604 s |
+
+The architectural latency contract of **864 cycles** per inference
+survived both flows unchanged: synthesis added no pipeline stage.
+
+The two netlists also agree with **each other** bit for bit: 0 logit,
+0 prediction and 0 cycle-count differences.
+
+| Guard | FPGA | Generic |
+|---|---|---|
+| top module comes from | `build/stage4/fpga/fpga_netlist.v` | `build/stage4/generic/generic_netlist.v` |
+| production RTL in the source list | False | False |
+| cell library | `cells_sim.v` | `simcells.v` |
+
+### What synthesis did to the 16 constant multiplications
+
+The fabric writes 16 multiplications, but one operand is always a fixed
+alphabet level, so nothing forces them to become multipliers. Measured,
+not assumed:
+
+| Observation | FPGA | Generic |
+|---|---|---|
+| `*` operators in the source | 16 | 16 |
+| multiplier / DSP cells surviving | **0** | **0** |
+| product-bank bits that are literal constants | 37 / 192 | 33 / 192 |
+| product-bank bits that are plain wires from the activation register | 41 | 41 |
+| product-bank bits fused into downstream select logic | 114 | 118 |
+
+**No multiplier cell exists in either netlist.** Where the FPGA flow
+kept the product wire names, the drivers show exactly what happened:
+
+| Product | Level | Driver in the FPGA netlist |
+|---|---|---|
+| `prod_00` | x * -8 | `{ bank[11:3], 3'h0 }` |
+| `prod_01` | x * -7 | `{ bank[23:15], x[2], bank[26], bank[3] }` |
+| `prod_02` | x * -6 | `{ bank[35:26], bank[3], 1'h0 }` |
+| `prod_03` | x * -5 | `{ bank[47:37], bank[3] }` |
+| `prod_04` | x * -4 | `{ bank[58], bank[58:51], bank[3], 2'h0 }` |
+| `prod_05` | x * -3 | `{ bank[70], bank[70:63], bank[27:26], bank[3] }` |
+| `prod_06` | x * -2 | `{ bank[81], bank[81], bank[81:74], bank[3], 1'h0 }` |
+| `prod_07` | x * -1 | `{ bank[92], bank[92], bank[92], bank[92:85], bank[3] }` |
+| `prod_08` | x * +0 | `12'h000` |
+| `prod_09` | x * +1 | `{ 4'h0, x[7:2], bank[26], bank[3] }` |
+| `prod_10` | x * +2 | `{ 3'h0, x[7:2], bank[26], bank[3], 1'h0 }` |
+| `prod_11` | x * +3 | `{ 2'h0, bank[141:133], bank[3] }` |
+| `prod_12` | x * +4 | `{ 2'h0, x[7:2], bank[26], bank[3], 2'h0 }` |
+| `prod_13` | x * +5 | `{ 1'h0, bank[166:159], bank[27:26], bank[3] }` |
+| `prod_14` | x * +6 | `{ 1'h0, bank[141:133], bank[3], 1'h0 }` |
+| `prod_15` | x * +7 | `{ 1'h0, bank[190:182], bank[37], bank[3] }` |
+
+`x * 0` folded to a literal zero; `x * 1`, `x * 2` and `x * 4` are pure
+wiring (a shift with constant zero fill); `x * -8` is a shift of a
+shared negated value. The remaining levels reuse shared adder logic,
+and their bank bits no longer exist as separate signals at all — the
+product generation was fused into the 16:1 selection.
+
+### Resources: source-level counts vs synthesized cells
+
+| Quantity | Value | Kind |
+|---|---|---|
+| naive fully spatial synapse multiplications | 25408 | source-level operation count |
+| fully spatial MSA product generators | 13056 | source-level operation count |
+| Stage-1 time-multiplexed MSA product expressions | 16 | source-level operation count |
+| iCE40 total cells (whole design) | 9079 | **measured, synthesized** |
+| generic total cells (whole design) | 45707 | **measured, synthesized** |
+
+The first three numbers and the last two are **different kinds of
+quantity**. No ratio between them is an area ratio, and no area
+conclusion is drawn here: that would require synthesizing comparable
+implementations of each baseline, which Stage 4 does not do.
+
+As a diagnostic only, `rtl/mnist_mlp_fabric.v` was also synthesized on
+its own, with no parameter backend attached, to separate the compute
+datapath from the parameter ROM:
+
+| | Whole design | Fabric only | Difference (the ROM) |
+|---|---|---|---|
+| iCE40 `SB_LUT4` | 6429 | 6126 | +303 |
+| iCE40 flip-flops | 1614 | 1418 | +196 |
+| iCE40 `SB_RAM40_4K` | 32 | 0 | +32 |
+| generic total cells | 45707 | 25505 | +20202 |
+
+On iCE40 the 102,506 parameter bits landed in 32 block RAMs, so the ROM
+costs almost no logic. With no block RAM available the generic flow had
+to build the same ROM out of gates, which is where its 20202 extra cells go.
+
+### Reproducibility
+
+| Item | Value |
+|---|---|
+| Python | 3.11.11 |
+| Yosys | Yosys 0.68+ |
+| Icarus Verilog | Icarus Verilog version 13.0 (stable) (v13_0) |
+| Yosys data directory | `/home/rithwik/klayout_cf/yosys/share/yosys` |
+| fpga cell library | `/home/rithwik/klayout_cf/yosys/share/yosys/ice40/cells_sim.v` (`b5b2bcd86c0d6eea`) |
+| generic cell library | `/home/rithwik/klayout_cf/yosys/share/yosys/simcells.v` (`63918d5fd356ffcd`) |
+| fpga synthesis repeated from a clean directory | netlist SHA identical: **True** |
+| generic synthesis repeated from a clean directory | netlist SHA identical: **True** |
+
+Both flows are byte-deterministic: a second run from an empty output
+directory produced an identical netlist.
+
+### Not claimed by Stage 4
+
+- No FPGA place-and-route was run: synth_ice40 output was not passed to nextpnr and no bitstream exists.
+- No FPGA timing analysis and no Fmax was measured. The Stage-1 50/100 MHz figures remain architectural latency examples only.
+- No ASIC physical implementation: the generic flow maps to the Yosys generic gate vocabulary, not to a SKY130 standard-cell library, and no floorplan, placement, routing or extraction was performed.
+- No ASIC timing analysis and no characterized-library area.
+- Stage-2 physical OpenROM backend remains PARTIAL and was not touched in Stage 4; the OpenRAM behavioural backend was deliberately excluded from Stage 4, which uses the portable backend only.
+- No formal RTL-vs-netlist equivalence check was run. It is optional
+  supplemental evidence; gate-level simulation against the integer
+  oracle is the mandatory check and is what was done.
+<!-- STAGE4_RESULTS_END -->
+
+## Appendix F — Stage 5: physical OpenROM backend
+
+<!-- STAGE5_RESULTS_START -->
+Stage 5 completes the physical OpenROM parameter backend: every macro
+now exists on disk as GDS, and every bit in it is proved to be the bit
+the Stage-0 integer model uses.
+
+**Physical generation: PASS. Physical signoff: UNVERIFIED.** Those are
+two different claims and this section keeps them apart — see the DRC/LVS
+subsection for why the second one cannot be made here.
+
+### Two representations, one source of truth
+
+The canonical Stage-2 *logical* images stay authoritative and were not
+redefined. Stage 5 adds a *physical* representation derived from them by
+two transformations, both approved and both exactly reversible:
+
+| Logical memory | Logical shape | Physical form | Transformation |
+|---|---|---|---|
+| `weights_l1` | 784 x 128 | 4 macros of 784 x 32 | banked into 4 parallel macros of 784 x 32; all banks share one address and are read together, so the external latency stays one cycle |
+| `weights_l2` | 32 x 40 | 32 x 40 | identity: already byte granular |
+| `bias_l1` | 32 x 22 signed | 32 x 24 signed | sign extended 22 -> 24 bits |
+| `bias_l2` | 10 x 17 signed | 10 x 24 signed | sign extended 17 -> 24 bits, then recovered and sign extended 17 -> 22 on the bus |
+
+Why each one is needed: this OpenROM revision expresses `word_size` in
+**bytes**, so 22-bit and 17-bit words cannot be requested at all, and it
+cannot route the direct 784 x 128 array — `signal_escape_router` fails on
+`clk0`. Neither the logical memories, the bit packing, nor the Stage-1
+fabric interface changed.
+
+| Physical macro | Shape | Logical slice | Image SHA-256 |
+|---|---|---|---|
+| `weights_l1_b0` | 784 x 32 | `weights_l1` `[31:0]` | `53ac6dd7e7011873f8648240` |
+| `weights_l1_b1` | 784 x 32 | `weights_l1` `[63:32]` | `9fcbdaed9ac116404d64602c` |
+| `weights_l1_b2` | 784 x 32 | `weights_l1` `[95:64]` | `b676a3b5f89cb4f054730f05` |
+| `weights_l1_b3` | 784 x 32 | `weights_l1` `[127:96]` | `8c38b42b18a653797f39ea84` |
+| `weights_l2` | 32 x 40 | `weights_l2` `[39:0]` | `0f475f7ea7b7dff0fd6f14cf` |
+| `bias_l1` | 32 x 24 | `bias_l1` `[21:0]` | `bd8e7f6a00b5e5530cf80dd0` |
+| `bias_l2` | 10 x 24 | `bias_l2` `[16:0]` | `86d4111b7cb6b5d8291d0f99` |
+
+The reverse map is an automated invariant: `decode(physical) ==
+canonical logical image` for **858 / 858 rows**, 0 mismatches.
+
+### The macros
+
+| Macro | Shape | words/row | Array | Runtime | Views | Bits verified | GDS bbox |
+|---|---|---|---|---|---|---|---|
+| `weights_l1_b0` | 784 x 32 | 4 | 196 x 128 | 205.9 s | gds, lef, log, lvs.sp, py, sp, v | **25088 / 25088** | 194.17 x 276.40 um = **53668.6 um²** |
+| `weights_l1_b1` | 784 x 32 | 4 | 196 x 128 | 204.2 s | gds, lef, log, lvs.sp, py, sp, v | **25088 / 25088** | 194.17 x 276.40 um = **53668.6 um²** |
+| `weights_l1_b2` | 784 x 32 | 4 | 196 x 128 | 199.6 s | gds, lef, log, lvs.sp, py, sp, v | **25088 / 25088** | 194.17 x 276.40 um = **53668.6 um²** |
+| `weights_l1_b3` | 784 x 32 | 4 | 196 x 128 | 201.2 s | gds, lef, log, lvs.sp, py, sp, v | **25088 / 25088** | 194.17 x 276.40 um = **53668.6 um²** |
+| `weights_l2` | 32 x 40 | 4 | 8 x 160 | 10.3 s | gds, lef, log, lvs.sp, py, sp, v | **1280 / 1280** | 218.93 x 75.36 um = **16498.6 um²** |
+| `bias_l1` | 32 x 24 | 4 | 8 x 96 | 6.9 s | gds, lef, log, lvs.sp, py, sp, v | **768 / 768** | 148.91 x 68.96 um = **10268.8 um²** |
+| `bias_l2` | 10 x 24 | 5 | 2 x 120 | 6.4 s | gds, lef, log, lvs.sp, py, sp, v | **240 / 240** | 171.31 x 63.86 um = **10939.9 um²** |
+| **total** | | | | | | **102640 / 102640** | **252381.6 um²** |
+
+`words_per_row` is an internal folding choice and was picked from
+measured behaviour, not reused: every attempt is recorded, including
+the failures. For the 784 x 32 banks `words_per_row = 2` fails in
+`signal_escape_router`; 4 and 8 both generate and 4 measured smaller
+(53,669 um² against 56,817 um²). `bias_l2` needed 5 because 2 failed.
+
+Bounding boxes are measured **from the GDS** with KLayout, hierarchy
+resolved — not taken from a log line. The LEF abstract outline is
+recorded alongside as a cross-check and is smaller, because the GDS also
+contains the supply ring and labels.
+
+### The central proof: the GDS holds the model's bits
+
+For every macro, the programmed cells were read back out of the
+**generated SPICE netlist** and compared against the physical image.
+The cell map was derived empirically from the Stage-2 macro, whose
+contents are known, and confirmed on all 1,280 of its bits:
+
+```
+row = addr // words_per_row
+col = bit * words_per_row + addr %% words_per_row   (bit numbered MSB first)
+rom_base_one_cell = 1, rom_base_zero_cell = 0
+```
+
+| Check | Count | Mismatches |
+|---|---|---|
+| programmed bit cells vs the physical image | 102640 | **0** |
+| logical rows rebuilt from the physical macros | 858 | **0** |
+| weight indices after unpacking | 25408 | **0** |
+| bias values through the full path | 42 | **0** |
+| bias special values (0, +1, -1, both extremes, min/max present) | 14 | **0** |
+
+All 784 layer-1 rows reassemble from the four banks, and all
+**25,408 / 25,408** weight indices survive banking unchanged.
+
+### Functional equivalence: the physical form changes nothing
+
+| Comparison | Result |
+|---|---|
+| portable vs canonical image | 0 weight + 0 bias mismatches |
+| OpenRAM behavioural vs canonical image | 0 + 0 |
+| **physical wrapper vs canonical image** | **0 + 0** |
+| backend to backend, all three pairs | 0 |
+
+969 stimulus cycles, 2907 weight and 2907 bias comparisons, covering every valid address of every logical memory, plus holds, layer switches, invalid addresses, first/last address and a new address every cycle.
+
+Full model, the same 500 MNIST images Stages 3 and 4 used:
+
+| | Physical backend | Portable backend |
+|---|---|---|
+| hidden mismatches | **0** / 16000 | **0** / 16000 |
+| logit mismatches | **0** / 5000 | **0** / 5000 |
+| prediction mismatches | **0** | **0** |
+| cycles per inference | [864] | [864] |
+| label accuracy | 98.00% | 98.00% |
+
+Backend to backend: 0 hidden, 0 logit, 0 prediction mismatches. The
+four banks share one address and are read in parallel, so the external
+read latency is still one cycle and the inference is still 864 cycles.
+
+### Area
+
+| Storage | Measurement | Area |
+|---|---|---|
+| OpenROM hard macros (7 total) | GDS bounding boxes, summed | **252381.6 um²** |
+| of which the four `weights_l1` banks | | 214674.4 um² |
+| `mnist_mlp_params_portable.v` on SKY130 | liberty cell area | **58335.9 um²** |
+| | of which sequential | 4144.0 um² (138 cells) |
+| | of which combinational | 54192.0 um² (9268 cells) |
+
+Library: `sky130_fd_sc_hd__tt_025C_1v80.lib`, corner sky130_fd_sc_hd, tt, 25 C, 1.80 V. 9406 mapped cells, no blackboxes.
+
+**These are not the same kind of area.** The macro figure is a hard
+block's bounding box, already containing its decoders, column mux,
+precharge and supply ring. The portable figure is a standard-cell area
+sum with no placement utilisation and no routing overhead, because no
+place-and-route was run. The raw macro sum is also not a floorplanned
+area: there is no floorplan, and no placement density is claimed.
+
+### Storage crossover — none was measured
+
+| Point | Bits | OpenROM bbox | Portable cells | Portable cell area | Ratio | Smaller |
+|---|---|---|---|---|---|---|
+| 32x32 | 1024 | 13275.3 um² | 203 | 1964.4 um² | 6.76 | portable |
+| 64x32 | 2048 | 15037.0 um² | 375 | 2916.5 um² | 5.16 | portable |
+| 128x32 | 4096 | 18466.5 um² | 679 | 4773.3 um² | 3.87 | portable |
+| 256x32 | 8192 | 25266.8 um² | 1194 | 8165.3 um² | 3.09 | portable |
+| 512x32 | 16384 | 38879.4 um² | 2150 | 13753.2 um² | 2.83 | portable |
+| 784x32 | 25088 | 53668.6 um² | 3032 | 18433.9 um² | 2.91 | portable |
+| 1568x32 | 50176 | 92011.5 um² | 5213 | 30934.7 um² | 2.97 | portable |
+
+Both implementations at each point hold **identical deterministic
+contents**, and the OpenROM side of every sweep point had its bits
+verified against the generated netlist the same way the real macros did.
+
+No crossover was measured. The OpenROM bounding box exceeds the portable mapped cell area at all 7 points, and the ratio is 6.76 at the smallest point and 2.97 at the largest, so it flattens rather than converging towards 1. Any statement about sizes beyond 50176 bits would be extrapolation and is not made.
+
+For scale rather than as a claim: a placed portable block occupies
+cell area divided by its utilisation, so at the deepest measured
+point the two would only break even if the portable block placed at
+**34% utilisation or worse**. That is a derived sensitivity, not
+a measurement.
+
+### DRC / LVS: signoff is UNVERIFIED
+
+The local physical-verification environment is not trustworthy for this
+OpenROM revision, and Stage 5 did not try to repair it. A control was
+run under identical settings: OpenRAM's own upstream reference ROM (rom_configs/example_1kbyte.bin, word_size 1, the settings sky130_rom_1kbyte.py uses). Nothing in the OpenRAM tree was modified; only the output directory was redirected.
+
+| Macro | DRC | LVS |
+|---|---|---|
+| **control — OpenRAM's own reference ROM** | **830 errors** | **MISMATCH** |
+| `weights_l1_b0` | 1244 errors | MISMATCH |
+| `weights_l1_b1` | 1244 errors | MISMATCH |
+| `weights_l1_b2` | 1244 errors | MISMATCH |
+| `weights_l1_b3` | 1244 errors | MISMATCH |
+| `weights_l2` | 780 errors | MISMATCH |
+| `bias_l1` | 500 errors | MISMATCH |
+| `bias_l2` | 615 errors | MISMATCH |
+
+The upstream reference macro fails here too, so **no DRC or LVS result
+produced in this environment is evidence about model2rtl's macros** —
+in either direction. Therefore:
+
+| Verdict | Status |
+|---|---|
+| physical generation | **PASS** |
+| physical signoff | **UNVERIFIED** |
+
+### Toolchain (unchanged from Stage 2)
+
+| Item | Value |
+|---|---|
+| OpenRAM | `b2b069ce119d1488cbe6883b2240bceb5c7ce29a` branch `stable` |
+| OpenRAM tracked files modified | False |
+| PDK | `/home/rithwik/pdk`, sky130A present: True |
+| magic | 8.3.486 |
+| netgen | Netgen 1.5.323 compiled on Tue Aug 18 15:41:47 IST 2026 |
+| KLayout (area measurement) | KLayout 0.28.17 |
+
+### Not claimed by Stage 5
+
+- No macro is DRC-clean or LVS-clean: the environment's control fails, so no physical-verification result here is evidence.
+- No full-chip GDS, no floorplan, no placement, no routing.
+- No timing analysis and no maximum clock frequency.
+- The area comparison is between two different kinds of area and is not a finished-chip ratio.
+- No crossover point is claimed beyond the measured data.
+- No full-chip flow of any kind: the fabric was not placed, nothing was
+  routed, no hard macro was integrated into a floorplan, and
+  `rtl2gdsagi` was not used.
+<!-- STAGE5_RESULTS_END -->

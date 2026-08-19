@@ -120,7 +120,8 @@ if [ -n "$(git status --porcelain)" ] || [ "$DRY_RUN" = "1" ]; then
         scripts/render_readme.py \
         scripts/git_push.sh \
         pyproject.toml \
-        README.md
+        README.md \
+        .gitattributes
     run git commit -m "feat(cli): compile any two-layer MLP to RTL from the command line
 
     model2rtl --model my_model.h5 --output ./rtlout
@@ -170,7 +171,15 @@ start, the port handshake with a working testbench, supported-model rules with
 real rejection messages, and an explicit list of what this is NOT. Its code
 blocks are extracted and executed as part of checking this commit.
 
-429 tests passing. All 25 frozen artifacts byte-identical."
+429 tests passing. All 25 frozen artifacts byte-identical.
+
+Adds .gitattributes. GitHub was reporting this repo as 62.6% SourcePawn,
+because Linguist maps .sp to SourcePawn and OpenROM writes its SPICE netlists
+with that extension -- 23.8 MB of them. build/ is 98.4% of the repository by
+bytes and is entirely tool output, so it is marked linguist-generated along
+with the .sp, .log, .lef and .hex artifacts. rtl/ stays counted as Verilog on
+purpose: it is generated, but it is the deliverable. The language bar becomes
+roughly 71% Python, 29% Verilog, which is what was actually written."
 else
     echo "  nothing to commit"
 fi

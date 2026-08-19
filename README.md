@@ -1,235 +1,387 @@
 # model2rtl
 
-**Compile a quantized neural network into portable synthesizable RTL.**
+**Turn a trained neural network into a chip design.**
 
-```
-MNIST  784 -> 32 -> ReLU -> 10
-       4-bit weight indices, 16 fixed levels
-       uint8 activations
-       16 shared constant-weight products per activation
-       Verilog-2001, no vendor primitives
-       FPGA-oriented and generic/ASIC-oriented synthesis, same source
-       500-image post-synthesis verification on both, zero mismatches
+You give it a trained Keras model. It gives you Verilog: real, synthesizable hardware that computes exactly the same answers.
+
+```bash
+model2rtl --model my_model.h5 --output ./rtlout
 ```
 
-model2rtl demonstrates that a trained quantized neural network can be compiled into a portable RTL implementation using a shared Multiply-Select-Add architecture, verified behaviourally and after independent FPGA-oriented and generic/ASIC-oriented synthesis, with an optional ASIC physical ROM representation of its parameters.
+That is the whole idea. The rest of this page is how to actually do it, what works, and what does not.
 
-> **Scope.** The claim covers the demonstrated MNIST 784-32-10 MLP only. It is not a claim of production ASIC readiness, timing closure, full-chip physical implementation, DRC- or LVS-clean macros, arbitrary-model compilation, or reproduction of any proprietary implementation.
+> **New to hardware?** You do not need an FPGA, a chip, or any expensive tools. Everything here runs on a laptop with free, open-source software. Start at [Quick start](#quick-start).
 
-## Results
+## What this actually does
 
-| Metric | Result |
+A neural network is multiplications and additions. A chip can do those directly, without a CPU, if you describe the circuit. That description is written in a language called **Verilog**, and writing it by hand for a whole network is slow and error-prone.
+
+`model2rtl` writes it for you:
+
+```
+  my_model.h5            ->   model2rtl   ->   mlp_fabric.v
+  (trained in Keras)                           mlp_params.v
+                                               mlp_top.v
+                                               (Verilog you can simulate
+                                                or send to a chip flow)
+```
+
+The interesting part is *how* it builds the circuit. A network with 25,408 connections would need 25,408 multipliers if you built one per connection. This design uses **16**, by exploiting the fact that the weights were squeezed down to only 16 possible values. More on that in [How it works](#how-it-works).
+
+## Install
+
+You need Python 3.9 or newer.
+
+```bash
+git clone <this repo> && cd model2rtl
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install -e .              # the compiler (needs only numpy)
+pip install -e ".[train]"      # add this to read .h5 files (installs TensorFlow)
+```
+
+To *simulate* the Verilog you also need two free tools:
+
+```bash
+# Ubuntu / Debian
+sudo apt install iverilog yosys
+
+# macOS
+brew install icarus-verilog yosys
+```
+
+| Tool | What it is | Needed for |
+|---|---|---|
+| Icarus Verilog (`iverilog`) | a Verilog simulator | running the generated hardware |
+| Yosys | a synthesis tool | turning Verilog into logic gates |
+
+Neither is needed just to *generate* the Verilog.
+
+## Quick start
+
+Copy-paste this. It trains a small network, compiles it to hardware, and checks the hardware elaborates. Takes about a minute.
+
+**1. Train something to compile**
+
+```python
+# save as train_demo.py
+import numpy as np, tensorflow as tf
+
+(x, y), (xt, yt) = tf.keras.datasets.mnist.load_data()
+x, xt = x.reshape(-1, 784) / 255.0, xt.reshape(-1, 784) / 255.0
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Input((784,)),
+    tf.keras.layers.Dense(32, activation='relu'),   # hidden layer
+    tf.keras.layers.Dense(10, activation='softmax') # 10 digits
+])
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+model.fit(x, y, epochs=5, batch_size=128)
+model.save('demo.h5')
+
+# save some test images for the compiler to measure against
+np.savez('calib.npz', x=(xt[:2000] * 255).astype('uint8'), y=yt[:2000])
+```
+
+```bash
+python train_demo.py
+```
+
+**2. Compile it to hardware**
+
+```bash
+model2rtl --model demo.h5 --calibration calib.npz \
+          --output ./rtlout --check
+```
+
+You will see something like:
+
+```
+loaded demo.h5: 784 -> 32 -> ReLU -> 10
+calibration: 2000 samples with labels
+quantized: shift 8, input scale 0.0039215686
+  float 0.9310 -> integer 0.9120 on calibration (-1.90 points)
+
+wrote ./rtlout
+  mlp_fabric.v      ...
+  mlp_params.v      ...
+  mlp_params_sel.v  ...
+  mlp_top.v         ...
+  compile_report.json
+
+fabric is weight independent: True
+latency: 864 cycles per inference (architectural only)
+icarus: OK
+yosys:  OK
+```
+
+That's it. `./rtlout` now contains a working hardware design.
+
+> **`-1.90 points` is normal.** Squeezing weights down to 16 values costs some accuracy. If that bothers you, see [Getting the accuracy back](#getting-the-accuracy-back).
+
+## What you get
+
+| File | What it is | Contains your weights? |
+|---|---|---|
+| `mlp_fabric.v` | the compute engine: multipliers, adders, control | **no** |
+| `mlp_params.v` | your trained weights, as a read-only memory | yes |
+| `mlp_params_sel.v` | a small file that connects the two | no |
+| `mlp_top.v` | the top level, wires everything together | no |
+| `compile_report.json` | every number, hash and setting used | — |
+| `param_images/` | the weights in a plain, checkable format | yes |
+
+Only **one** of those files depends on your model. Train a different network of the same shape and `mlp_fabric.v` comes out byte-for-byte identical — the compiler checks this on every single run and refuses to finish if it is ever untrue.
+
+## Using the hardware
+
+The design has a simple handshake. To classify one input:
+
+```
+  1. hold rst high for a few cycles, then drop it
+  2. pulse start high for one cycle
+  3. in_ready goes high -> feed one value per cycle
+     (set in_valid high and put the value on in_data)
+  4. wait for done to pulse high
+  5. read prediction (the winning class) and logits (the raw scores)
+```
+
+| Port | Direction | Meaning |
+|---|---|---|
+| `clk` | in | clock |
+| `rst` | in | reset, active high, synchronous |
+| `start` | in | pulse for one cycle to begin |
+| `in_ready` | out | the design is ready for an input value |
+| `in_valid` | in | you are providing a valid input value |
+| `in_data` | in | one input value, 0-255 |
+| `busy` | out | an inference is in progress |
+| `done` | out | pulses high for one cycle when finished |
+| `prediction` | out | the winning class index |
+| `logits` | out | all raw scores, packed together |
+
+A minimal testbench:
+
+```verilog
+// save as tb.v, then:
+//   iverilog -g2001 -o sim tb.v rtlout/*.v && ./sim
+`timescale 1ns/1ps
+module tb;
+    reg clk = 0;  always #5 clk = ~clk;
+    reg rst = 1, start = 0, in_valid = 0;
+    reg [7:0] in_data = 0;
+    wire in_ready, busy, done, prediction_valid;
+    wire [3:0] prediction;
+    wire [179:0] logits;
+    integer i;
+
+    mlp_top dut (.clk(clk), .rst(rst), .start(start),
+        .in_ready(in_ready), .in_valid(in_valid), .in_data(in_data),
+        .busy(busy), .done(done), .prediction_valid(prediction_valid),
+        .prediction(prediction), .logits(logits));
+
+    initial begin
+        repeat (4) @(negedge clk);
+        rst = 0;                       // 1. release reset
+        @(negedge clk); start = 1;     // 2. kick it off
+        @(negedge clk); start = 0;
+
+        i = 0;                         // 3. feed 784 pixels
+        while (i < 784) begin
+            if (in_ready) begin
+                in_valid = 1;
+                in_data  = i[7:0];     // put your real pixel here
+                i = i + 1;
+            end else in_valid = 0;
+            @(negedge clk);
+        end
+        in_valid = 0;
+
+        while (!done) @(negedge clk);  // 4. wait
+        $display("predicted class = %0d", prediction);  // 5. read
+        $finish;
+    end
+endmodule
+```
+
+One classification takes **864 clock cycles** for this network shape (`inputs + 2 x hidden + outputs + 6`). It processes one input value per cycle rather than all at once, which keeps the circuit small.
+
+## What models are supported
+
+Exactly one shape, on purpose:
+
+```
+Input -> Dense(any size) -> ReLU -> Dense(any size) -> output
+```
+
+| Supported | Not supported |
 |---|---|
-| Float MNIST test accuracy | 96.52% |
-| Quantized integer test accuracy | 96.45% |
-| Behavioral RTL vs integer golden model | **0 mismatches** |
-| Behavioral verification images | 500 |
-| Cycle-level internal trace checks | 178,840, 0 failures |
-| FPGA post-synthesis gate-level | 500 images, **0 mismatches** |
-| Generic post-synthesis gate-level | 500 images, **0 mismatches** |
-| Nominal cycles per inference | 864 |
-| Fabric active shared product alternatives | 16 |
-| iCE40 `SB_MAC16` (DSP) | **0** |
-| iCE40 `SB_LUT4` | 6,429 |
-| iCE40 flip-flops | 1,614 |
-| iCE40 `SB_RAM40_4K` | 32 |
-| Generic-gate cells | 45,707 |
-| Generic multiplier/arithmetic cells | **0** |
-| OpenROM physical macro contents | **bit-exact** (102,640 / 102,640 cells) |
-| OpenROM total macro GDS bounding box | 252,381.6 um² |
-| Same storage as SKY130 standard cells | 9,406 cells, 58,335.9 um² |
-| Physical DRC/LVS signoff | **UNVERIFIED** |
+| 2 `Dense` layers, any width | 3 or more `Dense` layers |
+| `relu` on the hidden layer | any other hidden activation |
+| `softmax`, `sigmoid` or none on the output | `tanh` etc. on the output |
+| `.h5`, `.keras`, or `.npz` with `w1,b1,w2,b2` | SavedModel folders, ONNX, TFLite, PyTorch |
+| `Flatten`, `Dropout`, `Input` (ignored) | convolution, pooling, batch-norm, RNN |
 
-Full detail: **[FINAL-REPORT.md](FINAL-REPORT.md)**. Machine-readable: [`reports/final_report.json`](reports/final_report.json) and [`reports/results.csv`](reports/results.csv). Every number above was extracted from the six per-stage reports, not retyped.
-
-## The architecture
-
-Weights are quantized to exactly **K = 16** levels, so every synapse stores only a 4-bit index. For a given activation `x_i` there are therefore only 16 distinct products it can ever take part in, however many neurons it feeds.
+If your model is not supported the compiler **stops and tells you what it found**. It never quietly compiles part of your network. Real examples from testing:
 
 ```
-                          activation x_i
+$ model2rtl --model housing.keras --output ./out
+model2rtl: cannot compile this model.
+expected exactly 2 Dense layers, found 3. This compiler builds
+input -> Dense -> ReLU -> Dense only.
+Layers found: Dense(hidden_1), Dense(hidden_2), Dense(output)
+
+$ model2rtl --model convnet_weights.npz --output ./out
+model2rtl: cannot compile this model.
+inconsistent shapes: w1 (3, 3, 1, 32), w2 (1600, 10)
+```
+
+That second one is a convolutional network. The refusal is the correct answer: compiling it anyway would produce hardware that computes something other than your model.
+
+## Getting the accuracy back
+
+Weights are stored as one of only 16 values. Your model was not trained expecting that, so it loses a little accuracy. Two options:
+
+**Default (fast, no training needed):**
+
+```bash
+model2rtl --model demo.h5 --calibration calib.npz --output ./out
+```
+
+**Fine-tuning (slower, much better):**
+
+```bash
+model2rtl --model demo.h5 --calibration calib.npz \
+          --quantize qat --epochs 25 --output ./out
+```
+
+This retrains the weights *while pretending they are already squeezed*, so they settle in places that survive it. Measured on a Fashion-MNIST model, held-out data:
+
+| | Accuracy |
+|---|---|
+| original float model | 83.0% |
+| default quantization | 82.7% |
+| with `--quantize qat` | **86.0%** |
+
+> **Always pass `--calibration`.** Without it the compiler cannot measure anything and has to guess a key setting. It will warn you loudly. The file is just an `.npz` with `x` (inputs) and ideally `y` (labels).
+
+## Command reference
+
+| Option | Meaning |
+|---|---|
+| `--model PATH` | trained model: `.h5`, `.keras`, or `.npz` |
+| `--indices PATH` | an already-quantized model; skips quantization |
+| `--output DIR` | where to write the Verilog (required) |
+| `--calibration PATH` | `.npz` with `x` and ideally `y`; strongly recommended |
+| `--quantize ptq\|qat` | `ptq` (default, fast) or `qat` (fine-tune, better) |
+| `--epochs N` | fine-tuning epochs, default 20 |
+| `--prefix NAME` | name your modules, default `mlp` |
+| `--input-scale F` | if your model expects `x/255`, this is `0.00392157`. Auto-detected by default |
+| `--shift N` | force an internal setting; normally chosen by measurement |
+| `--check` | run Icarus and Yosys on the result |
+| `--quiet` | less output |
+
+## Does it actually work?
+
+The reference MNIST model was checked at every level. Not "it compiled" — actually simulated and compared, number by number.
+
+| Check | Result |
+|---|---|
+| Original float accuracy | 96.52% |
+| After quantization | 96.45% |
+| Hardware simulation vs the maths, 500 images | **0 differences** |
+| Internal signals checked, cycle by cycle | 178,840 checks, 0 failures |
+| After FPGA synthesis, 500 images | **0 differences** |
+| After generic chip synthesis, 500 images | **0 differences** |
+| Automated tests | 429 passing |
+
+Synthesized size, measured with real tools:
+
+| | iCE40 FPGA | Generic gates |
+|---|---|---|
+| logic cells | 6,429 LUTs | 45,707 cells |
+| registers | 1,614 | 1,742 |
+| memory blocks | 32 | 0 (built from gates) |
+| **multipliers / DSPs** | **0** | **0** |
+
+Zero multipliers. The tools discovered that multiplying by a fixed small number is just shifting and adding, and removed them all.
+
+## How it works
+
+Every weight is one of 16 fixed values (-8, -7, -6 ... 6, 7). So for any input value `x`, there are only 16 possible products it can ever be involved in — no matter how many neurons it feeds.
+
+So compute those 16 products **once**, and let every neuron pick the one it needs:
+
+```
+                          one input value x
                                 |
         +-----------+-----------+-----------+-----------+
         |           |           |           |           |
-     x_i*-8      x_i*-7       .....       x_i*+6      x_i*+7
+      x * -8      x * -7      .....       x * +6      x * +7
         |           |           |           |           |
-        +-----------+--- 16 shared products -+-----------+
+        +----------- 16 products, computed once ---------+
                                 |
               +-----------+------+------+-----------+
               |           |             |           |
-           mux j0      mux j1   .....  mux jN    (4-bit weight index
-              |           |             |          selects per synapse)
-            acc0        acc1          accN
-              |           |             |
-              +-----------+-------------+
-                                |
-                          next activation
+           neuron 0    neuron 1  .....  neuron N
+            picks       picks           picks       <- each uses its
+            one         one             one            4-bit weight
+              |           |               |
+            add to      add to          add to
+            total       total           total
 ```
 
-Execution is **input-serial, output-parallel**: one activation enters per cycle, every neuron of the active layer accumulates in parallel, and the same 16-product bank is reused across all neurons, across input cycles and across both layers.
+This is called **Multiply-Select-Add**. Inputs are fed one per cycle and every neuron accumulates in parallel, so the same 16 products serve the whole network, both layers included.
 
-Three counts are easy to conflate, so they are kept apart — **all three are source-level operation counts, none is a physical multiplier count**:
+The trade: it takes 864 cycles instead of doing everything at once. You are exchanging speed for a much smaller circuit.
 
-| | Count |
+## Troubleshooting
+
+| Message | What to do |
 |---|---|
-| naive fully spatial synapse multiplications | 25,408 |
-| fully spatial MSA product generators | 13,056 |
-| **implemented** active shared product expressions | **16** |
+| `expected exactly 2 Dense layers, found 3` | Your model is too deep. Only 2 dense layers are supported. |
+| `unrecognised model format` | Save as `.h5` or `.keras`: `model.save('m.h5')` |
+| `reading a Keras model needs TensorFlow` | `pip install -e ".[train]"` |
+| `no ReLU was found between the two Dense layers` | Use `activation='relu'` on the hidden layer. |
+| `NO LABELLED CALIBRATION DATA` | Pass `--calibration` with an `.npz` containing `x` and `y`. |
+| `bias does not fit N signed bits` | Your biases are very large relative to the weights. Retrain with a smaller learning rate or normalise your inputs. |
+| Accuracy dropped a lot | Use `--quantize qat --epochs 30`. |
+| `icarus: not on PATH, skipped` | Install `iverilog` if you want the check to run. |
 
-Area and parallelism are traded for latency: **864 cycles** per inference instead of one.
+## What this is not
 
-After synthesis there are **0 multiplier or DSP cells left in either netlist**. Each product has a fixed small constant operand, so synthesis turns them into wiring, shifts, negation and LUT/carry logic. The honest statement is: *The architecture exposes only sixteen constant-weight product alternatives per activation, and synthesis further eliminates explicit multiplier hardware.*
+Being clear about this matters more than looking impressive.
 
-## Parameter flow
+- **Not a finished chip.** You get Verilog. Turning that into silicon needs a full manufacturing flow that is not included.
+- **Not FPGA-ready-to-flash.** No place-and-route, no timing analysis, no bitstream. The design synthesizes; nobody has fitted it to a real device.
+- **No speed claims.** Cycle counts are exact, clock speed is not measured. Any MHz figure here would be made up.
+- **Two dense layers only.** No convolution, no transformers, no ONNX or TFLite import.
+- **The SKY130 chip memories are experimental.** They generate and their contents are verified exactly, but the manufacturing checks (DRC/LVS) cannot be trusted in this environment: the vendor's own reference design fails them here too. Status: **UNVERIFIED**.
 
-```
-   trained model  (Stage 0, quantization-aware training)
-        |
-   4-bit weight-index image + integer biases
-        |
-   canonical parameter images        <- one hashed source of truth
-        |
-   +----+-----------------------+
-   |                            |
-   portable Verilog ROM      OpenROM physical macros (SKY130)
-   (FPGA + ASIC)             (ASIC only; banked + byte-padded)
-   |                            |
-   +----+-----------------------+
-        |
-   ONE fixed logical parameter interface
-        |
-   the SAME unchanged compute fabric
-```
+## Going deeper
 
-The fabric contains **no trained value**. Regenerating it with a different weight set and different biases produces a byte-identical file, so the compute architecture and the model are genuinely separable. The fabric has not changed a byte since Stage 1:
+| Document | What is in it |
+|---|---|
+| **[FINAL-REPORT.md](FINAL-REPORT.md)** | the full technical report: architecture, quantization, verification, area |
+| [`reports/final_report.json`](reports/final_report.json) | every measurement, machine-readable |
+| [`reports/results.csv`](reports/results.csv) | headline numbers with their source |
+| Appendices below | stage-by-stage evidence, regenerated from the reports |
 
-```
-rtl/mnist_mlp_fabric.v  7757362642b37fd0044bb7b323467116998caee69bad091d8454fc6010691e1c
-```
-
-Backend choice is a build-time source-list decision — no runtime mux, no parameter. Compile exactly one selector file:
+To rebuild the reference MNIST design and re-run everything:
 
 ```bash
-# portable (FPGA or ASIC)
-rtl/mnist_mlp_top.v rtl/mnist_mlp_fabric.v \
-  rtl/mnist_mlp_params_portable.v rtl/mnist_mlp_params_sel_portable.v
-
-# physical OpenROM organisation (ASIC / SKY130)
-rtl/mnist_mlp_top.v rtl/mnist_mlp_fabric.v \
-  rtl/mnist_mlp_params_openrom_phys.v \
-  rtl/mnist_mlp_params_sel_openrom_phys.v
+python scripts/train_mnist_mlp.py --sweep-hidden-shift
+python scripts/gen_compute_fabric.py
+python scripts/verify_stage3.py --images 500
+python -m pytest tests -q
 ```
 
-## Status
-
-| Stage | Scope | Status |
-|---|---|---|
-| 0 | training, quantization, integer golden model, arithmetic contract | **PASS** |
-| 1 | weight-independent Multiply-Select-Add compute fabric | **PASS** |
-| 2 | two interchangeable parameter-storage backends | **PARTIAL** |
-| 3 | behavioral RTL verification | **PASS** |
-| 4 | dual-target synthesis portability + gate-level verification | **PASS** |
-| 5 | physical OpenROM generation | **PASS** |
-| 5 | physical DRC/LVS signoff | **UNVERIFIED** |
-| 6 | final report and consolidation | **PASS** |
-
-Stage 2 closed as PARTIAL because two of the four logical memory shapes could not be built by the installed OpenROM at the time; Stage 5 completed them. The Stage-2 verdict is left as recorded.
-
-### What does not exist
-
-- **No DRC or LVS signoff.** OpenRAM's *own* upstream reference ROM fails in this environment (830 errors, LVS MISMATCH), so no physical-verification result here is evidence about these macros in either direction. No macro is called clean.
-- **No place-and-route**, on either target: no device fit, no bitstream, no floorplan, no routing, no full-chip flow.
-- **No timing analysis** anywhere, and no maximum clock frequency. The 50/100 MHz figures in the appendices are cycle counts divided by an assumed clock.
-- **No floorplanned area and no placement density.** The macro figure is a raw sum of bounding boxes.
-- **No general model compiler.** MNIST 784 -> 32 -> ReLU -> 10 only; no convolution, no ONNX or TFLite ingestion.
-
-## Public prior-art / IP note
-
-This project explores a digital RTL interpretation of publicly disclosed high-level Multiply-Select-Add ideas associated with public Taalas patent material. No Taalas source code, netlist, layout or transistor-level mask-ROM detail was used, consulted or reproduced, and nothing here is claimed to be equivalent to Taalas hardware.
-
-## The arithmetic contract
-
-The integer specification was fixed **analytically, before any RTL existed**, and never moved. A pure-NumPy integer model implementing it is the sole oracle for every stage; Keras float output is a reference number and was never used to check RTL arithmetic.
-
-| Item | Value |
-|---|---|
-| weight alphabet | `alphabet[i] = i - 8`, i.e. -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7 |
-| weight index | 4 bits |
-| activations | uint8, zero point 0, range [0, 255] |
-| product | signed, 12 bits |
-| layer1 dot / bias / accumulator | 22 / 22 / 23 bits |
-| layer2 dot / bias / accumulator | 17 / 17 / 18 bits |
-| requantization | `hidden: h = clamp((max(acc1, 0) + 128) >> 8, 0, 255); output: none (raw signed logits)` |
-| rounding | round-half-up (add 1 << (shift-1), then arithmetic right shift) |
-| prediction | argmax over the 10 signed logits; lowest index wins ties |
-
-There is **no multiplicative requantization scale anywhere in the datapath** — the only requantization operator is a fixed power-of-two shift of 8. That is precisely why no trained value can leak into the fabric.
-
-## Repository layout
-
-```
-model2rtl/
-├── FINAL-REPORT.md            the technical report
-├── README.md                  this file
-├── model/                     trained 4-bit indices + integer biases
-├── rtl/                       all GENERATED, all Verilog-2001
-│   ├── mnist_mlp_fabric.v             weight-independent MSA fabric
-│   ├── mnist_mlp_params_portable.v    portable parameter ROM
-│   ├── mnist_mlp_params_openram.v     OpenRAM behavioural backend
-│   ├── mnist_mlp_params_openrom_phys.v physical OpenROM backend
-│   ├── mnist_mlp_params_sel_*.v       build-time backend selectors
-│   └── mnist_mlp_top.v                fabric + selected backend
-├── src/model2rtl/             the compiler and its verification model
-├── scripts/                   one driver per stage, plus renderers
-├── tests/                     the whole verification suite
-├── reports/                   per-stage JSON + final_report.json
-└── build/                     generated artifacts per stage
-    ├── param_images/          canonical parameter images
-    ├── openram/               Stage-2 OpenROM attempts
-    ├── stage4/                synthesized netlists and logs
-    └── stage5/                physical macros, sweep, DRC/LVS
-```
-
-This project is **standalone**. It does not import from, depend on, reuse code from, or modify `rtl2gdsagi`.
-
-## Reproducing
-
-The functional flow needs only Python, Yosys and Icarus. The physical flow additionally needs a user-space OpenRAM checkout, the SKY130 PDK, magic, netgen and KLayout. **The environment is not one-click portable**; exact versions and paths are in [FINAL-REPORT.md](FINAL-REPORT.md) section 19.
-
-```bash
-python3.11 -m venv .venv
-.venv/bin/pip install -e ".[train,test]"
-
-# functional flow
-.venv/bin/python scripts/train_mnist_mlp.py --sweep-hidden-shift
-.venv/bin/python scripts/gen_compute_fabric.py
-.venv/bin/python scripts/verify_stage1.py
-.venv/bin/python scripts/gen_weight_rom_portable.py
-.venv/bin/python scripts/verify_stage2.py
-.venv/bin/python scripts/verify_stage3.py --images 500
-.venv/bin/python scripts/synth_stage4.py
-.venv/bin/python scripts/verify_stage4.py --images 500
-
-# physical flow (optional; needs the OpenRAM + SKY130 environment)
-source build/openram/openram_env.sh
-.venv/bin/python scripts/gen_weight_rom_openram.py
-.venv/bin/python scripts/gen_openrom_stage5.py
-.venv/bin/python scripts/gen_openrom_phys_rtl.py
-.venv/bin/python scripts/sweep_stage5.py
-.venv/bin/python scripts/verify_physical_stage5.py
-.venv/bin/python scripts/verify_stage5.py --images 500
-
-# consolidate and test
-.venv/bin/python scripts/build_final_report.py
-.venv/bin/python scripts/render_final_report.py
-.venv/bin/python -m pytest tests -q
-```
-
-Seed 1234; MNIST split `MNIST train[:55000] / train[55000:60000] / official test`. TensorFlow is a **training-time dependency only** — the compiler, the integer golden model and every verification path depend on NumPy alone.
+This project does not import from, depend on, or modify `rtl2gdsagi`.
 
 ---
 
-The appendices below are the per-stage results, regenerated from the stage reports. They are the detailed evidence behind the summary above; start with [FINAL-REPORT.md](FINAL-REPORT.md) if you want the narrative.
+The appendices below are the detailed per-stage evidence behind the numbers above. They are generated from the stage reports, not written by hand. Start with [FINAL-REPORT.md](FINAL-REPORT.md) if you want the narrative rather than the raw evidence.
 ## Appendix A — Stage 0: quantization
 
 <!-- STAGE0_RESULTS_START -->

@@ -15,6 +15,9 @@ authors = [{ name = "rithwik" }]
 # TensorFlow is deliberately NOT here: it is a training-time tool only.
 dependencies = ["numpy>=1.21"]
 
+[project.scripts]
+model2rtl = "model2rtl.cli:main"
+
 [project.optional-dependencies]
 train = ["tensorflow-cpu==2.16.2"]
 test = ["pytest>=7"]

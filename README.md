@@ -122,11 +122,9 @@ Rejection is deliberate. The compiler must not generate hardware that computes a
 ### 1. Get the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/xp4t/model2rtl.git
 cd model2rtl
 ```
-
-Replace `<repository-url>` with this repository's Git URL.
 
 ### 2. Create a Python environment
 

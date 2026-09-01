@@ -48,7 +48,13 @@ build/**/*_netlist.json
 build/**/*.vvp
 
 /scripts/git_commit_stages.sh
-docs/
+/docs
+UCFVidAnomalydetection.h5
+
+
+
+
+
 
 # Local Superpowers SDD coordination artifacts are not product history.
 .superpowers/

@@ -1,0 +1,4011 @@
+{
+  "schema_version": 1,
+  "search": {
+    "authenticated_at_utc": "2026-08-21T04:37:32Z",
+    "kaggle_cli_api_version": "2.2.4",
+    "kaggle_executable": "/home/rithwik/model2rtl/.venv/bin/kaggle",
+    "dataset": "odins0n/ucf-crime-dataset",
+    "temporary_directory": "/tmp/model2rtl-task2a-D26ggC",
+    "temporary_directory_retained": true,
+    "authentication_safety": "Credential material and authorization headers were not inspected, printed, copied, hashed, or persisted."
+  },
+  "target": {
+    "local_read_only_model": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+    "size_bytes": 65601128,
+    "sha256": "7411d46d5ab0900f46e732217b140d3f777dc028a7f74362300fd1d7dc0f1c12",
+    "identity_rule": "Only exact whole-file SHA-256 equality establishes identity.",
+    "confirmed_non_match_sha256": "2009bda65062478b7eb810668ca274cc1edd1fa36883b7d3140a77f2ee1ed1b6"
+  },
+  "candidate_inventory": {
+    "counts": {
+      "associated_notebooks": 165,
+      "authenticated_source_recoveries": 165,
+      "authenticated_output_inventories": 165,
+      "total_listed_output_entries": 510,
+      "previously_http_401_sources_recovered": 13,
+      "h5_keras_listed": 26,
+      "h5_keras_recovered_and_hashed": 23,
+      "h5_keras_listed_but_not_returned": 3,
+      "savedmodel_exports_listed": 3,
+      "savedmodel_exports_recovered": 1,
+      "archives_recovered_and_inspected": 10,
+      "archive_h5_keras_savedmodel_members": 0
+    },
+    "prior_inaccessible_candidates_recovered": [
+      {
+        "owner": "nishaarulselvir",
+        "slug": "project",
+        "source_access": "recovered_authenticated",
+        "source_filename": "project.ipynb",
+        "source_size_bytes": 7974,
+        "source_sha256": "f2f583c433a3efaec055d8c5877d6b2f629df845738a5aa9d0010e19d625d9fb",
+        "output_file_count": 0
+      },
+      {
+        "owner": "dev1111",
+        "slug": "video-anomaly-detection",
+        "source_access": "recovered_authenticated",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 14523,
+        "source_sha256": "c5940025708530fda35c6a3e6c69611879f51fdcbd692501e8b268bd4d939d0d",
+        "output_file_count": 0
+      },
+      {
+        "owner": "mohamadmaulana",
+        "slug": "notebookdc485d10c9",
+        "source_access": "recovered_authenticated",
+        "source_filename": "notebookdc485d10c9.ipynb",
+        "source_size_bytes": 208664,
+        "source_sha256": "26e4ea0337f82089893a837accf7a30db6375b8f12eb8713ab4afc184f6bd1d2",
+        "output_file_count": 0
+      },
+      {
+        "owner": "ammarahmedsiddiqui",
+        "slug": "ufc-crime-dataset",
+        "source_access": "recovered_authenticated",
+        "source_filename": "ufc-crime-dataset.ipynb",
+        "source_size_bytes": 126265,
+        "source_sha256": "40305c026abeab568c09c61994af2b51fc157231d1cae17df9080af4d7f3dea1",
+        "output_file_count": 0
+      },
+      {
+        "owner": "sohailmasood",
+        "slug": "video-anomaly-detection",
+        "source_access": "recovered_authenticated",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 54214,
+        "source_sha256": "2cdc8eda74be2b5981b1c275243cdf837cdadab4f06c4d65a43168c042899cfe",
+        "output_file_count": 0
+      },
+      {
+        "owner": "developerdowny",
+        "slug": "video-anomaly-detection",
+        "source_access": "recovered_authenticated",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 35584,
+        "source_sha256": "e1f52f1227fb92a4c371ce06e914b23911e43f09688529d95a87d21758eef2e2",
+        "output_file_count": 0
+      },
+      {
+        "owner": "guptakrishna4135",
+        "slug": "anamoly-detection-project",
+        "source_access": "recovered_authenticated",
+        "source_filename": "anamoly-detection-project.ipynb",
+        "source_size_bytes": 38896,
+        "source_sha256": "a7ad1ef18a6cbbb7a2269fad9e3d530ff21e7e98fae33294b408aaa56d8eb177",
+        "output_file_count": 0
+      },
+      {
+        "owner": "mahedihasan1234",
+        "slug": "ufc-crime-dataset",
+        "source_access": "recovered_authenticated",
+        "source_filename": "ufc-crime-dataset.ipynb",
+        "source_size_bytes": 351423,
+        "source_sha256": "ca7fe1cdd4dc601750d9bc4548d63c62519fe591db827722e46ecda91852b0a4",
+        "output_file_count": 0
+      },
+      {
+        "owner": "smh125",
+        "slug": "videoanomlydetection-ucfcrime101",
+        "source_access": "recovered_authenticated",
+        "source_filename": "videoanomlydetection-ucfcrime101.ipynb",
+        "source_size_bytes": 13619072,
+        "source_sha256": "df7098157dcb351b239ffaba16f54fe161d0028226280c5ab1e352c3abb641bd",
+        "output_file_count": 0
+      },
+      {
+        "owner": "hampyhampy",
+        "slug": "crime-types-cctv-detection-vit",
+        "source_access": "recovered_authenticated",
+        "source_filename": "crime-types-cctv-detection-vit.ipynb",
+        "source_size_bytes": 63826,
+        "source_sha256": "09a528b117b3cbbd12f7e772c94667207030076996fd1710939a249021ad4c42",
+        "output_file_count": 0
+      },
+      {
+        "owner": "marufhasan879",
+        "slug": "ucf-crime",
+        "source_access": "recovered_authenticated",
+        "source_filename": "ucf-crime.ipynb",
+        "source_size_bytes": 2437161,
+        "source_sha256": "3a2034ccbe2faff77a107dd501ae4d5244c36ef826687e78c5a7830b923c45e5",
+        "output_file_count": 0
+      },
+      {
+        "owner": "ap00100",
+        "slug": "opticalflow",
+        "source_access": "recovered_authenticated",
+        "source_filename": "opticalflow.ipynb",
+        "source_size_bytes": 69840,
+        "source_sha256": "ad68ff742b290aa47bc80a346f81c8d07c420c92dd6c19e3d63f9b77fbee0c81",
+        "output_file_count": 0
+      },
+      {
+        "owner": "seryaltuncer4",
+        "slug": "suspicious-activities-graduation-project-bb5b05",
+        "source_access": "recovered_authenticated",
+        "source_filename": "suspicious-activities-graduation-project-bb5b05.ipynb",
+        "source_size_bytes": 655185,
+        "source_sha256": "842ce6c50062d32eb4ff7ea869f8126d710e663e932510fd510d0c5513b685a2",
+        "output_file_count": 0
+      }
+    ],
+    "notebooks": [
+      {
+        "owner": "abdulhai12343",
+        "slug": "seq-swin-trains",
+        "last_run_time_utc": "2023-10-21T15:48:09.977000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "seq-swin-trains.ipynb",
+        "source_size_bytes": 30528,
+        "source_sha256": "dcac68922cf30ca4a4c9b91de8b69b44f252b30b693253a64d94720ea56603be",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "abhaysemwal01",
+        "slug": "crime-det-2-0",
+        "last_run_time_utc": "2024-11-09T05:12:08.710000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-det-2-0.ipynb",
+        "source_size_bytes": 11095,
+        "source_sha256": "0b802e5ea9dfd16674ef309473880948084f026782300c3884590f956e35693e",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "mymodel.h5",
+            "kaggle_list_files_size_field": 840,
+            "creation_date_utc": "5:12 am, Saturday 9 November 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "abhaysemwal01",
+        "slug": "crime-detection-final2",
+        "last_run_time_utc": "2025-06-15T14:09:47.390000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-detection-final2.ipynb",
+        "source_size_bytes": 12003,
+        "source_sha256": "a5361c93860dfeab3acc75b6efa9c7a801db06516b3de1bec4aaded85f834fbd",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 5,
+        "relevant_listed_outputs": [
+          {
+            "filename": "CNN_LSTM.h5",
+            "kaggle_list_files_size_field": 843,
+            "creation_date_utc": "2:09 pm, Sunday 15 June 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "abhaysemwal01",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2024-11-18T11:19:47.137000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 11130,
+        "source_sha256": "553dc0b9abf3bdf5a309c46b5b77b2a477290cc62560e3db3c3420431bf18aca",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "mymodel.h5",
+            "kaggle_list_files_size_field": 840,
+            "creation_date_utc": "11:19 am, Monday 18 November 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "abhignanbollam",
+        "slug": "social-force-mode-final",
+        "last_run_time_utc": "2026-02-09T10:07:49.287000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "social-force-mode-final.ipynb",
+        "source_size_bytes": 5865,
+        "source_sha256": "0fb919bb3ec85fe3984721370eeb622643b98cbe0121599c35e57088ccaceac5",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "abujafarsaifullah",
+        "slug": "group-7-ml-project",
+        "last_run_time_utc": "2023-10-30T15:49:33.973000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "group-7-ml-project.ipynb",
+        "source_size_bytes": 18668,
+        "source_sha256": "4bd9cbdd8bf762f1b76722922e5b98d96859271e979c68144547ae36bfd6deee",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "adarshgg",
+        "slug": "vadclip",
+        "last_run_time_utc": "2025-03-28T10:52:39.297000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "vadclip.ipynb",
+        "source_size_bytes": 35774,
+        "source_sha256": "8ff1c40a029c0be621cd83079e7b54dca8833311802be245473d7d8581d749d0",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "adityasapru",
+        "slug": "anomalydetectionfinal",
+        "last_run_time_utc": "2025-12-28T11:34:22.297000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomalydetectionfinal.ipynb",
+        "source_size_bytes": 23334,
+        "source_sha256": "690190f6b163be6e729affd63627251314d317a012e3a0b22d5c284f17c27938",
+        "source_signals": [
+          ".keras",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "adityasapru",
+        "slug": "anomalydetectionfinal-1-75f6fc18d0",
+        "last_run_time_utc": "2025-12-28T19:25:37.273000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomalydetectionfinal-1-75f6fc18d0.ipynb",
+        "source_size_bytes": 25237,
+        "source_sha256": "d15395789bc784cd11c22fc62d36856f91b3884c5427888dfc3347a259cf3c56",
+        "source_signals": [
+          ".keras",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "akarsh1263",
+        "slug": "crime-detection-2-1d",
+        "last_run_time_utc": "2024-07-05T07:50:55.723000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-detection-2-1d.ipynb",
+        "source_size_bytes": 17946,
+        "source_sha256": "4df224d38b61ee7edce0a58b761677ba46b18f24be3701e9c96b6131e4be5407",
+        "source_signals": [
+          ".keras",
+          "class_indices",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "akarsh2661",
+        "slug": "crime-detection-2d-cnn-10-epoch",
+        "last_run_time_utc": "2024-07-05T12:45:17.323000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-detection-2d-cnn-10-epoch.ipynb",
+        "source_size_bytes": 13447,
+        "source_sha256": "f9602b03c341e98ece074612173e53996175bdce91901320780a6d3becb26a02",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "akarsh2661",
+        "slug": "crime-detection-2d-cnn-4-epoch",
+        "last_run_time_utc": "2024-07-05T12:09:45.927000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-detection-2d-cnn-4-epoch.ipynb",
+        "source_size_bytes": 13368,
+        "source_sha256": "417628cbb678c28a7abbf35c8c66850dd0b66671c958daa20fd72ef4a6de2e18",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "akashmuthukumar",
+        "slug": "final-progress-excellent-curve",
+        "last_run_time_utc": "2025-01-05T21:48:09.667000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "final-progress-excellent-curve.ipynb",
+        "source_size_bytes": 19859,
+        "source_sha256": "a71d048401de24a2b963d4b7fee0aa78745b268a62507fb4ba568dc8f2b3d4cc",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "alanshoby",
+        "slug": "slowfast-training",
+        "last_run_time_utc": "2026-03-16T02:06:35.223000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "slowfast-training.ipynb",
+        "source_size_bytes": 32152,
+        "source_sha256": "9890e07018fb27b8e5b23589824a65aaf004f7938a9546bc5a44204c38854d64",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ammarahmedsiddiqui",
+        "slug": "ufc-crime-dataset",
+        "last_run_time_utc": "2023-07-26T06:24:41.663000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ufc-crime-dataset.ipynb",
+        "source_size_bytes": 126265,
+        "source_sha256": "40305c026abeab568c09c61994af2b51fc157231d1cae17df9080af4d7f3dea1",
+        "source_signals": [
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ammarayounas999",
+        "slug": "semantic-analysis-of-video-surveillanace-cameras",
+        "last_run_time_utc": "2026-05-20T17:38:00.343000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "semantic-analysis-of-video-surveillanace-cameras.ipynb",
+        "source_size_bytes": 34265,
+        "source_sha256": "09575fe695c4236701a717bf9b8db631324bd09e5cc678ea3f0ac57a274d1e6f",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "anassiddiqui132",
+        "slug": "ucf-dataset-eda",
+        "last_run_time_utc": "2023-09-28T04:14:57.467000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-dataset-eda.ipynb",
+        "source_size_bytes": 6634,
+        "source_sha256": "2b2fd6330b028863eb362de70928c0a9956d50da5681e6e71924c57e925fb125",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "aneeshraskar",
+        "slug": "21bai1516-crime-anomaly-detection-project",
+        "last_run_time_utc": "2024-03-25T16:18:16.917000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "21bai1516-crime-anomaly-detection-project.ipynb",
+        "source_size_bytes": 22905,
+        "source_sha256": "a7f10bcc0de16bdcc59ce088e625e17386875546dee988a4e750b81154bf50fa",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 56,
+        "relevant_listed_outputs": [
+          {
+            "filename": "CNN_RNN.h5",
+            "kaggle_list_files_size_field": 862,
+            "creation_date_utc": "4:18 pm, Monday 25 March 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "anhkhoango",
+        "slug": "lab1-4-dat301m-se182284-ngoquocanhkhoa",
+        "last_run_time_utc": "2025-02-04T03:52:44.963000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-dat301m-se182284-ngoquocanhkhoa.ipynb",
+        "source_size_bytes": 13340,
+        "source_sha256": "c53b097ea8bf4b5e2ca40d7eb76e098146768b5c5096b008c4d06f7ab17f608c",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "anmatngu",
+        "slug": "lab1-4-se180083-nguyenxuanan",
+        "last_run_time_utc": "2025-01-20T11:44:37.400000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-se180083-nguyenxuanan.ipynb",
+        "source_size_bytes": 6891,
+        "source_sha256": "90a04f98a22f6f39f7f52644013dfad7476864dd1ad43dbb1d778dda06fb0b37",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 2,
+        "relevant_listed_outputs": [
+          {
+            "filename": "best_video_classification_model.keras",
+            "kaggle_list_files_size_field": 924,
+            "creation_date_utc": "11:44 am, Monday 20 January 2025 UTC"
+          },
+          {
+            "filename": "final_video_classification_model.keras",
+            "kaggle_list_files_size_field": 927,
+            "creation_date_utc": "11:44 am, Monday 20 January 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "annakzvereva",
+        "slug": "crime-video-detection",
+        "last_run_time_utc": "2024-02-21T19:23:35.337000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-video-detection.ipynb",
+        "source_size_bytes": 40399,
+        "source_sha256": "da6d03c69f6e15543ae9f111c5882f1963ab884f565f5e16820ea6df2e5bfbf1",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "annrealijo",
+        "slug": "victim-reaction-spike",
+        "last_run_time_utc": "2026-05-06T13:33:09.103000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "victim-reaction-spike.ipynb",
+        "source_size_bytes": 15348,
+        "source_sha256": "72a79ce6f927aad10a948274c0c024ab912d25aa9c091457b5d250269023e2fe",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ap00100",
+        "slug": "opticalflow",
+        "last_run_time_utc": "2026-03-03T10:42:55.090000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "opticalflow.ipynb",
+        "source_size_bytes": 69840,
+        "source_sha256": "ad68ff742b290aa47bc80a346f81c8d07c420c92dd6c19e3d63f9b77fbee0c81",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "aryanbhutani27",
+        "slug": "notebook42c057a795",
+        "last_run_time_utc": "2026-07-14T17:23:01.090000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook42c057a795.ipynb",
+        "source_size_bytes": 114232,
+        "source_sha256": "953f89832994f170d573de4e1d6d0ba36fc8e4a8cc59c9250099e25f0ee9e51b",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 3,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "asifahmad7007",
+        "slug": "anomaly-detection",
+        "last_run_time_utc": "2022-11-01T11:14:24.323000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomaly-detection.ipynb",
+        "source_size_bytes": 12330,
+        "source_sha256": "8c37469a7a819dddc17f27b3928da000bd33f4017af158b848b8fefb7e1360e9",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "aslinurdemir",
+        "slug": "goruntuisleme",
+        "last_run_time_utc": "2026-05-17T12:55:19.190000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "goruntuisleme.ipynb",
+        "source_size_bytes": 25302,
+        "source_sha256": "0f390a0ebf955eac5855b4e07217eb4e2d6fbd0fd1d99dc15c78c3ec954731df",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 96,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ayusharyan71",
+        "slug": "mvit-ucf",
+        "last_run_time_utc": "2023-03-13T11:00:49.943000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "mvit-ucf.ipynb",
+        "source_size_bytes": 5026,
+        "source_sha256": "9335439951e898124ed50b0cd04e2791414e6045b42b1d3ea9add11c831b1d4a",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 134,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ayushman1010",
+        "slug": "04-ucf-crime-fast-ipynb",
+        "last_run_time_utc": "2026-01-16T05:05:19.197000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "04-ucf-crime-fast-ipynb.ipynb",
+        "source_size_bytes": 20187,
+        "source_sha256": "141d47bb1e878b0574b839204061eb5b3af8e7446162341db31993e2a44eb408",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 8,
+        "relevant_listed_outputs": [
+          {
+            "filename": "ucf_pipeline_outputs.zip",
+            "kaggle_list_files_size_field": 879,
+            "creation_date_utc": "5:05 am, Friday 16 January 2026 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "ayushman1010",
+        "slug": "chain-snatching-model",
+        "last_run_time_utc": "2026-03-18T05:01:04.537000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "chain-snatching-model.ipynb",
+        "source_size_bytes": 40116,
+        "source_sha256": "0d18fbcc8f00276b4fc0b7f3954ffaace6a626a2e101a81585de0bf2a8de112e",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "83accuracy",
+        "last_run_time_utc": "2026-05-14T23:06:01.053000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "83accuracy.ipynb",
+        "source_size_bytes": 33045,
+        "source_sha256": "4727aff8403613a7e25685b8638cc88ffda152d79e21cc8013a3eade4013d774",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 4,
+        "relevant_listed_outputs": [
+          {
+            "filename": "model_best.keras",
+            "kaggle_list_files_size_field": 841,
+            "creation_date_utc": "11:06 pm, Thursday 14 May 2026 UTC"
+          },
+          {
+            "filename": "model_final.keras",
+            "kaggle_list_files_size_field": 844,
+            "creation_date_utc": "11:06 pm, Thursday 14 May 2026 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "notebookb77ed8a378",
+        "last_run_time_utc": "2026-05-12T14:25:05.860000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebookb77ed8a378.ipynb",
+        "source_size_bytes": 101091,
+        "source_sha256": "63598574a0a08efd13df23b8a7a7b3bd558cca310e4464d3009bfc54f980d0c5",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "last_run_time_utc": "2026-04-25T19:39:55.413000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "suspicious-activities-graduation-project-dc7568.ipynb",
+        "source_size_bytes": 49244,
+        "source_sha256": "a92e2f14e2ddf28127487fd6b71ccd30a0418fb1d1bbdb6a48d05b48eb0e53a2",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 13,
+        "relevant_listed_outputs": [
+          {
+            "filename": "deney1_1_vgg16_lstm_best.keras",
+            "kaggle_list_files_size_field": 947,
+            "creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+          },
+          {
+            "filename": "deney1_1_vgg16_lstm_final.keras",
+            "kaggle_list_files_size_field": 950,
+            "creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+          },
+          {
+            "filename": "deney1_2_mobilenet_lstm_best.keras",
+            "kaggle_list_files_size_field": 959,
+            "creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+          },
+          {
+            "filename": "deney1_2_mobilenet_lstm_final.keras",
+            "kaggle_list_files_size_field": 962,
+            "creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+          },
+          {
+            "filename": "deney2_mobilenet_lstm_genisletilmis_best.keras",
+            "kaggle_list_files_size_field": 995,
+            "creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+          },
+          {
+            "filename": "deney2_mobilenet_lstm_genisletilmis_final.keras",
+            "kaggle_list_files_size_field": 998,
+            "creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "candycandyy",
+        "slug": "ucf-crime-eda",
+        "last_run_time_utc": "2025-04-24T10:51:53.170000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime-eda.ipynb",
+        "source_size_bytes": 12187,
+        "source_sha256": "33a555c2893fd6050408ca26e8d659c4fdfadd7c30212304d09a850c93ce445d",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "csanskriti",
+        "slug": "anomaly-detection-from-video-frames",
+        "last_run_time_utc": "2023-08-18T16:09:17.420000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomaly-detection-from-video-frames.ipynb",
+        "source_size_bytes": 7207,
+        "source_sha256": "a76182e2c4867d43bef17fd2924c2a54f6f6ed2f63634f646bfdaf564686abc2",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "dev1111",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2022-06-07T05:04:54.940000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 14523,
+        "source_sha256": "c5940025708530fda35c6a3e6c69611879f51fdcbd692501e8b268bd4d939d0d",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "developerdowny",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2024-04-16T06:22:17.573000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 35584,
+        "source_sha256": "e1f52f1227fb92a4c371ce06e914b23911e43f09688529d95a87d21758eef2e2",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "dhruvgoel45",
+        "slug": "crime-anomaly-detection-deep-learning-project",
+        "last_run_time_utc": "2023-12-30T14:34:43.680000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-anomaly-detection-deep-learning-project.ipynb",
+        "source_size_bytes": 28497,
+        "source_sha256": "ed78d47f634a6a1bfe1bc4cffbb76f7a368387b7f7ad04aee48132d5f920eac2",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "class_indices",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "dhruvshah90",
+        "slug": "enhancement-models-testing",
+        "last_run_time_utc": "2026-06-12T12:08:44.737000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "enhancement-models-testing.ipynb",
+        "source_size_bytes": 11426,
+        "source_sha256": "0e418e9357a53a0f4096df791a06a72bf5967b26185608119b3fe0934b1000b1",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "dima806",
+        "slug": "crime-cctv-detection-vit",
+        "last_run_time_utc": "2024-11-02T21:22:46.023000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-cctv-detection-vit.ipynb",
+        "source_size_bytes": 35379,
+        "source_sha256": "a0f50f5055278d50c7104712f8f7363f2d38066dab6a3b70a8ddf6c398c4072a",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "dima806",
+        "slug": "crime-types-cctv-detection-vit",
+        "last_run_time_utc": "2024-11-03T17:15:55.637000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-types-cctv-detection-vit.ipynb",
+        "source_size_bytes": 38084,
+        "source_sha256": "c8ed15142cab89852f154a6fe3a6aae74b756c90add1446a592e5edba2c03720",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "dk79944",
+        "slug": "action-recon-by-dpk",
+        "last_run_time_utc": "2025-06-29T08:23:56.983000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "action-recon-by-dpk.ipynb",
+        "source_size_bytes": 19074,
+        "source_sha256": "aefcc2a32972590871e191360af512d202795979aaa684a3ab93502881b63bbd",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ethandanielcarter",
+        "slug": "crime-cctv-detection-vit-how-long-to-run-on-kaggle",
+        "last_run_time_utc": "2025-01-24T14:31:43.337000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-cctv-detection-vit-how-long-to-run-on-kaggle.ipynb",
+        "source_size_bytes": 31969,
+        "source_sha256": "0dbc377b779c6bb101dcb2cf54fa4d60ac7513a5791fb9dca630b9cc76692254",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 14,
+        "relevant_listed_outputs": [
+          {
+            "filename": "preprocessor_config.json",
+            "kaggle_list_files_size_field": 1013,
+            "creation_date_utc": "2:31 pm, Friday 24 January 2025 UTC"
+          },
+          {
+            "filename": "trainer_state.json",
+            "kaggle_list_files_size_field": 995,
+            "creation_date_utc": "2:31 pm, Friday 24 January 2025 UTC"
+          },
+          {
+            "filename": "preprocessor_config.json",
+            "kaggle_list_files_size_field": 979,
+            "creation_date_utc": "2:31 pm, Friday 24 January 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "ethandanielcarter",
+        "slug": "crime-types-cctv-detection-vit",
+        "last_run_time_utc": "2025-01-25T12:06:20.380000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-types-cctv-detection-vit.ipynb",
+        "source_size_bytes": 38084,
+        "source_sha256": "6c853be35a107e354962b0aa1455ec204aed44eb63df4d66f4eb4ab008bf336e",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "faizzzan",
+        "slug": "surveillance-pipeline",
+        "last_run_time_utc": "2026-05-11T08:14:34.167000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "surveillance-pipeline.ipynb",
+        "source_size_bytes": 4343,
+        "source_sha256": "c19d6ea5c6a942b3e09a50d55c7c0f85f827fcefe5793efd0267c62fb5362828",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 2,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "feyitayolasekan",
+        "slug": "robbery-theft-detection-ue",
+        "last_run_time_utc": "2024-07-07T17:04:23.513000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "robbery-theft-detection-ue.ipynb",
+        "source_size_bytes": 3091,
+        "source_sha256": "6729d1e71b198a4000af5ec013c5215b00a973765f4177b51d3e38ddabbff518",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "foulpotion",
+        "slug": "crime-video-detection",
+        "last_run_time_utc": "2024-04-05T06:08:33.947000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-video-detection.ipynb",
+        "source_size_bytes": 42342,
+        "source_sha256": "0d840c35bd7f09c2932b91ff02fbc694233ced612847b10cc2f68dbb95d45df0",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gagandwaz",
+        "slug": "final-progress-excellent-curve",
+        "last_run_time_utc": "2024-12-02T16:10:20.347000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "final-progress-excellent-curve.ipynb",
+        "source_size_bytes": 24171,
+        "source_sha256": "120c5edde905f3e418b2043624c38a0395973ae0c447d12b3aa6427ad96ade7b",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gajjelamanikantagoud",
+        "slug": "ufc-crime-dataset",
+        "last_run_time_utc": "2026-01-07T17:25:04.117000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ufc-crime-dataset.ipynb",
+        "source_size_bytes": 15766,
+        "source_sha256": "ac4b0d8b7d0b26f8daa1ed819064afd9527c01b388ffd77d234c70413987dfb1",
+        "source_signals": [
+          ".keras"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gamzegezgin",
+        "slug": "notebookb77ed8a378",
+        "last_run_time_utc": "2026-05-06T15:45:50.437000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebookb77ed8a378.ipynb",
+        "source_size_bytes": 95082,
+        "source_sha256": "759f584e919cd58a01f0c85fde94fd0a4240a9ebb74a48735592e1f4c2c14f4b",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gamzegezgin",
+        "slug": "suspicious-activities-graduation-project-vbase",
+        "last_run_time_utc": "2026-04-24T09:48:04.473000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "suspicious-activities-graduation-project-vbase.ipynb",
+        "source_size_bytes": 32753,
+        "source_sha256": "217b05715f0f4bb11222d18fb876d53c4121aae357cfe0c13d215c6ace5e1578",
+        "source_signals": [
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "giabao181555",
+        "slug": "trandinhgiabao-se181555-lab1-4",
+        "last_run_time_utc": "2025-02-04T14:04:04.693000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "trandinhgiabao-se181555-lab1-4.ipynb",
+        "source_size_bytes": 4980,
+        "source_sha256": "f7d3e254db48321e68cfc9cb288fee6927bec5df4105bad1af6b5097d0768823",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gotkka",
+        "slug": "airport-anomaly-surveillance-kaggle-using-ubnormal",
+        "last_run_time_utc": "2026-06-20T01:18:50.277000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "airport-anomaly-surveillance-kaggle-using-ubnormal.ipynb",
+        "source_size_bytes": 161976,
+        "source_sha256": "0a0398bff51b30a1e29414fa650662b8d62d45942cd01dd66585a6ac2282f8d2",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 6,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gouthamreddy456",
+        "slug": "goutham469-ucf",
+        "last_run_time_utc": "2025-04-22T13:49:09.457000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "goutham469-ucf.ipynb",
+        "source_size_bytes": 13861,
+        "source_sha256": "0198eea8f2e3c7563c4819d030ad96e35cc8276a38d3ed898a260afbc5787ef4",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gudisevavinodkumar",
+        "slug": "intrusion-detection-system",
+        "last_run_time_utc": "2026-07-05T09:56:32.933000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "intrusion-detection-system.ipynb",
+        "source_size_bytes": 53795,
+        "source_sha256": "d1ead791844d7b9f3d0ea34a6f420bca9c21137826a53b61cc04288633ea5196",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gunashankarkalla",
+        "slug": "crime-video-detection",
+        "last_run_time_utc": "2024-04-04T10:45:05.457000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-video-detection.ipynb",
+        "source_size_bytes": 37096,
+        "source_sha256": "ab8a21b34435f9c8fd30f98294e72ce07bb47a288481e5b7caa72db3daf82ec4",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "gunashankarkalla",
+        "slug": "guardian-eye-mod",
+        "last_run_time_utc": "2024-04-09T05:44:09.583000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "guardian-eye-mod.ipynb",
+        "source_size_bytes": 18812,
+        "source_sha256": "e8da99c3c6fcdd52790b0ca392991ed066b41deb30d839b6c226cd8f24dcb600",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "guptakrishna4135",
+        "slug": "anamoly-detection-project",
+        "last_run_time_utc": "2024-09-08T11:50:02.237000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anamoly-detection-project.ipynb",
+        "source_size_bytes": 38896,
+        "source_sha256": "a7ad1ef18a6cbbb7a2269fad9e3d530ff21e7e98fae33294b408aaa56d8eb177",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "saved_model",
+          "class_indices",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "hadeerarafa108",
+        "slug": "video-anomaly-detection-research",
+        "last_run_time_utc": "2023-09-06T10:42:50.637000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection-research.ipynb",
+        "source_size_bytes": 9013,
+        "source_sha256": "5ac64c497a507415a8d59f3f24baaf93fcf6f60353e45149191d9323af25d5f1",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "hampyhampy",
+        "slug": "crime-types-cctv-detection-vit",
+        "last_run_time_utc": "2025-07-15T14:07:52.223000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-types-cctv-detection-vit.ipynb",
+        "source_size_bytes": 63826,
+        "source_sha256": "09a528b117b3cbbd12f7e772c94667207030076996fd1710939a249021ad4c42",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "henilpatel45",
+        "slug": "resnet50-true",
+        "last_run_time_utc": "2024-10-17T15:00:17.103000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "resnet50-true.ipynb",
+        "source_size_bytes": 4521,
+        "source_sha256": "64fb2e3b8fde3bef3118b3cefef0ea43197f8b9d05a96f82fd8792054d73290b",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "resnet_anomaly_detection1.h5",
+            "kaggle_list_files_size_field": 895,
+            "creation_date_utc": "3:00 pm, Thursday 17 October 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "hoangphuc32399",
+        "slug": "lab1-4-v3",
+        "last_run_time_utc": "2025-01-22T16:59:10.380000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-v3.ipynb",
+        "source_size_bytes": 10070,
+        "source_sha256": "f17c8e6c4d86f9b4c3268f512a457504647165e42bc57cce4499e198ecdc568e",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "holeminhhoang",
+        "slug": "notebook9caf366b0a",
+        "last_run_time_utc": "2024-12-10T13:00:09.757000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook9caf366b0a.ipynb",
+        "source_size_bytes": 6174,
+        "source_sha256": "324e0bf13da48941cb3156611f6dce47fcb6fbdd519353a807f2d1e1513f82c2",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "hosen42",
+        "slug": "anomaly-detection-cnn",
+        "last_run_time_utc": "2024-04-15T21:25:29.917000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomaly-detection-cnn.ipynb",
+        "source_size_bytes": 13544,
+        "source_sha256": "31ea1f39465f370aec8545b190de3d48a89af84ec45997d869cc4886832026d5",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "hosen42",
+        "slug": "video-anomaly-detection-densenet121",
+        "last_run_time_utc": "2024-04-15T15:39:22.950000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection-densenet121.ipynb",
+        "source_size_bytes": 14925,
+        "source_sha256": "960c9b3ff50f230cf21ce11721572ef741b052b08ad1ba8bf3138d3a9d4c7417",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "hugoochoagonzlez",
+        "slug": "05-bytetrack-events",
+        "last_run_time_utc": "2026-06-20T17:56:15.390000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "05-bytetrack-events.ipynb",
+        "source_size_bytes": 41767,
+        "source_sha256": "e429604f60f2de4247fc662cf95adcea91e442b5e0ec89902e07fd4d68f6d9c2",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 21,
+        "relevant_listed_outputs": [
+          {
+            "filename": "ucf_label_sample.zip",
+            "kaggle_list_files_size_field": 898,
+            "creation_date_utc": "5:56 pm, Saturday 20 June 2026 UTC"
+          },
+          {
+            "filename": "ucf_label_sample.zip",
+            "kaggle_list_files_size_field": 884,
+            "creation_date_utc": "5:56 pm, Saturday 20 June 2026 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "hugoochoagonzlez",
+        "slug": "06a-ucf-crime-export",
+        "last_run_time_utc": "2026-07-01T12:10:10.863000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "06a-ucf-crime-export.ipynb",
+        "source_size_bytes": 10250,
+        "source_sha256": "5b3bf1e7157a4a8e6bf8a1b2f8ed5c4eb20fa59be50aaa17189c63c067b6a950",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 4,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "jayasimhareddy7035",
+        "slug": "start-train-model",
+        "last_run_time_utc": "2025-11-06T09:50:13.787000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "start-train-model.ipynb",
+        "source_size_bytes": 71865,
+        "source_sha256": "741d0f12af6605c178056ecf9e47d6263ac65803df7333efe024fb7e9aaec6ad",
+        "source_signals": [
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "jeevakamal",
+        "slug": "mobilenetv3",
+        "last_run_time_utc": "2026-01-19T12:54:14.947000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "mobilenetv3.ipynb",
+        "source_size_bytes": 32336,
+        "source_sha256": "b3f4f8fd7486c196a6f775fd2e480593e72dd429cb8ed1aae10c39276ba2be9d",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "jeevakamal",
+        "slug": "notebook9ea065b22c",
+        "last_run_time_utc": "2026-01-17T17:17:51.540000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook9ea065b22c.ipynb",
+        "source_size_bytes": 19009,
+        "source_sha256": "59299d97196be4de6106d7141050f4f900ccd009ea8ce4f4b7e4f0f7a2ff0515",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "_output_.zip",
+            "kaggle_list_files_size_field": 845,
+            "creation_date_utc": "5:17 pm, Saturday 17 January 2026 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "jithendra456",
+        "slug": "notebook5594ff96f6",
+        "last_run_time_utc": "2024-10-30T16:36:01.107000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook5594ff96f6.ipynb",
+        "source_size_bytes": 8254,
+        "source_sha256": "31190c40ede3d3eec64682fced0e014c3d6990d5c654e00bc41a7f3c0a08ae76",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "jithendraganesh",
+        "slug": "video-anomaly-detection-densenet121",
+        "last_run_time_utc": "2024-10-31T05:24:23.403000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection-densenet121.ipynb",
+        "source_size_bytes": 19019,
+        "source_sha256": "cc52b8b4524b7b28fdff31400549ac03b96c90ce6e8f1706cd368f34a5d96aa3",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "joyygoswami",
+        "slug": "notebookd4d5eb59de",
+        "last_run_time_utc": "2024-04-30T09:28:03.967000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebookd4d5eb59de.ipynb",
+        "source_size_bytes": 8798,
+        "source_sha256": "c5cd12b0dd85ee2e3e0c7f8ad321de00d83fa62b0c45da2546bd0d6727110350",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "kabanchikdema",
+        "slug": "ufc-crime-hggface",
+        "last_run_time_utc": "2025-12-23T09:35:50.997000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ufc-crime-hggface.ipynb",
+        "source_size_bytes": 10181,
+        "source_sha256": "0473bb39270dcf2e59d3986fbfe2912b9b9f550a9f48326235123ead4eb65d48",
+        "source_signals": [
+          "class_map"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "kaledhoshme",
+        "slug": "early-detection-of-collective-individual-theft",
+        "last_run_time_utc": "2022-08-04T11:52:51.843000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "early-detection-of-collective-individual-theft.ipynb",
+        "source_size_bytes": 2224,
+        "source_sha256": "7b7d0b4d3b608b9211e7e690e502cf77d44cc88271a666fabfa345d19fdffda4",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "kapoorsaumitra",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2024-09-28T13:33:12.420000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 10582,
+        "source_sha256": "3e673af9c4782ef7153371e03b216893bfa20f250f9c1a4115a642c15c15d010",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 2,
+        "relevant_listed_outputs": [
+          {
+            "filename": "ucf_crime_detection_model.h5",
+            "kaggle_list_files_size_field": 894,
+            "creation_date_utc": "1:33 pm, Saturday 28 September 2024 UTC"
+          },
+          {
+            "filename": "ucf_crime_detection_weights.h5",
+            "kaggle_list_files_size_field": 900,
+            "creation_date_utc": "1:33 pm, Saturday 28 September 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "karthikeya14",
+        "slug": "video-ad-efficientnet",
+        "last_run_time_utc": "2022-03-05T19:53:36.350000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-ad-efficientnet.ipynb",
+        "source_size_bytes": 11660,
+        "source_sha256": "9d8e33e865893d4b2a67776a7b2c1cdce12019df7839ee13cb07030e8a29f8e8",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "model.h5",
+            "kaggle_list_files_size_field": 833,
+            "creation_date_utc": "7:53 pm, Saturday 5 March 2022 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "khalidxlone",
+        "slug": "video-abuse-detection",
+        "last_run_time_utc": "2026-01-13T15:37:42.747000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-abuse-detection.ipynb",
+        "source_size_bytes": 11324,
+        "source_sha256": "121965ae51d0a0d1487b3caa2239e12a5978ad103a62ac216e34dd23122354a3",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "khizerz",
+        "slug": "crime-detection",
+        "last_run_time_utc": "2025-07-16T15:18:52.540000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-detection.ipynb",
+        "source_size_bytes": 23240,
+        "source_sha256": "3827e29a463c287b85409e7db36002066f8de683b14b22148af9726a689e30a2",
+        "source_signals": [
+          ".h5",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "my_model.h5",
+            "kaggle_list_files_size_field": 822,
+            "creation_date_utc": "3:18 pm, Wednesday 16 July 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "khushaljainn",
+        "slug": "fork-of-video-anomaly-detection",
+        "last_run_time_utc": "2023-04-10T16:10:54.610000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "fork-of-video-anomaly-detection.ipynb",
+        "source_size_bytes": 11202,
+        "source_sha256": "93858e5ef4e9eda1e7ed2106c18677c554eb6396263cadcfc2c828b0704e37d6",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "kraditya",
+        "slug": "notebook097ed81368",
+        "last_run_time_utc": "2023-11-10T03:44:17.003000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook097ed81368.ipynb",
+        "source_size_bytes": 11370,
+        "source_sha256": "95f2c5fe5a8dda60bb79661f832a533edd2f7d0132c00cd0c1a21fbb08d3303f",
+        "source_signals": [
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "kruthisb999",
+        "slug": "video-anomaly-detection-custom",
+        "last_run_time_utc": "2024-12-13T05:55:01.287000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection-custom.ipynb",
+        "source_size_bytes": 18673,
+        "source_sha256": "3d9c25525c7684d8f23525286d600bb6030887979930c4a3d4d8844caf53d639",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 6,
+        "relevant_listed_outputs": [
+          {
+            "filename": "best_model.h5",
+            "kaggle_list_files_size_field": 871,
+            "creation_date_utc": "5:55 am, Friday 13 December 2024 UTC"
+          },
+          {
+            "filename": "final_model.h5",
+            "kaggle_list_files_size_field": 874,
+            "creation_date_utc": "5:55 am, Friday 13 December 2024 UTC"
+          },
+          {
+            "filename": "saved_model.pb",
+            "kaggle_list_files_size_field": 898,
+            "creation_date_utc": "5:55 am, Friday 13 December 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "kumariritika",
+        "slug": "framing",
+        "last_run_time_utc": "2023-04-23T11:49:11.653000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "framing.ipynb",
+        "source_size_bytes": 10225,
+        "source_sha256": "862e9f2812510aa25afe73859a9374626aa2c3cc9aa3ae3cc2cedb094fa1a55e",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "lhobinhoo",
+        "slug": "3iavyvson",
+        "last_run_time_utc": "2024-11-05T22:52:39.663000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "3iavyvson.ipynb",
+        "source_size_bytes": 20113,
+        "source_sha256": "301b4aa7b1aa271e2d84e09af095158353c830b6da4259523983d0e82d99747f",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "likhithkumarmankala",
+        "slug": "timeline-detection",
+        "last_run_time_utc": "2026-04-30T13:06:24.957000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "timeline-detection.ipynb",
+        "source_size_bytes": 28488,
+        "source_sha256": "41777e319ac719be60833cf1590ed23cb3028054877becb2a7e10d01db7a0cfe",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 40,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "louisamakye",
+        "slug": "eagle-eye-starter-notebook",
+        "last_run_time_utc": "2025-09-12T13:02:25.287000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "eagle-eye-starter-notebook.ipynb",
+        "source_size_bytes": 38392,
+        "source_sha256": "1b7256ee28099094c34d698fb8be9c1948b0cae30e76a30a827b4b59584aae21",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 20,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "madhulatha17",
+        "slug": "task-victim-reaction-detection",
+        "last_run_time_utc": "2026-04-28T08:25:35.507000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "task-victim-reaction-detection.ipynb",
+        "source_size_bytes": 98123,
+        "source_sha256": "e39944f2acc5b13c843ee5627c607774d638029a3046d4f9887bf6934bc271c3",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 16,
+        "relevant_listed_outputs": [
+          {
+            "filename": "sample_video.zip",
+            "kaggle_list_files_size_field": 877,
+            "creation_date_utc": "8:25 am, Tuesday 28 April 2026 UTC"
+          },
+          {
+            "filename": "victim_reaction_model.zip",
+            "kaggle_list_files_size_field": 903,
+            "creation_date_utc": "8:25 am, Tuesday 28 April 2026 UTC"
+          },
+          {
+            "filename": "victim_reaction_results.zip",
+            "kaggle_list_files_size_field": 910,
+            "creation_date_utc": "8:25 am, Tuesday 28 April 2026 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "madhulatha17",
+        "slug": "victim-reaction-spike-detection",
+        "last_run_time_utc": "2026-04-25T10:08:39.870000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "victim-reaction-spike-detection.ipynb",
+        "source_size_bytes": 37387,
+        "source_sha256": "dcbdf592460f618394592c770bc0595ede55c9f4f2a10e918af10bb2446e5145",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "madhulatha17",
+        "slug": "victim-spike-detection",
+        "last_run_time_utc": "2026-04-29T12:21:07.937000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "victim-spike-detection.ipynb",
+        "source_size_bytes": 43774,
+        "source_sha256": "628b745e8502a4d5b2a9ca86d553bcc3638ff19bca67f2a1941d994bdd1989b9",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 7,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "mahedihasan1234",
+        "slug": "ufc-crime-dataset",
+        "last_run_time_utc": "2025-03-07T18:54:25.987000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ufc-crime-dataset.ipynb",
+        "source_size_bytes": 351423,
+        "source_sha256": "ca7fe1cdd4dc601750d9bc4548d63c62519fe591db827722e46ecda91852b0a4",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "mantavyaupadhyay",
+        "slug": "anomalyclassifier-ucf-mantavya",
+        "last_run_time_utc": "2023-08-04T21:10:42.207000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomalyclassifier-ucf-mantavya.ipynb",
+        "source_size_bytes": 32415,
+        "source_sha256": "d2407a1924d623b02b09fdf65bda46422f75e0627d940fa33fe927208a693a65",
+        "source_signals": [
+          ".keras"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "marufhasan879",
+        "slug": "ucf-crime",
+        "last_run_time_utc": "2025-12-27T16:36:59.817000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime.ipynb",
+        "source_size_bytes": 2437161,
+        "source_sha256": "3a2034ccbe2faff77a107dd501ae4d5244c36ef826687e78c5a7830b923c45e5",
+        "source_signals": [
+          ".h5",
+          ".keras"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "mgshivaprasad",
+        "slug": "notebooka57dd9e890",
+        "last_run_time_utc": "2026-04-11T07:28:51.923000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebooka57dd9e890.ipynb",
+        "source_size_bytes": 35396,
+        "source_sha256": "9e39e4fba8ffaf3222c75798094f1884736053469382f784b0924bf5404e8f50",
+        "source_signals": [
+          ".keras",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "mohamadmaulana",
+        "slug": "notebookdc485d10c9",
+        "last_run_time_utc": "2023-06-17T17:29:59.353000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebookdc485d10c9.ipynb",
+        "source_size_bytes": 208664,
+        "source_sha256": "26e4ea0337f82089893a837accf7a30db6375b8f12eb8713ab4afc184f6bd1d2",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "mosabir",
+        "slug": "notebooka9d9f6edf6",
+        "last_run_time_utc": "2026-05-17T19:27:29.040000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebooka9d9f6edf6.ipynb",
+        "source_size_bytes": 7709,
+        "source_sha256": "2e1fd709b9809d08a2dd80ccad84030e3116c39ea1b3cc55796353df49f14e36",
+        "source_signals": [
+          "label_map"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "mreagle7",
+        "slug": "false-alarm-task",
+        "last_run_time_utc": "2026-05-04T13:35:07.297000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "false-alarm-task.ipynb",
+        "source_size_bytes": 42416,
+        "source_sha256": "7ed38942aba7b03d83927f8847ed14f4693fae9c4fc411c4db5cccb41ac4c1d9",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 10,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "muaaz9922",
+        "slug": "ai-video-summarization-engine",
+        "last_run_time_utc": "2026-06-09T10:47:49.400000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ai-video-summarization-engine.ipynb",
+        "source_size_bytes": 21791,
+        "source_sha256": "9011b2aa7cef075faaf2486185ed9dcd143ecabcf932d001e985b3ba340f6c98",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "muaaz9922",
+        "slug": "face-recognition-behavior-analysis",
+        "last_run_time_utc": "2026-06-09T10:36:29.910000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "face-recognition-behavior-analysis.ipynb",
+        "source_size_bytes": 28240,
+        "source_sha256": "1d060d4504f233bb21d777451f0f7624c185296c0e974e0934075a4587fb7c35",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "nada18",
+        "slug": "crime-classification",
+        "last_run_time_utc": "2025-05-04T15:03:18.200000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-classification.ipynb",
+        "source_size_bytes": 20271,
+        "source_sha256": "6775c8d8a664de043fa289151aa6666edda79591c3dc2bb98bcdf3d5ad51d2de",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "saved_model",
+          "class_indices",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "nayeembhuiyan1",
+        "slug": "notebook9c61972589",
+        "last_run_time_utc": "2025-12-27T18:43:04.690000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook9c61972589.ipynb",
+        "source_size_bytes": 40473,
+        "source_sha256": "e8e68377bb9181e9067f6f6efc81d20cdaccb299cc7498041f33b873b8df94bc",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "nguyenhuuduong",
+        "slug": "lab1-4",
+        "last_run_time_utc": "2025-02-04T08:55:49.947000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4.ipynb",
+        "source_size_bytes": 10133,
+        "source_sha256": "8d0246c53c044227a957651bda4e173627a4181163530fc82d01da92ab1e6a02",
+        "source_signals": [
+          ".keras",
+          "class_indices",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "nishaarulselvir",
+        "slug": "project",
+        "last_run_time_utc": "2022-04-25T10:20:37.193000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "project.ipynb",
+        "source_size_bytes": 7974,
+        "source_sha256": "f2f583c433a3efaec055d8c5877d6b2f629df845738a5aa9d0010e19d625d9fb",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "nithishkumarp007",
+        "slug": "model1",
+        "last_run_time_utc": "2026-02-01T05:26:34.537000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "model1.ipynb",
+        "source_size_bytes": 11021,
+        "source_sha256": "3905992387dc6b005d69bb8bfd22f276491d059ef923cf2f188e513c7a598792",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "nitishapatil",
+        "slug": "anomalous-frames",
+        "last_run_time_utc": "2024-12-28T14:35:40.207000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomalous-frames.ipynb",
+        "source_size_bytes": 26052,
+        "source_sha256": "02dd2363bc70881e7336606e05e0831ccd14245c551d2b59d25524408863969e",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "odins0n",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2021-12-26T22:49:14.143000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 11531,
+        "source_sha256": "574e373cf56ade43531d51edae6be262b261815e5c3de5165186a2e6364d9255",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ohka39",
+        "slug": "human-detection-in-camera-360",
+        "last_run_time_utc": "2024-12-18T16:42:55.793000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "human-detection-in-camera-360.ipynb",
+        "source_size_bytes": 7051,
+        "source_sha256": "c7ce5c5a62a090ee7c5366032bec0ac9789ed0c19fbff94e650358471165c06f",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "oliviagracemitchell",
+        "slug": "lab1-4-se182219-mobilenetv2",
+        "last_run_time_utc": "2025-01-23T14:47:08.903000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-se182219-mobilenetv2.ipynb",
+        "source_size_bytes": 6814,
+        "source_sha256": "db84cc531b3ba14b92fd45b82bdcc60ed31b1ae10064bf4cd074ef1e9a4818f2",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "ouhkub",
+        "slug": "videocrimedetection",
+        "last_run_time_utc": "2025-05-09T11:17:17.930000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "videocrimedetection.ipynb",
+        "source_size_bytes": 9333,
+        "source_sha256": "f790a91e0d9a91b8a841d82ce6aeab8bbb2d3c523c9d3328a33d16091c304f40",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "phuc57588",
+        "slug": "lab1-4-se182219-densenet121",
+        "last_run_time_utc": "2025-01-24T04:33:45.473000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-se182219-densenet121.ipynb",
+        "source_size_bytes": 4290,
+        "source_sha256": "eecf7a39d9d099126dcb9f4394f4175c0fe3dace2498b38b4ef269476c932d0d",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "poudel0",
+        "slug": "notebookc9ff36ac2a",
+        "last_run_time_utc": "2024-12-26T04:06:52.620000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebookc9ff36ac2a.ipynb",
+        "source_size_bytes": 9960,
+        "source_sha256": "d5125cb55dd5ef40c126d9a6398ee287ebc25223e58ecf595a45d27ad950c54f",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 2,
+        "relevant_listed_outputs": [
+          {
+            "filename": "model_weights.weights.h5",
+            "kaggle_list_files_size_field": 882,
+            "creation_date_utc": "4:06 am, Thursday 26 December 2024 UTC"
+          },
+          {
+            "filename": "my_model.keras",
+            "kaggle_list_files_size_field": 855,
+            "creation_date_utc": "4:06 am, Thursday 26 December 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "prachisury11",
+        "slug": "theft-project",
+        "last_run_time_utc": "2026-05-22T09:48:02.953000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "theft-project.ipynb",
+        "source_size_bytes": 97279,
+        "source_sha256": "efbf5828d7d46e653692a6a901f900f0ec12e8d5a70392d5d061d63e126bb0ff",
+        "source_signals": [
+          ".keras",
+          "label_map",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "prajwal2922",
+        "slug": "ucf-code-03",
+        "last_run_time_utc": "2023-10-09T17:18:46.933000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-code-03.ipynb",
+        "source_size_bytes": 53672,
+        "source_sha256": "8fdee3c75fc827ed4a2be54a613871377ef81de72b1263c52dd802f4301385ad",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "prajwalpande159",
+        "slug": "final-progress-excellent-curve",
+        "last_run_time_utc": "2023-05-30T07:35:06.310000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "final-progress-excellent-curve.ipynb",
+        "source_size_bytes": 19467,
+        "source_sha256": "4a4f124aa5ec23740fff6212cb618b696bae4e4c5b469740ed9513471b32d86f",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "prakharsharmadtu2028",
+        "slug": "aims-gemma",
+        "last_run_time_utc": "2026-07-13T20:18:14.480000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "aims-gemma.ipynb",
+        "source_size_bytes": 80798,
+        "source_sha256": "fb4da7c5b049b3541875fc78e3a3c67d257351bc7fc1e3764130526c389ba1b7",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "prathapprathap01",
+        "slug": "pytorch-based-multi-class-crime-detection",
+        "last_run_time_utc": "2026-01-03T14:51:54.450000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "pytorch-based-multi-class-crime-detection.ipynb",
+        "source_size_bytes": 14072,
+        "source_sha256": "77b40635dd929dbf5403aa99ae6f029fb86862ed5eeeff4423168326390f9da0",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 4,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "last_run_time_utc": "2025-10-27T17:37:02.203000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "new-rnn-trainning.ipynb",
+        "source_size_bytes": 63557,
+        "source_sha256": "39a772880d79a4cbeb1b2f647632879091e142a4b8b9b492b4779136d10860f3",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 8,
+        "relevant_listed_outputs": [
+          {
+            "filename": "models.zip",
+            "kaggle_list_files_size_field": 838,
+            "creation_date_utc": "5:37 pm, Monday 27 October 2025 UTC"
+          },
+          {
+            "filename": "results.zip",
+            "kaggle_list_files_size_field": 841,
+            "creation_date_utc": "5:37 pm, Monday 27 October 2025 UTC"
+          },
+          {
+            "filename": "training_history.json",
+            "kaggle_list_files_size_field": 890,
+            "creation_date_utc": "5:37 pm, Monday 27 October 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "pushkalpandey3",
+        "slug": "ufc-crime-dataset",
+        "last_run_time_utc": "2022-01-10T17:06:00.360000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ufc-crime-dataset.ipynb",
+        "source_size_bytes": 12316,
+        "source_sha256": "28e8a9bae46c766e3f144c5dfa62ac39f797ceeafdcf21d56d7e136dcacc88ba",
+        "source_signals": [
+          ".keras"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "raghurammusunuru",
+        "slug": "notebook5172692460",
+        "last_run_time_utc": "2026-02-18T04:02:00.287000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook5172692460.ipynb",
+        "source_size_bytes": 11197,
+        "source_sha256": "9f56401c16cd947a77ac21be704b927636d611dd16cbec6d5cb4a29ef54bc9a3",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "raiaaan",
+        "slug": "deteksikecelakaan",
+        "last_run_time_utc": "2026-08-13T12:52:09.357000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "deteksikecelakaan.ipynb",
+        "source_size_bytes": 17256,
+        "source_sha256": "dd32d972c08731769b14913cfedd7d74931d9763392d009bd43c367aa5d5c2f1",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "rajparmar28",
+        "slug": "ucf-crime-densenet121",
+        "last_run_time_utc": "2024-11-16T09:17:01.553000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime-densenet121.ipynb",
+        "source_size_bytes": 10498,
+        "source_sha256": "4c7449d8f088b72eb39a9160ab4b8a8fdd46a8926011ca1b238279814d49c0ad",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "rajparmar28",
+        "slug": "ucf-crime-mobilenet",
+        "last_run_time_utc": "2024-11-16T09:18:52.750000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime-mobilenet.ipynb",
+        "source_size_bytes": 10500,
+        "source_sha256": "beb3fe805c6104bc8227978a0fe2b3bdf833b057dc6f835ddb36643e2f68e506",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "rameshvignesh",
+        "slug": "ucf-45",
+        "last_run_time_utc": "2026-02-22T07:08:49.490000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-45.ipynb",
+        "source_size_bytes": 18966,
+        "source_sha256": "f07b135916a09a95542dd8cc0f64c000b82513fdfd049851f57fa0ed043abe43",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "saadw3939",
+        "slug": "ds-project",
+        "last_run_time_utc": "2024-10-10T19:12:52.717000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ds-project.ipynb",
+        "source_size_bytes": 1084,
+        "source_sha256": "85ad820c0c428c723010069ac93b1d3c651b15eba28054393ba0ad78d2656ce1",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "saba2114",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2024-03-19T10:28:23.120000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 14081,
+        "source_sha256": "f6057fbb7f7c2d1ddce40b5bcd99cafd6b5bb59a98107f571da984eeb0bce0be",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "trained_model.h5",
+            "kaggle_list_files_size_field": 858,
+            "creation_date_utc": "10:28 am, Tuesday 19 March 2024 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "sadiabaribinti",
+        "slug": "anomaly-detection",
+        "last_run_time_utc": "2026-06-19T15:05:14.500000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomaly-detection.ipynb",
+        "source_size_bytes": 11665,
+        "source_sha256": "067d641190a23e66552c8d91508333d2ffd9516081a5b19bfd3abd943ae3d74e",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sadiabaribinti",
+        "slug": "anomaly-detection-2",
+        "last_run_time_utc": "2026-06-20T16:18:11.557000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomaly-detection-2.ipynb",
+        "source_size_bytes": 21564,
+        "source_sha256": "584de4a90015a7dbca14d3938650044ee1063922076edc6eccdbd3dbe40b8807",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sadiabaribinti",
+        "slug": "notebook63fd042dc0",
+        "last_run_time_utc": "2026-08-06T16:35:52.437000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook63fd042dc0.ipynb",
+        "source_size_bytes": 2064,
+        "source_sha256": "b58051ae8fb8af446afb25b4fcfae005b2b8023a4d09a3c93137d90fd485abd7",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sadiabaribinti",
+        "slug": "notebook8f767c7648",
+        "last_run_time_utc": "2026-08-06T16:43:24.173000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook8f767c7648.ipynb",
+        "source_size_bytes": 1946,
+        "source_sha256": "654008879ec3cb7dccc4b6d0559cb114dcc42c4dd546a77effb951dae82fb4b1",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "safauu",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2024-04-10T08:36:25.463000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 11329,
+        "source_sha256": "8263f18bc9286a52c43395cf4f9f4bf0ffed4784182fd4320e573d6d63da99f9",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "saikiranpitchika",
+        "slug": "ucf-dataset-eda",
+        "last_run_time_utc": "2024-04-03T03:41:35.193000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-dataset-eda.ipynb",
+        "source_size_bytes": 6872,
+        "source_sha256": "c8b7a432b996464a6888f9aab6c070fe0c6a060679cab0874bd23040d84df634",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "salillokhande8",
+        "slug": "lavad-5-march",
+        "last_run_time_utc": "2025-03-26T05:24:17.420000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lavad-5-march.ipynb",
+        "source_size_bytes": 32593,
+        "source_sha256": "5579a1811a38806767dbbdb6612a3f63bc9bf35258da3a06ef92cbf4aa7325f5",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sanskarsawane",
+        "slug": "hierarchialclassificationfordataimabalance-resnet",
+        "last_run_time_utc": "2025-05-21T08:32:31.303000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "hierarchialclassificationfordataimabalance-resnet.ipynb",
+        "source_size_bytes": 6601,
+        "source_sha256": "e92e49c62eaeb3fbbf42599b1c66e6ac07056fe85ccdee61f0371bb1cd6aa1b2",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "class_indices",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sarthakzunjure",
+        "slug": "crowd-panic",
+        "last_run_time_utc": "2026-04-06T12:36:23.813000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crowd-panic.ipynb",
+        "source_size_bytes": 28279,
+        "source_sha256": "63c581faeb9a23924abe57d80b8255c3024389447edc1f2d69169070e477542a",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sashrikgupta",
+        "slug": "feature-extraction-using-vit",
+        "last_run_time_utc": "2025-03-31T09:01:40.697000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "feature-extraction-using-vit.ipynb",
+        "source_size_bytes": 13830,
+        "source_sha256": "2d2030d95481d7c51a7c8cab35e2733f3b714316f79e01a82d03c52668b88213",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "saubhagya111101",
+        "slug": "mobilenetv3",
+        "last_run_time_utc": "2026-04-29T06:33:52.800000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "mobilenetv3.ipynb",
+        "source_size_bytes": 222242,
+        "source_sha256": "ff6703c8357f8d139540b4c6ec7c71543dc0f3f2cd4f823e99660970bb66972c",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "seryaltuncer4",
+        "slug": "suspicious-activities-graduation-project-bb5b05",
+        "last_run_time_utc": "2026-05-03T13:00:34.540000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "suspicious-activities-graduation-project-bb5b05.ipynb",
+        "source_size_bytes": 655185,
+        "source_sha256": "842ce6c50062d32eb4ff7ea869f8126d710e663e932510fd510d0c5513b685a2",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "shahriariqbalpeal",
+        "slug": "anomalydetection",
+        "last_run_time_utc": "2024-01-26T13:18:10.230000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomalydetection.ipynb",
+        "source_size_bytes": 23028,
+        "source_sha256": "4cfba837a585b8431d6236590f88e1e5db3f50a1b8651d167fa43f9b53b9df1b",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "shantanurajurkar25",
+        "slug": "edai5-cnn",
+        "last_run_time_utc": "2025-12-02T12:27:14.590000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "edai5-cnn.ipynb",
+        "source_size_bytes": 28388,
+        "source_sha256": "f23df68e55d2f5202e1392e56a53c1277112cf20d75491642bd6a6a4b39e4085",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 2,
+        "relevant_listed_outputs": [
+          {
+            "filename": "my_model.h5",
+            "kaggle_list_files_size_field": 844,
+            "creation_date_utc": "12:27 pm, Tuesday 2 December 2025 UTC"
+          },
+          {
+            "filename": "my_model.keras",
+            "kaggle_list_files_size_field": 856,
+            "creation_date_utc": "12:27 pm, Tuesday 2 December 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "shantanurajurkar25",
+        "slug": "notebook6099e43933",
+        "last_run_time_utc": "2025-12-04T15:09:27.643000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook6099e43933.ipynb",
+        "source_size_bytes": 14289,
+        "source_sha256": "b493cfe71ce739a9a1d53dd29dd47ef91436a68c40dc3db6f7f99c4b7d956496",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "shreeharism",
+        "slug": "notebook697132a23d",
+        "last_run_time_utc": "2025-08-27T05:49:38.200000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook697132a23d.ipynb",
+        "source_size_bytes": 5332,
+        "source_sha256": "b0563fa9ea1209cb2cfd3a2f3c0a459bc5f80f00f6a2cdf033822ceabf2d9b4d",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 1,
+        "relevant_listed_outputs": [
+          {
+            "filename": "_output_.zip",
+            "kaggle_list_files_size_field": 844,
+            "creation_date_utc": "5:49 am, Wednesday 27 August 2025 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "skriyaz26",
+        "slug": "crime-anamoly-detection-deep-learning-project",
+        "last_run_time_utc": "2024-04-13T14:59:11.817000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime-anamoly-detection-deep-learning-project.ipynb",
+        "source_size_bytes": 35363,
+        "source_sha256": "09c45bd05763d9b04660f7eea5c471270aeaa4b1934d29a5831756c931e56eb2",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "saved_model",
+          "class_indices",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "skriyaz26",
+        "slug": "riyaz-ge",
+        "last_run_time_utc": "2024-04-02T13:20:28.450000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "riyaz-ge.ipynb",
+        "source_size_bytes": 28485,
+        "source_sha256": "c294452fa7d2cf1db667830c8168d8e53beecf5e0feedc0dec4d5f7cb45a793a",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "smh125",
+        "slug": "videoanomlydetection-ucfcrime101",
+        "last_run_time_utc": "2025-05-08T06:20:24.347000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "videoanomlydetection-ucfcrime101.ipynb",
+        "source_size_bytes": 13619072,
+        "source_sha256": "df7098157dcb351b239ffaba16f54fe161d0028226280c5ab1e352c3abb641bd",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sobhanbhowmick",
+        "slug": "anomalyclassifier-ucf-mantavya-c7950d",
+        "last_run_time_utc": "2023-10-10T18:21:18.167000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "anomalyclassifier-ucf-mantavya-c7950d.ipynb",
+        "source_size_bytes": 29448,
+        "source_sha256": "39de79d8b6d3e1f5a681a6a3614a7fe318014e211e53f1615f78128ad2b6e4fd",
+        "source_signals": [
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 4,
+        "relevant_listed_outputs": [
+          {
+            "filename": "saved_model.pb",
+            "kaggle_list_files_size_field": 886,
+            "creation_date_utc": "6:21 pm, Tuesday 10 October 2023 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "sohailmasood",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2024-03-15T09:27:09.157000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 54214,
+        "source_sha256": "2cdc8eda74be2b5981b1c275243cdf837cdadab4f06c4d65a43168c042899cfe",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sriramvenkata26",
+        "slug": "socialforcemodel",
+        "last_run_time_utc": "2026-02-21T05:08:48.750000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "socialforcemodel.ipynb",
+        "source_size_bytes": 12797,
+        "source_sha256": "f959b1250d9206c8dc3fc75b46a1151928d325990680339e22ed3f6f787a3f64",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "stpeteishii",
+        "slug": "ucf-crime-slide-show",
+        "last_run_time_utc": "2021-11-17T05:07:01.950000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime-slide-show.ipynb",
+        "source_size_bytes": 9091,
+        "source_sha256": "f1e53fa2a06826da2a7c941a842c3f4fe88b846311e4370ab2e5954730bbfbbf",
+        "source_signals": [
+          ".keras"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sushanthegde",
+        "slug": "notebook7b2bd39f23",
+        "last_run_time_utc": "2026-02-04T00:38:47.107000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook7b2bd39f23.ipynb",
+        "source_size_bytes": 47146,
+        "source_sha256": "0a5c7ef320c47525ac466c63b4a7ef1f40a7413e1933c8ee301db70c9eb8e42c",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "sviatoslavdolinskyi",
+        "slug": "n12313otebook10d1cbff57",
+        "last_run_time_utc": "2026-06-18T14:04:55.347000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "n12313otebook10d1cbff57.ipynb",
+        "source_size_bytes": 102609,
+        "source_sha256": "1f91813c27d554c347285b4c94c50fb729d274f9d3706b1625669dc900e1ebcb",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 4,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "talhasattar727",
+        "slug": "video-anomaly-detection-custom",
+        "last_run_time_utc": "2025-04-22T10:06:28.057000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection-custom.ipynb",
+        "source_size_bytes": 13851,
+        "source_sha256": "e9a72d991469da7523858c16eba12149090f42996f2be5ee737c783a605a9b17",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input",
+          "model.save",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "tanhubui2301gmailcom",
+        "slug": "notebook27fceb35f1",
+        "last_run_time_utc": "2025-02-05T13:13:18.920000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook27fceb35f1.ipynb",
+        "source_size_bytes": 6021,
+        "source_sha256": "8a1e35d72087927cdd7943a8ea38c48409bd3f4336b65b704a582500584a65fa",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "thbdh5765",
+        "slug": "lab1-4-mobilenetv2",
+        "last_run_time_utc": "2025-01-25T11:36:48.503000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-mobilenetv2.ipynb",
+        "source_size_bytes": 4333,
+        "source_sha256": "3b82f9074b44fb2f22aaa76fc77139047e5690a07f2852ac6ac19cef1d6ec814",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "thbdh5765",
+        "slug": "lab1-4-se182219-mobilenet",
+        "last_run_time_utc": "2025-01-24T14:38:36.687000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "lab1-4-se182219-mobilenet.ipynb",
+        "source_size_bytes": 4259,
+        "source_sha256": "f5eb04ee5ca731912941161014ea6c53a7c1e3f281a45e06957a503953f16c26",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "thuando62",
+        "slug": "ucf-crime-slide-show",
+        "last_run_time_utc": "2026-06-16T02:09:34.777000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime-slide-show.ipynb",
+        "source_size_bytes": 799,
+        "source_sha256": "36e2a471fba59e697bb114bb55adc8ccbe831263ba8c7effdf3188c6225a031f",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "torp0071",
+        "slug": "video-anomaly-detection",
+        "last_run_time_utc": "2025-03-30T05:14:03.060000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "video-anomaly-detection.ipynb",
+        "source_size_bytes": 11766,
+        "source_sha256": "5ffa89818968f0ad1e2a18b840f2892e2e1af985da4510061b7b5aaea68f10d2",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "trantuyetminh14",
+        "slug": "notebookc52d1fdb6b",
+        "last_run_time_utc": "2024-01-12T12:48:14.030000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebookc52d1fdb6b.ipynb",
+        "source_size_bytes": 7973,
+        "source_sha256": "47225e550cb036f88ab5d5d62d1e42d483168ac424e9271dec20329790a328a9",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "imagedatagenerator",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "truongnguyencong",
+        "slug": "ucf-crime-convlstm",
+        "last_run_time_utc": "2026-04-20T12:45:32.653000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "ucf-crime-convlstm.ipynb",
+        "source_size_bytes": 37285,
+        "source_sha256": "0677d650df156333cf44473723eb9c1f2af44efe164115612f368a175d5f1783",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "preprocess_input",
+          "modelcheckpoint"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "turaneminli",
+        "slug": "notebook0a74b2ebb9",
+        "last_run_time_utc": "2023-05-15T17:08:22.900000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook0a74b2ebb9.ipynb",
+        "source_size_bytes": 4903,
+        "source_sha256": "c6fb68351f282f42785a201848ab122910bb9d8324577460b1257686b5dccf54",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "turaneminli",
+        "slug": "surveillance-system-anomaly-detection",
+        "last_run_time_utc": "2023-05-22T20:47:40.283000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "surveillance-system-anomaly-detection.ipynb",
+        "source_size_bytes": 12254,
+        "source_sha256": "5ba173987154fa195f7b0c1b176354366ef5af656672982c36fe47a6df419794",
+        "source_signals": [
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 4,
+        "relevant_listed_outputs": [
+          {
+            "filename": "saved_model.pb",
+            "kaggle_list_files_size_field": 874,
+            "creation_date_utc": "8:47 pm, Monday 22 May 2023 UTC"
+          }
+        ]
+      },
+      {
+        "owner": "vedicavg",
+        "slug": "notebook2b4c020099",
+        "last_run_time_utc": "2025-07-09T16:22:08.927000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "notebook2b4c020099.ipynb",
+        "source_size_bytes": 4360,
+        "source_sha256": "fc07e3dac3c2220fbac6c5d732175936b6a613c6e42850a0d382abc8208a935a",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "vemulawadatejaswini",
+        "slug": "miniproject-py",
+        "last_run_time_utc": "2023-11-03T10:19:51.760000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "miniproject-py.ipynb",
+        "source_size_bytes": 16295,
+        "source_sha256": "1db3a865e3ff9cee55452ce3d7c507b8f9ba9d84631ad92a44cf86a7b830343f",
+        "source_signals": [
+          ".h5",
+          ".keras",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "vijaymuru",
+        "slug": "sarath-anomaly-detection",
+        "last_run_time_utc": "2024-04-12T16:58:11.167000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "sarath-anomaly-detection.ipynb",
+        "source_size_bytes": 10719,
+        "source_sha256": "2fd8d0ca45cb8edf0680d35dfad13e8220924d5bb34d10f5a9f0cce2bd4747ad",
+        "source_signals": [
+          ".keras",
+          "flow_from_directory",
+          "imagedatagenerator",
+          "preprocess_input"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "vinay04kasana",
+        "slug": "crime",
+        "last_run_time_utc": "2025-11-27T15:00:24.897000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "crime.ipynb",
+        "source_size_bytes": 23619,
+        "source_sha256": "16a44381b84443137280f746e379044baff44caa3decd7d4c05f777dd1cb294b",
+        "source_signals": [
+          ".h5",
+          "model.save"
+        ],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "xuanleekaggle",
+        "slug": "c3d-clip",
+        "last_run_time_utc": "2023-07-30T12:57:25.897000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "c3d-clip.ipynb",
+        "source_size_bytes": 18161,
+        "source_sha256": "7c158598b1f610287e23d43ad2891efc2faa392d7abaad67f3ad94482941a530",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "xuanleekaggle",
+        "slug": "clip-vad",
+        "last_run_time_utc": "2023-07-30T10:35:27.553000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "clip-vad.ipynb",
+        "source_size_bytes": 2684,
+        "source_sha256": "5afbc5549866f2b1b5c5ebec560c407b0ac2553cf3d815a49e7ffa2301bbe2ca",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 0,
+        "relevant_listed_outputs": []
+      },
+      {
+        "owner": "xuanleekaggle",
+        "slug": "fine-tune-blip",
+        "last_run_time_utc": "2023-07-30T13:18:42.017000",
+        "source_access": "recovered_authenticated",
+        "source_version_locator": "latest_at_authenticated_search",
+        "source_filename": "fine-tune-blip.ipynb",
+        "source_size_bytes": 12520,
+        "source_sha256": "f3a2202ee47aed1450f6d13955e368c66f7c3a6034649c314cfb5127cea4e491",
+        "source_signals": [],
+        "exact_target_filename_mentioned": false,
+        "output_inventory_access": "success_authenticated",
+        "output_file_count": 2,
+        "relevant_listed_outputs": [
+          {
+            "filename": "train_data.txt",
+            "kaggle_list_files_size_field": 853,
+            "creation_date_utc": "11:13 am, Sunday 30 July 2023 UTC"
+          }
+        ]
+      }
+    ]
+  },
+  "model_artifacts": {
+    "h5_keras_recovered": [
+      {
+        "owner": "abhaysemwal01",
+        "slug": "crime-det-2-0",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "mymodel.h5",
+        "size_bytes": 101263528,
+        "sha256": "4326a907b0ef431244108a2e6ae721da654f946bbb76ecca2fac2bd820323ab1",
+        "exact_match": false,
+        "output_creation_date_utc": "5:12 am, Saturday 9 November 2024 UTC"
+      },
+      {
+        "owner": "abhaysemwal01",
+        "slug": "crime-detection-final2",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "CNN_LSTM.h5",
+        "size_bytes": 33442032,
+        "sha256": "cd4649cc3994100611fd4766ab9968827a4507b655180d1c2268d6dbfb16f23c",
+        "exact_match": false,
+        "output_creation_date_utc": "2:09 pm, Sunday 15 June 2025 UTC"
+      },
+      {
+        "owner": "aneeshraskar",
+        "slug": "21bai1516-crime-anomaly-detection-project",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "CNN_RNN.h5",
+        "size_bytes": 18225216,
+        "sha256": "1b832110891ba7d0b2884b67fa898bc1e1de0deee986032ad59b7e3a4906e1de",
+        "exact_match": false,
+        "output_creation_date_utc": "4:18 pm, Monday 25 March 2024 UTC"
+      },
+      {
+        "owner": "anmatngu",
+        "slug": "lab1-4-se180083-nguyenxuanan",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "best_video_classification_model.keras",
+        "size_bytes": 13751289,
+        "sha256": "a36612091ef68c77580b8798e0944c304ab1b2ecbde242e0ccf743e5ebfcc6a0",
+        "exact_match": false,
+        "output_creation_date_utc": "11:44 am, Monday 20 January 2025 UTC"
+      },
+      {
+        "owner": "anmatngu",
+        "slug": "lab1-4-se180083-nguyenxuanan",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "final_video_classification_model.keras",
+        "size_bytes": 13751289,
+        "sha256": "1f3ea810786ef82a2de9e6a623c6e5295fe47f9f644a17a478798f797cf97d33",
+        "exact_match": false,
+        "output_creation_date_utc": "11:44 am, Monday 20 January 2025 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "83accuracy",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "model_best.keras",
+        "size_bytes": 29157858,
+        "sha256": "43419682493640a6df8ed76738b88a3cc8a6c460ac67a06fdc617c39babf6735",
+        "exact_match": false,
+        "output_creation_date_utc": "11:06 pm, Thursday 14 May 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "83accuracy",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "model_final.keras",
+        "size_bytes": 29157857,
+        "sha256": "58f3f31fd796720dac0586cbc7d6f4faea39a853909f38e0576d0bcf935dd4e1",
+        "exact_match": false,
+        "output_creation_date_utc": "11:06 pm, Thursday 14 May 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "deney1_1_vgg16_lstm_best.keras",
+        "size_bytes": 60734694,
+        "sha256": "78daf419dc4ba3438f59bfbb0d51bbf65baea94a874d8ab53024466cafbb942a",
+        "exact_match": false,
+        "output_creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "deney1_1_vgg16_lstm_final.keras",
+        "size_bytes": 60734694,
+        "sha256": "57a07634b47b9fbb3b0e38fc0b4b7ffa720ec47c361ddaf668c1155248175462",
+        "exact_match": false,
+        "output_creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "deney1_2_mobilenet_lstm_best.keras",
+        "size_bytes": 13764378,
+        "sha256": "aec2c9cbf2b9c00cfa7b930d15be1a2159981ce7390188259557d237365d6e1d",
+        "exact_match": false,
+        "output_creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "deney1_2_mobilenet_lstm_final.keras",
+        "size_bytes": 13764378,
+        "sha256": "80b925bdbce01d1aba917ce1427ad1a00eaf3b034a6a1a9b907cec8e80915efd",
+        "exact_match": false,
+        "output_creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "deney2_mobilenet_lstm_genisletilmis_best.keras",
+        "size_bytes": 13764378,
+        "sha256": "568f7ce683e57d3ba77fd1a4e19e7f3bf0ee568e426519f80c6cc46fa0fe40a0",
+        "exact_match": false,
+        "output_creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+      },
+      {
+        "owner": "beyzakondu",
+        "slug": "suspicious-activities-graduation-project-dc7568",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "deney2_mobilenet_lstm_genisletilmis_final.keras",
+        "size_bytes": 13764378,
+        "sha256": "b3739b26d5974871aede27420a41a7a1da51dac5666e6da271135c59aee96b36",
+        "exact_match": false,
+        "output_creation_date_utc": "7:39 pm, Saturday 25 April 2026 UTC"
+      },
+      {
+        "owner": "henilpatel45",
+        "slug": "resnet50-true",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "resnet_anomaly_detection1.h5",
+        "size_bytes": 308773656,
+        "sha256": "4633e98aa4320fdbb1c36637bf8f49c24392d1d9fdc38f57d64e117cdecc656c",
+        "exact_match": false,
+        "output_creation_date_utc": "3:00 pm, Thursday 17 October 2024 UTC"
+      },
+      {
+        "owner": "kapoorsaumitra",
+        "slug": "video-anomaly-detection",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "ucf_crime_detection_model.h5",
+        "size_bytes": 33104248,
+        "sha256": "89a20039d2189383ee06fee435611864da303096bffcccb4cf5cf2816cbcbd8b",
+        "exact_match": false,
+        "output_creation_date_utc": "1:33 pm, Saturday 28 September 2024 UTC"
+      },
+      {
+        "owner": "kapoorsaumitra",
+        "slug": "video-anomaly-detection",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "ucf_crime_detection_weights.h5",
+        "size_bytes": 32897464,
+        "sha256": "6397977cf73af4f2f5f0a630ecf06df45cbf558365c3dfaa0c3f9ee272288dff",
+        "exact_match": false,
+        "output_creation_date_utc": "1:33 pm, Saturday 28 September 2024 UTC"
+      },
+      {
+        "owner": "karthikeya14",
+        "slug": "video-ad-efficientnet",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "model.h5",
+        "size_bytes": 21095240,
+        "sha256": "837b206c0707568718453279ff1397a412212f0cf7f8c2209782db5bfb7bd9fc",
+        "exact_match": false,
+        "output_creation_date_utc": "7:53 pm, Saturday 5 March 2022 UTC"
+      },
+      {
+        "owner": "khizerz",
+        "slug": "crime-detection",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "my_model.h5",
+        "size_bytes": 50864424,
+        "sha256": "893473305699aa4504f9eeb4556cd991b77496f2ebf87a1bd7507ca03a50d8f0",
+        "exact_match": false,
+        "output_creation_date_utc": "3:18 pm, Wednesday 16 July 2025 UTC"
+      },
+      {
+        "owner": "poudel0",
+        "slug": "notebookc9ff36ac2a",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "model_weights.weights.h5",
+        "size_bytes": 33442832,
+        "sha256": "00550ff884c4eb60c80bc241f22857fea0cd5f7674c199e8d60c23efd68e8fab",
+        "exact_match": false,
+        "output_creation_date_utc": "4:06 am, Thursday 26 December 2024 UTC"
+      },
+      {
+        "owner": "poudel0",
+        "slug": "notebookc9ff36ac2a",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "my_model.keras",
+        "size_bytes": 33797619,
+        "sha256": "51966eb6f2011b053f064a29470064614bcaa72eeb806deafe573ce0c0627fc5",
+        "exact_match": false,
+        "output_creation_date_utc": "4:06 am, Thursday 26 December 2024 UTC"
+      },
+      {
+        "owner": "saba2114",
+        "slug": "video-anomaly-detection",
+        "numeric_version": 2,
+        "version_locator": "2",
+        "filename": "trained_model.h5",
+        "size_bytes": 33104248,
+        "sha256": "2009bda65062478b7eb810668ca274cc1edd1fa36883b7d3140a77f2ee1ed1b6",
+        "exact_match": false,
+        "output_creation_date_utc": "10:28 am, Tuesday 19 March 2024 UTC"
+      },
+      {
+        "owner": "shantanurajurkar25",
+        "slug": "edai5-cnn",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "my_model.h5",
+        "size_bytes": 50864424,
+        "sha256": "9f8adff4f1272f61518f840c65bd30d9d37c77c1d0807caf27c842653a350ebb",
+        "exact_match": false,
+        "output_creation_date_utc": "12:27 pm, Tuesday 2 December 2025 UTC"
+      },
+      {
+        "owner": "shantanurajurkar25",
+        "slug": "edai5-cnn",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "my_model.keras",
+        "size_bytes": 50863000,
+        "sha256": "3de1be13b65e2c50b41070917aa038b97a222e0195cddd1771764fce605198c6",
+        "exact_match": false,
+        "output_creation_date_utc": "12:27 pm, Tuesday 2 December 2025 UTC"
+      }
+    ],
+    "h5_keras_listed_but_not_returned": [
+      {
+        "owner": "kruthisb999",
+        "slug": "video-anomaly-detection-custom",
+        "numeric_version": null,
+        "version_locator": "listed_latest_output_at_authenticated_search",
+        "filename": "best_model.h5",
+        "exact_size_bytes": null,
+        "sha256": null,
+        "kaggle_list_files_size_field": 871,
+        "output_creation_date_utc": "5:55 am, Friday 13 December 2024 UTC",
+        "access_outcome": "listed_by_kernels_files_but_not_returned_by_authenticated_kernels_output_current_session"
+      },
+      {
+        "owner": "kruthisb999",
+        "slug": "video-anomaly-detection-custom",
+        "numeric_version": null,
+        "version_locator": "listed_latest_output_at_authenticated_search",
+        "filename": "final_model.h5",
+        "exact_size_bytes": null,
+        "sha256": null,
+        "kaggle_list_files_size_field": 874,
+        "output_creation_date_utc": "5:55 am, Friday 13 December 2024 UTC",
+        "access_outcome": "listed_by_kernels_files_but_not_returned_by_authenticated_kernels_output_current_session"
+      },
+      {
+        "owner": "abhaysemwal01",
+        "slug": "video-anomaly-detection",
+        "numeric_version": null,
+        "version_locator": "listed_latest_output_at_authenticated_search",
+        "filename": "mymodel.h5",
+        "exact_size_bytes": null,
+        "sha256": null,
+        "kaggle_list_files_size_field": 840,
+        "output_creation_date_utc": "11:19 am, Monday 18 November 2024 UTC",
+        "access_outcome": "listed_by_kernels_files_but_not_returned_by_authenticated_kernels_output_current_session"
+      }
+    ],
+    "savedmodel_exports": [
+      {
+        "owner": "kruthisb999",
+        "slug": "video-anomaly-detection-custom",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "listed_files": [
+          "best_model.h5",
+          "final_model.h5",
+          "keras_metadata.pb",
+          "saved_model.pb",
+          "variables.data-00000-of-00001",
+          "variables.index"
+        ],
+        "access_outcome": "listed_by_kernels_files_but_not_returned_by_authenticated_kernels_output_current_session",
+        "recovered_components": []
+      },
+      {
+        "owner": "sobhanbhowmick",
+        "slug": "anomalyclassifier-ucf-mantavya-c7950d",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "listed_files": [
+          "keras_metadata.pb",
+          "saved_model.pb",
+          "variables.data-00000-of-00001",
+          "variables.index"
+        ],
+        "access_outcome": "recovered",
+        "recovered_components": [
+          {
+            "owner": "sobhanbhowmick",
+            "slug": "anomalyclassifier-ucf-mantavya-c7950d",
+            "version_locator": "latest_output_at_authenticated_search",
+            "filename": "model/keras_metadata.pb",
+            "size_bytes": 1306177,
+            "sha256": "c4dfc1c2bdccc35368be449d0f45d40bae76d69e1e24d247ea99d88bfdc92184"
+          },
+          {
+            "owner": "sobhanbhowmick",
+            "slug": "anomalyclassifier-ucf-mantavya-c7950d",
+            "version_locator": "latest_output_at_authenticated_search",
+            "filename": "model/saved_model.pb",
+            "size_bytes": 10345354,
+            "sha256": "7bea463809ca504cad3dbd88f69940ff8f0657089050757edc857715ee977705"
+          },
+          {
+            "owner": "sobhanbhowmick",
+            "slug": "anomalyclassifier-ucf-mantavya-c7950d",
+            "version_locator": "latest_output_at_authenticated_search",
+            "filename": "model/variables/variables.data-00000-of-00001",
+            "size_bytes": 73690139,
+            "sha256": "fb3652b6b40705f07e7f8c7ad96f6bca92525d3bf16014da6164252d96c63959"
+          },
+          {
+            "owner": "sobhanbhowmick",
+            "slug": "anomalyclassifier-ucf-mantavya-c7950d",
+            "version_locator": "latest_output_at_authenticated_search",
+            "filename": "model/variables/variables.index",
+            "size_bytes": 70385,
+            "sha256": "f46292fb53b1a40816ebe615963ed70239393979c2c554a4b4e70a028ebf2d2b"
+          }
+        ]
+      },
+      {
+        "owner": "turaneminli",
+        "slug": "surveillance-system-anomaly-detection",
+        "numeric_version": null,
+        "version_locator": "latest_output_at_authenticated_search",
+        "listed_files": [
+          "keras_metadata.pb",
+          "saved_model.pb",
+          "variables.data-00000-of-00001",
+          "variables.index"
+        ],
+        "access_outcome": "listed_by_kernels_files_but_not_returned_by_authenticated_kernels_output_current_session",
+        "recovered_components": []
+      }
+    ],
+    "archives": [
+      {
+        "owner": "ayushman1010",
+        "slug": "04-ucf-crime-fast-ipynb",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "ucf_pipeline_outputs.zip",
+        "size_bytes": 181471,
+        "sha256": "056296f0ccfdad981ad739df6b94d6d989270394827e1ccacc9de099b016ec0e",
+        "member_count": 5,
+        "model_member_count": 0,
+        "relevant_members": []
+      },
+      {
+        "owner": "hugoochoagonzlez",
+        "slug": "05-bytetrack-events",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "dataset_upload/ucf_label_sample.zip",
+        "size_bytes": 5691387,
+        "sha256": "14c453b4721b3d36938a74ceb94db0b771e8d3ee8032ea828c5d14d35e249885",
+        "member_count": 794,
+        "model_member_count": 0,
+        "relevant_members": []
+      },
+      {
+        "owner": "hugoochoagonzlez",
+        "slug": "05-bytetrack-events",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "outputs/ucf_label_sample.zip",
+        "size_bytes": 5691387,
+        "sha256": "14c453b4721b3d36938a74ceb94db0b771e8d3ee8032ea828c5d14d35e249885",
+        "member_count": 794,
+        "model_member_count": 0,
+        "relevant_members": []
+      },
+      {
+        "owner": "jeevakamal",
+        "slug": "notebook9ea065b22c",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "_output_.zip",
+        "size_bytes": 1774936358,
+        "sha256": "603e40408e7d1918096d7a3a91fe0727caefb5ff97ec8fdd3a2addec9938fbac",
+        "member_count": 100013,
+        "model_member_count": 0,
+        "relevant_members": []
+      },
+      {
+        "owner": "madhulatha17",
+        "slug": "task-victim-reaction-detection",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "sample_video.zip",
+        "size_bytes": 604107,
+        "sha256": "5285b15f275aebd24d75a9f2f07c080f5dd29f5f179305e4280d9f2b30f5419c",
+        "member_count": 1,
+        "model_member_count": 0,
+        "relevant_members": []
+      },
+      {
+        "owner": "madhulatha17",
+        "slug": "task-victim-reaction-detection",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "victim_reaction_model.zip",
+        "size_bytes": 7427,
+        "sha256": "851d9e5b581d0d91998aef38c2bcd22a08a236fa4c10bb449d7500d846b5a3c4",
+        "member_count": 2,
+        "model_member_count": 0,
+        "relevant_members": [
+          {
+            "name": "metadata.json",
+            "size_bytes": 396,
+            "crc32": "02a0e911"
+          }
+        ]
+      },
+      {
+        "owner": "madhulatha17",
+        "slug": "task-victim-reaction-detection",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "victim_reaction_results.zip",
+        "size_bytes": 871024,
+        "sha256": "e63f9fa6eecf0020195029e50f47c43f578f0a116a773f8347148bda5de0039a",
+        "member_count": 10,
+        "model_member_count": 0,
+        "relevant_members": []
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "models.zip",
+        "size_bytes": 10564891,
+        "sha256": "d6ee97d8a4584d7c43166120876de65f276c82f485662565536d3401ae7ca8ab",
+        "member_count": 10,
+        "model_member_count": 0,
+        "relevant_members": [
+          {
+            "name": "kaggle/working/results/metrics.json",
+            "size_bytes": 1944,
+            "crc32": "b1f0be2a"
+          },
+          {
+            "name": "kaggle/working/results/training_history.json",
+            "size_bytes": 1785,
+            "crc32": "abc9ece4"
+          },
+          {
+            "name": "kaggle/working/__notebook__.ipynb",
+            "size_bytes": 7723907,
+            "crc32": "046ee93c"
+          }
+        ]
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "results.zip",
+        "size_bytes": 21130198,
+        "sha256": "9ece8e94af90549ebbf43ccc8c9b24a987b03b449b946b52642ddf57d3c3653c",
+        "member_count": 11,
+        "model_member_count": 0,
+        "relevant_members": [
+          {
+            "name": "kaggle/working/results/metrics.json",
+            "size_bytes": 1944,
+            "crc32": "b1f0be2a"
+          },
+          {
+            "name": "kaggle/working/results/training_history.json",
+            "size_bytes": 1785,
+            "crc32": "abc9ece4"
+          },
+          {
+            "name": "kaggle/working/__notebook__.ipynb",
+            "size_bytes": 7724615,
+            "crc32": "9abdaf19"
+          }
+        ]
+      },
+      {
+        "owner": "shreeharism",
+        "slug": "notebook697132a23d",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "_output_.zip",
+        "size_bytes": 1851930072,
+        "sha256": "ab02198e34f078c591a3b27900478d731c5963e51af1852bbedce4837d53e184",
+        "member_count": 108143,
+        "model_member_count": 0,
+        "relevant_members": []
+      }
+    ],
+    "archive_member_handling": "All ZIP central directories were inspected. No H5, Keras, or SavedModel member existed, so no model member required extraction. Archive bytes were hashed as downloaded."
+  },
+  "non_model_artifacts": {
+    "source_signal_counts": {
+      ".keras": 94,
+      "imagedatagenerator": 73,
+      ".h5": 40,
+      "flow_from_directory": 49,
+      "preprocess_input": 41,
+      "model.save": 36,
+      "modelcheckpoint": 27,
+      "class_indices": 7,
+      "saved_model": 3,
+      "class_map": 1,
+      "label_map": 2
+    },
+    "exact_target_filename_mentions_in_165_sources": 0,
+    "downloaded_output_sidecars": [
+      {
+        "owner": "ethandanielcarter",
+        "slug": "crime-cctv-detection-vit-how-long-to-run-on-kaggle",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "crime_cctv_image_detection/checkpoint-17808/preprocessor_config.json",
+        "size_bytes": 351,
+        "sha256": "445c77049d082004aa07593344d5e1f521f1198228bf586196f70ce7ae021414"
+      },
+      {
+        "owner": "ethandanielcarter",
+        "slug": "crime-cctv-detection-vit-how-long-to-run-on-kaggle",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "crime_cctv_image_detection/checkpoint-17808/trainer_state.json",
+        "size_bytes": 7233,
+        "sha256": "f4545ef7e4f000fcb76c167046a312a6bebfe54d1e9f864f73281b51ef41957a"
+      },
+      {
+        "owner": "ethandanielcarter",
+        "slug": "crime-cctv-detection-vit-how-long-to-run-on-kaggle",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "crime_cctv_image_detection/preprocessor_config.json",
+        "size_bytes": 351,
+        "sha256": "445c77049d082004aa07593344d5e1f521f1198228bf586196f70ce7ae021414"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "results/training_history.json",
+        "size_bytes": 1785,
+        "sha256": "f9ba8bb03964a23c9eb3dc48add35c96f9ab8934bd64393c3204879e50cdf04a"
+      },
+      {
+        "owner": "xuanleekaggle",
+        "slug": "fine-tune-blip",
+        "version_locator": "latest_output_at_authenticated_search",
+        "filename": "train_data.txt",
+        "size_bytes": 123252354,
+        "sha256": "6fa8a8f5ab98516eef4c24a7f0d10b59ad33ed85966cb04a085315cb2b1204d8"
+      }
+    ],
+    "relevant_archive_members": [
+      {
+        "owner": "madhulatha17",
+        "slug": "task-victim-reaction-detection",
+        "archive": "victim_reaction_model.zip",
+        "name": "metadata.json",
+        "size_bytes": 396,
+        "crc32": "02a0e911"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "archive": "models.zip",
+        "name": "kaggle/working/results/metrics.json",
+        "size_bytes": 1944,
+        "crc32": "b1f0be2a"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "archive": "models.zip",
+        "name": "kaggle/working/results/training_history.json",
+        "size_bytes": 1785,
+        "crc32": "abc9ece4"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "archive": "models.zip",
+        "name": "kaggle/working/__notebook__.ipynb",
+        "size_bytes": 7723907,
+        "crc32": "046ee93c"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "archive": "results.zip",
+        "name": "kaggle/working/results/metrics.json",
+        "size_bytes": 1944,
+        "crc32": "b1f0be2a"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "archive": "results.zip",
+        "name": "kaggle/working/results/training_history.json",
+        "size_bytes": 1785,
+        "crc32": "abc9ece4"
+      },
+      {
+        "owner": "pujancozu",
+        "slug": "new-rnn-trainning",
+        "archive": "results.zip",
+        "name": "kaggle/working/__notebook__.ipynb",
+        "size_bytes": 7724615,
+        "crc32": "9abdaf19"
+      }
+    ],
+    "note": "All 165 notebook sources were downloaded and hashed; candidate notebook declarations are not exact-model provenance without an exact artifact hash."
+  },
+  "exact_match": false,
+  "exact_match_source_evidence": null,
+  "final_provenance_status": "unresolved_after_final_authenticated_search",
+  "evidence_artifact_updates": {
+    "reports/ucf_preprocessing.json": {
+      "outcome": "unchanged_unresolved",
+      "sha256": "fa982fe753f60892c12d4e33d12225235129f11f4c292e09a822fd7ad709d745"
+    },
+    "ucfout/class_map.json": {
+      "outcome": "unchanged_unresolved",
+      "sha256": "2d9e00a45dfd45868fa1f410afe58dbf015beda23eaa53f8e227061a781697d9"
+    }
+  },
+  "recommendation": "Stop provenance searching permanently and train a new reproducible UCF hybrid model with a pinned preprocessing manifest, persisted generator class_indices, exact source revision, and model-byte hash.",
+  "limitations": [
+    "Kaggle kernels files listed three H5 files and two SavedModel exports that the authenticated current-session kernels output endpoint did not return; repeated filtered and unfiltered downloads produced only logs.",
+    "Numeric notebook versions are not exposed by Kaggle CLI 2.2.4 pull/list metadata for most current outputs; those artifacts are located as the latest output at the authenticated search timestamp. The saba2114 candidate is version 2 from prior API evidence and was also recovered through the version-2 output locator.",
+    "A transient HTTP 429 burst occurred during initial pulls; every one of the 165 source pulls and 165 output inventories later succeeded under throttled retries.",
+    "Architecture, shape, timestamps, behavior, metrics, and preprocessing similarity were not used as identity evidence."
+  ],
+  "rtl_generated": false
+}

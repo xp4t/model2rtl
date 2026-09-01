@@ -5508,6 +5508,6 @@ Found and reported 0 problems.
 Dumping module `\mnist_mlp_top'.
 
 Warnings: 2 unique messages, 2 total
-End of script. Logfile hash: be35055f46, time: 11.75s, user: 8.67s, system: 0.18s, MEM: 195.04 MB peak
+End of script. Logfile hash: be35055f46, time: 11.22s, user: 8.33s, system: 0.17s, MEM: 202.32 MB peak
 Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]
-Time spent: 39% 1x abc (5 sec), 17% 32x opt_expr (2 sec), ...
+Time spent: 39% 1x abc (4 sec), 17% 32x opt_expr (2 sec), ...

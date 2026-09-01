@@ -1,0 +1,134 @@
+{
+  "dependency_availability": {
+    "h5py": {
+      "available": true,
+      "version": "3.16.0"
+    },
+    "keras": {
+      "available": true,
+      "version": "3.15.1"
+    },
+    "onnx": {
+      "available": true,
+      "limitation": null,
+      "version": "1.16.2"
+    },
+    "tensorflow": {
+      "available": true,
+      "version": "2.16.2"
+    }
+  },
+  "evidence_date": "2026-08-31",
+  "integration_matrix": {
+    "model_a": {
+      "decision_count": 3,
+      "execution": "PASSED",
+      "execution_mode": "full_rtl",
+      "graph_ir_sha256": "cc2efcca2682ec857c24f6921b82f92cd73e5b12da5af0c67b9c0ef22011ba10",
+      "report_byte_determinism": "PASSED",
+      "rtl_generated": false,
+      "semantic_node_count": 3,
+      "source_sha256": "4c160d24f4afc137edf930c8a60f132aa2ccebd910c29ab2feb0880b5645f6f5",
+      "source_format": "h5",
+      "topology": "Dense/ReLU/Dense"
+    },
+    "model_b": {
+      "decision_count": 5,
+      "execution": "PASSED",
+      "execution_mode": "full_rtl",
+      "cross_process_graph_hashes_match": true,
+      "cross_process_source_hashes_match": true,
+      "graph_ir_sha256": "2cb6b1dcf310b67ea4481dc6f7d86321d643f08fa48dda9049a9eccfe315c5d6",
+      "independent_archive_graph_hashes_match": true,
+      "independent_archive_source_hashes_match": true,
+      "report_byte_determinism": "PASSED",
+      "rtl_generated": false,
+      "semantic_node_count": 5,
+      "source_sha256": "9594b9d38f439d521180b0934d0ffddbc0cdd99ba532f0b424383c9544e735a7",
+      "source_format": "keras",
+      "topology": "Dense/ReLU/Dense/ReLU/Dense"
+    },
+    "model_c": {
+      "decision_count": 6,
+      "execution": "PASSED",
+      "execution_mode": "hybrid",
+      "graph_ir_sha256": "3757ae1918582b4b9687ea0dcfaae110177c619de5644d479e3c7578f32c5bcd",
+      "report_byte_determinism": "PASSED",
+      "rtl_generated": false,
+      "semantic_node_count": 6,
+      "source_sha256": "13d34fd34d89303852e96e3046188054a7702ba666fd4efb8290cc981ac3ea9d",
+      "source_format": "h5",
+      "topology": "Conv2D/MaxPooling2D/Flatten/Dense/ReLU/Dense"
+    },
+    "model_d": {
+      "decision_count": 3,
+      "execution": "PASSED",
+      "execution_mode": "full_rtl",
+      "graph_ir_sha256": "4b32e3c9be133291c34344907542ef81a91deb0a8b5350f23ca4af201e6fbb78",
+      "report_byte_determinism": "PASSED",
+      "rtl_generated": false,
+      "semantic_node_count": 3,
+      "source_sha256": "f7f6d3dff716969e0e04bcff7e749e41e182c9e56470d6fe8f5af882d29efacd",
+      "source_format": "onnx",
+      "topology": "Gemm/Relu/Gemm"
+    },
+    "unsupported_only_onnx": {
+      "decision_count": 1,
+      "execution": "PASSED",
+      "execution_mode": "compile_unavailable",
+      "graph_ir_sha256": "16814464b5157827fd7d542a4032c0e888cadee84a7313435bb39d9a01a66774",
+      "expected_execution_mode": "compile_unavailable",
+      "report_byte_determinism": "PASSED",
+      "rtl_generated": false,
+      "semantic_node_count": 1,
+      "source_sha256": "791dc0bd47f0118c312c8f858022bf73b9ff43c3f229dde63f5bbace48684273",
+      "source_format": "onnx",
+      "topology": "Sin"
+    }
+  },
+  "milestone": "V2 Milestone 1",
+  "fix_round": 6,
+  "overall_status": "PASS",
+  "rtl_generated": false,
+  "schema_version": "model2rtl-v2-milestone1-report-v1",
+  "status_reason": "All native Keras/H5 and ONNX analysis fixtures executed; no RTL generated because Milestone 1 is analysis only",
+  "test_counts": {
+    "baseline": {
+      "failed": 0,
+      "passed": 462,
+      "skipped": 0,
+      "source_commit": "8245901"
+    },
+    "new_v2_milestone1": {
+      "failed": 0,
+      "outcomes": 124,
+      "passed": 124,
+      "skipped": 0
+    },
+    "total": {
+      "failed": 0,
+      "outcomes": 586,
+      "passed": 586,
+      "skipped": 0
+    }
+  },
+  "verification_commands": [
+    "/home/rithwik/model2rtl/.venv/bin/python -m pytest -o addopts='' tests/v2 -q -rs",
+    "/home/rithwik/model2rtl/.venv/bin/python -m pytest -o addopts='' -q -rs",
+    "/home/rithwik/model2rtl/.venv/bin/python -m pytest -o addopts='' tests/v2/test_router.py tests/v2/test_analyze_cli.py tests/test_cli_compile.py -q",
+    "/home/rithwik/model2rtl/.venv/bin/python -m compileall -q src/model2rtl/v2 tests/v2",
+    "git diff --check",
+    "rg -n '(^| )(import|from) (tensorflow|keras|h5py|onnx)' src/model2rtl/v2 --glob '!**/importers/keras.py' --glob '!**/importers/onnx.py'"
+  ],
+  "verification_notes": [
+    "The brief's importer exclusion globs were not path-aware when run from the repository root and matched only the two allowed importer files; the equivalent path-aware leakage scan returned no matches.",
+    "Model B source and GraphIR hashes were reproduced in two fresh Python processes after stable traversal remapping preserved equal shared_object_id aliases.",
+    "Fix round 4 ran the complete V2 suite and observed 116 passed and 3 skipped, then ran the complete repository suite and observed 578 passed and 3 skipped.",
+    "Initial runs recorded three guarded ONNX-related skips while the optional dependency was unavailable; those historical observations are superseded by the current ONNX evidence below.",
+    "Model C was regenerated after removing unsupported rank-4 NHWC guessing; its fresh GraphIR SHA-256 is recorded above while its source hash, node count, decision count, and hybrid mode remained stable.",
+    "Fix round 5 restricted ONNX Constant materialization to the standard ONNX domains so custom-domain operators named Constant remain live and cannot be silently dropped by partitioning; the custom-domain Constant regression now executed.",
+    "Fix round 6 corrected an invalid unsupported-op fixture to a valid custom-domain fixture, and all ONNX evidence passed.",
+    "Focused ONNX importer/integration: 18 passed in 6.73s.",
+    "Independent full suite: 586 passed in 56.18s."
+  ]
+}

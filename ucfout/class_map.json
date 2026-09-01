@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "artifact": "ucf_output_class_map_evidence",
+  "retrieved_at": "2026-08-20",
+  "status": "unresolved",
+  "verified": false,
+  "blocks_label_metrics": true,
+  "blocked_claims": [
+    "class_accuracy",
+    "macro_f1",
+    "confusion_matrix",
+    "class_named_predictions"
+  ],
+  "output_map_role": "provisional_candidate_only",
+  "classes": [
+    "Abuse",
+    "Arrest",
+    "Arson",
+    "Assault",
+    "Burglary",
+    "Explosion",
+    "Fighting",
+    "NormalVideos",
+    "RoadAccidents",
+    "Robbery",
+    "Shooting",
+    "Shoplifting",
+    "Stealing",
+    "Vandalism"
+  ],
+  "output_map": [
+    {"index": 0, "class_name": "Abuse"},
+    {"index": 1, "class_name": "Arrest"},
+    {"index": 2, "class_name": "Arson"},
+    {"index": 3, "class_name": "Assault"},
+    {"index": 4, "class_name": "Burglary"},
+    {"index": 5, "class_name": "Explosion"},
+    {"index": 6, "class_name": "Fighting"},
+    {"index": 7, "class_name": "NormalVideos"},
+    {"index": 8, "class_name": "RoadAccidents"},
+    {"index": 9, "class_name": "Robbery"},
+    {"index": 10, "class_name": "Shooting"},
+    {"index": 11, "class_name": "Shoplifting"},
+    {"index": 12, "class_name": "Stealing"},
+    {"index": 13, "class_name": "Vandalism"}
+  ],
+  "verdict": "The recovered H5 proves 14 output neurons but stores no class_indices or label map. Matching public notebooks call flow_from_directory without an explicit classes argument, but none is identity-linked to the recovered H5. The displayed ordered map is therefore a provisional candidate and must not be used as training-time class-map evidence.",
+  "candidate_discrepancy": {
+    "matching_notebook_display_labels_index_7": "Normal",
+    "dataset_directory_candidate_index_7": "NormalVideos",
+    "effect": "The notebook label list was not passed to flow_from_directory and cannot resolve the exact model's index 7 label."
+  },
+  "evidence": [
+    {
+      "kind": "recovered_model",
+      "source": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+      "sha256": "7411d46d5ab0900f46e732217b140d3f777dc028a7f74362300fd1d7dc0f1c12",
+      "locator": "model_config final Dense layer classification, units=14; no class_indices attribute",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Proves output width only, not output-neuron names or order."
+    },
+    {
+      "kind": "kaggle_origin_notebook_source",
+      "source": "https://www.kaggle.com/api/v1/kernels/pull/odins0n/video-anomaly-detection",
+      "sha256": "31eb98822f0396ca93d9e10d1d4e3b2d035d57e786f941b6a256c90cf077cdd1",
+      "locator": "blob.source cells 9, 10, 13, and 15; source sha256=ef421edf20bf9f875348fc81b77a16b4e1b943698b2707ba4eb0a5685260ce9d",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Shows a candidate label list and generator call, but does not pass classes=, persist class_indices, or identify the recovered H5."
+    },
+    {
+      "kind": "kaggle_candidate_notebook_source",
+      "source": "https://www.kaggle.com/api/v1/kernels/pull/saba2114/video-anomaly-detection",
+      "sha256": "0a99123c46bc05bc966ccc96c646dc4cb19382a0c5fcffd2a115e9ae2cf4a007",
+      "locator": "version 2 blob.source cells 9, 10, 13, 15, and 20; source sha256=3357906665da4171158a62b1291a0b0ee8afb24c35031149bc1f7db0d70d756b",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Saves a matching candidate model but has no saved class_indices, does not explicitly bind generator classes, and is not identity-linked to the Hugging Face file."
+    },
+    {
+      "kind": "kaggle_dataset_description",
+      "source": "https://www.kaggle.com/datasets/odins0n/ucf-crime-dataset/code",
+      "sha256": "363a6b54726717594c9bb8d7ba5ea5a744858fe9da5a529df44ddd2f0e03fc0f",
+      "locator": "embedded dataset description class list at HTML line 97",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Supplies provisional class display names, including Normal Videos, but does not prove the recovered model's output-neuron order or the NormalVideos identifier spelling."
+    }
+  ],
+  "limitations": [
+    "No exact training source, saved class_indices, or label-map sidecar was recovered.",
+    "Filesystem or archive enumeration is explicitly non-verifying.",
+    "No labels or TEST accuracy were used to infer output order."
+  ]
+}

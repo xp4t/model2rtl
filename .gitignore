@@ -2,10 +2,16 @@
 # Python
 # ---------------------------------------------------------------------------
 .venv/
+.venv-legacy-keras/
 __pycache__/
 *.py[cod]
 *.egg-info/
 .pytest_cache/
+
+# UCF pre-RTL local artifacts. Compact JSON evidence and reports remain tracked.
+ucfout/**/*.keras
+ucfout/**/*.npz
+ucfout/cache/
 
 # ---------------------------------------------------------------------------
 # Regenerable build output.
@@ -42,3 +48,7 @@ build/**/*_netlist.json
 build/**/*.vvp
 
 /scripts/git_commit_stages.sh
+docs/
+
+# Local Superpowers SDD coordination artifacts are not product history.
+.superpowers/

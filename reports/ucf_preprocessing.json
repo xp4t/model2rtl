@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "artifact": "ucf_preprocessing_evidence",
+  "retrieved_at": "2026-08-20",
+  "status": "unresolved",
+  "confidence": "insufficient_documentary_provenance",
+  "contract": null,
+  "blocks_feature_extraction": true,
+  "blocks_accuracy_claims": true,
+  "research_order": [
+    "huggingface_model_revision_and_history",
+    "uploader_profile_and_linked_github",
+    "attached_public_kaggle_notebooks",
+    "h5_metadata"
+  ],
+  "verdict": "No searched documentary source proves the complete preprocessing contract for the exact recovered H5. The H5 proves a 64x64x3 model input but contains no resize interpolation, channel-order, or pixel-normalization metadata. Architecturally matching Kaggle notebooks are candidate provenance only because no retrieved record identity-links their saved output to the recovered H5.",
+  "known_from_recovered_h5": {
+    "input_shape": [
+      null,
+      64,
+      64,
+      3
+    ],
+    "keras_version": "2.15.0",
+    "backend": "tensorflow",
+    "preprocessing_metadata_present": false
+  },
+  "candidates": [
+    {
+      "name": "raw_uint8",
+      "resize": [64, 64],
+      "interpolation": "unresolved",
+      "channel_order": "RGB",
+      "dtype": "uint8",
+      "scale": 1.0,
+      "offset": 0.0,
+      "status": "not_verified"
+    },
+    {
+      "name": "divide_255",
+      "resize": [64, 64],
+      "interpolation": "unresolved",
+      "channel_order": "RGB",
+      "dtype": "float32",
+      "scale": 0.00392156862745098,
+      "offset": 0.0,
+      "status": "not_verified"
+    },
+    {
+      "name": "keras_densenet_preprocess_input",
+      "resize": [64, 64],
+      "interpolation": "unresolved",
+      "channel_order": "RGB",
+      "dtype": "float32",
+      "scale": [
+        0.017124753831663668,
+        0.01750700280112045,
+        0.017429193899782137
+      ],
+      "offset": [
+        -2.1179039301310043,
+        -2.0357142857142856,
+        -1.8044444444444445
+      ],
+      "status": "not_verified"
+    },
+    {
+      "name": "matching_notebook_declared_composition",
+      "resize": [64, 64],
+      "interpolation": "keras_flow_from_directory_default_not_identity_linked",
+      "channel_order": "RGB",
+      "dtype": "float32",
+      "declared_operations": [
+        "tf.keras.applications.densenet.preprocess_input",
+        "ImageDataGenerator(rescale=1./255)"
+      ],
+      "status": "candidate_source_not_identity_linked",
+      "reason": "The notebook topology, optimizer, and loss match H5 metadata, but its downloadable saved output could not be compared with the recovered file and the notebook author is not linked to the Hugging Face uploader."
+    }
+  ],
+  "controlled_fallback": {
+    "status": "completed_non_verifying",
+    "used_train_frames": true,
+    "used_labels": false,
+    "used_test_frames": false,
+    "accuracy_scored": false,
+    "candidate_ranking_performed": false,
+    "verification_effect": "none",
+    "remaining_ambiguity": "All four declared candidates produced finite values on the bounded TRAIN subset, while three produced saturated softmax outputs and the notebook composition did not. These observations characterize numerical behavior only; without exact-H5 documentary provenance they do not identify the training contract.",
+    "environment": {
+      "python": ".venv-legacy-keras/bin/python",
+      "tensorflow_version": "2.15.1",
+      "keras_version": "2.15.0",
+      "model_path": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+      "model_sha256": "7411d46d5ab0900f46e732217b140d3f777dc028a7f74362300fd1d7dc0f1c12"
+    },
+    "runtime": {
+      "archive_sha256_seconds": 22.41,
+      "selection_seconds": 3.16,
+      "model_characterization_wall_seconds": 26.04,
+      "four_candidate_inference_seconds": 2.7812804960049107,
+      "model_characterization_max_rss_kb": 670124
+    },
+    "selection": {
+      "archive_path": "/home/rithwik/datasets/ucf-crime-frames/archive.zip",
+      "archive_sha256": "d99223c90d713f73cdd451aea4f48c068b1e2e1951c3dba593a9d0167cb7cdd5",
+      "split": "TRAIN",
+      "member_filter": "path starts with Train/ and lowercase suffix is .png",
+      "train_member_count": 1266345,
+      "source_order_check": "the complete filtered central-directory stream was verified lexicographically nondecreasing",
+      "algorithm": "Partition the verified sorted TRAIN stream into 8 equal index strata using floor(index*8/1266345). In each stratum choose the minimum tuple (sha256(str(seed)+'\\0'+member_path), member_path), then sort the eight selected paths. No path component was parsed as a label.",
+      "seed": 20260820,
+      "sample_count": 8,
+      "subset_serialization": "UTF-8 selected member paths in sorted order, each followed by LF including the final path",
+      "subset_sha256": "a53c7abfaaeecb1dbc4cca5312f8c809cc5a035683b8247e9e5795f95988d1d3",
+      "samples": [
+        {
+          "member_path": "Train/Burglary/Burglary088_x264_3930.png",
+          "frame_id": "Burglary088_x264_3930"
+        },
+        {
+          "member_path": "Train/NormalVideos/Normal_Videos087_x264_47740.png",
+          "frame_id": "Normal_Videos087_x264_47740"
+        },
+        {
+          "member_path": "Train/NormalVideos/Normal_Videos308_x264_237950.png",
+          "frame_id": "Normal_Videos308_x264_237950"
+        },
+        {
+          "member_path": "Train/NormalVideos/Normal_Videos449_x264_2700.png",
+          "frame_id": "Normal_Videos449_x264_2700"
+        },
+        {
+          "member_path": "Train/NormalVideos/Normal_Videos541_x264_69930.png",
+          "frame_id": "Normal_Videos541_x264_69930"
+        },
+        {
+          "member_path": "Train/NormalVideos/Normal_Videos633_x264_101640.png",
+          "frame_id": "Normal_Videos633_x264_101640"
+        },
+        {
+          "member_path": "Train/NormalVideos/Normal_Videos819_x264_33410.png",
+          "frame_id": "Normal_Videos819_x264_33410"
+        },
+        {
+          "member_path": "Train/RoadAccidents/RoadAccidents142_x264_3310.png",
+          "frame_id": "RoadAccidents142_x264_3310"
+        }
+      ]
+    },
+    "measurement_definition": {
+      "input": "dtype, shape, finite fraction, min, max, mean, standard deviation",
+      "activations": "finite fraction and absolute mean, 95th percentile, and maximum at GAP and each hidden Dense ReLU output",
+      "output": "softmax finite fraction, min/max, row-sum range, and per-frame natural-log entropy range/mean/finite fraction"
+    },
+    "results": [
+      {
+        "candidate": "raw_uint8",
+        "sample_subset_sha256": "a53c7abfaaeecb1dbc4cca5312f8c809cc5a035683b8247e9e5795f95988d1d3",
+        "input": {
+          "dtype": "uint8",
+          "shape": [8, 64, 64, 3],
+          "finite_fraction": 1.0,
+          "min": 0.0,
+          "max": 255.0,
+          "mean": 105.27821858723958,
+          "std": 62.09455836778591
+        },
+        "activations": {
+          "global_average_pooling2d": {"finite_fraction": 1.0, "abs_mean": 2697.2453723446474, "abs_p95": 16225.074023437486, "abs_max": 137552.15625},
+          "dense": {"finite_fraction": 1.0, "abs_mean": 3728.694760690909, "abs_p95": 17491.253808593723, "abs_max": 48035.234375},
+          "dense_1": {"finite_fraction": 1.0, "abs_mean": 1644.2485107897082, "abs_p95": 6990.061181640624, "abs_max": 24717.677734375},
+          "dense_2": {"finite_fraction": 1.0, "abs_mean": 1346.2623425944766, "abs_p95": 6186.4752197265625, "abs_max": 20460.052734375}
+        },
+        "output": {
+          "shape": [8, 14],
+          "finite_fraction": 1.0,
+          "min": 0.0,
+          "max": 1.0,
+          "row_sum_min": 1.0,
+          "row_sum_max": 1.0,
+          "entropy_nats_min": 0.0,
+          "entropy_nats_mean": 0.0,
+          "entropy_nats_max": 0.0,
+          "entropy_finite_fraction": 1.0
+        }
+      },
+      {
+        "candidate": "divide_255",
+        "sample_subset_sha256": "a53c7abfaaeecb1dbc4cca5312f8c809cc5a035683b8247e9e5795f95988d1d3",
+        "input": {
+          "dtype": "float32",
+          "shape": [8, 64, 64, 3],
+          "finite_fraction": 1.0,
+          "min": 0.0,
+          "max": 1.0,
+          "mean": 0.41285577055150213,
+          "std": 0.2435080780228936
+        },
+        "activations": {
+          "global_average_pooling2d": {"finite_fraction": 1.0, "abs_mean": 9.24408902235621, "abs_p95": 52.46518821716308, "abs_max": 446.71795654296875},
+          "dense": {"finite_fraction": 1.0, "abs_mean": 13.19813524131132, "abs_p95": 62.67028827667227, "abs_max": 166.66464233398438},
+          "dense_1": {"finite_fraction": 1.0, "abs_mean": 5.783562216771259, "abs_p95": 26.613696193695066, "abs_max": 102.6142807006836},
+          "dense_2": {"finite_fraction": 1.0, "abs_mean": 4.915092239172509, "abs_p95": 23.029874801635742, "abs_max": 67.76426696777344}
+        },
+        "output": {
+          "shape": [8, 14],
+          "finite_fraction": 1.0,
+          "min": 0.0,
+          "max": 1.0,
+          "row_sum_min": 1.0,
+          "row_sum_max": 1.0,
+          "entropy_nats_min": 0.0,
+          "entropy_nats_mean": 7.798142664001762e-19,
+          "entropy_nats_max": 6.1156228347868896e-18,
+          "entropy_finite_fraction": 1.0
+        }
+      },
+      {
+        "candidate": "keras_densenet_preprocess_input",
+        "sample_subset_sha256": "a53c7abfaaeecb1dbc4cca5312f8c809cc5a035683b8247e9e5795f95988d1d3",
+        "input": {
+          "dtype": "float32",
+          "shape": [8, 64, 64, 3],
+          "finite_fraction": 1.0,
+          "min": -2.1179039478302,
+          "max": 2.640000104904175,
+          "mean": -0.15913553961005297,
+          "std": 1.0845530689674274
+        },
+        "activations": {
+          "global_average_pooling2d": {"finite_fraction": 1.0, "abs_mean": 44.154546850120944, "abs_p95": 266.5131072998046, "abs_max": 2059.6787109375},
+          "dense": {"finite_fraction": 1.0, "abs_mean": 68.66755874431328, "abs_p95": 309.63916320800763, "abs_max": 650.9743041992188},
+          "dense_1": {"finite_fraction": 1.0, "abs_mean": 30.69949745539475, "abs_p95": 127.22524490356444, "abs_max": 343.3595886230469},
+          "dense_2": {"finite_fraction": 1.0, "abs_mean": 25.016339843718015, "abs_p95": 114.49105072021484, "abs_max": 274.4373779296875}
+        },
+        "output": {
+          "shape": [8, 14],
+          "finite_fraction": 1.0,
+          "min": 0.0,
+          "max": 1.0,
+          "row_sum_min": 1.0,
+          "row_sum_max": 1.0,
+          "entropy_nats_min": 0.0,
+          "entropy_nats_mean": 0.0,
+          "entropy_nats_max": 0.0,
+          "entropy_finite_fraction": 1.0
+        }
+      },
+      {
+        "candidate": "matching_notebook_declared_composition",
+        "sample_subset_sha256": "a53c7abfaaeecb1dbc4cca5312f8c809cc5a035683b8247e9e5795f95988d1d3",
+        "input": {
+          "dtype": "float32",
+          "shape": [8, 64, 64, 3],
+          "finite_fraction": 1.0,
+          "min": -0.008305505849421024,
+          "max": 0.01035294122993946,
+          "mean": -0.0006240609532031279,
+          "std": 0.004253149315562992
+        },
+        "activations": {
+          "global_average_pooling2d": {"finite_fraction": 1.0, "abs_mean": 0.5599980839496708, "abs_p95": 3.228070247173309, "abs_max": 19.938953399658203},
+          "dense": {"finite_fraction": 1.0, "abs_mean": 0.6466792411770825, "abs_p95": 3.079486799240108, "abs_max": 11.464256286621094},
+          "dense_1": {"finite_fraction": 1.0, "abs_mean": 0.28642209495319193, "abs_p95": 1.3115357637405394, "abs_max": 4.259161949157715},
+          "dense_2": {"finite_fraction": 1.0, "abs_mean": 0.2522259282103292, "abs_p95": 1.1568564474582672, "abs_max": 4.011932849884033}
+        },
+        "output": {
+          "shape": [8, 14],
+          "finite_fraction": 1.0,
+          "min": 4.484147666516947e-06,
+          "max": 0.9995369911193848,
+          "row_sum_min": 0.9999999348074198,
+          "row_sum_max": 1.0000000910658855,
+          "entropy_nats_min": 0.004917070871227796,
+          "entropy_nats_mean": 0.7589419753088036,
+          "entropy_nats_max": 2.0388506455619817,
+          "entropy_finite_fraction": 1.0
+        }
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "kind": "repository_revision_api",
+      "source": "https://huggingface.co/api/models/abhi26/video-anomaly-detection/revision/f1e9ec12d3d3f9f96148214ebdb0b54256036474",
+      "sha256": "ce36f19dc19daab6c34a5b3b6461843a94bac2c45365ad29e4bfa01757d55fc4",
+      "locator": "JSON revision record; sha and siblings",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Pins the exact public model revision and enumerates its adjacent files; no preprocessing metadata or source is listed."
+    },
+    {
+      "kind": "repository_tree_api",
+      "source": "https://huggingface.co/api/models/abhi26/video-anomaly-detection/tree/f1e9ec12d3d3f9f96148214ebdb0b54256036474?recursive=true&expand=true",
+      "sha256": "15ded3718c385af88fdcd5cfab56747ec7e6b6b3a3924cd3d59a4bbeb7c51c1b",
+      "locator": "complete recursive tree at pinned revision",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "The tree contains only .gitattributes, README.md, and UCFVidAnomalydetection.h5."
+    },
+    {
+      "kind": "model_card",
+      "source": "https://huggingface.co/abhi26/video-anomaly-detection/raw/f1e9ec12d3d3f9f96148214ebdb0b54256036474/README.md",
+      "sha256": "3e0e15fa0c5cc81675bd69af8eb469d128a725c1a7bfc71f03b7877b7b650567",
+      "locator": "entire three-line README.md",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "The model card declares only an MIT license and gives no preprocessing contract."
+    },
+    {
+      "kind": "repository_commit_history",
+      "source": "https://huggingface.co/api/models/abhi26/video-anomaly-detection/commits/main",
+      "sha256": "07904e664dfbd4ae8325b7ae52830b0ad7e16fa39655f142079e590fa1d11ccf",
+      "locator": "complete public commit list",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "The two-commit history exposes no deleted or adjacent training source."
+    },
+    {
+      "kind": "uploader_profile",
+      "source": "https://huggingface.co/abhi26",
+      "sha256": "17382f9d9397416b36c92b1820d4630957b763fb23400739fc349d7af5ed3b9d",
+      "locator": "profile metadata field github=Abhisekguha",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Establishes the uploader's linked public GitHub account for the second search stage."
+    },
+    {
+      "kind": "github_repository_inventory",
+      "source": "https://api.github.com/users/Abhisekguha/repos?per_page=100&sort=updated",
+      "sha256": "52c03ec2c4c5f08b7bfb0aa4a49bfd38201afc38e61f3a875e53883e9705355a",
+      "locator": "all 28 current public repository records plus shallow HEAD scan manifest sha256=b011ed21e02c38925354d494dd9c42f0d26547b5653fa8aefaefeb816948035b",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "All linked public repositories were searched for model filename, UCF-Crime, video anomaly, DenseNet121, generator, and class-index markers; no relevant source was found."
+    },
+    {
+      "kind": "kaggle_dataset_code_page",
+      "source": "https://www.kaggle.com/datasets/odins0n/ucf-crime-dataset/code",
+      "sha256": "363a6b54726717594c9bb8d7ba5ea5a744858fe9da5a529df44ddd2f0e03fc0f",
+      "locator": "dataset metadata and attached-code page",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Confirms the 14-class 64x64 PNG dataset but does not identify this model's training run."
+    },
+    {
+      "kind": "kaggle_attached_notebook_inventory",
+      "source": "https://www.kaggle.com/api/i/kernels.KernelsService/ListKernels",
+      "sha256": "2eb424b7dde3ec76aa74fd5344b19a57f2740ee475237e033bea3beabca60d96",
+      "locator": "datasetId=1710176, page 1, 100 notebook records; pages 2 and 3 sha256=e4c341aaaf9e38efb53649a9cb29f9452977f8b338bfdbbb7d3ed5d034a5118e and a12882a9b0015772af73c2708108fa0ae2b05b549dd350d8d4aa19b244f1f0ae",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Enumerates all 165 public notebooks attached to the dataset in the required search stage."
+    },
+    {
+      "kind": "kaggle_notebook_source_inventory",
+      "source": "https://www.kaggle.com/api/v1/kernels/pull/{owner}/{slug}",
+      "sha256": "c73df9c1af2ca2844f8e73e69a0e8458a6e6ac5fcbc79dc9d80e1e8a5c72848d",
+      "locator": "canonical manifest over 152 retrievable source responses; 13 listed notebooks returned HTTP 401",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "No retrieved source contains the exact recovered filename; matching notebook families do not establish output identity."
+    },
+    {
+      "kind": "kaggle_origin_notebook_source",
+      "source": "https://www.kaggle.com/api/v1/kernels/pull/odins0n/video-anomaly-detection",
+      "sha256": "31eb98822f0396ca93d9e10d1d4e3b2d035d57e786f941b6a256c90cf077cdd1",
+      "locator": "response blob.source cells 9, 10, 17, and 19; blob.source sha256=ef421edf20bf9f875348fc81b77a16b4e1b943698b2707ba4eb0a5685260ce9d",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Declares DenseNet preprocessing plus rescale, 64x64 RGB generators, and the matching architecture, but does not save a model and is not linked to the recovered H5."
+    },
+    {
+      "kind": "kaggle_candidate_notebook_source",
+      "source": "https://www.kaggle.com/api/v1/kernels/pull/saba2114/video-anomaly-detection",
+      "sha256": "0a99123c46bc05bc966ccc96c646dc4cb19382a0c5fcffd2a115e9ae2cf4a007",
+      "locator": "version 2 blob.source cells 9, 10, 17, 19, and 20; blob.source sha256=3357906665da4171158a62b1291a0b0ee8afb24c35031149bc1f7db0d70d756b",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "A 2024 candidate saves trained_model.h5 and matches topology/training metadata, but author identity and saved-file bytes are not linked to the Hugging Face artifact."
+    },
+    {
+      "kind": "kaggle_output_access_outcome",
+      "source": "https://www.kaggle.com/api/i/kernels.KernelsService/ListKernelSessionOutput",
+      "sha256": "11519ba740db0cbca6f7ea6d4034752151f4f0bb5a4d059da2b17b34673405b5",
+      "locator": "request userName=saba2114, kernelSlug=video-anomaly-detection; HTTP/API 403 Permission kernelSessions.get denied",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "The candidate notebook's saved H5 could not be hashed and compared, so architectural and temporal similarity cannot prove identity."
+    },
+    {
+      "kind": "recovered_model",
+      "source": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+      "sha256": "7411d46d5ab0900f46e732217b140d3f777dc028a7f74362300fd1d7dc0f1c12",
+      "locator": "read-only HDF5 root and model input layer",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Pins the exact recovered model; the model config proves 64x64x3 input but contains no pixel preprocessing layer."
+    },
+    {
+      "kind": "h5_model_config_attribute",
+      "source": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+      "sha256": "32f130411db86df4907262f8d825e05b9e093be1b93d0635c1b5c0933a32ee12",
+      "locator": "root attribute model_config, 245071 bytes",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Shows the 64x64x3 InputLayer, DenseNet121, GAP, and dense head without an embedded preprocessing transform."
+    },
+    {
+      "kind": "h5_training_config_attribute",
+      "source": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+      "sha256": "0b4c23a7d2d5316eb2a8b1cd57b803d061bd3024a9a88ff71d78332b2db7e353",
+      "locator": "root attribute training_config, 694 bytes",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Records SGD learning rate 0.00003, categorical crossentropy, and AUC but no image generator or preprocessing contract."
+    },
+    {
+      "kind": "h5_non_weight_attributes",
+      "source": "/home/rithwik/model2rtl/UCFVidAnomalydetection.h5",
+      "sha256": "cebea885ef40f295a311dfe2879c002bba33695e437f859f7ce111645a99c0ec",
+      "locator": "root backend attribute; keras_version attribute sha256=5a6de52371c760d50b5862e3c7ec27bee4ca35d68941355c9031fd218d2336c3",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "The remaining non-weight root attributes are backend=tensorflow and keras_version=2.15.0; neither supplies preprocessing."
+    },
+    {
+      "kind": "empirical_characterization",
+      "source": "/home/rithwik/datasets/ucf-crime-frames/archive.zip",
+      "sha256": "d99223c90d713f73cdd451aea4f48c068b1e2e1951c3dba593a9d0167cb7cdd5",
+      "locator": "8 deterministic TRAIN PNG members; subset sha256=a53c7abfaaeecb1dbc4cca5312f8c809cc5a035683b8247e9e5795f95988d1d3; controlled_fallback.results",
+      "retrieved_at": "2026-08-20",
+      "reasoning": "Characterizes input ranges, internal activation magnitudes, and output entropy under all candidates with no labels or TEST data; it is explicitly non-verifying."
+    }
+  ],
+  "limitations": [
+    "No candidate training source is identity-linked to the exact H5 bytes.",
+    "The public Kaggle output API required authentication for the candidate saved model, so byte comparison was unavailable.",
+    "The bounded empirical fallback is non-verifying and cannot resolve model provenance.",
+    "No TEST labels, TEST accuracy, or best-accuracy selection were used."
+  ]
+}

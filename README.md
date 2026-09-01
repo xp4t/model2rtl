@@ -1,387 +1,616 @@
 # model2rtl
 
-**Turn a trained neural network into a chip design.**
+Turn a trained neural-network model into an honest hardware capability report—and, for the currently supported V1 network shape, synthesizable Verilog.
 
-You give it a trained Keras model. It gives you Verilog: real, synthesizable hardware that computes exactly the same answers.
+`model2rtl` has two paths today:
 
-```bash
-model2rtl --model my_model.h5 --output ./rtlout
+| Path | What it accepts | What it does |
+|---|---|---|
+| **V2 analyzer** | `.h5`, `.keras`, `.onnx` | Imports the complete graph, classifies every operator, and proposes a full-RTL or hybrid partition. **It does not generate V2 RTL yet.** |
+| **V1 hardware compiler** | A two-layer Dense MLP in `.h5`, `.keras`, or `.npz` | Quantizes the model and generates synthesizable Verilog, parameter images, and a compilation report. |
+
+That distinction is important: **analyzing a model is not the same as compiling it to RTL**.
+
+Choose the command by what you want to do:
+
+| Goal | Command shape | Result |
+|---|---|---|
+| Understand any supported model file | `model2rtl analyze MODEL` | Capability and partition report; no RTL |
+| Generate RTL for the proven two-Dense-layer V1 graph | `model2rtl --model MODEL --calibration DATA --output DIR` | Verilog and parameter files |
+| Generate RTL for an arbitrary V2 Dense graph | `model2rtl compile ...` | Not implemented yet; exits safely with `E200` |
+
+> New here? Follow [Install](#install), then start with [Analyze an existing model](#analyze-an-existing-model). Use the V1 hardware command only if analysis and the model topology confirm that it has exactly two Dense layers with a ReLU between them.
+
+## Contents
+
+- [What model2rtl does](#what-model2rtl-does)
+- [Current support at a glance](#current-support-at-a-glance)
+- [Install](#install)
+- [Analyze an existing model](#analyze-an-existing-model)
+- [Understand legacy H5 recovery](#understand-legacy-h5-recovery)
+- [Why V2 compile stops](#why-v2-compile-stops)
+- [Compile the supported V1 MLP](#compile-the-supported-v1-mlp)
+- [Understand the generated files](#understand-the-generated-files)
+- [Use a model contract](#use-a-model-contract)
+- [Common errors](#common-errors)
+- [Verification status and limitations](#verification-status-and-limitations)
+- [Repository map](#repository-map)
+- [Technical appendices](#technical-appendices)
+
+## What model2rtl does
+
+A trained neural network is a graph of operations such as matrix multiplication, addition, activation functions, convolution, and reshaping. Hardware can implement some of those operations directly, but only if the compiler understands their exact shapes and arithmetic.
+
+The V2 flow is framework-neutral after import:
+
+```text
+.h5 / .keras ──> Keras importer ──┐
+                                  ├──> GraphIR ──> capability analysis ──> partition report
+.onnx ─────────> ONNX importer ───┘
 ```
 
-That is the whole idea. The rest of this page is how to actually do it, what works, and what does not.
+`GraphIR` is model2rtl's internal compiler boundary. `.keras` files and compatible complete-model H5 files are imported natively. Incompatible legacy H5 files may use the explicitly non-executable structural recovery described below. Keras inputs are **not** converted through ONNX.
 
-> **New to hardware?** You do not need an FPGA, a chip, or any expensive tools. Everything here runs on a laptop with free, open-source software. Start at [Quick start](#quick-start).
+Every graph node receives one explicit result:
 
-## What this actually does
+- `SUPPORTED`: the current Dense backend understands the operation.
+- `SOFTWARE_FALLBACK`: keep this operation in software.
+- `UNSUPPORTED`: analysis can describe it, but compilation must stop safely.
 
-A neural network is multiplications and additions. A chip can do those directly, without a CPU, if you describe the circuit. That description is written in a language called **Verilog**, and writing it by hand for a whole network is slow and error-prone.
+No operator is silently removed just to make a model appear compatible.
 
-`model2rtl` writes it for you:
+The older V1 path goes further for one proven architecture:
 
+```text
+Input -> Dense -> ReLU -> Dense -> output
+                     |
+                     v
+               quantization
+                     |
+                     v
+        Verilog fabric + parameter memory
 ```
-  my_model.h5            ->   model2rtl   ->   mlp_fabric.v
-  (trained in Keras)                           mlp_params.v
-                                               mlp_top.v
-                                               (Verilog you can simulate
-                                                or send to a chip flow)
+
+## Current support at a glance
+
+### V2 analysis
+
+| Feature | Status |
+|---|---|
+| Keras `.h5` import | Native when compatible; safe topology-only fallback for complete legacy files |
+| Native Keras `.keras` import | Supported |
+| ONNX `.onnx` import | Supported through the optional ONNX extra |
+| Deterministic GraphIR JSON | Supported |
+| Operator capability report | Supported |
+| Largest contiguous Dense-suffix partition | Supported |
+| Model-contract validation | Supported |
+| V2 quantization and scheduling | Not implemented yet |
+| V2 RTL generation | Not implemented yet |
+| CNN RTL | Not implemented |
+
+A CNN followed by Dense layers can therefore be reported as a **hybrid candidate**:
+
+```text
+Conv / Pool / feature extraction   -> software
+Dense / ReLU / Dense suffix        -> RTL-capable candidate
 ```
 
-The interesting part is *how* it builds the circuit. A network with 25,408 connections would need 25,408 multipliers if you built one per connection. This design uses **16**, by exploiting the fact that the weights were squeezed down to only 16 possible values. More on that in [How it works](#how-it-works).
+The CNN itself is not claimed as RTL.
+
+### V1 hardware compilation
+
+The V1 compiler accepts exactly this inference graph:
+
+```text
+Input -> Dense(any positive width) -> ReLU -> Dense(any positive width) -> output
+```
+
+Harmless inference-time layers such as `Input`, `Flatten`, and `Dropout` may be ignored where valid.
+
+| Supported by V1 | Rejected by V1 |
+|---|---|
+| Exactly two Dense layers | Three or more Dense layers |
+| ReLU hidden activation | Other hidden activations |
+| Linear, softmax, or sigmoid output interpretation | Unsupported output behavior |
+| Keras `.h5` / `.keras` | SavedModel, ONNX, TFLite, PyTorch |
+| Float `.npz` containing `w1`, `b1`, `w2`, `b2` | Conv, pooling, batch normalization, RNN, attention |
+
+Rejection is deliberate. The compiler must not generate hardware that computes a different graph from the model you supplied.
 
 ## Install
 
-You need Python 3.9 or newer.
+### 1. Get the repository
 
 ```bash
-git clone <this repo> && cd model2rtl
-python3 -m venv .venv
-source .venv/bin/activate
-
-pip install -e .              # the compiler (needs only numpy)
-pip install -e ".[train]"      # add this to read .h5 files (installs TensorFlow)
+git clone <repository-url>
+cd model2rtl
 ```
 
-To *simulate* the Verilog you also need two free tools:
+Replace `<repository-url>` with this repository's Git URL.
+
+### 2. Create a Python environment
+
+Linux and macOS:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+```
+
+Windows PowerShell:
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+```
+
+### 3. Install the frontend you need
+
+For native `.h5` and `.keras` models:
+
+```bash
+pip install -e ".[keras]"
+```
+
+For ONNX models:
+
+```bash
+pip install -e ".[onnx]"
+```
+
+For both frontends and the test runner:
+
+```bash
+pip install -e ".[keras,onnx,dev]"
+```
+
+A minimal core-only installation is also available:
+
+```bash
+pip install -e .
+```
+
+The core contains NumPy, YAML contract support, GraphIR, capability analysis, and partitioning. A model frontend extra is still required to import its corresponding file format.
+
+### 4. Optional Verilog tools
+
+The V1 `--check` option uses Icarus Verilog and Yosys:
 
 ```bash
 # Ubuntu / Debian
 sudo apt install iverilog yosys
 
-# macOS
+# macOS with Homebrew
 brew install icarus-verilog yosys
 ```
 
-| Tool | What it is | Needed for |
+These tools are not needed for V2 analysis. They are strongly recommended when generating V1 RTL.
+
+### 5. Confirm the installation
+
+```bash
+model2rtl --help
+model2rtl analyze --help
+```
+
+If the shell cannot find `model2rtl`, make sure the virtual environment is active.
+
+If you installed the development dependencies, this quick smoke test checks the compatibility router and V2 analysis command without downloading a dataset:
+
+```bash
+python -m pytest \
+  tests/v2/test_router.py \
+  tests/v2/test_analyze_cli.py
+```
+
+## Analyze an existing model
+
+Analysis is the safest place to start because it does not generate or overwrite RTL output.
+
+### Analyze Keras or H5
+
+```bash
+model2rtl analyze path/to/model.h5
+model2rtl analyze path/to/model.keras
+```
+
+### Analyze ONNX
+
+```bash
+model2rtl analyze path/to/model.onnx
+```
+
+### Save the complete JSON report
+
+```bash
+model2rtl analyze path/to/model.h5 --json analysis.json
+```
+
+The terminal summary includes:
+
+- tensor, node, and parameter counts;
+- supported, software-fallback, and unsupported operator counts;
+- the proposed software/RTL partition;
+- an advisory Dense compute and transfer-cost estimate;
+- an explicit statement that no RTL was generated.
+
+### Understand the analysis result
+
+| Result | Beginner-friendly meaning |
+|---|---|
+| `full_rtl` | The complete live graph matches today's Dense capability rules. This is a capability result; V2 RTL generation is still a later milestone. |
+| `hybrid` | Part of the graph must remain in software, while one Dense-family suffix is an RTL-capable candidate. |
+| `analysis_only` | Import and classification succeeded, but there is no safe Dense suffix to propose. |
+| `compile_unavailable` | A live unsupported operation or unsafe boundary prevents compilation. |
+
+Example CNN result:
+
+```text
+MODEL
+  tensors: 13  nodes: 6  parameters: 55
+OPERATORS
+  supported: 4  software fallback: 2  unsupported: 0
+PARTITION
+  execution mode: hybrid
+  RTL nodes: node_0003_00, node_0004_00, node_0004_00_activation, node_0005_00
+RESULT: HYBRID
+RTL generated: no
+```
+
+## Understand legacy H5 recovery
+
+The `.h5` extension does not guarantee that a file is a complete Keras model. It may be a complete model, a weights-only checkpoint, or even an unrelated file. model2rtl checks the HDF5 envelope before asking Keras to deserialize anything.
+
+For a complete H5 model, analysis reports one of two recovery modes:
+
+| Recovery mode | Meaning | Can it be compiled? |
 |---|---|---|
-| Icarus Verilog (`iverilog`) | a Verilog simulator | running the generated hardware |
-| Yosys | a synthesis tool | turning Verilog into logic gates |
+| `native_executable` | Keras loaded the model, and model2rtl imported verified tensors and weights into GraphIR. | It may become eligible once its operators and input contract pass all later compiler stages. V2 RTL is not implemented yet. |
+| `structural_analysis` | model2rtl recovered topology from detached H5 JSON because native loading was unsafe or incompatible. No trained constants are attached, and numerical behavior is not verified. | **No.** It is analysis-only until executable recovery verifies weights and tensor behavior. |
 
-Neither is needed just to *generate* the Verilog.
+Example structural result:
 
-## Quick start
+```text
+IMPORTER
+  frontend: keras  format: h5
+  recovery: structural_analysis
+  executable: no  weights verified: no
+```
 
-Copy-paste this. It trains a small network, compiles it to hardware, and checks the hardware elaborates. Takes about a minute.
+Serialized `Lambda` and `TFOpLambda` layers are never passed to native deserialization by default. Their nodes remain visible in structural GraphIR so capability analysis can report them honestly. Source H5 bytes are always read-only and are never rewritten.
 
-**1. Train something to compile**
+Expected file diagnostics are also explicit:
+
+- `H5_MODEL_CONFIG_MISSING`: this is a weights-only HDF5 file, not a standalone model; provide its original architecture or export a complete model.
+- `H5_INVALID`: the file is not valid HDF5.
+- `H5_MODEL_CONFIG_INVALID`: the embedded model configuration is malformed.
+- `H5_MODEL_CONFIG_UNSUPPORTED`: the detached topology cannot be represented safely.
+
+The pinned public compatibility corpus contains 54 H5-named artifacts from 54 Hugging Face repositories. The hardened frontend analyzed all 39 complete models: 27 natively and 12 structurally. The remaining 14 weights-only files and one invalid file produced stable diagnostics. This is frontend analysis evidence—not 54 RTL conversions. See [`reports/huggingface_h5_compatibility_after.json`](reports/huggingface_h5_compatibility_after.json) for every revision, SHA-256, and outcome.
+
+## Why V2 compile stops
+
+The V2 command exists as a reserved interface, but Milestone 1 intentionally refuses to generate output:
+
+```bash
+model2rtl compile \
+  --model model.h5 \
+  --contract model2rtl.yaml \
+  --calibration calibration.npz \
+  --output build/model
+```
+
+It exits with status 2, prints error `E200`, and writes nothing. This command is reserved for the future GraphIR quantization, scheduling, integer-oracle, and tiled-RTL pipeline. Use the legacy V1 command below only when your model matches the proven two-Dense-layer architecture.
+
+## Compile the supported V1 MLP
+
+The V1 hardware command has **no `compile` subcommand**:
+
+```bash
+model2rtl \
+  --model my_model.h5 \
+  --calibration calibration.npz \
+  --output rtlout \
+  --check
+```
+
+### A complete copy-paste example
+
+This example trains a small MNIST MLP, saves calibration data, generates RTL, and checks that the RTL elaborates.
+
+Create `train_demo.py`:
 
 ```python
-# save as train_demo.py
-import numpy as np, tensorflow as tf
+import numpy as np
+import tensorflow as tf
 
-(x, y), (xt, yt) = tf.keras.datasets.mnist.load_data()
-x, xt = x.reshape(-1, 784) / 255.0, xt.reshape(-1, 784) / 255.0
+# Download and prepare MNIST.
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+x_train = x_train.reshape(-1, 784).astype("float32") / 255.0
+x_test = x_test.reshape(-1, 784).astype("float32") / 255.0
 
-model = tf.keras.Sequential([
-    tf.keras.layers.Input((784,)),
-    tf.keras.layers.Dense(32, activation='relu'),   # hidden layer
-    tf.keras.layers.Dense(10, activation='softmax') # 10 digits
-])
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
-model.fit(x, y, epochs=5, batch_size=128)
-model.save('demo.h5')
+# This shape is exactly what the V1 compiler supports.
+model = tf.keras.Sequential(
+    [
+        tf.keras.layers.Input(shape=(784,), name="pixels"),
+        tf.keras.layers.Dense(32, activation="relu", name="hidden"),
+        tf.keras.layers.Dense(10, activation="softmax", name="output"),
+    ]
+)
+model.compile(
+    optimizer="adam",
+    loss="sparse_categorical_crossentropy",
+    metrics=["accuracy"],
+)
+model.fit(x_train, y_train, epochs=5, batch_size=128)
+model.save("demo.keras")
 
-# save some test images for the compiler to measure against
-np.savez('calib.npz', x=(xt[:2000] * 255).astype('uint8'), y=yt[:2000])
+# V1 calibration inputs are unsigned 8-bit activations.
+np.savez(
+    "calibration.npz",
+    x=np.rint(x_test[:2000] * 255.0).astype(np.uint8),
+    y=y_test[:2000],
+)
 ```
+
+Run it:
 
 ```bash
 python train_demo.py
+
+model2rtl \
+  --model demo.keras \
+  --calibration calibration.npz \
+  --output rtlout \
+  --check
 ```
 
-**2. Compile it to hardware**
+The first run downloads the MNIST dataset (about 11 MiB) unless Keras already
+has it cached.
+
+A successful run reports the detected topology, quantization measurements, emitted file hashes, weight-independence check, architectural latency, and optional Icarus/Yosys checks.
+
+> Calibration data must come from representative inputs. If labels are included, model2rtl can measure the quantized decision accuracy instead of reporting it as unknown.
+
+### Compile from an already quantized parameter file
 
 ```bash
-model2rtl --model demo.h5 --calibration calib.npz \
-          --output ./rtlout --check
+model2rtl \
+  --indices model/mnist_weights_indices.npz \
+  --output rtlout \
+  --check
 ```
 
-You will see something like:
+### Improve quantized accuracy with QAT
 
-```
-loaded demo.h5: 784 -> 32 -> ReLU -> 10
-calibration: 2000 samples with labels
-quantized: shift 8, input scale 0.0039215686
-  float 0.9310 -> integer 0.9120 on calibration (-1.90 points)
-
-wrote ./rtlout
-  mlp_fabric.v      ...
-  mlp_params.v      ...
-  mlp_params_sel.v  ...
-  mlp_top.v         ...
-  compile_report.json
-
-fabric is weight independent: True
-latency: 864 cycles per inference (architectural only)
-icarus: OK
-yosys:  OK
-```
-
-That's it. `./rtlout` now contains a working hardware design.
-
-> **`-1.90 points` is normal.** Squeezing weights down to 16 values costs some accuracy. If that bothers you, see [Getting the accuracy back](#getting-the-accuracy-back).
-
-## What you get
-
-| File | What it is | Contains your weights? |
-|---|---|---|
-| `mlp_fabric.v` | the compute engine: multipliers, adders, control | **no** |
-| `mlp_params.v` | your trained weights, as a read-only memory | yes |
-| `mlp_params_sel.v` | a small file that connects the two | no |
-| `mlp_top.v` | the top level, wires everything together | no |
-| `compile_report.json` | every number, hash and setting used | — |
-| `param_images/` | the weights in a plain, checkable format | yes |
-
-Only **one** of those files depends on your model. Train a different network of the same shape and `mlp_fabric.v` comes out byte-for-byte identical — the compiler checks this on every single run and refuses to finish if it is ever untrue.
-
-## Using the hardware
-
-The design has a simple handshake. To classify one input:
-
-```
-  1. hold rst high for a few cycles, then drop it
-  2. pulse start high for one cycle
-  3. in_ready goes high -> feed one value per cycle
-     (set in_valid high and put the value on in_data)
-  4. wait for done to pulse high
-  5. read prediction (the winning class) and logits (the raw scores)
-```
-
-| Port | Direction | Meaning |
-|---|---|---|
-| `clk` | in | clock |
-| `rst` | in | reset, active high, synchronous |
-| `start` | in | pulse for one cycle to begin |
-| `in_ready` | out | the design is ready for an input value |
-| `in_valid` | in | you are providing a valid input value |
-| `in_data` | in | one input value, 0-255 |
-| `busy` | out | an inference is in progress |
-| `done` | out | pulses high for one cycle when finished |
-| `prediction` | out | the winning class index |
-| `logits` | out | all raw scores, packed together |
-
-A minimal testbench:
-
-```verilog
-// save as tb.v, then:
-//   iverilog -g2001 -o sim tb.v rtlout/*.v && ./sim
-`timescale 1ns/1ps
-module tb;
-    reg clk = 0;  always #5 clk = ~clk;
-    reg rst = 1, start = 0, in_valid = 0;
-    reg [7:0] in_data = 0;
-    wire in_ready, busy, done, prediction_valid;
-    wire [3:0] prediction;
-    wire [179:0] logits;
-    integer i;
-
-    mlp_top dut (.clk(clk), .rst(rst), .start(start),
-        .in_ready(in_ready), .in_valid(in_valid), .in_data(in_data),
-        .busy(busy), .done(done), .prediction_valid(prediction_valid),
-        .prediction(prediction), .logits(logits));
-
-    initial begin
-        repeat (4) @(negedge clk);
-        rst = 0;                       // 1. release reset
-        @(negedge clk); start = 1;     // 2. kick it off
-        @(negedge clk); start = 0;
-
-        i = 0;                         // 3. feed 784 pixels
-        while (i < 784) begin
-            if (in_ready) begin
-                in_valid = 1;
-                in_data  = i[7:0];     // put your real pixel here
-                i = i + 1;
-            end else in_valid = 0;
-            @(negedge clk);
-        end
-        in_valid = 0;
-
-        while (!done) @(negedge clk);  // 4. wait
-        $display("predicted class = %0d", prediction);  // 5. read
-        $finish;
-    end
-endmodule
-```
-
-One classification takes **864 clock cycles** for this network shape (`inputs + 2 x hidden + outputs + 6`). It processes one input value per cycle rather than all at once, which keeps the circuit small.
-
-## What models are supported
-
-Exactly one shape, on purpose:
-
-```
-Input -> Dense(any size) -> ReLU -> Dense(any size) -> output
-```
-
-| Supported | Not supported |
-|---|---|
-| 2 `Dense` layers, any width | 3 or more `Dense` layers |
-| `relu` on the hidden layer | any other hidden activation |
-| `softmax`, `sigmoid` or none on the output | `tanh` etc. on the output |
-| `.h5`, `.keras`, or `.npz` with `w1,b1,w2,b2` | SavedModel folders, ONNX, TFLite, PyTorch |
-| `Flatten`, `Dropout`, `Input` (ignored) | convolution, pooling, batch-norm, RNN |
-
-If your model is not supported the compiler **stops and tells you what it found**. It never quietly compiles part of your network. Real examples from testing:
-
-```
-$ model2rtl --model housing.keras --output ./out
-model2rtl: cannot compile this model.
-expected exactly 2 Dense layers, found 3. This compiler builds
-input -> Dense -> ReLU -> Dense only.
-Layers found: Dense(hidden_1), Dense(hidden_2), Dense(output)
-
-$ model2rtl --model convnet_weights.npz --output ./out
-model2rtl: cannot compile this model.
-inconsistent shapes: w1 (3, 3, 1, 32), w2 (1600, 10)
-```
-
-That second one is a convolutional network. The refusal is the correct answer: compiling it anyway would produce hardware that computes something other than your model.
-
-## Getting the accuracy back
-
-Weights are stored as one of only 16 values. Your model was not trained expecting that, so it loses a little accuracy. Two options:
-
-**Default (fast, no training needed):**
+Post-training quantization is the default:
 
 ```bash
-model2rtl --model demo.h5 --calibration calib.npz --output ./out
+model2rtl \
+  --model demo.keras \
+  --calibration calibration.npz \
+  --quantize ptq \
+  --output rtlout
 ```
 
-**Fine-tuning (slower, much better):**
+Quantization-aware fine-tuning requires labelled calibration/training data:
 
 ```bash
-model2rtl --model demo.h5 --calibration calib.npz \
-          --quantize qat --epochs 25 --output ./out
+model2rtl \
+  --model demo.keras \
+  --calibration calibration.npz \
+  --quantize qat \
+  --epochs 25 \
+  --output rtlout
 ```
 
-This retrains the weights *while pretending they are already squeezed*, so they settle in places that survive it. Measured on a Fashion-MNIST model, held-out data:
+Always compare the float and integer metrics reported for your own dataset. The reference MNIST numbers in the appendices are historical evidence, not a promised accuracy for other models.
 
-| | Accuracy |
-|---|---|
-| original float model | 83.0% |
-| default quantization | 82.7% |
-| with `--quantize qat` | **86.0%** |
-
-> **Always pass `--calibration`.** Without it the compiler cannot measure anything and has to guess a key setting. It will warn you loudly. The file is just an `.npz` with `x` (inputs) and ideally `y` (labels).
-
-## Command reference
+### V1 command reference
 
 | Option | Meaning |
 |---|---|
-| `--model PATH` | trained model: `.h5`, `.keras`, or `.npz` |
-| `--indices PATH` | an already-quantized model; skips quantization |
-| `--output DIR` | where to write the Verilog (required) |
-| `--calibration PATH` | `.npz` with `x` and ideally `y`; strongly recommended |
-| `--quantize ptq\|qat` | `ptq` (default, fast) or `qat` (fine-tune, better) |
-| `--epochs N` | fine-tuning epochs, default 20 |
-| `--prefix NAME` | name your modules, default `mlp` |
-| `--input-scale F` | if your model expects `x/255`, this is `0.00392157`. Auto-detected by default |
-| `--shift N` | force an internal setting; normally chosen by measurement |
-| `--check` | run Icarus and Yosys on the result |
-| `--quiet` | less output |
+| `--model PATH` | Float `.h5`, `.keras`, or `.npz` model |
+| `--indices PATH` | Already-quantized parameter `.npz` |
+| `--output DIR` / `-o DIR` | Output directory; required |
+| `--calibration PATH` | `.npz` with `x` and preferably `y`, or a bare `.npy` input array |
+| `--quantize ptq\|qat` | Post-training quantization or quantization-aware fine-tuning |
+| `--epochs N` | QAT epochs; default 20 |
+| `--prefix NAME` | Verilog module/file prefix; default `mlp` |
+| `--input-scale F` | Override the float input scale |
+| `--shift N` | Override the hidden-layer requantization shift |
+| `--check` | Run Icarus and Yosys elaboration checks if installed |
+| `--quiet` | Reduce terminal output |
 
-## Does it actually work?
+## Understand the generated files
 
-The reference MNIST model was checked at every level. Not "it compiled" — actually simulated and compared, number by number.
+A V1 output directory contains:
 
-| Check | Result |
-|---|---|
-| Original float accuracy | 96.52% |
-| After quantization | 96.45% |
-| Hardware simulation vs the maths, 500 images | **0 differences** |
-| Internal signals checked, cycle by cycle | 178,840 checks, 0 failures |
-| After FPGA synthesis, 500 images | **0 differences** |
-| After generic chip synthesis, 500 images | **0 differences** |
-| Automated tests | 429 passing |
-
-Synthesized size, measured with real tools:
-
-| | iCE40 FPGA | Generic gates |
+| File | Purpose | Contains trained parameters? |
 |---|---|---|
-| logic cells | 6,429 LUTs | 45,707 cells |
-| registers | 1,614 | 1,742 |
-| memory blocks | 32 | 0 (built from gates) |
-| **multipliers / DSPs** | **0** | **0** |
+| `mlp_fabric.v` | Compute engine, accumulators, and controller | No |
+| `mlp_params.v` | Read-only trained parameter storage | Yes |
+| `mlp_params_sel.v` | Parameter-backend selection wrapper | No |
+| `mlp_top.v` | Top-level module and interfaces | No |
+| `compile_report.json` | Topology, hashes, arithmetic settings, and verification metadata | Metadata |
+| `param_images/` | Canonical parameter images | Yes |
 
-Zero multipliers. The tools discovered that multiplying by a fixed small number is just shifting and adding, and removed them all.
+Changing only the trained weights while keeping the same topology must leave the fabric byte-identical. The compiler checks this weight-independence property.
 
-## How it works
+### Hardware handshake
 
-Every weight is one of 16 fixed values (-8, -7, -6 ... 6, 7). So for any input value `x`, there are only 16 possible products it can ever be involved in — no matter how many neurons it feeds.
+The generated top level uses a simple sequence:
 
-So compute those 16 products **once**, and let every neuron pick the one it needs:
+1. Hold `rst` high for a few clocks, then release it.
+2. Pulse `start` for one clock.
+3. When `in_ready` is high, present one input value with `in_valid` high.
+4. Wait for `done`.
+5. Read `prediction` and the packed `logits`.
 
+| Port | Direction | Meaning |
+|---|---|---|
+| `clk` | Input | Clock |
+| `rst` | Input | Active-high synchronous reset |
+| `start` | Input | One-cycle transaction start |
+| `in_ready` | Output | The fabric can accept an input value |
+| `in_valid` | Input | `in_data` is valid |
+| `in_data` | Input | One unsigned activation |
+| `busy` | Output | Inference is in progress |
+| `done` | Output | One-cycle completion pulse |
+| `prediction` | Output | Winning output index |
+| `logits` | Output | Packed integer output scores |
+
+The V1 architecture is input-serial and output-parallel. For a network with `N_IN` inputs, `N_HIDDEN` hidden neurons, and `N_OUT` outputs, the documented architectural latency is:
+
+```text
+N_IN + 2*N_HIDDEN + N_OUT + 6 clocks
 ```
-                          one input value x
-                                |
-        +-----------+-----------+-----------+-----------+
-        |           |           |           |           |
-      x * -8      x * -7      .....       x * +6      x * +7
-        |           |           |           |           |
-        +----------- 16 products, computed once ---------+
-                                |
-              +-----------+------+------+-----------+
-              |           |             |           |
-           neuron 0    neuron 1  .....  neuron N
-            picks       picks           picks       <- each uses its
-            one         one             one            4-bit weight
-              |           |               |
-            add to      add to          add to
-            total       total           total
+
+Clock frequency and timing closure are separate physical-design questions and are not claimed here.
+
+## Use a model contract
+
+A model file often does not contain resize rules, channel order, normalization, labels, or output interpretation. V2 accepts an optional YAML contract rather than guessing those facts.
+
+Example `model2rtl.yaml` for a flat classifier:
+
+```yaml
+schema_version: model2rtl-contract-v1
+
+input:
+  name: features
+  shape: [1, 8]
+  dtype: float32
+  layout: NC
+
+output:
+  interpretation: classification
+  decision: argmax
+
+preprocessing:
+  operations:
+    - scale: 0.003921568627
+
+labels:
+  path: labels.json
 ```
 
-This is called **Multiply-Select-Add**. Inputs are fed one per cycle and every neuron accumulates in parallel, so the same 16 products serve the whole network, both layers included.
-
-The trade: it takes 864 cycles instead of doing everything at once. You are exchanging speed for a much smaller circuit.
-
-## Troubleshooting
-
-| Message | What to do |
-|---|---|
-| `expected exactly 2 Dense layers, found 3` | Your model is too deep. Only 2 dense layers are supported. |
-| `unrecognised model format` | Save as `.h5` or `.keras`: `model.save('m.h5')` |
-| `reading a Keras model needs TensorFlow` | `pip install -e ".[train]"` |
-| `no ReLU was found between the two Dense layers` | Use `activation='relu'` on the hidden layer. |
-| `NO LABELLED CALIBRATION DATA` | Pass `--calibration` with an `.npz` containing `x` and `y`. |
-| `bias does not fit N signed bits` | Your biases are very large relative to the weights. Retrain with a smaller learning rate or normalise your inputs. |
-| Accuracy dropped a lot | Use `--quantize qat --epochs 30`. |
-| `icarus: not on PATH, skipped` | Install `iverilog` if you want the check to run. |
-
-## What this is not
-
-Being clear about this matters more than looking impressive.
-
-- **Not a finished chip.** You get Verilog. Turning that into silicon needs a full manufacturing flow that is not included.
-- **Not FPGA-ready-to-flash.** No place-and-route, no timing analysis, no bitstream. The design synthesizes; nobody has fitted it to a real device.
-- **No speed claims.** Cycle counts are exact, clock speed is not measured. Any MHz figure here would be made up.
-- **Two dense layers only.** No convolution, no transformers, no ONNX or TFLite import.
-- **The SKY130 chip memories are experimental.** They generate and their contents are verified exactly, but the manufacturing checks (DRC/LVS) cannot be trusted in this environment: the vendor's own reference design fails them here too. Status: **UNVERIFIED**.
-
-## Going deeper
-
-| Document | What is in it |
-|---|---|
-| **[FINAL-REPORT.md](FINAL-REPORT.md)** | the full technical report: architecture, quantization, verification, area |
-| [`reports/final_report.json`](reports/final_report.json) | every measurement, machine-readable |
-| [`reports/results.csv`](reports/results.csv) | headline numbers with their source |
-| Appendices below | stage-by-stage evidence, regenerated from the reports |
-
-To rebuild the reference MNIST design and re-run everything:
+Use it during analysis:
 
 ```bash
-python scripts/train_mnist_mlp.py --sweep-hidden-shift
-python scripts/gen_compute_fabric.py
-python scripts/verify_stage3.py --images 500
-python -m pytest tests -q
+model2rtl analyze model.h5 --contract model2rtl.yaml --json analysis.json
 ```
 
-This project does not import from, depend on, or modify `rtl2gdsagi`.
+The declared input name, shape, data type, and layout must match GraphIR exactly. If embedded model preprocessing conflicts with the contract, analysis fails instead of choosing one silently.
+
+A user-provided contract is authoritative for a new compilation. It is not evidence that an unknown historical training pipeline has been recovered.
+
+## Common errors
+
+| Message or symptom | What it means | What to do |
+|---|---|---|
+| `No module named tensorflow` or Keras importer unavailable | The Keras frontend extra is missing | `pip install -e ".[keras]"` |
+| `No module named onnx` or ONNX importer unavailable | The ONNX frontend extra is missing | `pip install -e ".[onnx]"` |
+| `expected exactly 2 Dense layers` | The model does not match the V1 hardware backend | Run `model2rtl analyze model.h5` to inspect it; do not force V1 compilation |
+| `no ReLU was found between the two Dense layers` | V1 requires a ReLU hidden activation | Retrain/export a matching model or use analysis only |
+| `calibration inputs have ... features` | Calibration vectors do not match the model input width | Check flattening, shape, and preprocessing |
+| `NO LABELLED CALIBRATION DATA` | Accuracy cannot be measured without labels | Store `y` alongside `x` in the calibration `.npz` |
+| `compile is unavailable in Milestone 1` | You invoked the reserved V2 compiler | Use V2 analysis, or the V1 command for an exactly supported MLP |
+| `icarus: not on PATH, skipped` | Icarus Verilog is not installed | Install `iverilog` or omit `--check` |
+| `yosys: not on PATH, skipped` | Yosys is not installed | Install Yosys or omit `--check` |
+| Accuracy drops after quantization | Four-bit weight indices changed model behavior | Use representative calibration, inspect the report, and consider QAT |
+| `recovery: structural_analysis` | Topology was recovered, but executable weights and behavior were not verified | Use a compatible isolated Keras environment or safely re-export a copy if you need execution; never edit the original file in place |
+| `H5_MODEL_CONFIG_MISSING` | The H5 contains weights but no standalone architecture | Supply the original architecture and weights together, or export a complete model |
+| `H5_INVALID` | The file is not actually HDF5 | Verify the download and file format |
+
+## Verification status and limitations
+
+The current additive V2 Milestone 1 regression result is:
+
+```text
+613 passed
+0 failed
+0 skipped
+```
+
+That fresh total includes the frozen V1 regression plus the Keras/H5/ONNX analysis and H5-hardening tests. The earlier Milestone 1 evidence remains preserved in [`reports/v2_milestone1.json`](reports/v2_milestone1.json); the newer public H5 audit is [`reports/huggingface_h5_compatibility_after.json`](reports/huggingface_h5_compatibility_after.json).
+
+The reference V1 MNIST implementation has also been checked through behavioral simulation, iCE40-oriented synthesis and gate-level simulation, and generic synthesis and gate-level simulation. Detailed evidence is preserved in the appendices and [`FINAL-REPORT.md`](FINAL-REPORT.md).
+
+What is **not** claimed:
+
+- V2 does not generate RTL yet.
+- Conv2D, pooling, attention, and recurrent networks are not implemented in RTL.
+- A successful synthesis run does not prove a design fits a particular FPGA.
+- No FPGA place-and-route, bitstream, or timing closure is claimed.
+- The generated V1 RTL is not a complete fabricated chip.
+- SKY130/OpenROM physical signoff remains **UNVERIFIED**; do not describe it as signoff-grade.
+- The recovered historical UCF model remains an analysis fixture with unresolved historical preprocessing and class ordering.
+
+## How the V1 hardware saves multipliers
+
+V1 quantizes each weight to one of 16 signed levels. For a current activation `x`, only 16 products are possible:
+
+```text
+                    current activation x
+                              |
+              x*-8, x*-7, ... x*6, x*7
+                              |
+                 16 shared candidate products
+                              |
+               each neuron selects one product
+                              |
+                       accumulate and add bias
+```
+
+This is the Multiply-Select-Add architecture. It reuses the same small product alphabet instead of instantiating one multiplier per trained connection.
+
+The trade-off is serial input processing: the design uses fewer arithmetic resources but needs multiple clocks per inference.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| `src/model2rtl/` | Frozen V1 compiler plus the compatibility router |
+| `src/model2rtl/v2/` | Additive V2 GraphIR analysis pipeline |
+| `src/model2rtl/v2/importers/keras.py` | Native H5/Keras frontend |
+| `src/model2rtl/v2/importers/onnx.py` | ONNX frontend |
+| `src/model2rtl/v2/ir/` | Framework-neutral deterministic GraphIR |
+| `src/model2rtl/v2/capability/` | Operator capability registry |
+| `src/model2rtl/v2/partition/` | Dense-suffix partitioning and advisory cost model |
+| `tests/` | V1 and V2 regression tests |
+| `reports/` | Machine-readable verification evidence |
+| `rtl/` | Historical generated/reference RTL |
+| `scripts/` | Training, generation, verification, and synthesis helpers |
+
+Run all tests:
+
+```bash
+python -m pytest -ra
+```
+
+Run only V2 tests:
+
+```bash
+python -m pytest tests/v2 -ra
+```
+
+## Technical appendices
+
+Everything below this point is generated stage-by-stage V1 evidence. It is intentionally detailed, and the historical renderer scripts expect it to remain in this README. Beginners can stop here; none of the appendices is required for the normal install, analyze, or compile workflow.
+
+Start with:
+
+- [`FINAL-REPORT.md`](FINAL-REPORT.md) for the full V1 narrative;
+- [`reports/final_report.json`](reports/final_report.json) for machine-readable V1 evidence;
+- [`reports/v2_milestone1.json`](reports/v2_milestone1.json) for V2 Milestone 1 evidence.
+- [`reports/huggingface_h5_compatibility_after.json`](reports/huggingface_h5_compatibility_after.json) for the pinned 54-artifact H5 frontend audit.
+
+This project does not claim full-model RTL for hybrid graphs and does not silently remove unsupported operations.
 
 ---
-
-The appendices below are the detailed per-stage evidence behind the numbers above. They are generated from the stage reports, not written by hand. Start with [FINAL-REPORT.md](FINAL-REPORT.md) if you want the narrative rather than the raw evidence.
 ## Appendix A — Stage 0: quantization
 
 <!-- STAGE0_RESULTS_START -->

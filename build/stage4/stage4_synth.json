@@ -276,7 +276,7 @@
       "script": "read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nsynth_ice40 -top mnist_mlp_fabric\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/diag_fabric_fpga/fabric_only_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/diag_fabric_fpga/fabric_only_netlist.v\n",
       "script_path": "build/stage4/diag_fabric_fpga/synth_fabric_only.ys",
       "script_sha256": "8c8df6cd148fdbb9e8d9e14028c9fb7b1a0290c8bac109f533aee557458ee1a4",
-      "seconds": 16.12,
+      "seconds": 15.29,
       "status": "PASS",
       "target": "fpga",
       "unresolved_blackboxes": []
@@ -556,7 +556,7 @@
       "script": "read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nhierarchy -check -top mnist_mlp_fabric\nproc\nflatten\nopt -full\nmemory\nopt -full\ntechmap\nopt -full\nsimplemap\ndfflegalize -cell $_DFF_P_ 01\nabc -g simple\nsetundef -zero\nopt_clean -purge\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/diag_fabric_generic/fabric_only_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/diag_fabric_generic/fabric_only_netlist.v\n",
       "script_path": "build/stage4/diag_fabric_generic/synth_fabric_only.ys",
       "script_sha256": "f1dae1cdabf3ec104cc946a770d4fe1d8a2513f798b83d3a001ca4a41e8e1125",
-      "seconds": 5.09,
+      "seconds": 4.88,
       "status": "PASS",
       "target": "generic",
       "unresolved_blackboxes": []
@@ -578,7 +578,7 @@
       "identical_to_first_run": true,
       "netlist_sha256": "bf0c87a67504a532e27c529997727e2b8bb3632533d10eaab954272b1c85f5e7",
       "same_cell_counts": true,
-      "seconds": 25.39
+      "seconds": 26.16
     },
     "generic": {
       "cells": {
@@ -593,7 +593,7 @@
       "identical_to_first_run": true,
       "netlist_sha256": "725723fa6b9e9bf122b420e60e779356618b88ceba00b0b1984d534f2ecc04cc",
       "same_cell_counts": true,
-      "seconds": 11.87
+      "seconds": 11.27
     }
   },
   "source_freeze_after": {
@@ -899,7 +899,7 @@
       "script": "read_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nread_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v\nread_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v\nread_verilog -defer /home/rithwik/model2rtl/rtl/mnist_mlp_top.v\nsynth_ice40 -top mnist_mlp_top\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/fpga/fpga_netlist.v\n",
       "script_path": "build/stage4/fpga/synth_fpga.ys",
       "script_sha256": "a0e928bd848e8466e0d94678b3c567836586fb1277e801b8edf46aa9e5d6828c",
-      "seconds": 25.34,
+      "seconds": 26.0,
       "status": "PASS",
       "target": "fpga",
       "unresolved_blackboxes": []
@@ -1171,7 +1171,7 @@
       "script": "read_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_fabric.v\nread_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_portable.v\nread_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_params_sel_portable.v\nread_verilog /home/rithwik/model2rtl/rtl/mnist_mlp_top.v\nhierarchy -check -top mnist_mlp_top\nproc\nflatten\nopt -full\nmemory\nopt -full\ntechmap\nopt -full\nsimplemap\ndfflegalize -cell $_DFF_P_ 01\nabc -g simple\nsetundef -zero\nopt_clean -purge\ncheck -assert\nstat\nwrite_json /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.json\nwrite_verilog -noattr -noexpr /home/rithwik/model2rtl/build/stage4/generic/generic_netlist.v\n",
       "script_path": "build/stage4/generic/synth_generic.ys",
       "script_sha256": "6b41105e536c6fed7bd38d31cddbe95dd0cb995a8d19f205a2ebfd87b23117a8",
-      "seconds": 11.82,
+      "seconds": 11.29,
       "status": "PASS",
       "target": "generic",
       "unresolved_blackboxes": []

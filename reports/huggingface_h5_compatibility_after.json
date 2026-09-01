@@ -1,0 +1,4685 @@
+{
+  "after": {
+    "analysis_failed_with_expected_stable_diagnostic": 15,
+    "analysis_passed": 39,
+    "artifacts": 54,
+    "complete_model_h5": 39,
+    "distinct_repositories": 54,
+    "execution_modes": {
+      "analysis_only": 15,
+      "compile_unavailable": 23,
+      "diagnostic_failure": 15,
+      "hybrid": 1
+    },
+    "invalid_hdf5": 1,
+    "native_executable": 27,
+    "structural_analysis": 12,
+    "structural_constants_attached": 0,
+    "structural_rtl_nodes_selected": 0,
+    "unexpected_failures": 0,
+    "unsafe_code_structurally_blocked": 4,
+    "weights_only_h5": 14
+  },
+  "before": {
+    "compiler_commit": "01651b860f4c56ca34692d85426e2d5a46b0350d",
+    "security_skipped": 4,
+    "v2_analysis_failed": 23,
+    "v2_analysis_passed": 27
+  },
+  "compiler": {
+    "branch": "generic-model2rtl",
+    "commit": "4ee061b7d9ff3ff3f92652021b20792b5195c6a5",
+    "scope": "V2 import, GraphIR validation, capability analysis, and partitioning only",
+    "source_tree_clean_during_corpus": true,
+    "v2_rtl_generated": false
+  },
+  "interpretation": {
+    "all_artifact_outcome_rate": "54/54 explicit outcomes",
+    "claim": "The hardened frontend analyzes every complete-model H5 in this pinned corpus. It does not convert these public models to RTL; V2 RTL remains unimplemented and structural recovery is topology-only.",
+    "complete_model_analysis_rate": "39/39",
+    "structural_graphs_compile_eligible": false,
+    "structural_recovery_is_executable": false,
+    "structural_weights_verified": false,
+    "v2_dense_rtl_backend_available": false,
+    "weights_only_files_are_standalone_models": false
+  },
+  "method": {
+    "isolation": "bubblewrap; model/code/OS read-only; only per-run output writable; network unavailable under the execution sandbox; 180-second timeout",
+    "model_files_reused_without_redownload": true,
+    "model_sha256_reverified": true,
+    "parallel_processes": 4,
+    "per_model_timeout_seconds": 180,
+    "selection_rule": "shuffle distinct public repositories with Python random.Random(20260831), choose one preferred non-.weights.h5 file per repo when available, keep first 50 with successful HEAD, safe filename/repository tokens, and size in range",
+    "selection_seed": 20260831,
+    "source_changes_during_corpus_run": false
+  },
+  "models": [
+    {
+      "after_outcome": "invalid_hdf5_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.13335,
+        "error_message": "H5_INVALID: cannot inspect HDF5 source /models/001.h5",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "  File \"h5py/_objects.pyx\", line 54, in h5py._objects.with_phil.wrapper",
+          "  File \"h5py/_objects.pyx\", line 55, in h5py._objects.with_phil.wrapper",
+          "  File \"h5py/h5f.pyx\", line 106, in h5py.h5f.open",
+          "OSError: Unable to synchronously open file (file signature not found)",
+          "",
+          "The above exception was the direct cause of the following exception:",
+          "",
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 126, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_INVALID: cannot inspect HDF5 source /models/001.h5"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "tmp82231.h5",
+      "ordinal": 1,
+      "preflight": {
+        "hdf5_error": "OSError: Unable to synchronously open file (file signature not found)",
+        "hdf5_valid": false,
+        "ordinal": 1,
+        "sha256": "8e4f1bdced2c9a5acd927bbadcc7db87fff58510b8ab27f4b96b34462bc6618c",
+        "size_bytes": 55541990
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "Manzer/army_men",
+      "resource_usage": {
+        "max_rss_kib": 408240,
+        "system_cpu_seconds": 0.891819,
+        "user_cpu_seconds": 1.577523
+      },
+      "revision": "1e25183667994608eb0c21545a6ea682f83c67ec",
+      "sha256": "8e4f1bdced2c9a5acd927bbadcc7db87fff58510b8ab27f4b96b34462bc6618c",
+      "size_bytes": 55541990,
+      "source_url": "https://huggingface.co/Manzer/army_men/resolve/1e25183667994608eb0c21545a6ea682f83c67ec/tmp82231.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 8,
+        "elapsed_seconds": 0.140601,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "933ed9589b99f858522b8a75fb34604f55604bcf3f53b9ef25364990b15f91f0",
+        "node_count": 7,
+        "operator_support": {
+          "software_fallback": 6,
+          "supported": 1
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 7,
+        "status": "passed",
+        "tensor_count": 16,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model_digrec_1Node_.h5",
+      "ordinal": 2,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "BatchNormalization",
+          "Dense",
+          "Dropout",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.6.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 2,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "9b4956463f216bfd01f47f4f2f48591a4e0f2be4369eae2a559374466cfdd5ab",
+        "size_bytes": 4872544,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "brcprado/model_digrec_1Node_.h5",
+      "resource_usage": {
+        "max_rss_kib": 451024,
+        "system_cpu_seconds": 0.959156,
+        "user_cpu_seconds": 1.503654
+      },
+      "revision": "7ead0cddea702c88b06776832747d6f42d4964fa",
+      "sha256": "9b4956463f216bfd01f47f4f2f48591a4e0f2be4369eae2a559374466cfdd5ab",
+      "size_bytes": 4872544,
+      "source_url": "https://huggingface.co/brcprado/model_digrec_1Node_.h5/resolve/7ead0cddea702c88b06776832747d6f42d4964fa/model_digrec_1Node_.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 264,
+        "elapsed_seconds": 1.24276,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "cd1e5f7655bed7be8c11093f60b3de68277533fe5f1035dba2089ec6eae3a06b",
+        "node_count": 163,
+        "operator_support": {
+          "software_fallback": 137,
+          "supported": 2,
+          "unsupported": 24
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 428,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "plant_cnn_mobilenet.h5",
+      "ordinal": 3,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "RandomFlip",
+          "RandomRotation",
+          "RandomZoom",
+          "ReLU",
+          "Sequential",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.11.3",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 3,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "6b15b946eb80747cc4d0b934b939809491ce5cbda646f886e93e6ce808152ea2",
+        "size_bytes": 13389512,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "Pranet25/plant_cnn_mobilenet.h5",
+      "resource_usage": {
+        "max_rss_kib": 527800,
+        "system_cpu_seconds": 1.171789,
+        "user_cpu_seconds": 2.780289
+      },
+      "revision": "9990c7b897bfb5eedd0ddc13ac4f4463d31cc090",
+      "sha256": "6b15b946eb80747cc4d0b934b939809491ce5cbda646f886e93e6ce808152ea2",
+      "size_bytes": 13389512,
+      "source_url": "https://huggingface.co/Pranet25/plant_cnn_mobilenet.h5/resolve/9990c7b897bfb5eedd0ddc13ac4f4463d31cc090/plant_cnn_mobilenet.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 1128,
+        "elapsed_seconds": 4.308311,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "542f6ad5218211158b5746df8046f926ce323b8016539ca89851654b33548655",
+        "node_count": 774,
+        "operator_support": {
+          "software_fallback": 585,
+          "supported": 1,
+          "unsupported": 188
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 1903,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "output/models/NASNetMobile_best.h5",
+      "ordinal": 4,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Activation",
+          "Add",
+          "AveragePooling2D",
+          "BatchNormalization",
+          "Concatenate",
+          "Conv2D",
+          "Cropping2D",
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "HeNormal",
+          "InputLayer",
+          "MaxPooling2D",
+          "Ones",
+          "SeparableConv2D",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "HeNormal",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.8.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 4,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "db4e4ded2a2b61da3234fa4c41aa529f3713e0005bc148c908ab87f7eabf5876",
+        "size_bytes": 20506056,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "wisamWR/Tomato_Leaf_Diseases-CNN_Comparative_Analysis",
+      "resource_usage": {
+        "max_rss_kib": 626952,
+        "system_cpu_seconds": 1.003869,
+        "user_cpu_seconds": 6.014559
+      },
+      "revision": "96442caec5d8f7c2d1f27abeba9047c36f10a949",
+      "sha256": "db4e4ded2a2b61da3234fa4c41aa529f3713e0005bc148c908ab87f7eabf5876",
+      "size_bytes": 20506056,
+      "source_url": "https://huggingface.co/wisamWR/Tomato_Leaf_Diseases-CNN_Comparative_Analysis/resolve/96442caec5d8f7c2d1f27abeba9047c36f10a949/output/models/NASNetMobile_best.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 8,
+        "elapsed_seconds": 0.124372,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "9a3021a33788b829cbaad27b33979c9179947e51b049711379905c0e20a23bc6",
+        "node_count": 4,
+        "operator_support": {
+          "software_fallback": 3,
+          "supported": 1
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 4,
+        "status": "passed",
+        "tensor_count": 13,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.h5",
+      "ordinal": 5,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "GlorotUniform",
+          "InputLayer",
+          "LSTM",
+          "Orthogonal",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Orthogonal",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 5,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "9903f62b594582878b65cac0388983ed39bbb03e29c7df4fcfda52dd8b3d2767",
+        "size_bytes": 389288,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "Hamza012bce21/model.h5",
+      "resource_usage": {
+        "max_rss_kib": 446752,
+        "system_cpu_seconds": 2.743248,
+        "user_cpu_seconds": 1.799823
+      },
+      "revision": "97d86fb750fc9def8a92c20efd6e90232ece4df3",
+      "sha256": "9903f62b594582878b65cac0388983ed39bbb03e29c7df4fcfda52dd8b3d2767",
+      "size_bytes": 389288,
+      "source_url": "https://huggingface.co/Hamza012bce21/model.h5/resolve/97d86fb750fc9def8a92c20efd6e90232ece4df3/model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.146979,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "gen_ema.h5",
+      "ordinal": 6,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": "2.10.0",
+        "model_config": "absent",
+        "ordinal": 6,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "layer_names"
+        ],
+        "root_keys": [
+          "00ai",
+          "00d",
+          "00n",
+          "0ai",
+          "0c",
+          "0r",
+          "1ai",
+          "1c",
+          "1r",
+          "2ai",
+          "2c",
+          "2r",
+          "3ai",
+          "3c",
+          "3r",
+          "4ai",
+          "4c",
+          "4r",
+          "5ai",
+          "5c",
+          "5r",
+          "6ai",
+          "6c",
+          "6r",
+          "7ai",
+          "7c",
+          "7r",
+          "8ai",
+          "8c",
+          "8r",
+          "9c",
+          "average_pooling2d_11",
+          "average_pooling2d_12",
+          "average_pooling2d_13",
+          "average_pooling2d_14",
+          "average_pooling2d_15",
+          "average_pooling2d_16",
+          "flatten_2",
+          "input_7",
+          "res1c",
+          "res2c",
+          "res3c",
+          "res4c",
+          "reshape_1",
+          "tf.__operators__.add_24",
+          "tf.__operators__.add_25",
+          "tf.__operators__.add_26",
+          "tf.__operators__.add_27",
+          "tf.__operators__.add_28",
+          "tf.__operators__.add_29",
+          "tf.__operators__.add_30",
+          "tf.__operators__.add_31",
+          "tf.__operators__.add_32",
+          "tf.__operators__.add_33",
+          "tf.__operators__.add_34",
+          "tf.__operators__.add_35",
+          "tf.__operators__.add_36",
+          "tf.__operators__.add_37",
+          "tf.__operators__.getitem_4",
+          "tf.__operators__.getitem_5",
+          "tf.__operators__.getitem_6",
+          "tf.__operators__.getitem_7",
+          "tf.cast_8",
+          "tf.cast_9",
+          "tf.compat.v1.shape_4",
+          "tf.compat.v1.shape_5",
+          "tf.compat.v1.shape_6",
+          "tf.compat.v1.shape_7",
+          "tf.compat.v1.transpose_10",
+          "tf.compat.v1.transpose_7",
+          "tf.compat.v1.transpose_8",
+          "tf.compat.v1.transpose_9",
+          "tf.concat_10",
+          "tf.concat_9",
+          "tf.expand_dims_2",
+          "tf.expand_dims_3",
+          "tf.math.multiply_28",
+          "tf.math.multiply_29",
+          "tf.math.multiply_30",
+          "tf.math.multiply_31",
+          "tf.math.multiply_32",
+          "tf.math.multiply_33",
+          "tf.math.multiply_34",
+          "tf.math.multiply_35",
+          "tf.math.multiply_36",
+          "tf.math.multiply_37",
+          "tf.math.multiply_38",
+          "tf.math.multiply_39",
+          "tf.math.multiply_40",
+          "tf.math.multiply_41",
+          "tf.math.multiply_42",
+          "tf.math.multiply_43",
+          "tf.math.multiply_44",
+          "tf.math.multiply_45",
+          "tf.math.reduce_std_10",
+          "tf.math.reduce_std_11",
+          "tf.math.reduce_std_12",
+          "tf.math.reduce_std_13",
+          "tf.math.reduce_std_14",
+          "tf.math.reduce_std_15",
+          "tf.math.reduce_std_16",
+          "tf.math.reduce_std_17",
+          "tf.math.reduce_std_18",
+          "tf.math.reduce_std_19",
+          "tf.math.truediv_10",
+          "tf.math.truediv_11",
+          "tf.math.truediv_12",
+          "tf.math.truediv_13",
+          "tf.math.truediv_14",
+          "tf.math.truediv_15",
+          "tf.math.truediv_16",
+          "tf.math.truediv_17",
+          "tf.math.truediv_18",
+          "tf.math.truediv_19",
+          "tf.nn.silu_40",
+          "tf.nn.silu_41",
+          "tf.nn.silu_42",
+          "tf.nn.silu_43",
+          "tf.nn.silu_44",
+          "tf.nn.silu_45",
+          "tf.nn.silu_46",
+          "tf.nn.silu_47",
+          "tf.nn.silu_48",
+          "tf.nn.silu_49",
+          "tf.reshape_10",
+          "tf.reshape_11",
+          "tf.reshape_12",
+          "tf.reshape_13",
+          "tf.reshape_14",
+          "tf.reshape_15",
+          "tf.reshape_8",
+          "tf.reshape_9",
+          "tf.split_10",
+          "tf.split_9",
+          "top_level_model_weights"
+        ],
+        "sha256": "60bd96610f29113243ee3c922a73a6a3d6130860b21cef1fc11778accfb5dc90",
+        "size_bytes": 62200720,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "efederici/musika-t-hecker",
+      "resource_usage": {
+        "max_rss_kib": 409448,
+        "system_cpu_seconds": 2.694995,
+        "user_cpu_seconds": 1.887292
+      },
+      "revision": "21efde19dd019124c550ce4e921117398eb6f0d5",
+      "sha256": "60bd96610f29113243ee3c922a73a6a3d6130860b21cef1fc11778accfb5dc90",
+      "size_bytes": 62200720,
+      "source_url": "https://huggingface.co/efederici/musika-t-hecker/resolve/21efde19dd019124c550ce4e921117398eb6f0d5/gen_ema.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 10,
+        "elapsed_seconds": 0.162349,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "47cbdcd5bb1653ae0cf07386f7dc8e4499af367061ec9042fc969ada6a071008",
+        "node_count": 11,
+        "operator_support": {
+          "software_fallback": 11
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 11,
+        "status": "passed",
+        "tensor_count": 22,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "sketch_recogination_model_cnn.h5",
+      "ordinal": 7,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "Dense",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.11.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 7,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "0fe3e822088ad43aa09d9d698ad814cb29a82e2ff17259648c9ed724a7f8c9b1",
+        "size_bytes": 4007240,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "Apex-X/sketch_recognition_model_cnn.h5",
+      "resource_usage": {
+        "max_rss_kib": 446768,
+        "system_cpu_seconds": 2.680698,
+        "user_cpu_seconds": 1.86099
+      },
+      "revision": "e667a142d92e434efbccbc70f4158a2fd5f7e4f3",
+      "sha256": "0fe3e822088ad43aa09d9d698ad814cb29a82e2ff17259648c9ed724a7f8c9b1",
+      "size_bytes": 4007240,
+      "source_url": "https://huggingface.co/Apex-X/sketch_recognition_model_cnn.h5/resolve/e667a142d92e434efbccbc70f4158a2fd5f7e4f3/sketch_recogination_model_cnn.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 8,
+        "elapsed_seconds": 0.116703,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "3dd18ce2747547be9add778091a71278a2a4eba0fb6c7291a8a81b929550b2c6",
+        "node_count": 10,
+        "operator_support": {
+          "software_fallback": 8,
+          "supported": 2
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 10,
+        "status": "passed",
+        "tensor_count": 19,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "heart_disease_mode1l.h5",
+      "ordinal": 8,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "GlorotUniform",
+          "HeNormal",
+          "InputLayer",
+          "L2",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "HeNormal",
+          "L2",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.8.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 8,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "c3d44d261e9b6c25cb590530e31f3cd46f2eb0f8b79afd865fd70cc1499bf2e0",
+        "size_bytes": 176600,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "keshav273/heart_disease_mode1l.h5",
+      "resource_usage": {
+        "max_rss_kib": 440136,
+        "system_cpu_seconds": 2.747335,
+        "user_cpu_seconds": 1.788656
+      },
+      "revision": "666983d0ab7f7b05c2675f578117e0d641c8a475",
+      "sha256": "c3d44d261e9b6c25cb590530e31f3cd46f2eb0f8b79afd865fd70cc1499bf2e0",
+      "size_bytes": 176600,
+      "source_url": "https://huggingface.co/keshav273/heart_disease_mode1l.h5/resolve/666983d0ab7f7b05c2675f578117e0d641c8a475/heart_disease_mode1l.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.054245,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.h5",
+      "ordinal": 9,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": "2.15.0",
+        "model_config": "absent",
+        "ordinal": 9,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "layer_names"
+        ],
+        "root_keys": [
+          "Conv",
+          "Conv_1",
+          "avg_pool",
+          "dense_10",
+          "dense_11",
+          "dense_9",
+          "dropout_6",
+          "dropout_7",
+          "expanded_conv",
+          "expanded_conv_1",
+          "expanded_conv_10",
+          "expanded_conv_11",
+          "expanded_conv_12",
+          "expanded_conv_13",
+          "expanded_conv_14",
+          "expanded_conv_2",
+          "expanded_conv_3",
+          "expanded_conv_4",
+          "expanded_conv_5",
+          "expanded_conv_6",
+          "expanded_conv_7",
+          "expanded_conv_8",
+          "expanded_conv_9",
+          "input_1",
+          "multiply",
+          "multiply_1",
+          "multiply_10",
+          "multiply_11",
+          "multiply_12",
+          "multiply_13",
+          "multiply_14",
+          "multiply_15",
+          "multiply_16",
+          "multiply_17",
+          "multiply_18",
+          "multiply_19",
+          "multiply_2",
+          "multiply_3",
+          "multiply_4",
+          "multiply_5",
+          "multiply_6",
+          "multiply_7",
+          "multiply_8",
+          "multiply_9",
+          "re_lu",
+          "re_lu_1",
+          "re_lu_10",
+          "re_lu_11",
+          "re_lu_12",
+          "re_lu_13",
+          "re_lu_14",
+          "re_lu_15",
+          "re_lu_16",
+          "re_lu_17",
+          "re_lu_18",
+          "re_lu_19",
+          "re_lu_2",
+          "re_lu_20",
+          "re_lu_21",
+          "re_lu_22",
+          "re_lu_23",
+          "re_lu_24",
+          "re_lu_25",
+          "re_lu_26",
+          "re_lu_27",
+          "re_lu_28",
+          "re_lu_29",
+          "re_lu_3",
+          "re_lu_30",
+          "re_lu_31",
+          "re_lu_32",
+          "re_lu_33",
+          "re_lu_34",
+          "re_lu_35",
+          "re_lu_36",
+          "re_lu_37",
+          "re_lu_38",
+          "re_lu_4",
+          "re_lu_5",
+          "re_lu_6",
+          "re_lu_7",
+          "re_lu_8",
+          "re_lu_9",
+          "rescaling_1",
+          "tf.__operators__.add",
+          "tf.__operators__.add_1",
+          "tf.__operators__.add_10",
+          "tf.__operators__.add_11",
+          "tf.__operators__.add_12",
+          "tf.__operators__.add_13",
+          "tf.__operators__.add_14",
+          "tf.__operators__.add_15",
+          "tf.__operators__.add_16",
+          "tf.__operators__.add_17",
+          "tf.__operators__.add_18",
+          "tf.__operators__.add_19",
+          "tf.__operators__.add_2",
+          "tf.__operators__.add_20",
+          "tf.__operators__.add_21",
+          "tf.__operators__.add_22",
+          "tf.__operators__.add_23",
+          "tf.__operators__.add_24",
+          "tf.__operators__.add_25",
+          "tf.__operators__.add_26",
+          "tf.__operators__.add_27",
+          "tf.__operators__.add_3",
+          "tf.__operators__.add_4",
+          "tf.__operators__.add_5",
+          "tf.__operators__.add_6",
+          "tf.__operators__.add_7",
+          "tf.__operators__.add_8",
+          "tf.__operators__.add_9",
+          "tf.math.multiply",
+          "tf.math.multiply_1",
+          "tf.math.multiply_10",
+          "tf.math.multiply_11",
+          "tf.math.multiply_12",
+          "tf.math.multiply_13",
+          "tf.math.multiply_14",
+          "tf.math.multiply_15",
+          "tf.math.multiply_16",
+          "tf.math.multiply_17",
+          "tf.math.multiply_18",
+          "tf.math.multiply_19",
+          "tf.math.multiply_2",
+          "tf.math.multiply_20",
+          "tf.math.multiply_21",
+          "tf.math.multiply_22",
+          "tf.math.multiply_23",
+          "tf.math.multiply_24",
+          "tf.math.multiply_25",
+          "tf.math.multiply_26",
+          "tf.math.multiply_27",
+          "tf.math.multiply_3",
+          "tf.math.multiply_4",
+          "tf.math.multiply_5",
+          "tf.math.multiply_6",
+          "tf.math.multiply_7",
+          "tf.math.multiply_8",
+          "tf.math.multiply_9",
+          "top_level_model_weights"
+        ],
+        "sha256": "65378c5c54b69d13179cee8ea57c48fae5af77fb72962a70a855cceb5477ab49",
+        "size_bytes": 14238416,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "ShaharAdar/model.h5",
+      "resource_usage": {
+        "max_rss_kib": 416368,
+        "system_cpu_seconds": 2.724754,
+        "user_cpu_seconds": 1.724146
+      },
+      "revision": "96c4a6abe246855e6882847320d0b68c92203afb",
+      "sha256": "65378c5c54b69d13179cee8ea57c48fae5af77fb72962a70a855cceb5477ab49",
+      "size_bytes": 14238416,
+      "source_url": "https://huggingface.co/ShaharAdar/model.h5/resolve/96c4a6abe246855e6882847320d0b68c92203afb/model.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 10,
+        "elapsed_seconds": 0.118644,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "de77b23d1e2f775cd9133f62d54864bed76c1379b962d60b9f1a98e3e539800a",
+        "node_count": 9,
+        "operator_support": {
+          "software_fallback": 9
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 9,
+        "status": "passed",
+        "tensor_count": 20,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "best_model_10Words.h5",
+      "ordinal": 10,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "Dense",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.13.1",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 10,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "7cc82d9739765286bcccdf2ce2154957afd4d2a2d26e7603516d989fd3294347",
+        "size_bytes": 107984,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "BhoneMyintSwe/Handwritten-classification",
+      "resource_usage": {
+        "max_rss_kib": 441612,
+        "system_cpu_seconds": 2.767052,
+        "user_cpu_seconds": 1.803059
+      },
+      "revision": "7d7f4561422341589e5266e0cdcfaf886590bc1d",
+      "sha256": "7cc82d9739765286bcccdf2ce2154957afd4d2a2d26e7603516d989fd3294347",
+      "size_bytes": 107984,
+      "source_url": "https://huggingface.co/BhoneMyintSwe/Handwritten-classification/resolve/7d7f4561422341589e5266e0cdcfaf886590bc1d/best_model_10Words.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 259,
+        "elapsed_seconds": 1.356342,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "4cd85d0002397ede5b2c1856882df9da276b4653a310613c0d62b61a8c722c1d",
+        "node_count": 197,
+        "operator_support": {
+          "software_fallback": 158,
+          "supported": 7,
+          "unsupported": 32
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 457,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "deeplabv3plus_best.h5",
+      "ordinal": 11,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Activation",
+          "Add",
+          "AveragePooling2D",
+          "BatchNormalization",
+          "Concatenate",
+          "Conv2D",
+          "DTypePolicy",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Multiply",
+          "Normalization",
+          "Ones",
+          "Rescaling",
+          "Reshape",
+          "UpSampling2D",
+          "VarianceScaling",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "VarianceScaling",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.13.2",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 11,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "5c6b53d9bbdf7b4b81138d996f6c29d75d659e73470cd3443600736e598b5fed",
+        "size_bytes": 40541232,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "bekmon/kvasir-polyp-segmentation",
+      "resource_usage": {
+        "max_rss_kib": 548808,
+        "system_cpu_seconds": 2.883061,
+        "user_cpu_seconds": 3.298966
+      },
+      "revision": "91d67f961358750523173f63605c4efaa863137f",
+      "sha256": "5c6b53d9bbdf7b4b81138d996f6c29d75d659e73470cd3443600736e598b5fed",
+      "size_bytes": 40541232,
+      "source_url": "https://huggingface.co/bekmon/kvasir-polyp-segmentation/resolve/91d67f961358750523173f63605c4efaa863137f/deeplabv3plus_best.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.050332,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "f107f8c3b3a6cb8f2eabea2de2783b467e784d9c47dfdf8a5873d8ef16d0717d",
+        "node_count": 5,
+        "operator_support": {
+          "software_fallback": 2,
+          "unsupported": 3
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "TypeError: Could not locate class 'LSTM'. Make sure custom classes and functions are decorated with `@keras.saving.register_keras_serializable()`. If they are already decorated, make sure they are all imported so that the decorator is run before trying to load them. Full object config: {'class_name': 'LSTM', 'config': {'name': 'lstm', 'trainable': True, 'dtype': 'float32', 'return_sequences': True, 'return_state': False, 'go_backwards': False, 'stateful': False, 'unroll': False, 'time_major': False, 'units': 64, 'activation': 'tanh', 'recurrent_activation': 'sigmoid', 'use_bias': True, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}, 'shared_object_id': 3}, 'recurrent_initializer': {'class_name': 'Orthogonal', 'config': {'gain': 1.0, 'seed': None}, 'shared_object_id': 4}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 5}, 'unit_forget_bias': True, 'kernel_regularizer': None, 'recurrent_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'recurrent_constraint': None, 'bias_constraint': None, 'dropout': 0.0, 'recurrent_dropout': 0.0, 'implementation': 2}}",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 6,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "surrogate_model.h5",
+      "ordinal": 12,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Bidirectional",
+          "Dense",
+          "Embedding",
+          "Functional",
+          "GlorotUniform",
+          "InputLayer",
+          "LSTM",
+          "Orthogonal",
+          "RandomUniform",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Orthogonal",
+          "RandomUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 12,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "6224c0385f37bf76d904edd0e3638f598021c7c420b8f707343993f06a3c4732",
+        "size_bytes": 10131080,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "AiresPucrs/surrogate-model",
+      "resource_usage": {
+        "max_rss_kib": 409240,
+        "system_cpu_seconds": 2.620091,
+        "user_cpu_seconds": 1.79932
+      },
+      "revision": "bee8b7b2c405f05f1ed9d56c1c7abdc4ada3e9b9",
+      "sha256": "6224c0385f37bf76d904edd0e3638f598021c7c420b8f707343993f06a3c4732",
+      "size_bytes": 10131080,
+      "source_url": "https://huggingface.co/AiresPucrs/surrogate-model/resolve/bee8b7b2c405f05f1ed9d56c1c7abdc4ada3e9b9/surrogate_model.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 268,
+        "elapsed_seconds": 1.185288,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "cd5b2e1d75fc24e86d61d013dbc7dd3920153711b620d7b7da43f13c08032850",
+        "node_count": 161,
+        "operator_support": {
+          "software_fallback": 138,
+          "supported": 2,
+          "unsupported": 21
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 430,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "face_shape_model_v2.h5",
+      "ordinal": 13,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "ReLU",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.13.2",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 13,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "08d08a78219924ab0d9b8d475696f8bf912fd78dc4615cb924fa21c81f2db8d6",
+        "size_bytes": 25822424,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "manii576/face-shape-classifier",
+      "resource_usage": {
+        "max_rss_kib": 528132,
+        "system_cpu_seconds": 2.797026,
+        "user_cpu_seconds": 3.036538
+      },
+      "revision": "8d930dd29fc3f6d87a150e1f37e01eb189ec770d",
+      "sha256": "08d08a78219924ab0d9b8d475696f8bf912fd78dc4615cb924fa21c81f2db8d6",
+      "size_bytes": 25822424,
+      "source_url": "https://huggingface.co/manii576/face-shape-classifier/resolve/8d930dd29fc3f6d87a150e1f37e01eb189ec770d/face_shape_model_v2.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 266,
+        "elapsed_seconds": 1.218892,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "1e943a5df9e762cd92ed0ceedd2aa30ac1be114ee6dc45124db72f9d153bce59",
+        "node_count": 158,
+        "operator_support": {
+          "software_fallback": 137,
+          "unsupported": 21
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 425,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "showtrack_model_best.h5",
+      "ordinal": 14,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "ReLU",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.8.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 14,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "3d997b2d0c03df744cc48f416ea3421763e14c842d17334ee4f5c4ceb3366949",
+        "size_bytes": 10392848,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "cwcharles81/showtrack-ai-model",
+      "resource_usage": {
+        "max_rss_kib": 522168,
+        "system_cpu_seconds": 2.774546,
+        "user_cpu_seconds": 3.011358
+      },
+      "revision": "8b16708b6655e056a2f1632a5c55cd69a42d5e24",
+      "sha256": "3d997b2d0c03df744cc48f416ea3421763e14c842d17334ee4f5c4ceb3366949",
+      "size_bytes": 10392848,
+      "source_url": "https://huggingface.co/cwcharles81/showtrack-ai-model/resolve/8b16708b6655e056a2f1632a5c55cd69a42d5e24/showtrack_model_best.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.155813,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.weights.h5",
+      "ordinal": 15,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 15,
+        "root_attributes": [],
+        "root_keys": [
+          "contrastive_denoising_group_generator",
+          "denoising_class_embed",
+          "layers",
+          "vars"
+        ],
+        "sha256": "60ec70a5d24ed508311a66eb8d9bb6889f62456f65172e93cab5ceed296e6ce7",
+        "size_bytes": 43140280,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "keras/dfine_small_obj2coco",
+      "resource_usage": {
+        "max_rss_kib": 412128,
+        "system_cpu_seconds": 2.731355,
+        "user_cpu_seconds": 1.881889
+      },
+      "revision": "ffedd809e16c5d28be996035b9cbda817d650e51",
+      "sha256": "60ec70a5d24ed508311a66eb8d9bb6889f62456f65172e93cab5ceed296e6ce7",
+      "size_bytes": 43140280,
+      "source_url": "https://huggingface.co/keras/dfine_small_obj2coco/resolve/ffedd809e16c5d28be996035b9cbda817d650e51/model.weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.085868,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "0f085e3f23e7fa1f2cb6c3160bfa45a4e521defe2c824e560ed7f02ccb655b8b",
+        "node_count": 9,
+        "operator_support": {
+          "software_fallback": 8,
+          "unsupported": 1
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": null,
+          "unsafe_code_blocked": true,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 10,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "bald_or_not.h5",
+      "ordinal": 16,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Flatten",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Multiply",
+          "Ones",
+          "ReLU",
+          "Rescaling",
+          "Sequential",
+          "TFOpLambda",
+          "ZeroPadding2D",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Ones",
+          "TFOpLambda",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.12.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 16,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "39fd35304a3ce78e54ffee4a902b7539d4548f68ea1e15ccb7330c3ee66e7ba8",
+        "size_bytes": 15718136,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": true
+      },
+      "prior_v2_status": "not_run_security",
+      "recovery_mode": "structural_analysis",
+      "repository": "CineAI/Bald-or-Not-classification-Model",
+      "resource_usage": {
+        "max_rss_kib": 410676,
+        "system_cpu_seconds": 2.753206,
+        "user_cpu_seconds": 1.813317
+      },
+      "revision": "a4e6c2f1c26dd575e70d42fbbd6630436ec022cc",
+      "sha256": "39fd35304a3ce78e54ffee4a902b7539d4548f68ea1e15ccb7330c3ee66e7ba8",
+      "size_bytes": 15718136,
+      "source_url": "https://huggingface.co/CineAI/Bald-or-Not-classification-Model/resolve/a4e6c2f1c26dd575e70d42fbbd6630436ec022cc/bald_or_not.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 10,
+        "elapsed_seconds": 0.519581,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "85fb2ca13345a10e7633df69887f7c8321332aa3615baf0748a5fa2b6c83634e",
+        "node_count": 11,
+        "operator_support": {
+          "software_fallback": 11
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 11,
+        "status": "passed",
+        "tensor_count": 22,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "hip_impant_model.h5",
+      "ordinal": 17,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "Dense",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.12.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 17,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "9139627414329998f2fee61e8639d672224923c803844e8cdbed2c2eb8014831",
+        "size_bytes": 44410152,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "nishantguvvada/Hip-Implant",
+      "resource_usage": {
+        "max_rss_kib": 559740,
+        "system_cpu_seconds": 2.791571,
+        "user_cpu_seconds": 2.533773
+      },
+      "revision": "c928eca334c28d30f6377ae6c9391e46ed485339",
+      "sha256": "9139627414329998f2fee61e8639d672224923c803844e8cdbed2c2eb8014831",
+      "size_bytes": 44410152,
+      "source_url": "https://huggingface.co/nishantguvvada/Hip-Implant/resolve/c928eca334c28d30f6377ae6c9391e46ed485339/hip_impant_model.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.033808,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "168450dffa159ffe87ca52301666338e315938e206bb7395ed480034612b82a8",
+        "node_count": 43,
+        "operator_support": {
+          "software_fallback": 21,
+          "unsupported": 22
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": null,
+          "unsafe_code_blocked": true,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 46,
+        "unsafe_operator_names": [
+          "Lambda"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "fold_1/model.h5",
+      "ordinal": 18,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "Concatenate",
+          "Conv1D",
+          "Cropping1D",
+          "Dense",
+          "Functional",
+          "GlobalAveragePooling1D",
+          "GlorotUniform",
+          "InputLayer",
+          "Lambda",
+          "ReLU",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.4.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 18,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights"
+        ],
+        "sha256": "51fb252b64bf0abe624ab2c4ca0c75445df0da951d686183836cef8b7f93c504",
+        "size_bytes": 561784,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": true
+      },
+      "prior_v2_status": "not_run_security",
+      "recovery_mode": "structural_analysis",
+      "repository": "kundajelab/encode-bpnet-CTCF-ChIP-seq-H54-ENCSR000DKN-ENCSR334UTF",
+      "resource_usage": {
+        "max_rss_kib": 408356,
+        "system_cpu_seconds": 2.751428,
+        "user_cpu_seconds": 1.703653
+      },
+      "revision": "e20885e9501e808fbd95ba125bd80e69c697795c",
+      "sha256": "51fb252b64bf0abe624ab2c4ca0c75445df0da951d686183836cef8b7f93c504",
+      "size_bytes": 561784,
+      "source_url": "https://huggingface.co/kundajelab/encode-bpnet-CTCF-ChIP-seq-H54-ENCSR000DKN-ENCSR334UTF/resolve/e20885e9501e808fbd95ba125bd80e69c697795c/fold_1/model.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.107408,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "605552fd0d775442a2fdcd12462324fbe5bbe684136b9be00abd9bd5fa23c702",
+        "node_count": 12,
+        "operator_support": {
+          "software_fallback": 8,
+          "unsupported": 4
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": null,
+          "unsafe_code_blocked": true,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 14,
+        "unsafe_operator_names": [
+          "TFOpLambda"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "deep_lstm_attention_w2v_huber.h5",
+      "ordinal": 19,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Attention",
+          "Dense",
+          "Dropout",
+          "Embedding",
+          "Functional",
+          "GlorotUniform",
+          "InputLayer",
+          "LSTM",
+          "LayerNormalization",
+          "Ones",
+          "Orthogonal",
+          "RandomUniform",
+          "SpatialDropout1D",
+          "TFOpLambda",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Ones",
+          "Orthogonal",
+          "RandomUniform",
+          "SpatialDropout1D",
+          "TFOpLambda",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.11.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 19,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config"
+        ],
+        "root_keys": [
+          "model_weights"
+        ],
+        "sha256": "65d66cf8ebdcba8b35760bf5365ff5dec78a0fb34f072b015929f9ae543603c9",
+        "size_bytes": 39312104,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": true
+      },
+      "prior_v2_status": "not_run_security",
+      "recovery_mode": "structural_analysis",
+      "repository": "vkovenko/deep_lstm_attention_ukr_reviews_rating_estimation",
+      "resource_usage": {
+        "max_rss_kib": 411832,
+        "system_cpu_seconds": 2.733759,
+        "user_cpu_seconds": 1.827279
+      },
+      "revision": "abcedeba70aa816db3fa407464cf47b8d3c9ac67",
+      "sha256": "65d66cf8ebdcba8b35760bf5365ff5dec78a0fb34f072b015929f9ae543603c9",
+      "size_bytes": 39312104,
+      "source_url": "https://huggingface.co/vkovenko/deep_lstm_attention_ukr_reviews_rating_estimation/resolve/abcedeba70aa816db3fa407464cf47b8d3c9ac67/deep_lstm_attention_w2v_huber.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 20,
+        "elapsed_seconds": 0.556832,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "e4d42a94db1a09d842133094783a7c6fe415cc08f01209463b0a5ea0a0cc096b",
+        "node_count": 19,
+        "operator_support": {
+          "software_fallback": 18,
+          "supported": 1
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 19,
+        "status": "passed",
+        "tensor_count": 40,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "dog_cat_model.h5",
+      "ordinal": 20,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "BatchNormalization",
+          "Conv2D",
+          "Dense",
+          "Dropout",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Ones",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.15.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 20,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "eb7945c0a575919df8d8d1b67ae0fbebcb53655bb63266a908311566926a9d04",
+        "size_bytes": 46856520,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "umar007/cat-dog",
+      "resource_usage": {
+        "max_rss_kib": 559016,
+        "system_cpu_seconds": 2.869329,
+        "user_cpu_seconds": 2.560488
+      },
+      "revision": "2aedb1018961633fc90e6ffb4fe5c12d3e016399",
+      "sha256": "eb7945c0a575919df8d8d1b67ae0fbebcb53655bb63266a908311566926a9d04",
+      "size_bytes": 46856520,
+      "source_url": "https://huggingface.co/umar007/cat-dog/resolve/2aedb1018961633fc90e6ffb4fe5c12d3e016399/dog_cat_model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.034517,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.weights.h5",
+      "ordinal": 21,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 21,
+        "root_attributes": [],
+        "root_keys": [
+          "layers",
+          "optimizer",
+          "vars"
+        ],
+        "sha256": "cd94344fa6522b6e96602ad9d5dd22a19299a80ba9b7e70e6d068ffaa01bf995",
+        "size_bytes": 4466112,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "snoneeightfive/sequential-substitution-cipher-keras",
+      "resource_usage": {
+        "max_rss_kib": 412004,
+        "system_cpu_seconds": 2.714462,
+        "user_cpu_seconds": 1.738716
+      },
+      "revision": "26ee47060cddd60cc8aa3d5f40498831268b4678",
+      "sha256": "cd94344fa6522b6e96602ad9d5dd22a19299a80ba9b7e70e6d068ffaa01bf995",
+      "size_bytes": 4466112,
+      "source_url": "https://huggingface.co/snoneeightfive/sequential-substitution-cipher-keras/resolve/26ee47060cddd60cc8aa3d5f40498831268b4678/model.weights.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.02577,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "bnn_wine_model.h5",
+      "ordinal": 22,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": "2.8.0",
+        "model_config": "absent",
+        "ordinal": 22,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "layer_names"
+        ],
+        "root_keys": [
+          "alcohol",
+          "batch_normalization",
+          "chlorides",
+          "citric acid",
+          "concatenate",
+          "dense",
+          "dense_variational",
+          "dense_variational_1",
+          "density",
+          "fixed acidity",
+          "free sulfur dioxide",
+          "independent_normal",
+          "pH",
+          "residual sugar",
+          "sulphates",
+          "top_level_model_weights",
+          "total sulfur dioxide",
+          "volatile acidity"
+        ],
+        "sha256": "df331249b0d6575e33df06d8aba72dad18b74b0f3d34400d4ca4f06e2611c002",
+        "size_bytes": 61768,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "keras-io/ProbabalisticBayesianModel-Wine",
+      "resource_usage": {
+        "max_rss_kib": 406780,
+        "system_cpu_seconds": 2.79912,
+        "user_cpu_seconds": 1.602078
+      },
+      "revision": "7cf45a1957220a55c8e7cc64e1014cc03a01f129",
+      "sha256": "df331249b0d6575e33df06d8aba72dad18b74b0f3d34400d4ca4f06e2611c002",
+      "size_bytes": 61768,
+      "source_url": "https://huggingface.co/keras-io/ProbabalisticBayesianModel-Wine/resolve/7cf45a1957220a55c8e7cc64e1014cc03a01f129/bnn_wine_model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.062456,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "gan_model_weights.h5",
+      "ordinal": 23,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": "2.12.0",
+        "model_config": "absent",
+        "ordinal": 23,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "layer_names"
+        ],
+        "root_keys": [
+          "sequential",
+          "sequential_1",
+          "top_level_model_weights"
+        ],
+        "sha256": "bd81e7afde62faceca38fd81e646153b2c2eec61b2526cc473c6472e4a10bcec",
+        "size_bytes": 16447800,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "Pradeep016/GAN",
+      "resource_usage": {
+        "max_rss_kib": 410776,
+        "system_cpu_seconds": 2.73894,
+        "user_cpu_seconds": 1.703436
+      },
+      "revision": "166a31b75c2c625251116943d3410b1a5e9464eb",
+      "sha256": "bd81e7afde62faceca38fd81e646153b2c2eec61b2526cc473c6472e4a10bcec",
+      "size_bytes": 16447800,
+      "source_url": "https://huggingface.co/Pradeep016/GAN/resolve/166a31b75c2c625251116943d3410b1a5e9464eb/gan_model_weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 1.45508,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "e0e6c07722291112734a7c20afcdfba0987356cc582198e477c8bada9dd9a7bb",
+        "node_count": 12,
+        "operator_support": {
+          "software_fallback": 11,
+          "unsupported": 1
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "ValueError: Layer \"dense\" expects 1 input(s), but it received 2 input tensors. Inputs received: [<KerasTensor shape=(None, 7, 7, 1024), dtype=float32, sparse=False, ragged=False, name=keras_tensor_915>, <KerasTensor shape=(None, 7, 7, 1024), dtype=float32, sparse=False, ragged=False, name=keras_tensor_916>]",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 13,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "Dense_model.h5",
+      "ordinal": 24,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Activation",
+          "AveragePooling2D",
+          "BatchNormalization",
+          "Concatenate",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Ones",
+          "Sequential",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.5.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 24,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "529b2b8298cd8d4dd59d8337bb3d9043fc02d06cc9794be70b2d02098b3d2ea8",
+        "size_bytes": 37410512,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "anassaleh218/densenet_model_h5_2",
+      "resource_usage": {
+        "max_rss_kib": 513516,
+        "system_cpu_seconds": 2.82038,
+        "user_cpu_seconds": 3.430579
+      },
+      "revision": "e702d5cd636215a778b2e228450f5c6682c350a4",
+      "sha256": "529b2b8298cd8d4dd59d8337bb3d9043fc02d06cc9794be70b2d02098b3d2ea8",
+      "size_bytes": 37410512,
+      "source_url": "https://huggingface.co/anassaleh218/densenet_model_h5_2/resolve/e702d5cd636215a778b2e228450f5c6682c350a4/Dense_model.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 262,
+        "elapsed_seconds": 1.205918,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "51833410cd89682c8a7c2c0b9bb5495a467b2a1c1bf6f4f6a9aa983be9f0fc5d",
+        "node_count": 157,
+        "operator_support": {
+          "software_fallback": 135,
+          "supported": 1,
+          "unsupported": 21
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 420,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "dr_disease_mobilenet_v2.h5",
+      "ordinal": 25,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "ReLU",
+          "Sequential",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.12.1",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 25,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "3436d1a058ce102f6351626745377dd22e80daed305378dbcff562d9b75095d8",
+        "size_bytes": 9629296,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "Agro-Tech-Ai/dr-disease-mobilenet-v2",
+      "resource_usage": {
+        "max_rss_kib": 519936,
+        "system_cpu_seconds": 2.868935,
+        "user_cpu_seconds": 2.995615
+      },
+      "revision": "1bc7407d254b5734f297d38c26fa0ecb7eff0ffa",
+      "sha256": "3436d1a058ce102f6351626745377dd22e80daed305378dbcff562d9b75095d8",
+      "size_bytes": 9629296,
+      "source_url": "https://huggingface.co/Agro-Tech-Ai/dr-disease-mobilenet-v2/resolve/1bc7407d254b5734f297d38c26fa0ecb7eff0ffa/dr_disease_mobilenet_v2.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 28,
+        "elapsed_seconds": 0.24562,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "7ef7074db6f5ae2bf4826e137d4fe0f7cc87724e307664d748b31e76fd3595aa",
+        "node_count": 18,
+        "operator_support": {
+          "software_fallback": 17,
+          "supported": 1
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 18,
+        "status": "passed",
+        "tensor_count": 47,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.h5",
+      "ordinal": 26,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "L2",
+          "MaxPooling2D",
+          "Ones",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "L2",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 26,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "2de8da13f33b5d2b9fc816c2480a51aafef9dbc0ba6908baf52bd9e41a688f2a",
+        "size_bytes": 5181876,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "alejandrotg-code/music-genre-classification",
+      "resource_usage": {
+        "max_rss_kib": 449768,
+        "system_cpu_seconds": 2.785445,
+        "user_cpu_seconds": 1.878484
+      },
+      "revision": "c9e164b1c1d1aa49c9daa56c804e54a7089d7156",
+      "sha256": "2de8da13f33b5d2b9fc816c2480a51aafef9dbc0ba6908baf52bd9e41a688f2a",
+      "size_bytes": 5181876,
+      "source_url": "https://huggingface.co/alejandrotg-code/music-genre-classification/resolve/c9e164b1c1d1aa49c9daa56c804e54a7089d7156/model.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.05293,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "1ce6ad8c52834fc1a119e3e207442adfa2a90803561fedc5ad9c3e7796b575cf",
+        "node_count": 5,
+        "operator_support": {
+          "software_fallback": 3,
+          "unsupported": 2
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "ValueError: Unrecognized keyword arguments passed to LSTM: {'time_major': False}",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 6,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "bidirectional_lstm_best.h5",
+      "ordinal": 27,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Bidirectional",
+          "Dense",
+          "Dropout",
+          "Functional",
+          "GlorotUniform",
+          "InputLayer",
+          "LSTM",
+          "Orthogonal",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Orthogonal",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.14.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 27,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "ae54553d8d5586b30fa72244d59f18a8c537476e0d095232fc9d453d75e3ca0e",
+        "size_bytes": 510200,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "Davidavid4/bilstm-terrorism-forecasting-gtd",
+      "resource_usage": {
+        "max_rss_kib": 438840,
+        "system_cpu_seconds": 2.696451,
+        "user_cpu_seconds": 1.667903
+      },
+      "revision": "d059639b427289062853a6743e8414b42da8db05",
+      "sha256": "ae54553d8d5586b30fa72244d59f18a8c537476e0d095232fc9d453d75e3ca0e",
+      "size_bytes": 510200,
+      "source_url": "https://huggingface.co/Davidavid4/bilstm-terrorism-forecasting-gtd/resolve/d059639b427289062853a6743e8414b42da8db05/bidirectional_lstm_best.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.056,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "saved_model/yamnet_finetuned.weights.h5",
+      "ordinal": 28,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 28,
+        "root_attributes": [],
+        "root_keys": [
+          "layers",
+          "vars"
+        ],
+        "sha256": "974c21282838ba18ecabba71ec064381adbc05be7a83fdac861f2a881e6fbc98",
+        "size_bytes": 15250788,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "Titung/urban-surveillance-mode-classifier-finetuned-v_final-v3",
+      "resource_usage": {
+        "max_rss_kib": 408400,
+        "system_cpu_seconds": 2.727065,
+        "user_cpu_seconds": 1.842573
+      },
+      "revision": "57259d4dfa717362db808ced4b2b7ff27f74f3fd",
+      "sha256": "974c21282838ba18ecabba71ec064381adbc05be7a83fdac861f2a881e6fbc98",
+      "size_bytes": 15250788,
+      "source_url": "https://huggingface.co/Titung/urban-surveillance-mode-classifier-finetuned-v_final-v3/resolve/57259d4dfa717362db808ced4b2b7ff27f74f3fd/saved_model/yamnet_finetuned.weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 10,
+        "elapsed_seconds": 0.201702,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "a8c6b499691eb88eae1d17dd5eca715dc6d2992acd4a0eee9bce4ae69d9ab1ed",
+        "node_count": 10,
+        "operator_support": {
+          "software_fallback": 10
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 10,
+        "status": "passed",
+        "tensor_count": 21,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "aiornot.h5",
+      "ordinal": 29,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "Dense",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.11.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 29,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "bd4d000c14dbc5be8939d4c111de7765a878bce7330744ddd6d4c05d75b21d29",
+        "size_bytes": 8266792,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "Gutema/ai_generated_image_detector",
+      "resource_usage": {
+        "max_rss_kib": 463828,
+        "system_cpu_seconds": 2.75073,
+        "user_cpu_seconds": 1.907632
+      },
+      "revision": "47694459570a026225495905320c2abe32f70ae0",
+      "sha256": "bd4d000c14dbc5be8939d4c111de7765a878bce7330744ddd6d4c05d75b21d29",
+      "size_bytes": 8266792,
+      "source_url": "https://huggingface.co/Gutema/ai_generated_image_detector/resolve/47694459570a026225495905320c2abe32f70ae0/aiornot.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.682673,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "2578303f630df5332d7ac349c5d65ce01aea83750993cb6943b2a47608e280a6",
+        "node_count": 9,
+        "operator_support": {
+          "software_fallback": 8,
+          "unsupported": 1
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "ValueError: Layer \"dense\" expects 1 input(s), but it received 2 input tensors. Inputs received: [<KerasTensor shape=(None, 7, 7, 1280), dtype=float32, sparse=False, ragged=False, name=keras_tensor_328>, <KerasTensor shape=(None, 7, 7, 1280), dtype=float32, sparse=False, ragged=False, name=keras_tensor_329>]",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 10,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "fine_tuned_phone_detection_model.h5",
+      "ordinal": 30,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "ReLU",
+          "Sequential",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 30,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "f32a7746e309332e4b429cbdbd0dffaf9ecc7525300d87abb83ba09b02acfde1",
+        "size_bytes": 26322360,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "sreenathsree1578/mobile-phone-usage-detector",
+      "resource_usage": {
+        "max_rss_kib": 469436,
+        "system_cpu_seconds": 2.785031,
+        "user_cpu_seconds": 2.466895
+      },
+      "revision": "5ecfbb2373809177c8d814b48c0a98af54208c25",
+      "sha256": "f32a7746e309332e4b429cbdbd0dffaf9ecc7525300d87abb83ba09b02acfde1",
+      "size_bytes": 26322360,
+      "source_url": "https://huggingface.co/sreenathsree1578/mobile-phone-usage-detector/resolve/5ecfbb2373809177c8d814b48c0a98af54208c25/fine_tuned_phone_detection_model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.06751,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "transformer_weights.h5",
+      "ordinal": 31,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": "2.12.0",
+        "model_config": "absent",
+        "ordinal": 31,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "layer_names"
+        ],
+        "root_keys": [
+          "dense_6",
+          "landmark_embedding",
+          "sequential_2",
+          "token_embedding",
+          "top_level_model_weights",
+          "transformer_decoder"
+        ],
+        "sha256": "554974a9c10534e7ffab2c618b1cb69f923ad35a203e30a0a0626520f5386ae5",
+        "size_bytes": 20885440,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "shahdelgouhary/asl-fingerspelling-transformer",
+      "resource_usage": {
+        "max_rss_kib": 408992,
+        "system_cpu_seconds": 2.746123,
+        "user_cpu_seconds": 1.780978
+      },
+      "revision": "54b883d17b5382d584d04e3eec799200f660a554",
+      "sha256": "554974a9c10534e7ffab2c618b1cb69f923ad35a203e30a0a0626520f5386ae5",
+      "size_bytes": 20885440,
+      "source_url": "https://huggingface.co/shahdelgouhary/asl-fingerspelling-transformer/resolve/54b883d17b5382d584d04e3eec799200f660a554/transformer_weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 10,
+        "elapsed_seconds": 0.116452,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "af79764d892ffd2fe43312916d8189d14ac96f067c15354d93a803c64167778e",
+        "node_count": 11,
+        "operator_support": {
+          "software_fallback": 11
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 11,
+        "status": "passed",
+        "tensor_count": 22,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "Sniffusion_PomerAInian.h5",
+      "ordinal": 32,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "Dense",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.9.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 32,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "c45f9ae9b61f3f8693304390b44f8fa3da3c0343c4445b40721c4d29095d9004",
+        "size_bytes": 366528,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "RaidedCluster/Sniffusion-PomerAInian",
+      "resource_usage": {
+        "max_rss_kib": 436088,
+        "system_cpu_seconds": 2.748746,
+        "user_cpu_seconds": 1.791321
+      },
+      "revision": "369d17cf49bbaf6b8bb1eb724045a6a7b8cf4bbb",
+      "sha256": "c45f9ae9b61f3f8693304390b44f8fa3da3c0343c4445b40721c4d29095d9004",
+      "size_bytes": 366528,
+      "source_url": "https://huggingface.co/RaidedCluster/Sniffusion-PomerAInian/resolve/369d17cf49bbaf6b8bb1eb724045a6a7b8cf4bbb/Sniffusion_PomerAInian.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 262,
+        "elapsed_seconds": 1.175607,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "2e1b3184618e1bb20b195241c86c4b22f72addd9b64baac3b000131314c71f41",
+        "node_count": 158,
+        "operator_support": {
+          "software_fallback": 135,
+          "supported": 1,
+          "unsupported": 22
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 421,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model_deteksi_jenis_tanaman_v2.h5",
+      "ordinal": 33,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "L2",
+          "Ones",
+          "ReLU",
+          "Rescaling",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "L2",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.13.2",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 33,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config"
+        ],
+        "root_keys": [
+          "model_weights"
+        ],
+        "sha256": "d458f7eace4a2860ecb8afc4ea8edff48f9edc2416d003a318fa641329d1c662",
+        "size_bytes": 9411384,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "onalla/deteksi-jenis-tanaman-v2",
+      "resource_usage": {
+        "max_rss_kib": 520112,
+        "system_cpu_seconds": 2.818903,
+        "user_cpu_seconds": 2.989911
+      },
+      "revision": "bc20bdca0d3ef5ec4ea80700fb2fa2e2773f04e6",
+      "sha256": "d458f7eace4a2860ecb8afc4ea8edff48f9edc2416d003a318fa641329d1c662",
+      "size_bytes": 9411384,
+      "source_url": "https://huggingface.co/onalla/deteksi-jenis-tanaman-v2/resolve/bc20bdca0d3ef5ec4ea80700fb2fa2e2773f04e6/model_deteksi_jenis_tanaman_v2.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 9,
+        "elapsed_seconds": 0.210759,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "e912e73ce765f738ccccc312738e40de544b83391f88ea4844f0b023a377481e",
+        "node_count": 9,
+        "operator_support": {
+          "software_fallback": 4,
+          "unsupported": 5
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 19,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "Reference/ember-malconv/malconv.h5",
+      "ordinal": 34,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv1D",
+          "Dense",
+          "Embedding",
+          "GlobalMaxPooling1D",
+          "InputLayer",
+          "Model",
+          "Multiply",
+          "RandomUniform",
+          "VarianceScaling",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "RandomUniform",
+          "VarianceScaling",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.1.5",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 34,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "957fd697149066ee2926b18d7008997479952fe083e2b3f8e3fa4a35e84b6bd3",
+        "size_bytes": 12550712,
+        "top_class_name": "Model",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "uaf901/malconv",
+      "resource_usage": {
+        "max_rss_kib": 464596,
+        "system_cpu_seconds": 2.733734,
+        "user_cpu_seconds": 2.010876
+      },
+      "revision": "314d4fd45d8bf97b1d01ce9a0d86be0d07ca7324",
+      "sha256": "957fd697149066ee2926b18d7008997479952fe083e2b3f8e3fa4a35e84b6bd3",
+      "size_bytes": 12550712,
+      "source_url": "https://huggingface.co/uaf901/malconv/resolve/314d4fd45d8bf97b1d01ce9a0d86be0d07ca7324/Reference/ember-malconv/malconv.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 10,
+        "elapsed_seconds": 0.24735,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "ed4d31dcbdf783725d22ca52ebfbb21c5bc878335ad7b302bdb510d6798136a7",
+        "node_count": 15,
+        "operator_support": {
+          "software_fallback": 11,
+          "supported": 4
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 15,
+        "status": "passed",
+        "tensor_count": 26,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "malaria_cnn_model.h5",
+      "ordinal": 35,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.13.2",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 35,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "0c6bca9223031d9e2cb3f534d144ea2111b65c91b5a6820c0a3cd1e056a5fd0d",
+        "size_bytes": 9972512,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "elishaaminu90/malaria-scan-cnn",
+      "resource_usage": {
+        "max_rss_kib": 461812,
+        "system_cpu_seconds": 2.81499,
+        "user_cpu_seconds": 1.953118
+      },
+      "revision": "ed54928849170be74ed3fd6e93649a2d32609d22",
+      "sha256": "0c6bca9223031d9e2cb3f534d144ea2111b65c91b5a6820c0a3cd1e056a5fd0d",
+      "size_bytes": 9972512,
+      "source_url": "https://huggingface.co/elishaaminu90/malaria-scan-cnn/resolve/ed54928849170be74ed3fd6e93649a2d32609d22/malaria_cnn_model.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.075822,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "9256e99742998719f30769aa31344b794a6b52b23f1a46e698fd531b99dfbc71",
+        "node_count": 84,
+        "operator_support": {
+          "software_fallback": 64,
+          "unsupported": 20
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": null,
+          "unsafe_code_blocked": true,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 85,
+        "unsafe_operator_names": [
+          "Lambda"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.h5",
+      "ordinal": 36,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Bidirectional",
+          "Conv2D",
+          "Dense",
+          "Dropout",
+          "Functional",
+          "GlorotUniform",
+          "HeUniform",
+          "InputLayer",
+          "LSTM",
+          "Lambda",
+          "LeakyReLU",
+          "Ones",
+          "Orthogonal",
+          "Reshape",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "HeUniform",
+          "Ones",
+          "Orthogonal",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.14.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 36,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "e1f47afe0f72e89ee5b7100c212b03943c405a60a0b94690d66022eeaec47ccd",
+        "size_bytes": 6104336,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": true
+      },
+      "prior_v2_status": "not_run_security",
+      "recovery_mode": "structural_analysis",
+      "repository": "lol-cod/captchasolving",
+      "resource_usage": {
+        "max_rss_kib": 413140,
+        "system_cpu_seconds": 2.754833,
+        "user_cpu_seconds": 1.760787
+      },
+      "revision": "6067e6b0853a802a3f31a7957523e7607d46991c",
+      "sha256": "e1f47afe0f72e89ee5b7100c212b03943c405a60a0b94690d66022eeaec47ccd",
+      "size_bytes": 6104336,
+      "source_url": "https://huggingface.co/lol-cod/captchasolving/resolve/6067e6b0853a802a3f31a7957523e7607d46991c/model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.066137,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.weights.h5",
+      "ordinal": 37,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 37,
+        "root_attributes": [],
+        "root_keys": [
+          "contrastive_denoising_group_generator",
+          "denoising_class_embed",
+          "layers",
+          "vars"
+        ],
+        "sha256": "689ad4d36f8e156b74370c8891e8e18c48814876e14c590bfa98a71274cda0ce",
+        "size_bytes": 16684336,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "keras/dfine_nano_coco",
+      "resource_usage": {
+        "max_rss_kib": 408596,
+        "system_cpu_seconds": 1.879416,
+        "user_cpu_seconds": 1.798951
+      },
+      "revision": "6faa0a036f923847b1053cd7c29b391c098bde2c",
+      "sha256": "689ad4d36f8e156b74370c8891e8e18c48814876e14c590bfa98a71274cda0ce",
+      "size_bytes": 16684336,
+      "source_url": "https://huggingface.co/keras/dfine_nano_coco/resolve/6faa0a036f923847b1053cd7c29b391c098bde2c/model.weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 6,
+        "elapsed_seconds": 0.1816,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "aaa833ddfabccbe1a24cb14f4c47d5dce41f233f1877213a2489cf2f946149d7",
+        "node_count": 7,
+        "operator_support": {
+          "software_fallback": 7
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 7,
+        "status": "passed",
+        "tensor_count": 14,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "first_fashion_model.h5",
+      "ordinal": 38,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Dense",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.12.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 38,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "03f6398982dfc830ef2e857c3f70bbc0b43cb1fa60af7a58d4feeaf157a3d814",
+        "size_bytes": 6463056,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "elontusk404/fashion_mnist_model_accurace_0_88",
+      "resource_usage": {
+        "max_rss_kib": 450328,
+        "system_cpu_seconds": 1.972763,
+        "user_cpu_seconds": 1.935806
+      },
+      "revision": "6e78d5007f74380f5517d73bdce69004e9892d5e",
+      "sha256": "03f6398982dfc830ef2e857c3f70bbc0b43cb1fa60af7a58d4feeaf157a3d814",
+      "size_bytes": 6463056,
+      "source_url": "https://huggingface.co/elontusk404/fashion_mnist_model_accurace_0_88/resolve/6e78d5007f74380f5517d73bdce69004e9892d5e/first_fashion_model.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 6,
+        "elapsed_seconds": 0.227961,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "5af0249f5e4d8ceef7e2680d5f806eb82f6e53122e1c8f17bd8a6aa702223a82",
+        "node_count": 9,
+        "operator_support": {
+          "software_fallback": 7,
+          "supported": 2
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 9,
+        "status": "passed",
+        "tensor_count": 16,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "mnist_model.h5",
+      "ordinal": 39,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Dense",
+          "Dropout",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "L2",
+          "Sequential",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "GlorotUniform",
+          "L2",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 39,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "d38c1645c08ae873fb36cf784d99135a7300546022349c4fa4b634c5b9114831",
+        "size_bytes": 11159992,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "zelk12/mnist_Model",
+      "resource_usage": {
+        "max_rss_kib": 466444,
+        "system_cpu_seconds": 2.479128,
+        "user_cpu_seconds": 2.130705
+      },
+      "revision": "0dd22121dc12bda8978493c0d1b7e0fa7513427e",
+      "sha256": "d38c1645c08ae873fb36cf784d99135a7300546022349c4fa4b634c5b9114831",
+      "size_bytes": 11159992,
+      "source_url": "https://huggingface.co/zelk12/mnist_Model/resolve/0dd22121dc12bda8978493c0d1b7e0fa7513427e/mnist_model.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.191777,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "4bbccb963b19e0204869db7916464475f3d473522c14a0f1c2bbf0560d123042",
+        "node_count": 4,
+        "operator_support": {
+          "software_fallback": 2,
+          "unsupported": 2
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "ImporterError: Keras Sequential layer 'simple_rnn' does not have one public input tensor",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 5,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "artifacts/simple_rnn_imdb.h5",
+      "ordinal": 40,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "DTypePolicy",
+          "Dense",
+          "Embedding",
+          "GlorotUniform",
+          "InputLayer",
+          "Orthogonal",
+          "RandomUniform",
+          "Sequential",
+          "SimpleRNN",
+          "Zeros"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Orthogonal",
+          "RandomUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 40,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "d3a7da395ecd9b9272d625334f60e304d4e404befe88d80471d488b3cf8337ce",
+        "size_bytes": 15789768,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "ash001/imdb-sentiment-simple-rnn",
+      "resource_usage": {
+        "max_rss_kib": 468312,
+        "system_cpu_seconds": 2.609188,
+        "user_cpu_seconds": 2.080822
+      },
+      "revision": "28a28f6a4db3b233d982f016cfdbb2faece6e77b",
+      "sha256": "d3a7da395ecd9b9272d625334f60e304d4e404befe88d80471d488b3cf8337ce",
+      "size_bytes": 15789768,
+      "source_url": "https://huggingface.co/ash001/imdb-sentiment-simple-rnn/resolve/28a28f6a4db3b233d982f016cfdbb2faece6e77b/artifacts/simple_rnn_imdb.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 268,
+        "elapsed_seconds": 1.195126,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "66c579a5872b7f2cf1bb77815f5cedbda30aaa5e13db6288f73c4cfb5df9c2c6",
+        "node_count": 164,
+        "operator_support": {
+          "software_fallback": 141,
+          "supported": 2,
+          "unsupported": 21
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 433,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "my_model.h5",
+      "ordinal": 41,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Ones",
+          "ReLU",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.8.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 41,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "2287c3cb9f5bc04e70768b3ad9c06ef80ee42764c4b5b9c1c23f7702910d7132",
+        "size_bytes": 11169040,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "CapstoneML/Model",
+      "resource_usage": {
+        "max_rss_kib": 526500,
+        "system_cpu_seconds": 2.519754,
+        "user_cpu_seconds": 3.096734
+      },
+      "revision": "9474ecb0b28fbc25add165cf70a31a3d58da2612",
+      "sha256": "2287c3cb9f5bc04e70768b3ad9c06ef80ee42764c4b5b9c1c23f7702910d7132",
+      "size_bytes": 11169040,
+      "source_url": "https://huggingface.co/CapstoneML/Model/resolve/9474ecb0b28fbc25add165cf70a31a3d58da2612/my_model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.046192,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.h5",
+      "ordinal": 42,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": "2.4.0",
+        "model_config": "absent",
+        "ordinal": 42,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "layer_names"
+        ],
+        "root_keys": [
+          "sequential"
+        ],
+        "sha256": "d9539a243656b2615d7c48997ea5bce8011684f86c14a30a6af19b9c149bf4de",
+        "size_bytes": 10232552,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "SpeechFlow/kerastestjim",
+      "resource_usage": {
+        "max_rss_kib": 408884,
+        "system_cpu_seconds": 2.361773,
+        "user_cpu_seconds": 1.776256
+      },
+      "revision": "27dd8dfe35524a559f044b703d43039a70d3ec17",
+      "sha256": "d9539a243656b2615d7c48997ea5bce8011684f86c14a30a6af19b9c149bf4de",
+      "size_bytes": 10232552,
+      "source_url": "https://huggingface.co/SpeechFlow/kerastestjim/resolve/27dd8dfe35524a559f044b703d43039a70d3ec17/model.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 7,
+        "elapsed_seconds": 0.204022,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "6bde8c8e13d53ec1ee16e9956c9faee3eda72c8df437c81c45cfc333679e6c0d",
+        "node_count": 12,
+        "operator_support": {
+          "software_fallback": 8,
+          "supported": 1,
+          "unsupported": 3
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 23,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "ip_embed_model.h5",
+      "ordinal": 43,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Concatenate",
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "Embedding",
+          "Flatten",
+          "Functional",
+          "GlorotUniform",
+          "InputLayer",
+          "RandomUniform",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "RandomUniform",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.11.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 43,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "aa556a86bdf14ef5d878fa6261d0a45b8489a4ef8d96cd957cf02c8b4cc2386e",
+        "size_bytes": 4988992,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "ellammal0503/ip_embed_model.h5",
+      "resource_usage": {
+        "max_rss_kib": 448884,
+        "system_cpu_seconds": 2.560253,
+        "user_cpu_seconds": 1.91989
+      },
+      "revision": "7e16c6a504749c776ee21fd092c267bb50675ded",
+      "sha256": "aa556a86bdf14ef5d878fa6261d0a45b8489a4ef8d96cd957cf02c8b4cc2386e",
+      "size_bytes": 4988992,
+      "source_url": "https://huggingface.co/ellammal0503/ip_embed_model.h5/resolve/7e16c6a504749c776ee21fd092c267bb50675ded/ip_embed_model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.051548,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.weights.h5",
+      "ordinal": 44,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 44,
+        "root_attributes": [],
+        "root_keys": [
+          "layers",
+          "vars"
+        ],
+        "sha256": "254a1360b26498d2ec23d91ab8ab78d297a40c59a01ea08f37cc7ae51cc4b060",
+        "size_bytes": 12478640,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "keras/mobilenet_v3_large_100_imagenet_21k",
+      "resource_usage": {
+        "max_rss_kib": 413864,
+        "system_cpu_seconds": 2.48315,
+        "user_cpu_seconds": 1.746519
+      },
+      "revision": "70e71757d9a58e969e34ebbf25eb5fda4deb364a",
+      "sha256": "254a1360b26498d2ec23d91ab8ab78d297a40c59a01ea08f37cc7ae51cc4b060",
+      "size_bytes": 12478640,
+      "source_url": "https://huggingface.co/keras/mobilenet_v3_large_100_imagenet_21k/resolve/70e71757d9a58e969e34ebbf25eb5fda4deb364a/model.weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 1.518729,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "90733ad0d17b6892083eaba5a48602fc9b0a7b00c3e5d7e9ac4caa1d1583cc98",
+        "node_count": 12,
+        "operator_support": {
+          "software_fallback": 11,
+          "unsupported": 1
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "ValueError: Layer \"dense_1\" expects 1 input(s), but it received 2 input tensors. Inputs received: [<KerasTensor shape=(None, 7, 7, 1024), dtype=float32, sparse=False, ragged=False, name=keras_tensor_915>, <KerasTensor shape=(None, 7, 7, 1024), dtype=float32, sparse=False, ragged=False, name=keras_tensor_916>]",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 13,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "Dense_model.h5",
+      "ordinal": 45,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Activation",
+          "AveragePooling2D",
+          "BatchNormalization",
+          "Concatenate",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Ones",
+          "Sequential",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.5.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 45,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "b4576e077f61a2bfcf58f57058f5e1858ceee08e24daf934723f3856ab2a3626",
+        "size_bytes": 37102312,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "MennaEssam/densenet_model_h5_2_final",
+      "resource_usage": {
+        "max_rss_kib": 512376,
+        "system_cpu_seconds": 2.688916,
+        "user_cpu_seconds": 3.496726
+      },
+      "revision": "9069b8f18f305fa9dda03b7c0570047beaecce16",
+      "sha256": "b4576e077f61a2bfcf58f57058f5e1858ceee08e24daf934723f3856ab2a3626",
+      "size_bytes": 37102312,
+      "source_url": "https://huggingface.co/MennaEssam/densenet_model_h5_2_final/resolve/9069b8f18f305fa9dda03b7c0570047beaecce16/Dense_model.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.089933,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "keras-3-mobilevit-v2-weights/keras_mobilevitv2-im1k-256-f-384-1.25.weights.h5",
+      "ordinal": 46,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 46,
+        "root_attributes": [],
+        "root_keys": [
+          "layers",
+          "vars"
+        ],
+        "sha256": "3889c6288177fcb45413ff1117bab272375d737933689b4ab70bc5f66ca2c5ce",
+        "size_bytes": 30673540,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "veb-101/Keras-3-apple-mobilevit",
+      "resource_usage": {
+        "max_rss_kib": 407508,
+        "system_cpu_seconds": 1.813367,
+        "user_cpu_seconds": 1.724464
+      },
+      "revision": "ea6fb3e3d76c75b3e14c09becec43104d707572c",
+      "sha256": "3889c6288177fcb45413ff1117bab272375d737933689b4ab70bc5f66ca2c5ce",
+      "size_bytes": 30673540,
+      "source_url": "https://huggingface.co/veb-101/Keras-3-apple-mobilevit/resolve/ea6fb3e3d76c75b3e14c09becec43104d707572c/keras-3-mobilevit-v2-weights/keras_mobilevitv2-im1k-256-f-384-1.25.weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 262,
+        "elapsed_seconds": 1.232489,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "271926a247cc826d1b0281fbfa330196b2b3a9979d4edd31f024563d9740e9ff",
+        "node_count": 156,
+        "operator_support": {
+          "software_fallback": 135,
+          "unsupported": 21
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 419,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "crack_detector.h5",
+      "ordinal": 47,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Ones",
+          "ReLU",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.11.3",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 47,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "da794f29e7f2a65daf2a9f172ba0f533e6273e71d880ca92701842f14cecc3a1",
+        "size_bytes": 9584112,
+        "top_class_name": "Functional",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "PredictiveManish/wall-crack-detection",
+      "resource_usage": {
+        "max_rss_kib": 521208,
+        "system_cpu_seconds": 1.803852,
+        "user_cpu_seconds": 2.925089
+      },
+      "revision": "a19c08c30dcd75b31a878a284907d6b335371de3",
+      "sha256": "da794f29e7f2a65daf2a9f172ba0f533e6273e71d880ca92701842f14cecc3a1",
+      "size_bytes": 9584112,
+      "source_url": "https://huggingface.co/PredictiveManish/wall-crack-detection/resolve/a19c08c30dcd75b31a878a284907d6b335371de3/crack_detector.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.030436,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "pt_files_slide_entropy/16BX24416-F8.h5",
+      "ordinal": 48,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 48,
+        "root_attributes": [],
+        "root_keys": [
+          "slide_embedding"
+        ],
+        "sha256": "9bb973824c243dad92f5c953ca4611537f247235377d4f40194655f235b3f41e",
+        "size_bytes": 5120,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "ownt/rcc-h5-demo",
+      "resource_usage": {
+        "max_rss_kib": 408972,
+        "system_cpu_seconds": 2.542095,
+        "user_cpu_seconds": 1.700012
+      },
+      "revision": "f23863280bd488c14cdbdb12f79328acc65cb018",
+      "sha256": "9bb973824c243dad92f5c953ca4611537f247235377d4f40194655f235b3f41e",
+      "size_bytes": 5120,
+      "source_url": "https://huggingface.co/ownt/rcc-h5-demo/resolve/f23863280bd488c14cdbdb12f79328acc65cb018/pt_files_slide_entropy/16BX24416-F8.h5"
+    },
+    {
+      "after_outcome": "weights_only_diagnostic",
+      "analysis": {
+        "elapsed_seconds": 0.105639,
+        "error_message": "H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently",
+        "error_type": "ImporterError",
+        "status": "failed",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/harness/run_v2_after.py\", line 57, in main",
+          "    imported = import_model(str(model_path))",
+          "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/dispatch.py\", line 62, in import_model",
+          "    return importer(str(source))",
+          "           ^^^^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/keras.py\", line 798, in import_keras",
+          "    envelope = inspect_h5(source)",
+          "               ^^^^^^^^^^^^^^^^^^",
+          "  File \"/code/src/model2rtl/v2/importers/h5_metadata.py\", line 114, in inspect_h5",
+          "    raise ImporterError(",
+          "model2rtl.v2.importers.base.ImporterError: H5_MODEL_CONFIG_MISSING: HDF5 file has no complete-model architecture (model_config); weights-only files require the original model architecture and cannot be analyzed or compiled independently"
+        ]
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "StockZero-v2-2025-03-24-1727.weights.h5",
+      "ordinal": 49,
+      "preflight": {
+        "backend": null,
+        "class_names": [],
+        "custom_class_names": [],
+        "hdf5_valid": true,
+        "keras_version": null,
+        "model_config": "absent",
+        "ordinal": 49,
+        "root_attributes": [],
+        "root_keys": [
+          "conv1",
+          "dense_policy",
+          "dense_value",
+          "flatten",
+          "vars"
+        ],
+        "sha256": "5a12b700274008f45b30b3dcee1824dc71f73525aad69d52abf75571fcba31cf",
+        "size_bytes": 38331864,
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": null,
+      "repository": "nirajandhakal/StockZero-v2",
+      "resource_usage": {
+        "max_rss_kib": 410460,
+        "system_cpu_seconds": 2.539259,
+        "user_cpu_seconds": 1.942393
+      },
+      "revision": "544fa7da19e66ec465158887bbf6581f7da0ed1e",
+      "sha256": "5a12b700274008f45b30b3dcee1824dc71f73525aad69d52abf75571fcba31cf",
+      "size_bytes": 38331864,
+      "source_url": "https://huggingface.co/nirajandhakal/StockZero-v2/resolve/544fa7da19e66ec465158887bbf6581f7da0ed1e/StockZero-v2-2025-03-24-1727.weights.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.928742,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "c13c3d7f61ce16f2d8af8e95d43d8099122ad94f19fc386ab2f5828003daac43",
+        "node_count": 8,
+        "operator_support": {
+          "software_fallback": 7,
+          "unsupported": 1
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "ValueError: Layer \"dense_6\" expects 1 input(s), but it received 2 input tensors. Inputs received: [<KerasTensor shape=(None, 7, 7, 1280), dtype=float32, sparse=False, ragged=False, name=keras_tensor_504>, <KerasTensor shape=(None, 7, 7, 1280), dtype=float32, sparse=False, ragged=False, name=keras_tensor_505>]",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 9,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "best_EfficientNetB0.h5",
+      "ordinal": 50,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Activation",
+          "Add",
+          "BatchNormalization",
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "DepthwiseConv2D",
+          "Dropout",
+          "Functional",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Multiply",
+          "Normalization",
+          "Ones",
+          "Rescaling",
+          "Reshape",
+          "Sequential",
+          "VarianceScaling",
+          "ZeroPadding2D",
+          "Zeros",
+          "__keras_tensor__"
+        ],
+        "custom_class_names": [
+          "DTypePolicy",
+          "GlorotUniform",
+          "Ones",
+          "VarianceScaling",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 50,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "4a2ba2163ea158522f24b25fc44df10e2da60249a7b84e65f6e3794b500bbee0",
+        "size_bytes": 24603832,
+        "top_class_name": "Sequential",
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "Annga121/vehicle-classification-cnn",
+      "resource_usage": {
+        "max_rss_kib": 483860,
+        "system_cpu_seconds": 2.569592,
+        "user_cpu_seconds": 2.867217
+      },
+      "revision": "464af03cfeac52cfd972bb0707d1d3840d491a38",
+      "sha256": "4a2ba2163ea158522f24b25fc44df10e2da60249a7b84e65f6e3794b500bbee0",
+      "size_bytes": 24603832,
+      "source_url": "https://huggingface.co/Annga121/vehicle-classification-cnn/resolve/464af03cfeac52cfd972bb0707d1d3840d491a38/best_EfficientNetB0.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 14,
+        "elapsed_seconds": 0.278546,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "01384424bda2571d577e25f1c950760cefca936c2203fdb998a6e24d74180342",
+        "node_count": 15,
+        "operator_support": {
+          "software_fallback": 15
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 15,
+        "status": "passed",
+        "tensor_count": 30,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "modello_guida_autonoma_cifar10.h5",
+      "ordinal": 51,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Conv2D",
+          "DTypePolicy",
+          "Dense",
+          "Flatten",
+          "GlorotUniform",
+          "InputLayer",
+          "MaxPooling2D",
+          "Sequential",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "3.10.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 51,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "e52ec3af2260e6551a8b4cf08b8a4ab1c96dc906fb2876b0e1c84145a1c7ae36",
+        "size_bytes": 13898920,
+        "top_class_name": "Sequential",
+        "unsafe_class_names": [],
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "FlavioRubensOttaviani/autonomous-driving-object-detection-deepLearning",
+      "resource_usage": {
+        "max_rss_kib": 472408,
+        "system_cpu_seconds": 2.62843,
+        "user_cpu_seconds": 2.085793
+      },
+      "revision": "ad45e1a303c77999c15f6a7002b420545cd472bb",
+      "sha256": "e52ec3af2260e6551a8b4cf08b8a4ab1c96dc906fb2876b0e1c84145a1c7ae36",
+      "size_bytes": 13898920,
+      "source_url": "https://huggingface.co/FlavioRubensOttaviani/autonomous-driving-object-detection-deepLearning/resolve/ad45e1a303c77999c15f6a7002b420545cd472bb/modello_guida_autonoma_cifar10.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 6,
+        "elapsed_seconds": 0.101441,
+        "execution_mode": "hybrid",
+        "graph_ir_sha256": "3da5f0aaaf400549652c2602a72037b084fe3b3296c74a69ccbd3b27f7e37134",
+        "node_count": 6,
+        "operator_support": {
+          "software_fallback": 1,
+          "supported": 5
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 5,
+        "software_postfix_node_count": 1,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 13,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "multiclassification.h5",
+      "ordinal": 52,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Dense",
+          "GlorotUniform",
+          "InputLayer",
+          "Sequential",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.15.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 52,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "8c5e2b77385999b19f79c3bc7c776ddb3213bd22fa763848df08d3e3393eecce",
+        "size_bytes": 387832,
+        "top_class_name": "Sequential",
+        "unsafe_class_names": [],
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "girolamodiceglie/multiclass-classification",
+      "resource_usage": {
+        "max_rss_kib": 442184,
+        "system_cpu_seconds": 2.662271,
+        "user_cpu_seconds": 1.761464
+      },
+      "revision": "51e750957ccebdfa0b3b4cffa53dac09d7c19ec4",
+      "sha256": "8c5e2b77385999b19f79c3bc7c776ddb3213bd22fa763848df08d3e3393eecce",
+      "size_bytes": 387832,
+      "source_url": "https://huggingface.co/girolamodiceglie/multiclass-classification/resolve/51e750957ccebdfa0b3b4cffa53dac09d7c19ec4/multiclassification.h5"
+    },
+    {
+      "after_outcome": "analyzed_native",
+      "analysis": {
+        "constant_count": 2,
+        "elapsed_seconds": 0.088911,
+        "execution_mode": "analysis_only",
+        "graph_ir_sha256": "fe0dd0fb919e5ef68c3758a1161650e140416fb62ffe855683f6455b81a23ef6",
+        "node_count": 4,
+        "operator_support": {
+          "software_fallback": 4
+        },
+        "recovery": {
+          "executable": true,
+          "mode": "native_executable",
+          "unsafe_code_blocked": false,
+          "weights_verified": true
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 4,
+        "status": "passed",
+        "tensor_count": 7,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "foodTrain.h5",
+      "ordinal": 53,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Activation",
+          "Dense",
+          "GlobalAveragePooling2D",
+          "GlorotUniform",
+          "InputLayer",
+          "Sequential",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.13.1",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 53,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "785c36d861231192b1afaef807539be3b797232162f9ebe598e089a510d6229d",
+        "size_bytes": 24316,
+        "top_class_name": "Sequential",
+        "unsafe_class_names": [],
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "passed",
+      "recovery_mode": "native_executable",
+      "repository": "akaashp15/food_classification_tool",
+      "resource_usage": {
+        "max_rss_kib": 437888,
+        "system_cpu_seconds": 2.666522,
+        "user_cpu_seconds": 1.791799
+      },
+      "revision": "9f0bc0e6965130fafd94097173091fc88f545f0d",
+      "sha256": "785c36d861231192b1afaef807539be3b797232162f9ebe598e089a510d6229d",
+      "size_bytes": 24316,
+      "source_url": "https://huggingface.co/akaashp15/food_classification_tool/resolve/9f0bc0e6965130fafd94097173091fc88f545f0d/foodTrain.h5"
+    },
+    {
+      "after_outcome": "analyzed_structural",
+      "analysis": {
+        "constant_count": 0,
+        "elapsed_seconds": 0.181517,
+        "execution_mode": "compile_unavailable",
+        "graph_ir_sha256": "ce1a58d7466054be0ed133b94f4896d7bdf00b9fa258fb585c58b1c2f9943cba",
+        "node_count": 8,
+        "operator_support": {
+          "software_fallback": 6,
+          "unsupported": 2
+        },
+        "recovery": {
+          "executable": false,
+          "mode": "structural_analysis",
+          "native_loader_error": "TypeError: Error when deserializing class 'SpatialDropout1D' using config={'name': 'spatial_dropout1d', 'trainable': True, 'dtype': 'float32', 'rate': 0.2, 'noise_shape': None, 'seed': None}.\n\nException encountered: SpatialDropout1D.__init__() got an unexpected keyword argument 'trainable'",
+          "unsafe_code_blocked": false,
+          "weights_verified": false
+        },
+        "rtl_node_count": 0,
+        "software_postfix_node_count": 0,
+        "software_prefix_node_count": 0,
+        "status": "passed",
+        "tensor_count": 9,
+        "unsafe_operator_names": []
+      },
+      "environment": {
+        "keras": "3.15.1",
+        "python": "3.11.11",
+        "tensorflow": "2.16.2"
+      },
+      "filename": "model.h5",
+      "ordinal": 54,
+      "preflight": {
+        "backend": "tensorflow",
+        "class_names": [
+          "Dense",
+          "Embedding",
+          "GlorotUniform",
+          "InputLayer",
+          "LSTM",
+          "Orthogonal",
+          "RandomUniform",
+          "Sequential",
+          "SpatialDropout1D",
+          "Zeros"
+        ],
+        "hdf5_valid": true,
+        "keras_version": "2.12.0",
+        "model_config": "present",
+        "model_config_json_valid": true,
+        "ordinal": 54,
+        "root_attributes": [
+          "backend",
+          "keras_version",
+          "model_config",
+          "training_config"
+        ],
+        "root_keys": [
+          "model_weights",
+          "optimizer_weights"
+        ],
+        "sha256": "cc809fc62b4f84621e22ecf8fe9c2af763d9f4fd0f1383c92e1e0a9aaae59674",
+        "size_bytes": 51959288,
+        "top_class_name": "Sequential",
+        "unsafe_class_names": [],
+        "unsafe_serialized_code": false
+      },
+      "prior_v2_status": "failed",
+      "recovery_mode": "structural_analysis",
+      "repository": "fazni/predicting-role-based-on-skills",
+      "resource_usage": {
+        "max_rss_kib": 461308,
+        "system_cpu_seconds": 2.919385,
+        "user_cpu_seconds": 1.905771
+      },
+      "revision": "c2766cabf402dd09ff319344c97428a36a9fef44",
+      "sha256": "cc809fc62b4f84621e22ecf8fe9c2af763d9f4fd0f1383c92e1e0a9aaae59674",
+      "size_bytes": 51959288,
+      "source_url": "https://huggingface.co/fazni/predicting-role-based-on-skills/resolve/c2766cabf402dd09ff319344c97428a36a9fef44/model.h5"
+    }
+  ],
+  "schema_version": "model2rtl-huggingface-h5-compatibility-after-v1"
+}

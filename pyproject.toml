@@ -13,14 +13,24 @@ authors = [{ name = "rithwik" }]
 
 # Runtime dependency of the compiler and of the integer golden model.
 # TensorFlow is deliberately NOT here: it is a training-time tool only.
-dependencies = ["numpy>=1.21"]
+dependencies = [
+    "numpy>=1.21",
+    "PyYAML",
+]
 
 [project.scripts]
-model2rtl = "model2rtl.cli:main"
+model2rtl = "model2rtl.router:main"
 
 [project.optional-dependencies]
 train = ["tensorflow-cpu==2.16.2"]
-test = ["pytest>=7"]
+test = ["pytest>=7", "h5py>=3.8"]
+keras = [
+    "tensorflow>=2.15",
+    "h5py>=3.8",
+]
+onnx = ["onnx"]
+verify = ["onnxruntime"]
+dev = ["pytest>=7"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

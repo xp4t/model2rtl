@@ -6081,9 +6081,9 @@ ABC: Node =   22489.  Ch =  1269.  Total mem =    7.13 MB. Peak cut mem =    0.0
 ABC: P:  Del = 10558.00.  Ar =    6274.0.  Edge =    22140.  Cut =   135738.  T =     0.02 sec
 ABC: P:  Del = 10558.00.  Ar =    5814.0.  Edge =    22061.  Cut =   133819.  T =     0.02 sec
 ABC: P:  Del = 10558.00.  Ar =    6717.0.  Edge =    24121.  Cut =   136349.  T =     0.02 sec
-ABC: F:  Del = 10558.00.  Ar =    5628.0.  Edge =    21033.  Cut =   135189.  T =     0.03 sec
+ABC: F:  Del = 10558.00.  Ar =    5628.0.  Edge =    21033.  Cut =   135189.  T =     0.02 sec
 ABC: A:  Del = 10558.00.  Ar =    5468.0.  Edge =    19223.  Cut =   135244.  T =     0.04 sec
-ABC: A:  Del = 10558.00.  Ar =    5409.0.  Edge =    19153.  Cut =   135317.  T =     0.04 sec
+ABC: A:  Del = 10558.00.  Ar =    5409.0.  Edge =    19153.  Cut =   135317.  T =     0.05 sec
 ABC: Total time =     0.18 sec
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &mfs 
@@ -6093,9 +6093,9 @@ ABC: Mapping (K=4)  :  lut =   5400  edge =   19015  lev =   11 (0.57)  levB =  
 ABC: LUT = 5400 : 2=812 15.0 %  3=961 17.8 %  4=3627 67.2 %  Ave = 3.52
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &verify 
-ABC: Networks are equivalent.  Time =     0.24 sec
+ABC: Networks are equivalent.  Time =     0.25 sec
 ABC: + time 
-ABC: elapse: 10.39 seconds, total: 10.39 seconds
+ABC: elapse: 10.74 seconds, total: 10.74 seconds
 
 5.44.15.6. Executing AIGER frontend.
 <suppressed ~11 debug messages>
@@ -6638,6 +6638,6 @@ Found and reported 0 problems.
 Dumping module `\mnist_mlp_top'.
 
 Warnings: 2 unique messages, 2 total
-End of script. Logfile hash: c150063a8e, time: 25.29s, user: 15.46s, system: 0.19s, MEM: 145.79 MB peak
+End of script. Logfile hash: 33cc05d3f1, time: 25.95s, user: 15.82s, system: 0.14s, MEM: 146.33 MB peak
 Yosys 0.68+ (git sha1 36d0660ff-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/yosys_1786465780695/_build_env/bin/x86_64-conda-linux-gnu-c++ 14.4.0) [github.com/conda-forge/yosys-feedstock at main]
-Time spent: 39% 1x abc9_exe (10 sec), 34% 11x techmap (8 sec), ...
+Time spent: 40% 1x abc9_exe (10 sec), 33% 11x techmap (8 sec), ...
